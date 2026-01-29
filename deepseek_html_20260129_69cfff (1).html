@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Навигатор терапевта | Наша Поликлиника</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Цветовая палитра взрослого отделения */
+            --primary-blue: #1A5F9E;
+            --secondary-blue: #2C8BD4;
+            --light-blue: #F0F7FF;
+            --accent-red: #D32F2F;
+            --white: #FFFFFF;
+            --gray-light: #F5F7FA;
+            --gray-medium: #E0E5EC;
+            --gray-dark: #455A64;
+            --text-primary: #263238;
+            --text-secondary: #546E7A;
+            
+            --shadow-subtle: 0 2px 6px rgba(26, 95, 158, 0.05);
+            --shadow-medium: 0 4px 12px rgba(26, 95, 158, 0.08);
+            --shadow-strong: 0 8px 24px rgba(26, 95, 158, 0.12);
+            --border-radius: 6px;
+            --border-radius-lg: 10px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--light-blue);
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* === УЛУЧШЕННЫЙ ВЕРХНИЙ БЛОК === */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 3.5rem 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--accent-red);
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 50%);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            background: rgba(255, 255, 255, 0.15);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .logo-icon i {
+            font-size: 32px;
+        }
+        
+        .logo-text h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+        
+        .header-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .header-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header-subtitle {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            font-weight: 300;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+        
+        .header-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .header-image {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius-lg);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            min-height: 280px;
+        }
+        
+        .medical-icon {
+            font-size: 120px;
+            color: rgba(255,255,255,0.2);
+        }
+        
+        /* === БЛОК МИССИИ === */
+        .mission-section {
+            background: var(--white);
+            padding: 3.5rem 0;
+            position: relative;
+        }
+        
+        .mission-section::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--accent-red);
+            border-radius: 2px;
+        }
+        
+        .mission-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .mission-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 2.8rem;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--gray-medium);
+            position: relative;
+        }
+        
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--accent-red) 100%);
+            border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
+        }
+        
+        .mission-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .mission-title i {
+            color: var(--accent-red);
+        }
+        
+        .mission-text {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 1.8rem;
+        }
+        
+        .mission-highlight {
+            background: linear-gradient(90deg, var(--light-blue) 0%, transparent 100%);
+            border-left: 4px solid var(--primary-blue);
+            padding: 1.5rem;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            margin-top: 2rem;
+            font-style: italic;
+            position: relative;
+        }
+        
+        .mission-highlight::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 3rem;
+            color: var(--primary-blue);
+            opacity: 0.2;
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        /* === БЛОКИ С ОДИНАКОВОЙ ВЫСОТОЙ === */
+        .blocks-section {
+            padding: 4rem 0;
+        }
+        
+        .blocks-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent-red);
+            border-radius: 2px;
+        }
+        
+        .blocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 2rem;
+        }
+        
+        /* Ключевое изменение: одинаковый min-height для всех блоков */
+        .content-block {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            transition: transform 0.3s, box-shadow 0.3s;
+            min-height: 380px; /* Фиксированная минимальная высота */
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--gray-medium);
+        }
+        
+        .content-block:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .block-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 1.8rem;
+            position: relative;
+            flex-shrink: 0; /* Запрещаем сжиматься заголовку */
+        }
+        
+        .block-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-red);
+        }
+        
+        .block-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .block-icon i {
+            font-size: 22px;
+        }
+        
+        .block-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .block-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .block-content {
+            padding: 1.8rem;
+            flex-grow: 1; /* Растягиваем контент на доступное пространство */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .block-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            flex-grow: 1; /* Описание растягивается */
+        }
+        
+        .block-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .block-features li {
+            padding: 8px 0;
+            padding-left: 28px;
+            position: relative;
+            color: var(--text-primary);
+        }
+        
+        .block-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: var(--secondary-blue);
+            font-weight: bold;
+        }
+        
+        .block-actions {
+            margin-top: auto; /* Прижимаем кнопки к низу */
+            padding-top: 1.2rem;
+            border-top: 1px solid var(--gray-medium);
+        }
+        
+        .block-btn {
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 10px 22px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .block-btn:hover {
+            background: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+        
+        .block-btn i {
+            margin-left: 8px;
+            font-size: 0.9rem;
+        }
+        
+        /* === ФУТЕР === */
+        .footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+            border-top: 4px solid var(--accent-red);
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-logo h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .footer-logo p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+        }
+        
+        .footer-info {
+            text-align: right;
+        }
+        
+        .footer-info p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        /* === АДАПТИВНОСТЬ === */
+        @media (max-width: 1100px) {
+            .header-main {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .header-image {
+                min-height: 200px;
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .blocks-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+            
+            .content-block {
+                min-height: 360px;
+            }
+            
+            .header-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 2.5rem 0;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .logo-area {
+                flex-direction: column;
+            }
+            
+            .logo-icon {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .header-badge {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .header-stats {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .header-title {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+            
+            .header-subtitle {
+                text-align: center;
+                font-size: 1.1rem;
+            }
+            
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            
+            .footer-info {
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .blocks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .content-block {
+                min-height: 340px;
+            }
+            
+            .header-container, .mission-container, .blocks-container {
+                padding: 0 20px;
+            }
+            
+            .mission-card {
+                padding: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Улучшенный верхний блок -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-top">
+                <div class="logo-area">
+                    <div class="logo-icon">
+                        <i class="fas fa-hospital-alt"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Наша Поликлиника</h1>
+                        <p>Взрослое отделение</p>
+                    </div>
+                </div>
+                <div class="header-badge">
+                    <i class="fas fa-star"></i> Профессиональный инструмент
+                </div>
+            </div>
+            
+            <div class="header-main">
+                <div>
+                    <h2 class="header-title">Навигатор терапевта</h2>
+                    <p class="header-subtitle">
+                        Единая система для раннего выявления туберкулеза в практике врача первичного звена. 
+                        Актуальные нормативы, алгоритмы и инструменты в одном месте.
+                    </p>
+                    
+                    <div class="header-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">6</div>
+                            <div class="stat-label">Разделов</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Документов</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Доступ</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="header-image">
+                    <i class="fas fa-clipboard-check medical-icon"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Блок миссии -->
+    <section class="mission-section">
+        <div class="mission-container">
+            <div class="mission-card">
+                <h2 class="mission-title"><i class="fas fa-bullseye"></i> Миссия проекта</h2>
+                <div class="mission-text">
+                    <p>Создание единого стандартизированного подхода к ранней диагностике туберкулеза в практике врача-терапевта. Наш навигатор систематизирует нормативные документы, клинические рекомендации и практические алгоритмы для повышения эффективности работы первичного звена здравоохранения.</p>
+                    <p>Основная цель — сокращение времени от первых симптомов до постановки диагноза за счет четких инструкций и доступности всей необходимой информации в одном месте.</p>
+                </div>
+                <div class="mission-highlight">
+                    «Раннее выявление туберкулеза — ключевой фактор успешного лечения и предотвращения распространения заболевания. Профессионализм врача первичного звена в этом вопросе критически важен.»
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блоки с одинаковой высотой -->
+    <section class="blocks-section">
+        <div class="blocks-container">
+            <h2 class="section-title">Структура навигатора</h2>
+            
+            <div class="blocks-grid">
+                <!-- Блок 1: Нормативная база -->
+                <article class="content-block">
+                    <div class="block-header">
+                        <div class="block-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3 class="block-title">Нормативная база</h3>
+                        <p class="block-subtitle">Законодательство и стандарты</p>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Актуальные документы, регламентирующие порядок работы с пациентами с подозрением на туберкулез.</p>
+                        <ul class="block-features">
+                            <li>Приказы Минздрава РФ</li>
+                            <li>Клинические рекомендации</li>
+                            <li>СанПиН и СП</li>
+                            <li>Региональные нормативы</li>
+                            <li>Протоколы взаимодействия</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Изучить документы <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Блок 2: Диагностические алгоритмы -->
+                <article class="content-block">
+                    <div class="block-header">
+                        <div class="block-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3 class="block-title">Диагностические алгоритмы</h3>
+                        <p class="block-subtitle">Пошаговые инструкции</p>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Четкие схемы действий при различных клинических ситуациях и результатах обследований.</p>
+                        <ul class="block-features">
+                            <li>Алгоритм при изменении на флюорографии</li>
+                            <li>Работа с группами риска</li>
+                            <li>Дифференциальная диагностика</li>
+                            <li>Действия при отказе от обследования</li>
+                            <li>Маршрутизация пациента</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Смотреть алгоритмы <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Блок 3: Диагностический инструментарий -->
+                <article class="content-block">
+                    <div class="block-header">
+                        <div class="block-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="block-title">Диагностический инструментарий</h3>
+                        <p class="block-subtitle">Рабочие шаблоны и формы</p>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Готовые к использованию формы документов, опросники и чек-листы для ежедневной работы.</p>
+                        <ul class="block-features">
+                            <li>Скрининговые опросники</li>
+                            <li>Формы направлений</li>
+                            <li>Чек-листы осмотра</li>
+                            <li>Бланки экстренных извещений</li>
+                            <li>Шаблоны документации</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Скачать шаблоны <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Блок 4: Экспертные материалы -->
+                <article class="content-block">
+                    <div class="block-header">
+                        <div class="block-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h3 class="block-title">Экспертные материалы</h3>
+                        <p class="block-subtitle">Опыт ведущих специалистов</p>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Разборы сложных случаев, комментарии фтизиатров и анализ типичных ошибок в диагностике.</p>
+                        <ul class="block-features">
+                            <li>Видеокомментарии специалистов</li>
+                            <li>Разборы клинических случаев</li>
+                            <li>Типичные диагностические ошибки</li>
+                            <li>Ответы на частые вопросы</li>
+                            <li>Современные подходы к лечению</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Смотреть материалы <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Блок 5: Ресурсы и контакты -->
+                <article class="content-block">
+                    <div class="block-header">
+                        <div class="block-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <h3 class="block-title">Ресурсы и контакты</h3>
+                        <p class="block-subtitle">Справочная информация</p>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Контакты специализированных учреждений и полезные ресурсы для оперативного решения вопросов.</p>
+                        <ul class="block-features">
+                            <li>Контакты противотуберкулезного диспансера</li>
+                            <li>Телефоны "горячих линий"</li>
+                            <li>Официальные сайты и ресурсы</li>
+                            <li>Контакты ответственных лиц</li>
+                            <li>Регламенты взаимодействия</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Перейти к контактам <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Блок 6: Образовательные материалы -->
+                <article class="content-block">
+                    <div class="block-header">
+                        <div class="block-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="block-title">Образовательные материалы</h3>
+                        <p class="block-subtitle">Повышение квалификации</p>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Лекции, вебинары и учебные материалы для непрерывного медицинского образования.</p>
+                        <ul class="block-features">
+                            <li>Обучающие видеолекции</li>
+                            <li>Презентации и методички</li>
+                            <li>Тесты для самопроверки</li>
+                            <li>Актуальные публикации</li>
+                            <li>Программы повышения квалификации</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">К обучению <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <h3>Наша Поликлиника</h3>
+                <p>Взрослое отделение | Навигатор терапевта</p>
+            </div>
+            <div class="footer-info">
+                <p>Профессиональный инструмент для врачей первичного звена</p>
+                <p>Версия 1.0 | © 2023 Министерство здравоохранения</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Все блоки теперь одинаковой высоты - отслеживаем самую высокую
+        function equalizeBlockHeights() {
+            const blocks = document.querySelectorAll('.content-block');
+            if (blocks.length === 0) return;
+            
+            // Сбрасываем высоту для перерасчета
+            blocks.forEach(block => {
+                block.style.height = 'auto';
+            });
+            
+            // Находим максимальную высоту
+            let maxHeight = 0;
+            blocks.forEach(block => {
+                const height = block.offsetHeight;
+                if (height > maxHeight) maxHeight = height;
+            });
+            
+            // Устанавливаем одинаковую высоту всем блокам
+            blocks.forEach(block => {
+                block.style.height = maxHeight + 'px';
+            });
+        }
+        
+        // Выравниваем высоту при загрузке и изменении размера окна
+        window.addEventListener('load', equalizeBlockHeights);
+        window.addEventListener('resize', equalizeBlockHeights);
+        
+        // Анимация при наведении на блоки
+        document.querySelectorAll('.content-block').forEach(block => {
+            block.addEventListener('mouseenter', function() {
+                this.style.zIndex = '10';
+            });
+            
+            block.addEventListener('mouseleave', function() {
+                this.style.zIndex = '1';
+            });
+        });
+        
+        // Плавное появление блоков при прокрутке
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.content-block').forEach(block => {
+            block.style.opacity = '0';
+            block.style.transform = 'translateY(20px)';
+            block.style.transition = 'opacity 0.5s, transform 0.5s';
+            observer.observe(block);
+        });
+    </script>
+</body>
+</html>
