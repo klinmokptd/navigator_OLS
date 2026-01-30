@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UM<ГБУЗ МО МОКПТД | филиал Клинский<</title>
+    <title>Навигатор по выявлению туберкулеза | ГБУЗ МО МОКПТД филиал Клинский</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -68,8 +68,8 @@
         
         .logo-icon {
             background: rgba(255, 255, 255, 0.15);
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -79,26 +79,26 @@
         }
         
         .logo-icon i {
-            font-size: 32px;
+            font-size: 28px;
         }
         
         .logo-text h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
+            font-size: 1.5rem; /* УМЕНЬШЕНО с 2.5rem */
+            font-weight: 600; /* Сделано менее жирным */
             margin-bottom: 5px;
         }
         
         .logo-text p {
-            font-size: 1.2rem;
+            font-size: 1rem; /* УМЕНЬШЕНО с 1.2rem */
             opacity: 0.9;
         }
         
-        /* БЕЙДЖ - ВОЗВРАЩАЕМ */
+        /* БЕЙДЖ */
         .header-badge {
             background: rgba(255, 255, 255, 0.15);
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 30px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
             border: 1px solid rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
@@ -109,13 +109,14 @@
         }
         
         .header-title {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+            font-size: 2.8rem; /* УВЕЛИЧЕНО с 2.2rem */
+            font-weight: 700; /* Сделано более жирным */
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
         }
         
         .header-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.3rem; /* УВЕЛИЧЕНО с 1.2rem */
             opacity: 0.95;
             max-width: 800px;
             line-height: 1.5;
@@ -141,7 +142,6 @@
             border-top: 4px solid var(--accent-red);
         }
         
-        /* КРУЖОК У МИССИИ - ВОЗВРАЩАЕМ */
         .mission-title {
             font-size: 1.8rem;
             font-weight: 600;
@@ -216,7 +216,6 @@
             box-shadow: var(--shadow-strong);
         }
         
-        /* ГОРИЗОНТАЛЬНАЯ КОМПОНОВКА: иконка слева, текст справа */
         .block-header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
@@ -227,7 +226,7 @@
             align-items: center;
             position: relative;
             flex-shrink: 0;
-            gap: 20px; /* Расстояние между иконкой и текстом */
+            gap: 20px;
         }
         
         .block-header::after {
@@ -248,7 +247,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0; /* Фиксированный размер */
+            flex-shrink: 0;
         }
         
         .block-icon i {
@@ -260,7 +259,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            min-height: 50px; /* Минимальная высота как у иконки */
+            min-height: 50px;
         }
         
         .block-title {
@@ -400,7 +399,7 @@
             }
             
             .logo-text h1 {
-                font-size: 2rem;
+                font-size: 1.3rem;
             }
             
             .header-badge {
@@ -408,7 +407,7 @@
             }
             
             .header-title {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
                 text-align: center;
             }
             
@@ -587,7 +586,37 @@
                     </div>
                 </article>
                 
-                <!-- Блок 3 -->
+                <!-- Блок 3 - НОВЫЙ БЛОК: ТЕЛЕМЕДИЦИНСКИЕ КОНСУЛЬТАЦИИ -->
+                <article class="content-block">
+                    <div class="block-header">
+                        <div class="block-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="block-text">
+                            <h3 class="block-title">Телемедицинские консультации с ГБУЗ МО МОКПТД</h3>
+                            <p class="block-subtitle">Быстрое принятие решений</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">
+                            Возможность получения консультаций от специалистов областного противотуберкулезного диспансера 
+                            в помощь вашим врачам для сложных диагностических случаев осуществляется посредством 
+                            телемедицинской консультации, используя видеоселекторную инстанцию конференц-связи.
+                        </p>
+                        <ul class="block-features">
+                            <li>Алгоритм подключения к системе</li>
+                            <li>Необходимые документы и подготовка</li>
+                            <li>Расписание плановых консилиумов</li>
+                            <li>Экстренные консультации</li>
+                            <li>Технические требования к оборудованию</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Подробнее о сервисе</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Блок 4 (бывший 3) -->
                 <article class="content-block">
                     <div class="block-header">
                         <div class="block-icon">
@@ -612,7 +641,7 @@
                     </div>
                 </article>
                 
-                <!-- Блок 4 -->
+                <!-- Блок 5 (бывший 4) -->
                 <article class="content-block">
                     <div class="block-header">
                         <div class="block-icon">
@@ -637,7 +666,7 @@
                     </div>
                 </article>
                 
-                <!-- Блок 5 -->
+                <!-- Блок 6 (бывший 5) -->
                 <article class="content-block">
                     <div class="block-header">
                         <div class="block-icon">
@@ -662,7 +691,7 @@
                     </div>
                 </article>
                 
-                <!-- Блок 6 -->
+                <!-- Блок 7 (бывший 6) -->
                 <article class="content-block">
                     <div class="block-header">
                         <div class="block-icon">
