@@ -88,16 +88,16 @@
             font-size: 1.4rem;
             font-weight: 600;
             margin-bottom: 5px;
-            color: white; /* Белый текст */
+            color: white;
         }
         
         .logo-text p {
             font-size: 0.95rem;
             opacity: 0.9;
-            color: white; /* Белый текст */
+            color: white;
         }
         
-        /* Кнопка назад - ИСПРАВЛЕНА */
+        /* Кнопка назад */
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -121,7 +121,7 @@
             font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.2;
-            color: white; /* Белый текст */
+            color: white;
         }
         
         .header-subtitle {
@@ -129,7 +129,7 @@
             opacity: 0.95;
             max-width: 800px;
             line-height: 1.5;
-            color: white; /* Белый текст */
+            color: white;
         }
         
         /* === ОСНОВНОЙ КОНТЕНТ === */
@@ -208,7 +208,7 @@
             box-shadow: var(--shadow-medium);
         }
         
-        /* === СПИСОК ДОКУМЕНТОВ === */
+        /* === СПИСОК ДОКУМЕНТОВ - ИСПРАВЛЕНО === */
         .documents-section {
             margin-bottom: 3rem;
         }
@@ -235,6 +235,7 @@
             }
         }
         
+        /* КАРТОЧКИ С ДОКУМЕНТАМИ - ИСПРАВЛЕНО ДЛЯ КНОПОК ВНИЗУ */
         .document-card {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -242,6 +243,9 @@
             box-shadow: var(--shadow-medium);
             border: 1px solid var(--gray-medium);
             transition: transform 0.3s, box-shadow 0.3s;
+            display: flex; /* ДОБАВЛЕНО */
+            flex-direction: column; /* ДОБАВЛЕНО */
+            height: 100%; /* ДОБАВЛЕНО */
         }
         
         .document-card:hover {
@@ -249,18 +253,19 @@
             box-shadow: var(--shadow-strong);
         }
         
-        /* ИСПРАВЛЕНО: заголовок теперь БЕЛЫЙ на синем фоне */
+        /* Заголовок теперь БЕЛЫЙ на синем фоне */
         .document-header {
             background: var(--primary-blue);
-            color: white; /* БЕЛЫЙ текст */
+            color: white;
             padding: 1.2rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-shrink: 0; /* ДОБАВЛЕНО - не сжимается */
         }
         
         .document-header .document-title {
-            color: white !important; /* Принудительно белый */
+            color: white !important;
             font-size: 1.2rem;
             font-weight: 600;
             margin: 0;
@@ -281,6 +286,9 @@
         
         .document-body {
             padding: 1.5rem;
+            flex-grow: 1; /* ДОБАВЛЕНО - растягивается */
+            display: flex; /* ДОБАВЛЕНО */
+            flex-direction: column; /* ДОБАВЛЕНО */
         }
         
         .document-title {
@@ -296,12 +304,17 @@
             font-size: 0.95rem;
             margin-bottom: 1.2rem;
             line-height: 1.5;
+            flex-grow: 1; /* ДОБАВЛЕНО - текст занимает всё пространство */
         }
         
+        /* Кнопки теперь всегда внизу */
         .document-actions {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
+            margin-top: auto; /* ДОБАВЛЕНО - прижимает к низу */
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-medium);
         }
         
         .doc-btn {
@@ -454,7 +467,7 @@
             color: var(--text-primary);
         }
         
-        /* === ФУТЕР - ИСПРАВЛЕН === */
+        /* === ФУТЕР === */
         .footer {
             background: var(--primary-blue);
             color: white;
@@ -519,6 +532,10 @@
             .modal-content {
                 max-height: 90vh;
             }
+            
+            .document-actions {
+                flex-direction: column;
+            }
         }
         
         @media (max-width: 480px) {
@@ -534,10 +551,6 @@
                 flex-direction: column;
                 gap: 10px;
                 align-items: flex-start;
-            }
-            
-            .document-actions {
-                flex-direction: column;
             }
         }
     </style>
