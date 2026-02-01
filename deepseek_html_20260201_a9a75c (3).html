@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Нормативная база | Навигатор по выявлению туберкулеза</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1A5F9E;
+            --secondary-blue: #2C8BD4;
+            --light-blue: #F0F7FF;
+            --accent-red: #D32F2F;
+            --accent-green: #2E7D32;
+            --accent-orange: #F57C00;
+            --white: #FFFFFF;
+            --gray-light: #F5F7FA;
+            --gray-medium: #E0E5EC;
+            --gray-dark: #455A64;
+            --text-primary: #263238;
+            --text-secondary: #546E7A;
+            
+            --shadow-medium: 0 4px 12px rgba(26, 95, 158, 0.08);
+            --shadow-strong: 0 8px 24px rgba(26, 95, 158, 0.12);
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--light-blue);
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* === ШАПКА (как в навигаторе) === */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent-red);
+            position: relative;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            background: rgba(255, 255, 255, 0.15);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .logo-icon i {
+            font-size: 24px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: white; /* Белый текст */
+        }
+        
+        .logo-text p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            color: white; /* Белый текст */
+        }
+        
+        /* Кнопка назад - ИСПРАВЛЕНА */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: white; /* Белый текст */
+        }
+        
+        .header-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            line-height: 1.5;
+            color: white; /* Белый текст */
+        }
+        
+        /* === ОСНОВНОЙ КОНТЕНТ === */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 30px;
+        }
+        
+        .intro-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-medium);
+            border-top: 4px solid var(--primary-blue);
+        }
+        
+        .intro-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .intro-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary-blue);
+            border-color: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        /* === СПИСОК ДОКУМЕНТОВ === */
+        .documents-section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .document-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--gray-medium);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .document-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        /* ИСПРАВЛЕНО: заголовок теперь БЕЛЫЙ на синем фоне */
+        .document-header {
+            background: var(--primary-blue);
+            color: white; /* БЕЛЫЙ текст */
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .document-header .document-title {
+            color: white !important; /* Принудительно белый */
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .document-type {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        .document-body {
+            padding: 1.5rem;
+        }
+        
+        .document-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+        
+        .document-details {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+        }
+        
+        .document-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .doc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-download {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .btn-download:hover {
+            background: var(--secondary-blue);
+        }
+        
+        .btn-explain {
+            background: var(--accent-orange);
+            color: white;
+        }
+        
+        .btn-explain:hover {
+            background: #FF9800;
+        }
+        
+        /* === МОДАЛЬНОЕ ОКНО === */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            max-width: 700px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .explanation-section {
+            margin-bottom: 2rem;
+        }
+        
+        .explanation-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .explanation-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        .key-points {
+            background: var(--light-blue);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-blue);
+            margin: 1.5rem 0;
+        }
+        
+        .key-points h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .key-points ul {
+            margin-left: 1.2rem;
+        }
+        
+        .key-points li {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        /* === ФУТЕР - ИСПРАВЛЕН === */
+        .footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .footer-info {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .footer-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* === АДАПТИВНОСТЬ === */
+        @media (max-width: 768px) {
+            .header {
+                padding: 2rem 0;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .header-title {
+                font-size: 2rem;
+            }
+            
+            .header-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                padding: 0 20px;
+            }
+            
+            .modal-content {
+                max-height: 90vh;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-container, .main-container {
+                padding: 0 20px;
+            }
+            
+            .header-title {
+                font-size: 1.8rem;
+            }
+            
+            .document-header {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .document-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-top">
+                <div class="logo-area">
+                    <div class="logo-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>ГБУЗ МО "МОКПТД"</h1>
+                        <p>Филиал "Клинский"</p>
+                    </div>
+                </div>
+                <!-- Кнопка назад с ВАШЕЙ ссылкой -->
+                <a href="https://klinmokptd.github.io/navigator_OLS/" class="back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                    Назад в навигатор
+                </a>
+            </div>
+            
+            <h2 class="header-title">Нормативная база</h2>
+            <p class="header-subtitle">Законодательство, приказы, клинические рекомендации и стандарты по раннему выявлению и диагностике туберкулёза в ОЛС</p>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="main-container">
+        <!-- Введение и кнопки -->
+        <section class="intro-section">
+            <h2 class="intro-title">
+                <i class="fas fa-info-circle"></i>
+                Как работать с нормативной базой
+            </h2>
+            <p class="intro-text">
+                В этом разделе собраны ключевые нормативные документы, регулирующие вопросы диагностики, профилактики и лечения туберкулёза. 
+                Для каждого документа доступна возможность скачать оригинал и получить краткое объяснение его содержания и применения на практике.
+            </p>
+            
+            <div class="action-buttons">
+                <a href="https://1drv.ms/f/c/8d834935e09ce801/IgBKd21VQWpdSYQ2gnXrhr0fAQoI-PItK8l86GCSINQAePM?e=472l6G" 
+                   target="_blank" 
+                   class="action-btn btn-primary">
+                    <i class="fas fa-external-link-alt"></i>
+                    Перейти к полной папке с документами
+                </a>
+                <button class="action-btn btn-secondary" id="showAllExplanations">
+                    <i class="fas fa-lightbulb"></i>
+                    Показать все объяснения
+                </button>
+            </div>
+        </section>
+
+        <!-- Список документов -->
+        <section class="documents-section">
+            <h2 class="section-title">
+                <i class="fas fa-file-contract"></i>
+                Перечень документов
+            </h2>
+            
+            <div class="documents-grid">
+                <!-- Документ 1 -->
+                <article class="document-card" data-id="1">
+                    <div class="document-header">
+                        <h3 class="document-title">Приказ Минздрава РФ № 124н</h3>
+                    </div>
+                    <div class="document-body">
+                        <p class="document-details">
+                            <strong>Утверждён 21.03.2017 г.</strong><br>
+                            О порядке оказания медицинской помощи больным туберкулёзом
+                        </p>
+                        <div class="document-actions">
+                            <a href="documents/prikaz-124n.pdf" 
+                               download="Приказ_Минздрава_124н.pdf"
+                               class="doc-btn btn-download">
+                                <i class="fas fa-download"></i>
+                                Скачать PDF
+                            </a>
+                            <button class="doc-btn btn-explain explain-btn" data-id="1">
+                                <i class="fas fa-lightbulb"></i>
+                                Объяснение документа
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Документ 2 -->
+                <article class="document-card" data-id="2">
+                    <div class="document-header">
+                        <h3 class="document-title">Приказ МЗ МО № 1725</h3>
+                    </div>
+                    <div class="document-body">
+                        <p class="document-details">
+                            <strong>Утверждён 25.12.2020 г.</strong><br>
+                            О порядке взаимодействия врачей-патологоанатомов, судмедэкспертов и фтизиатров на территории Московской области
+                        </p>
+                        <div class="document-actions">
+                            <a href="documents/prikaz-1725.pdf" 
+                               download="Приказ_МЗ_МО_1725.pdf"
+                               class="doc-btn btn-download">
+                                <i class="fas fa-download"></i>
+                                Скачать PDF
+                            </a>
+                            <button class="doc-btn btn-explain explain-btn" data-id="2">
+                                <i class="fas fa-lightbulb"></i>
+                                Объяснение документа
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Документ 3 -->
+                <article class="document-card" data-id="3">
+                    <div class="document-header">
+                        <h3 class="document-title">Клинические рекомендации</h3>
+                    </div>
+                    <div class="document-body">
+                        <p class="document-details">
+                            <strong>Обновлены в 2023 г.</strong><br>
+                            Туберкулёз у взрослых. Национальная ассоциация фтизиатров
+                        </p>
+                        <div class="document-actions">
+                            <a href="documents/klinrek-2023.pdf" 
+                               download="Клинические_рекомендации_2023.pdf"
+                               class="doc-btn btn-download">
+                                <i class="fas fa-download"></i>
+                                Скачать PDF
+                            </a>
+                            <button class="doc-btn btn-explain explain-btn" data-id="3">
+                                <i class="fas fa-lightbulb"></i>
+                                Объяснение документа
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Документ 4 -->
+                <article class="document-card" data-id="4">
+                    <div class="document-header">
+                        <h3 class="document-title">СанПиН 3.3686-21</h3>
+                    </div>
+                    <div class="document-body">
+                        <p class="document-details">
+                            <strong>Утверждены 28.01.2021 г.</strong><br>
+                            Санитарно-эпидемиологические требования по профилактике инфекционных болезней
+                        </p>
+                        <div class="document-actions">
+                            <a href="documents/sanpin-3686.pdf" 
+                               download="СанПиН_3.3686-21.pdf"
+                               class="doc-btn btn-download">
+                                <i class="fas fa-download"></i>
+                                Скачать PDF
+                            </a>
+                            <button class="doc-btn btn-explain explain-btn" data-id="4">
+                                <i class="fas fa-lightbulb"></i>
+                                Объяснение документа
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Документ 5 -->
+                <article class="document-card" data-id="5">
+                    <div class="document-header">
+                        <h3 class="document-title">Приказ Минздрава РФ № 932н</h3>
+                    </div>
+                    <div class="document-body">
+                        <p class="document-details">
+                            <strong>Утверждён 06.12.2021 г.</strong><br>
+                            О порядке проведения профилактических медицинских осмотров
+                        </p>
+                        <div class="document-actions">
+                            <a href="documents/prikaz-932n.pdf" 
+                               download="Приказ_Минздрава_932н.pdf"
+                               class="doc-btn btn-download">
+                                <i class="fas fa-download"></i>
+                                Скачать PDF
+                            </a>
+                            <button class="doc-btn btn-explain explain-btn" data-id="5">
+                                <i class="fas fa-lightbulb"></i>
+                                Объяснение документа
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Документ 6 -->
+                <article class="document-card" data-id="6">
+                    <div class="document-header">
+                        <h3 class="document-title">Приказ МЗ МО № 1100</h3>
+                    </div>
+                    <div class="document-body">
+                        <p class="document-details">
+                            <strong>Утверждён 15.09.2022 г.</strong><br>
+                            Об организации раннего выявления туберкулёза в Московской области
+                        </p>
+                        <div class="document-actions">
+                            <a href="documents/prikaz-1100.pdf" 
+                               download="Приказ_МЗ_МО_1100.pdf"
+                               class="doc-btn btn-download">
+                                <i class="fas fa-download"></i>
+                                Скачать PDF
+                            </a>
+                            <button class="doc-btn btn-explain explain-btn" data-id="6">
+                                <i class="fas fa-lightbulb"></i>
+                                Объяснение документа
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Модальное окно для объяснений -->
+    <div class="modal-overlay" id="explanationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalDocTitle">Объяснение документа</h3>
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Содержание будет загружено через JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Футер - ИСПРАВЛЕН -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <p>© 2026 ГБУЗ МО "МОКПТД" филиал "Клинский"</p>
+                <p>По вопросам и замечаниям: <a href="mailto:mz_mokptd_klin@mosreg.ru">mz_mokptd_klin@mosreg.ru</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Данные для объяснений документов
+        const explanations = {
+            1: {
+                title: "Приказ Минздрава РФ № 124н",
+                keyPoints: [
+                    "Определяет трёхуровневую систему оказания помощи: первичный, специализированный и высокотехнологичный уровни",
+                    "Устанавливает порядок направления пациентов в противотуберкулёзные учреждения",
+                    "Регламентирует проведение диагностических процедур и контроль эффективности лечения",
+                    "Определяет порядок диспансерного наблюдения за пациентами",
+                    "Устанавливает требования к кадровому и материально-техническому обеспечению"
+                ],
+                application: "Используется для построения маршрута пациента при подозрении на туберкулёз, планирования диагностических мероприятий и организации межведомственного взаимодействия."
+            },
+            2: {
+                title: "Приказ МЗ МО № 1725",
+                keyPoints: [
+                    "Обязательное немедленное уведомление МОКПТД при подозрении на туберкулёз как причину смерти",
+                    "Забор материала для бактериологического посева на МБТ",
+                    "Совместная оценка случая фтизиатром и патологоанатомом/судмедэкспертом",
+                    "Определение ВИЧ-статуса для корректного установления причины смерти",
+                    "Ежемесячные коллегиальные разборы случаев"
+                ],
+                application: "Применяется во всех случаях смерти, где туберкулёз заподозрен как возможная причина. Позволяет избежать ошибок в статистике смертности и выявить дефекты диагностики."
+            },
+            3: {
+                title: "Клинические рекомендации по туберкулёзу у взрослых",
+                keyPoints: [
+                    "Алгоритмы диагностики при различных клинических проявлениях",
+                    "Критерии диагностики туберкулёза с лекарственной устойчивостью",
+                    "Современные схемы химиотерапии с учётом чувствительности МБТ",
+                    "Критерии перевода на амбулаторное лечение",
+                    "Мониторинг эффективности лечения и побочных реакций"
+                ],
+                application: "Используется для принятия клинических решений при подозрении на туберкулёз, выбора диагностической тактики и назначения адекватной терапии."
+            },
+            4: {
+                title: "СанПиН 3.3686-21",
+                keyPoints: [
+                    "Требования к профилактическим медицинским осмотрам на туберкулёз",
+                    "Порядок проведения дезинфекционных мероприятий в очагах туберкулёза",
+                    "Организация работы с контактными лицами",
+                    "Требования к размещению и оборудованию противотуберкулёзных учреждений",
+                    "Порядок регистрации и учёта случаев заболевания"
+                ],
+                application: "Применяется при организации профилактических осмотров, проведении противоэпидемических мероприятий в очагах туберкулёза и обеспечении безопасных условий труда для медицинского персонала."
+            },
+            5: {
+                title: "Приказ Минздрава РФ № 932н",
+                keyPoints: [
+                    "Группы населения, подлежащие профилактическим осмотрам на туберкулёз",
+                    "Периодичность флюорографического обследования для различных категорий",
+                    "Порядок учёта и отчётности по проведённым осмотрам",
+                    "Алгоритм действий при выявлении изменений на флюорограмме",
+                    "Организация дополнительного обследования лиц с подозрением на туберкулёз"
+                ],
+                application: "Используется для планирования и организации профилактических осмотров населения, формирования списков лиц, подлежащих обследованию, и анализа охвата скрининговыми мероприятиями."
+            },
+            6: {
+                title: "Приказ МЗ МО № 1100",
+                keyPoints: [
+                    "Региональные особенности организации раннего выявления туберкулёза",
+                    "Дополнительные группы риска, подлежащие обследованию в Московской области",
+                    "Алгоритмы взаимодействия между ЛПУ и противотуберкулёзной службой",
+                    "Система мониторинга и оценки эффективности скрининговых мероприятий",
+                    "Порядок предоставления отчётности в региональные органы здравоохранения"
+                ],
+                application: "Применяется при организации работы по раннему выявлению туберкулёза в медицинских учреждениях Московской области, планировании ресурсов и анализе эффективности проводимых мероприятий."
+            }
+        };
+
+        // Элементы DOM
+        const modal = document.getElementById('explanationModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const modalTitle = document.getElementById('modalDocTitle');
+        const modalBody = document.getElementById('modalBody');
+        const showAllBtn = document.getElementById('showAllExplanations');
+        const explainBtns = document.querySelectorAll('.explain-btn');
+
+        // Функция открытия модального окна с объяснением
+        function openExplanation(id) {
+            const data = explanations[id];
+            if (!data) return;
+            
+            modalTitle.textContent = data.title;
+            
+            modalBody.innerHTML = `
+                <div class="explanation-section">
+                    <h4 class="explanation-title">
+                        <i class="fas fa-file-alt"></i>
+                        Ключевые положения документа
+                    </h4>
+                    <div class="key-points">
+                        <ul>
+                            ${data.keyPoints.map(point => `<li>${point}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="explanation-section">
+                    <h4 class="explanation-title">
+                        <i class="fas fa-clipboard-check"></i>
+                        Практическое применение
+                    </h4>
+                    <p class="explanation-text">${data.application}</p>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Функция для показа всех объяснений
+        function showAllExplanations() {
+            modalTitle.textContent = "Объяснения всех документов";
+            
+            let allContent = '';
+            
+            Object.keys(explanations).forEach(id => {
+                const data = explanations[id];
+                allContent += `
+                    <div class="explanation-section" style="margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--gray-medium);">
+                        <h4 class="explanation-title">
+                            <i class="fas fa-file-medical-alt"></i>
+                            ${data.title}
+                        </h4>
+                        
+                        <div style="margin-top: 1rem;">
+                            <h5 style="color: var(--primary-blue); margin-bottom: 0.5rem;">Ключевые моменты:</h5>
+                            <ul style="margin-left: 1.2rem; font-size: 0.95rem;">
+                                ${data.keyPoints.slice(0, 3).map(point => `<li>${point}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            modalBody.innerHTML = allContent;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Закрытие модального окна
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Обработчики событий
+        explainBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const docId = btn.getAttribute('data-id');
+                openExplanation(docId);
+            });
+        });
+
+        showAllBtn.addEventListener('click', showAllExplanations);
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Закрытие по клику на оверлей
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Закрытие по Esc
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Анимация карточек при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.document-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s, transform 0.5s';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+</body>
+</html>
