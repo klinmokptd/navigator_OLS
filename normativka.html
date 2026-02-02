@@ -6,7 +6,7 @@
     <title>Нормативная база | Навигатор по выявлению туберкулеза</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-           <style>
+               <style>
         :root {
             --primary-blue: #1A5F9E;
             --secondary-blue: #2C8BD4;
@@ -41,7 +41,7 @@
             -webkit-font-smoothing: antialiased;
         }
         
-        /* === ШАПКА (как в навигаторе) === */
+        /* ШАПКА */
         .header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
@@ -132,7 +132,7 @@
             color: white;
         }
         
-        /* === ОСНОВНОЙ КОНТЕНТ === */
+        /* ОСНОВНОЙ КОНТЕНТ */
         .main-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -208,7 +208,7 @@
             box-shadow: var(--shadow-medium);
         }
         
-        /* === СПИСОК ДОКУМЕНТОВ === */
+        /* СПИСОК ДОКУМЕНТОВ */
         .documents-section {
             margin-bottom: 3rem;
         }
@@ -261,9 +261,8 @@
             flex-direction: column;
             align-items: flex-start;
             flex-shrink: 0;
-            min-height: 140px; /* Фиксированная высота для 5 строк */
+            min-height: 140px;
             height: 140px;
-            /* БЕЗ justify-content - теперь контент вверху */
         }
         
         .document-header .document-title {
@@ -281,11 +280,11 @@
             line-height: 1.3;
             opacity: 0.95;
             display: -webkit-box;
-            -webkit-line-clamp: 4; /* Максимум 4 строки */
+            -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-height: calc(1.3em * 4); /* Высота для 4 строк */
+            max-height: calc(1.3em * 4);
         }
         
         .document-body {
@@ -333,6 +332,16 @@
             background: var(--secondary-blue);
         }
         
+        /* НОВАЯ КНОПКА ДЛЯ EXCEL */
+        .btn-excel {
+            background: var(--accent-green);
+            color: white;
+        }
+        
+        .btn-excel:hover {
+            background: #388E3C;
+        }
+        
         .btn-explain {
             background: var(--accent-orange);
             color: white;
@@ -342,7 +351,7 @@
             background: #FF9800;
         }
         
-        /* === МОДАЛЬНОЕ ОКНО === */
+        /* МОДАЛЬНОЕ ОКНО */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -462,7 +471,7 @@
             color: var(--text-primary);
         }
         
-        /* === ФУТЕР === */
+        /* ФУТЕР */
         .footer {
             background: var(--primary-blue);
             color: white;
@@ -493,7 +502,7 @@
             text-decoration: underline;
         }
         
-        /* === АДАПТИВНОСТЬ === */
+        /* АДАПТИВНОСТЬ */
         @media (max-width: 768px) {
             .header {
                 padding: 2rem 0;
@@ -710,27 +719,29 @@
                 }
             },
     {
-        "id": 8,
-        "title": "Приказ Минздрава РФ № 690",
-        "officialTitle": "Об утверждении учетной документации по выявлению туберкулеза методом микроскопии",
-        "date": "Утверждён 2 октября 2006 г.",
-        "description": "Утверждение форм учётной документации для микроскопической диагностики туберкулёза",
-        "pdfFile": "documents/prikaz-690.pdf",
-        "pdfName": "Приказ_Минздрава_690.pdf",
-        "explanation": {
-            "keyPoints": [
-                "Утверждает стандартные учётные формы для микроскопической диагностики туберкулёза: формы 05-ТБ/у (направление), 04-ТБ/у (журнал исследований), 04-1-ТБ/у (журнал регистрации материала), 04-2-ТБ/у (сопроводительный лист).",
-                "Определяет правила сбора мокроты: в специально оборудованном проветриваемом помещении, с использованием СИЗ персоналом, правильная техника кашля для пациента.",
-                "Устанавливает график сбора мокроты: 3 образца в течение 2 дней (1-й в ЛПУ, 2-й дома утром, 3-й в ЛПУ при приёме второго образца).",
-                "Регламентирует транспортировку диагностического материала в закрытых биксах с сопроводительной документацией.",
-                "Предусматривает немедленное информирование врача при положительном результате микроскопии.",
-                "Определяет виды диагностического материала (26 позиций) помимо мокроты: ликвор, плевральная жидкость, кровь, биоптаты и др.",
-                "Устанавливает правила количественной оценки результатов микроскопии (от единичных КУМ до 3+).",
-                "Обязывает вести журналы учёта во всех ЛПУ, где проводится микроскопия на туберкулёз."
-            ],
-            "application": "Этот приказ является основным документом, регламентирующим микроскопическую диагностику туберкулёза на уровне первичного звена. Используется для: 1) Правильной организации сбора мокроты (график, условия, техника); 2) Заполнения обязательной учётной документации; 3) Безопасной транспортировки материала; 4) Стандартизации оценки результатов микроскопии; 5) Обеспечения преемственности между ЛПУ и лабораториями. Особенно важен для врачей поликлиник, фельдшерско-акушерских пунктов, приёмных отделений стационаров."
-        }
-    },
+    "id": 8,
+    "title": "Приказ Минздрава РФ № 690",
+    "officialTitle": "Об утверждении учетной документации по выявлению туберкулеза методом микроскопии",
+    "date": "Утверждён 2 октября 2006 г.",
+    "description": "Утверждение форм учётной документации для микроскопической диагностики туберкулёза",
+    "pdfFile": "documents/prikaz-690.pdf",
+    "pdfName": "Приказ_Минздрава_690.pdf",
+    "excelFile": "documents/04tb.xlsx",
+    "excelName": "Журнал_04-ТБ.xlsx",
+    "explanation": {
+        "keyPoints": [
+            "Утверждает стандартные учётные формы для микроскопической диагностики туберкулёза: формы 05-ТБ/у (направление), 04-ТБ/у (журнал исследований), 04-1-ТБ/у (журнал регистрации материала), 04-2-ТБ/у (сопроводительный лист).",
+            "Определяет правила сбора мокроты: в специально оборудованном проветриваемом помещении, с использованием СИЗ персоналом, правильная техника кашля для пациента.",
+            "Устанавливает график сбора мокроты: 3 образца в течение 2 дней (1-й в ЛПУ, 2-й дома утром, 3-й в ЛПУ при приёме второго образца).",
+            "Регламентирует транспортировку диагностического материала в закрытых биксах с сопроводительной документацией.",
+            "Предусматривает немедленное информирование врача при положительном результате микроскопии.",
+            "Определяет виды диагностического материала (26 позиций) помимо мокроты: ликвор, плевральная жидкость, кровь, биоптаты и др.",
+            "Устанавливает правила количественной оценки результатов микроскопии (от единичных КУМ до 3+).",
+            "Обязывает вести журналы учёта во всех ЛПУ, где проводится микроскопия на туберкулёз."
+        ],
+        "application": "Этот приказ является основным документом, регламентирующим микроскопическую диагностику туберкулёза на уровне первичного звена. Используется для: 1) Правильной организации сбора мокроты (график, условия, техника); 2) Заполнения обязательной учётной документации; 3) Безопасной транспортировки материала; 4) Стандартизации оценки результатов микроскопии; 5) Обеспечения преемственности между ЛПУ и лабораториями. Особенно важен для врачей поликлиник, фельдшерско-акушерских пунктов, приёмных отделений стационаров."
+    }
+},
  
             {
                 id: 3,
@@ -836,44 +847,64 @@
         // ========== ФУНКЦИИ ==========
         
         function renderDocuments() {
-            const container = document.getElementById('documents-container');
-            container.innerHTML = '';
-            
-            allDocuments.forEach(doc => {
-                const card = document.createElement('article');
-                card.className = 'document-card';
-                card.dataset.id = doc.id;
-                
-                card.innerHTML = `
-                    <div class="document-header">
-                        <h3 class="document-title">${doc.title}</h3>
-                        <div class="document-official-title">${doc.officialTitle}</div>
-                    </div>
-                    <div class="document-body">
-                        <p class="document-details">
-                            <strong>${doc.date}</strong><br>
-                            ${doc.description}
-                        </p>
-                        <div class="document-actions">
-                            <a href="${doc.pdfFile}" 
-                               download="${doc.pdfName}"
-                               class="doc-btn btn-download">
-                                <i class="fas fa-download"></i>
-                                Скачать PDF
-                            </a>
-                            <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
-                                <i class="fas fa-lightbulb"></i>
-                                Объяснение документа
-                            </button>
-                        </div>
-                    </div>
-                `;
-                
-                container.appendChild(card);
-            });
-            
-            attachEventListeners();
+    const container = document.getElementById('documents-container');
+    container.innerHTML = '';
+    
+    allDocuments.forEach(doc => {
+        const card = document.createElement('article');
+        card.className = 'document-card';
+        card.dataset.id = doc.id;
+        
+        // Создаём HTML для кнопок
+        let buttonsHTML = `
+            <a href="${doc.pdfFile}" 
+               download="${doc.pdfName}"
+               class="doc-btn btn-download">
+                <i class="fas fa-download"></i>
+                Скачать PDF
+            </a>
+        `;
+        
+        // Добавляем кнопку для Excel только для приказа 690
+        if (doc.id === 8 && doc.excelFile) {
+            buttonsHTML += `
+                <a href="${doc.excelFile}" 
+                   download="${doc.excelName || 'Журнал_04-ТБ.xlsx'}"
+                   class="doc-btn btn-excel">
+                    <i class="fas fa-file-excel"></i>
+                    Скачать журнал
+                </a>
+            `;
         }
+        
+        buttonsHTML += `
+            <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
+                <i class="fas fa-lightbulb"></i>
+                Объяснение документа
+            </button>
+        `;
+        
+        card.innerHTML = `
+            <div class="document-header">
+                <h3 class="document-title">${doc.title}</h3>
+                <div class="document-official-title">${doc.officialTitle}</div>
+            </div>
+            <div class="document-body">
+                <p class="document-details">
+                    <strong>${doc.date}</strong><br>
+                    ${doc.description}
+                </p>
+                <div class="document-actions">
+                    ${buttonsHTML}
+                </div>
+            </div>
+        `;
+        
+        container.appendChild(card);
+    });
+    
+    attachEventListeners();
+}
         
         function attachEventListeners() {
             const explainBtns = document.querySelectorAll('.explain-btn');
