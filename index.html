@@ -7,6 +7,43 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     
     <style>
+        /* ШРИФТЫ ИЗ РЕПОЗИТОРИЯ */
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/Inter-Regular.woff2') format('woff2'),
+                 url('assets/fonts/Inter-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/Inter-Medium.woff2') format('woff2'),
+                 url('assets/fonts/Inter-Medium.woff') format('woff');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/Inter-SemiBold.woff2') format('woff2'),
+                 url('assets/fonts/Inter-SemiBold.woff') format('woff');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/Inter-Bold.woff2') format('woff2'),
+                 url('assets/fonts/Inter-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        
         :root {
             --primary-blue: #1A5F9E;
             --secondary-blue: #2C8BD4;
@@ -22,10 +59,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
             background-color: var(--light-blue);
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
         }
         
         .header {
@@ -457,7 +496,7 @@
                             <li>Немедленное уведомление МОКПТД</li>
                             <li>Забор материала для микробиологии</li>
                             <li>Совместная оценка причины смерти</li>
-                            <li>Доступна памятка и QR-код для стенда</li>
+                            <li>Доступна памятка и QR  -код для стенда</li>
                         </ul>
                         <div class="block-actions">
                             <a href="https://klinmokptd.github.io/sudmed/" target="_blank" class="block-btn">Подробнее об алгоритме</a>
