@@ -688,14 +688,14 @@
             const indicator = document.getElementById('load-indicator');
             indicator.style.display = 'block';
             
-            // Автоскрытие через 10 секунд
+            // Автоскрытие через 3 секунды (было 10000)
             setTimeout(() => {
                 indicator.style.opacity = '0';
                 indicator.style.transition = 'opacity 1s';
                 setTimeout(() => {
                     indicator.style.display = 'none';
                 }, 1000);
-            }, 10000);
+            }, 3000); // ← ТУТ ИЗМЕНИЛ: 10000 → 3000
         });
     </script>
 </body>
