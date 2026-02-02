@@ -6,6 +6,110 @@
     <title>Нормативная база | Навигатор по выявлению туберкулеза</title>
     
     <style>
+        /* СТИЛИ ПРОГРЕСС-БАРА */
+        .progress-bar-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--light-blue);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .progress-bar-container.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .progress-bar-wrapper {
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            padding: 30px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .progress-bar-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--gray-medium);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-percentage {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .progress-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .progress-step {
+            text-align: center;
+            flex: 1;
+            position: relative;
+        }
+
+        .progress-step::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 10px;
+            background: var(--gray-medium);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .progress-step.active::before {
+            background: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(26, 95, 158, 0.2);
+        }
+
+        .progress-step.completed::before {
+            background: var(--accent-green);
+        }
+
         :root {
             --primary-blue: #1A5F9E;
             --secondary-blue: #2C8BD4;
@@ -32,7 +136,6 @@
         }
         
         body {
-            /* СИСТЕМНЫЕ ШРИФТЫ - САМОЕ БЫСТРОЕ */
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
                          'Open Sans', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
@@ -616,6 +719,15 @@
                 left: 10px;
                 max-width: none;
             }
+            
+            .progress-bar-wrapper {
+                width: 90%;
+                padding: 20px;
+            }
+            
+            .progress-bar-title {
+                font-size: 1.3rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -631,8 +743,40 @@
                 min-height: 160px;
                 height: 160px;
             }
+            
+            .progress-bar-wrapper {
+                padding: 15px;
+            }
+            
+            .progress-bar-title {
+                font-size: 1.2rem;
+            }
+            
+            .progress-steps {
+                font-size: 0.7rem;
+            }
         }
     </style>
+</head>
+<body>
+    <!-- ПРОГРЕСС-БАР ЗАГРУЗКИ -->
+    <div class="progress-bar-container" id="progressBar">
+        <div class="progress-bar-wrapper">
+            <h2 class="progress-bar-title">Загрузка нормативной базы</h2>
+            <div class="progress-percentage" id="progressPercentage">0%</div>
+            <div class="progress-bar">
+                <div class="progress-bar-fill" id="progressBarFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Инициализация...</div>
+            <div class="progress-steps">
+                <div class="progress-step" id="step1">HTML/CSS</div>
+                <div class="progress-step" id="step2">Данные</div>
+                <div class="progress-step" id="step3">Документы</div>
+                <div class="progress-step" id="step4">Готово</div>
+            </div>
+        </div>
+    </div>
+
 <header class="header">
     <div class="header-container">
         <div class="header-top">
@@ -724,6 +868,65 @@
     </div>
 
     <script>
+        // ========== УПРАВЛЕНИЕ ПРОГРЕСС-БАРОМ ==========
+        let progress = 0;
+        const progressBar = document.getElementById('progressBar');
+        const progressBarFill = document.getElementById('progressBarFill');
+        const progressPercentage = document.getElementById('progressPercentage');
+        const progressText = document.getElementById('progressText');
+        
+        function updateProgress(percent, text) {
+            progress = percent;
+            progressBarFill.style.width = percent + '%';
+            progressPercentage.textContent = Math.round(percent) + '%';
+            progressText.textContent = text;
+            
+            // Обновляем шаги
+            const steps = ['step1', 'step2', 'step3', 'step4'];
+            steps.forEach((stepId, index) => {
+                const step = document.getElementById(stepId);
+                const stepPercent = (index + 1) * 25;
+                
+                if (progress >= stepPercent) {
+                    step.classList.add('completed');
+                } else if (progress >= stepPercent - 10) {
+                    step.classList.add('active');
+                } else {
+                    step.classList.remove('active', 'completed');
+                }
+            });
+        }
+        
+        function simulateProgress() {
+            updateProgress(10, 'Загрузка стилей и шрифтов...');
+            
+            setTimeout(() => {
+                updateProgress(30, 'Инициализация данных...');
+                
+                setTimeout(() => {
+                    updateProgress(60, 'Генерация документов...');
+                    
+                    setTimeout(() => {
+                        updateProgress(85, 'Добавление карточек...');
+                        
+                        setTimeout(() => {
+                            updateProgress(100, 'Загрузка завершена!');
+                            
+                            // Анимация скрытия прогресс-бара
+                            setTimeout(() => {
+                                progressBar.classList.add('hidden');
+                                // Удаляем через 0.5 секунды после анимации
+                                setTimeout(() => {
+                                    progressBar.style.display = 'none';
+                                }, 500);
+                            }, 500);
+                            
+                        }, 500); // Время генерации карточек
+                    }, 300); // Время инициализации данных
+                }, 200); // Время загрузки стилей
+            }, 100); // Начальная задержка
+        }
+        
         // ========== ЕДИНЫЙ МАССИВ ВСЕХ ДОКУМЕНТОВ ==========
         const allDocuments = [
             {
@@ -1129,8 +1332,13 @@
         const showAllBtn = document.getElementById('showAllExplanations');
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Запускаем прогресс-бар
+            simulateProgress();
+            
+            // Рендерим документы
             renderDocuments();
             
+            // Вешаем обработчики событий
             showAllBtn.addEventListener('click', showAllExplanations);
             closeModalBtn.addEventListener('click', closeModal);
             
