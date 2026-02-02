@@ -4,563 +4,646 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Нормативная база | Навигатор по выявлению туберкулеза</title>
+    <!-- ТОЛЬКО Font Awesome (иконки) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-               <style>
+    
+    <style>
         :root {
-    --primary-blue: #1A5F9E;
-    --secondary-blue: #2C8BD4;
-    --light-blue: #F0F7FF;
-    --accent-red: #D32F2F;
-    --accent-green: #2E7D32;
-    --accent-orange: #F57C00;
-    --white: #FFFFFF;
-    --gray-light: #F5F7FA;
-    --gray-medium: #E0E5EC;
-    --gray-dark: #455A64;
-    --text-primary: #263238;
-    --text-secondary: #546E7A;
-    
-    --shadow-medium: 0 4px 12px rgba(26, 95, 158, 0.08);
-    --shadow-strong: 0 8px 24px rgba(26, 95, 158, 0.12);
-    --border-radius: 8px;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    line-height: 1.6;
-    color: var(--text-primary);
-    background-color: var(--light-blue);
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-}
-
-/* ШАПКА */
-.header {
-    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-    color: white;
-    padding: 2.5rem 0;
-    border-bottom: 4px solid var(--accent-red);
-    position: relative;
-}
-
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 30px;
-}
-
-.header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1.5rem;
-}
-
-.logo-area {
-    display: flex;
-    align-items: center;
-}
-
-.logo-icon {
-    background: rgba(255, 255, 255, 0.15);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 15px;
-    border: 2px solid rgba(255,255,255,0.2);
-}
-
-.logo-icon i {
-    font-size: 24px;
-}
-
-.logo-text h1 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: white;
-}
-
-.logo-text p {
-    font-size: 0.95rem;
-    opacity: 0.9;
-    color: white;
-}
-
-/* Кнопка назад */
-.back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 30px;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255,255,255,0.2);
-    transition: all 0.3s;
-}
-
-.back-btn:hover {
-    background: rgba(255, 255, 255, 0.25);
-}
-
-.header-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    line-height: 1.2;
-    color: white;
-}
-
-.header-subtitle {
-    font-size: 1.2rem;
-    opacity: 0.95;
-    max-width: 800px;
-    line-height: 1.5;
-    color: white;
-}
-
-/* ОСНОВНОЙ КОНТЕНТ */
-.main-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2.5rem 30px;
-}
-
-.intro-section {
-    background: var(--white);
-    border-radius: var(--border-radius);
-    padding: 2rem;
-    margin-bottom: 2.5rem;
-    box-shadow: var(--shadow-medium);
-    border-top: 4px solid var(--primary-blue);
-}
-
-.intro-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--primary-blue);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.intro-text {
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-}
-
-.action-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 24px;
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s;
-}
-
-.btn-primary {
-    background: var(--primary-blue);
-    color: white;
-    border: 2px solid var(--primary-blue);
-}
-
-.btn-primary:hover {
-    background: var(--secondary-blue);
-    border-color: var(--secondary-blue);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--primary-blue);
-    border: 2px solid var(--primary-blue);
-}
-
-.btn-secondary:hover {
-    background: var(--light-blue);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-medium);
-}
-
-/* СПИСОК ДОКУМЕНТОВ */
-.documents-section {
-    margin-bottom: 3rem;
-}
-
-.section-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.documents-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-    gap: 20px;
-}
-
-@media (max-width: 768px) {
-    .documents-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* КАРТОЧКИ С ДОКУМЕНТАМИ */
-.document-card {
-    background: var(--white);
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--shadow-medium);
-    border: 1px solid var(--gray-medium);
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-.document-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-strong);
-}
-
-.document-header {
-    background: var(--primary-blue);
-    color: white;
-    padding: 1.2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-shrink: 0;
-    min-height: 140px;
-    height: 140px;
-}
-
-.document-header .document-title {
-    color: white !important;
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0 0 8px 0;
-    line-height: 1.4;
-}
-
-.document-official-title {
-    color: white;
-    font-size: 0.95rem;
-    font-weight: 400;
-    line-height: 1.3;
-    opacity: 0.95;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-height: calc(1.3em * 4);
-}
-
-.document-body {
-    padding: 1.5rem;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.document-details {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    margin-bottom: 1.2rem;
-    line-height: 1.5;
-    flex-grow: 1;
-}
-
-/* КОМПАКТНЫЕ КНОПКИ */
-.document-actions {
-    display: flex;
-    gap: 8px; /* Уменьшили с 12px */
-    flex-wrap: wrap;
-    margin-top: auto;
-    padding-top: 1rem;
-    border-top: 1px solid var(--gray-medium);
-}
-
-.doc-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px; /* Уменьшили с 8px */
-    padding: 6px 10px; /* Уменьшили с 8px 16px */
-    border-radius: var(--border-radius);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: all 0.3s;
-}
-
-.btn-download {
-    background: var(--primary-blue);
-    color: white;
-}
-
-.btn-download:hover {
-    background: var(--secondary-blue);
-}
-
-.btn-excel {
-    background: var(--accent-green);
-    color: white;
-}
-
-.btn-excel:hover {
-    background: #388E3C;
-}
-
-.btn-explain {
-    background: var(--accent-orange);
-    color: white;
-}
-
-.btn-explain:hover {
-    background: #FF9800;
-}
-
-/* МОДАЛЬНОЕ ОКНО */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    padding: 20px;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.modal-content {
-    background: var(--white);
-    border-radius: var(--border-radius);
-    max-width: 700px;
-    width: 100%;
-    max-height: 80vh;
-    overflow-y: auto;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    transform: translateY(20px);
-    transition: transform 0.3s;
-}
-
-.modal-overlay.active .modal-content {
-    transform: translateY(0);
-}
-
-.modal-header {
-    background: var(--primary-blue);
-    color: white;
-    padding: 1.5rem;
-    border-radius: var(--border-radius) var(--border-radius) 0 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.modal-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: white;
-}
-
-.modal-close {
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    color: white;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.modal-close:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-.modal-body {
-    padding: 2rem;
-}
-
-.explanation-section {
-    margin-bottom: 2rem;
-}
-
-.explanation-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--primary-blue);
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.explanation-text {
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 1rem;
-}
-
-.key-points {
-    background: var(--light-blue);
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    border-left: 4px solid var(--secondary-blue);
-    margin: 1.5rem 0;
-}
-
-.key-points h4 {
-    color: var(--primary-blue);
-    margin-bottom: 0.8rem;
-    font-size: 1.1rem;
-}
-
-.key-points ul {
-    margin-left: 1.2rem;
-}
-
-.key-points li {
-    margin-bottom: 0.5rem;
-    color: var(--text-primary);
-}
-
-/* ФУТЕР */
-.footer {
-    background: var(--primary-blue);
-    color: white;
-    padding: 1.5rem 0;
-    margin-top: 3rem;
-    text-align: center;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 30px;
-}
-
-.footer-info {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
-
-.footer-info a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.footer-info a:hover {
-    text-decoration: underline;
-}
-
-/* АДАПТИВНОСТЬ */
-@media (max-width: 768px) {
-    .header {
-        padding: 2rem 0;
-    }
-    
-    .header-top {
-        flex-direction: column;
-        gap: 15px;
-    }
-    
-    .header-title {
-        font-size: 2rem;
-    }
-    
-    .header-subtitle {
-        font-size: 1.1rem;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-    }
-    
-    .documents-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .footer-container {
-        padding: 0 20px;
-    }
-    
-    .modal-content {
-        max-height: 90vh;
-    }
-    
-    .document-actions {
-        flex-direction: column;
-    }
-    
-    .document-header {
-        min-height: 150px;
-        height: 150px;
-    }
-}
-
-@media (max-width: 480px) {
-    .header-container, .main-container {
-        padding: 0 20px;
-    }
-    
-    .header-title {
-        font-size: 1.8rem;
-    }
-    
-    .document-header {
-        min-height: 160px;
-        height: 160px;
-    }
-}
+            --primary-blue: #1A5F9E;
+            --secondary-blue: #2C8BD4;
+            --light-blue: #F0F7FF;
+            --accent-red: #D32F2F;
+            --accent-green: #2E7D32;
+            --accent-orange: #F57C00;
+            --white: #FFFFFF;
+            --gray-light: #F5F7FA;
+            --gray-medium: #E0E5EC;
+            --gray-dark: #455A64;
+            --text-primary: #263238;
+            --text-secondary: #546E7A;
+            
+            --shadow-medium: 0 4px 12px rgba(26, 95, 158, 0.08);
+            --shadow-strong: 0 8px 24px rgba(26, 95, 158, 0.12);
+            --border-radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            /* СИСТЕМНЫЕ ШРИФТЫ вместо Inter */
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
+                         'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--light-blue);
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* ШАПКА */
+        .header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent-red);
+            position: relative;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .logo-area {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
+            background: rgba(255, 255, 255, 0.15);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .logo-icon i {
+            font-size: 24px;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .logo-text p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            color: white;
+        }
+        
+        /* Кнопка назад */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: white;
+        }
+        
+        .header-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            line-height: 1.5;
+            color: white;
+        }
+        
+        /* ОСНОВНОЙ КОНТЕНТ */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 30px;
+        }
+        
+        .intro-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-medium);
+            border-top: 4px solid var(--primary-blue);
+        }
+        
+        .intro-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .intro-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary-blue);
+            border-color: var(--secondary-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        /* СПИСОК ДОКУМЕНТОВ */
+        .documents-section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* КАРТОЧКИ С ДОКУМЕНТАМИ */
+        .document-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--gray-medium);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .document-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .document-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex-shrink: 0;
+            min-height: 140px;
+            height: 140px;
+        }
+        
+        .document-header .document-title {
+            color: white !important;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            line-height: 1.4;
+        }
+        
+        .document-official-title {
+            color: white;
+            font-size: 0.95rem;
+            font-weight: 400;
+            line-height: 1.3;
+            opacity: 0.95;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-height: calc(1.3em * 4);
+        }
+        
+        .document-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .document-details {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+        
+        /* КОМПАКТНЫЕ КНОПКИ */
+        .document-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-medium);
+        }
+        
+        .doc-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-download {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .btn-download:hover {
+            background: var(--secondary-blue);
+        }
+        
+        .btn-excel {
+            background: var(--accent-green);
+            color: white;
+        }
+        
+        .btn-excel:hover {
+            background: #388E3C;
+        }
+        
+        .btn-explain {
+            background: var(--accent-orange);
+            color: white;
+        }
+        
+        .btn-explain:hover {
+            background: #FF9800;
+        }
+        
+        /* МОДАЛЬНОЕ ОКНО */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            max-width: 700px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .explanation-section {
+            margin-bottom: 2rem;
+        }
+        
+        .explanation-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .explanation-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        
+        .key-points {
+            background: var(--light-blue);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--secondary-blue);
+            margin: 1.5rem 0;
+        }
+        
+        .key-points h4 {
+            color: var(--primary-blue);
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .key-points ul {
+            margin-left: 1.2rem;
+        }
+        
+        .key-points li {
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        /* ФУТЕР */
+        .footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .footer-info {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .footer-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* ИНДИКАТОР ЗАГРУЗКИ */
+        #load-indicator {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            padding: 12px 16px;
+            border-radius: var(--border-radius);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 14px;
+            z-index: 9999;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid #4CAF50;
+            display: none;
+            max-width: 300px;
+        }
+        
+        .load-indicator-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .load-indicator-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #4CAF50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+        }
+        
+        .load-time {
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .load-speed {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+        
+        .close-btn:hover {
+            opacity: 1;
+        }
+        
+        /* АДАПТИВНОСТЬ */
+        @media (max-width: 768px) {
+            .header {
+                padding: 2rem 0;
+            }
+            
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .header-title {
+                font-size: 2rem;
+            }
+            
+            .header-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-container {
+                padding: 0 20px;
+            }
+            
+            .modal-content {
+                max-height: 90vh;
+            }
+            
+            .document-actions {
+                flex-direction: column;
+            }
+            
+            .document-header {
+                min-height: 150px;
+                height: 150px;
+            }
+            
+            #load-indicator {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-container, .main-container {
+                padding: 0 20px;
+            }
+            
+            .header-title {
+                font-size: 1.8rem;
+            }
+            
+            .document-header {
+                min-height: 160px;
+                height: 160px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -652,6 +735,18 @@ body {
         </div>
     </footer>
 
+    <!-- ИНДИКАТОР ЗАГРУЗКИ -->
+    <div id="load-indicator">
+        <button class="close-btn" onclick="this.parentElement.style.display='none'">×</button>
+        <div class="load-indicator-content">
+            <div class="load-indicator-icon">✓</div>
+            <div>
+                <div>Страница загружена за <span class="load-time">0</span> сек</div>
+                <div class="load-speed"></div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ========== ЕДИНЫЙ МАССИВ ВСЕХ ДОКУМЕНТОВ ==========
         const allDocuments = [
@@ -679,147 +774,184 @@ body {
                 }
             },
             {
-    "id": 1,
-    "title": "Приказ Минздрава РФ № 190н",
-    "officialTitle": "Об утверждении порядка и сроков проведения профилактических медицинских осмотров граждан в целях выявления туберкулёза",
-    "date": "Утверждён 11.04.2025 г.",
-    "description": "Организация профилактических осмотров на туберкулёз врачами ОЛС: составление списков, планов, информирование и учёт",
-    "pdfFile": "documents/prikaz-190n.pdf",
-    "pdfName": "Приказ_Минздрава_190н.pdf",
-    "explanation": {
-        "keyPoints": [
-            "Возлагает на врачей ОЛС основную работу: участковые врачи (педиатры, терапевты, ВОП) и фельдшеры составляют поименные списки граждан для осмотра.",
-            "Организация планирования: уполномоченное лицо в медорганизации контролирует составление списков и формирует календарный план осмотров с датами, местами и количеством исследований.",
-            "Информирование и мотивация: врач ОЛС обязан информировать пациента о необходимости осмотра, его дате, времени, месте и проводить разъяснительную работу.",
-            "Осмотры в первичном звене: проводятся в поликлиниках по месту жительства, работы или учёбы в рамках программы госгарантий.",
-            "Возрастные алгоритмы: чёткое распределение методов по возрастам (проба Манту для 1-7 лет, Диаскинтест для 8-14 лет, Диаскинтест или флюорография для 15-17 лет, флюорография или рентген с 18 лет).",
-            "Учёт предыдущих исследований: если в течение года уже делалась флюорография, рентген или КТ, повторное исследование не проводится.",
-            "Действие при выявлении: при подозрении на туберкулёз пациент направляется к фтизиатру в течение 2 дней."
-        ],
-        "application": "Этот приказ является рабочей инструкцией для врача поликлиники. Он отвечает на практические вопросы: 1) Кого включать в списки на осмотр? 2) Как составить план? 3) Как информировать пациентов? 4) Какие методы обследования применять в каждом возрасте? 5) Что делать при выявлении изменений? Используется для организации системной работы по раннему выявлению туберкулёза на уровне первичного звена, планирования нагрузки и контроля охвата населения."
-    }
-},
+                "id": 1,
+                "title": "Приказ Минздрава РФ № 190н",
+                "officialTitle": "Об утверждении порядка и сроков проведения профилактических медицинских осмотров граждан в целях выявления туберкулёза",
+                "date": "Утверждён 11.04.2025 г.",
+                "description": "Организация профилактических осмотров на туберкулёз врачами ОЛС: составление списков, планов, информирование и учёт",
+                "pdfFile": "documents/prikaz-190n.pdf",
+                "pdfName": "Приказ_Минздрава_190н.pdf",
+                "explanation": {
+                    "keyPoints": [
+                        "Возлагает на врачей ОЛС основную работу: участковые врачи (педиатры, терапевты, ВОП) и фельдшеры составляют поименные списки граждан для осмотра.",
+                        "Организация планирования: уполномоченное лицо в медорганизации контролирует составление списков и формирует календарный план осмотров с датами, местами и количеством исследований.",
+                        "Информирование и мотивация: врач ОЛС обязан информировать пациента о необходимости осмотра, его дате, времени, месте и проводить разъяснительную работу.",
+                        "Осмотры в первичном звене: проводятся в поликлиниках по месту жительства, работы или учёбы в рамках программы госгарантий.",
+                        "Возрастные алгоритмы: чёткое распределение методов по возрастам (проба Манту для 1-7 лет, Диаскинтест для 8-14 лет, Диаскинтест или флюорография для 15-17 лет, флюорография или рентген с 18 лет).",
+                        "Учёт предыдущих исследований: если в течение года уже делалась флюорография, рентген или КТ, повторное исследование не проводится.",
+                        "Действие при выявлении: при подозрении на туберкулёз пациент направляется к фтизиатру в течение 2 дней."
+                    ],
+                    "application": "Этот приказ является рабочей инструкцией для врача поликлиники. Он отвечает на практические вопросы: 1) Кого включать в списки на осмотр? 2) Как составить план? 3) Как информировать пациентов? 4) Какие методы обследования применять в каждом возрасте? 5) Что делать при выявлении изменений? Используется для организации системной работы по раннему выявлению туберкулёза на уровне первичного звена, планирования нагрузки и контроля охвата населения."
+                }
+            },
             {
-                id: 2,
-                title: "Приказ МЗ МО № 1725",
-                officialTitle: "О порядке взаимодействия врачей-патологоанатомов, врачей-судебно-медицинских экспертов и врачей-фтизиатров на территории Московской области",
-                date: "Утверждён 25.12.2020 г.",
-                description: "Взаимодействие при установлении причины смерти, связанной с туберкулёзом",
-                pdfFile: "documents/prikaz-1725.pdf",
-                pdfName: "Приказ_МЗ_МО_1725.pdf",
-                explanation: {
-                    keyPoints: [
+                "id": 2,
+                "title": "Приказ МЗ МО № 1725",
+                "officialTitle": "О порядке взаимодействия врачей-патологоанатомов, врачей-судебно-медицинских экспертов и врачей-фтизиатров на территории Московской области",
+                "date": "Утверждён 25.12.2020 г.",
+                "description": "Взаимодействие при установлении причины смерти, связанной с туберкулёзом",
+                "pdfFile": "documents/prikaz-1725.pdf",
+                "pdfName": "Приказ_МЗ_МО_1725.pdf",
+                "explanation": {
+                    "keyPoints": [
                         "Обязательное немедленное уведомление МОКПТД при подозрении на туберкулёз как причину смерти",
                         "Забор материала для микробиологическое исследование с целью выявления микобактерий туберкулеза (МБТ)",
                         "Совместная оценка случая фтизиатром и патологоанатомом/судмедэкспертом",
                         "Определение ВИЧ-статуса для корректного установления причины смерти",
                         "Ежемесячные коллегиальные разборы случаев"
                     ],
-                    application: "Применяется во всех случаях смерти, где туберкулёз заподозрен как возможная причина. Позволяет избежать ошибок в статистике смертности и выявить дефекты диагностики."
+                    "application": "Применяется во всех случаях смерти, где туберкулёз заподозрен как возможная причина. Позволяет избежать ошибок в статистике смертности и выявить дефекты диагностики."
                 }
             },
-    {
-    "id": 8,
-    "title": "Приказ Минздрава РФ № 690",
-    "officialTitle": "Об утверждении учетной документации по выявлению туберкулеза методом микроскопии",
-    "date": "Утверждён 2 октября 2006 г.",
-    "description": "Утверждение форм учётной документации для микроскопической диагностики туберкулёза",
-    "pdfFile": "documents/prikaz-690.pdf",
-    "pdfName": "Приказ_Минздрава_690.pdf",
-    "excelFile": "documents/04tb.xlsx",
-    "excelName": "Журнал_04-ТБ.xlsx",
-    "explanation": {
-        "keyPoints": [
-            "Утверждает стандартные учётные формы для микроскопической диагностики туберкулёза: формы 05-ТБ/у (направление), 04-ТБ/у (журнал исследований), 04-1-ТБ/у (журнал регистрации материала), 04-2-ТБ/у (сопроводительный лист).",
-            "Определяет правила сбора мокроты: в специально оборудованном проветриваемом помещении, с использованием СИЗ персоналом, правильная техника кашля для пациента.",
-            "Устанавливает график сбора мокроты: 3 образца в течение 2 дней (1-й в ЛПУ, 2-й дома утром, 3-й в ЛПУ при приёме второго образца).",
-            "Регламентирует транспортировку диагностического материала в закрытых биксах с сопроводительной документацией.",
-            "Предусматривает немедленное информирование врача при положительном результате микроскопии.",
-            "Определяет виды диагностического материала (26 позиций) помимо мокроты: ликвор, плевральная жидкость, кровь, биоптаты и др.",
-            "Устанавливает правила количественной оценки результатов микроскопии (от единичных КУМ до 3+).",
-            "Обязывает вести журналы учёта во всех ЛПУ, где проводится микроскопия на туберкулёз."
-        ],
-        "application": "Этот приказ является основным документом, регламентирующим микроскопическую диагностику туберкулёза на уровне первичного звена. Используется для: 1) Правильной организации сбора мокроты (график, условия, техника); 2) Заполнения обязательной учётной документации; 3) Безопасной транспортировки материала; 4) Стандартизации оценки результатов микроскопии; 5) Обеспечения преемственности между ЛПУ и лабораториями. Особенно важен для врачей поликлиник, фельдшерско-акушерских пунктов, приёмных отделений стационаров."
-    }
-},
- 
             {
-                id: 3,
-                title: "Клинические рекомендации",
-                officialTitle: "Туберкулёз у взрослых",
-                date: "Обновлены в 2023 г.",
-                description: "Национальная ассоциация фтизиатров",
-                pdfFile: "documents/klinrek-2023.pdf",
-                pdfName: "Клинические_рекомендации_2023.pdf",
-                explanation: {
-                    keyPoints: [
+                "id": 8,
+                "title": "Приказ Минздрава РФ № 690",
+                "officialTitle": "Об утверждении учетной документации по выявлению туберкулеза методом микроскопии",
+                "date": "Утверждён 2 октября 2006 г.",
+                "description": "Утверждение форм учётной документации для микроскопической диагностики туберкулёза",
+                "pdfFile": "documents/prikaz-690.pdf",
+                "pdfName": "Приказ_Минздрава_690.pdf",
+                "excelFile": "documents/04tb.xlsx",
+                "excelName": "Журнал_04-ТБ.xlsx",
+                "explanation": {
+                    "keyPoints": [
+                        "Утверждает стандартные учётные формы для микроскопической диагностики туберкулёза: формы 05-ТБ/у (направление), 04-ТБ/у (журнал исследований), 04-1-ТБ/у (журнал регистрации материала), 04-2-ТБ/у (сопроводительный лист).",
+                        "Определяет правила сбора мокроты: в специально оборудованном проветриваемом помещении, с использованием СИЗ персоналом, правильная техника кашля для пациента.",
+                        "Устанавливает график сбора мокроты: 3 образца в течение 2 дней (1-й в ЛПУ, 2-й дома утром, 3-й в ЛПУ при приёме второго образца).",
+                        "Регламентирует транспортировку диагностического материала в закрытых биксах с сопроводительной документацией.",
+                        "Предусматривает немедленное информирование врача при положительном результате микроскопии.",
+                        "Определяет виды диагностического материала (26 позиций) помимо мокроты: ликвор, плевральная жидкость, кровь, биоптаты и др.",
+                        "Устанавливает правила количественной оценки результатов микроскопии (от единичных КУМ до 3+).",
+                        "Обязывает вести журналы учёта во всех ЛПУ, где проводится микроскопия на туберкулёз."
+                    ],
+                    "application": "Этот приказ является основным документом, регламентирующим микроскопическую диагностику туберкулёза на уровне первичного звена. Используется для: 1) Правильной организации сбора мокроты (график, условия, техника); 2) Заполнения обязательной учётной документации; 3) Безопасной транспортировки материала; 4) Стандартизации оценки результатов микроскопии; 5) Обеспечения преемственности между ЛПУ и лабораториями. Особенно важен для врачей поликлиник, фельдшерско-акушерских пунктов, приёмных отделений стационаров."
+                }
+            },
+            {
+                "id": 3,
+                "title": "Клинические рекомендации",
+                "officialTitle": "Туберкулёз у взрослых",
+                "date": "Обновлены в 2023 г.",
+                "description": "Национальная ассоциация фтизиатров",
+                "pdfFile": "documents/klinrek-2023.pdf",
+                "pdfName": "Клинические_рекомендации_2023.pdf",
+                "explanation": {
+                    "keyPoints": [
                         "Алгоритмы диагностики при различных клинических проявлениях",
                         "Критерии диагностики туберкулёза с лекарственной устойчивостью",
                         "Современные схемы химиотерапии с учётом чувствительности МБТ",
                         "Критерии перевода на амбулаторное лечение",
                         "Мониторинг эффективности лечения и побочных реакций"
                     ],
-                    application: "Используется для принятия клинических решений при подозрении на туберкулёз, выбора диагностической тактики и назначения адекватной терапии."
+                    "application": "Используется для принятия клинических решений при подозрении на туберкулёз, выбора диагностической тактики и назначения адекватной терапии."
                 }
             },
             {
-                id: 4,
-                title: "СанПиН 3.3686-21",
-                officialTitle: "Санитарно-эпидемиологические требования по профилактике инфекционных болезней",
-                date: "Утверждены 28.01.2021 г.",
-                description: "Требования к профилактике инфекционных заболеваний, включая туберкулёз",
-                pdfFile: "documents/sanpin-3686.pdf",
-                pdfName: "СанПиН_3.3686-21.pdf",
-                explanation: {
-                    keyPoints: [
+                "id": 4,
+                "title": "СанПиН 3.3686-21",
+                "officialTitle": "Санитарно-эпидемиологические требования по профилактике инфекционных болезней",
+                "date": "Утверждены 28.01.2021 г.",
+                "description": "Требования к профилактике инфекционных заболеваний, включая туберкулёз",
+                "pdfFile": "documents/sanpin-3686.pdf",
+                "pdfName": "СанПиН_3.3686-21.pdf",
+                "explanation": {
+                    "keyPoints": [
                         "Требования к профилактическим медицинским осмотрам на туберкулёз",
                         "Порядок проведения дезинфекционных мероприятий в очагах туберкулёза",
                         "Организация работы с контактными лицами",
                         "Требования к размещению и оборудованию противотуберкулёзных учреждений",
                         "Порядок регистрации и учёта случаев заболевания"
                     ],
-                    application: "Применяется при организации профилактических осмотров, проведении противоэпидемических мероприятий в очагах туберкулёза и обеспечении безопасных условий труда для медицинского персонала."
+                    "application": "Применяется при организации профилактических осмотров, проведении противоэпидемических мероприятий в очагах туберкулёза и обеспечении безопасных условий труда для медицинского персонала."
                 }
             },
             {
-                id: 5,
-                title: "Приказ Минздрава РФ № 932н",
-                officialTitle: "О порядке проведения профилактических медицинских осмотров",
-                date: "Утверждён 06.12.2021 г.",
-                description: "Порядок и срокы проведения профилактических медицинских осмотров",
-                pdfFile: "documents/prikaz-932n.pdf",
-                pdfName: "Приказ_Минздрава_932н.pdf",
-                explanation: {
-                    keyPoints: [
+                "id": 5,
+                "title": "Приказ Минздрава РФ № 932н",
+                "officialTitle": "О порядке проведения профилактических медицинских осмотров",
+                "date": "Утверждён 06.12.2021 г.",
+                "description": "Порядок и срокы проведения профилактических медицинских осмотров",
+                "pdfFile": "documents/prikaz-932n.pdf",
+                "pdfName": "Приказ_Минздрава_932н.pdf",
+                "explanation": {
+                    "keyPoints": [
                         "Группы населения, подлежащие профилактическим осмотрам на туберкулёз",
                         "Периодичность флюорографического обследования для различных категорий",
                         "Порядок учёта и отчётности по проведённым осмотрам",
                         "Алгоритм действий при выявлении изменений на флюорограмме",
                         "Организация дополнительного обследования лиц с подозрением на туберкулёз"
                     ],
-                    application: "Используется для планирования и организации профилактических осмотров населения, формирования списков лиц, подлежащих обследованию, и анализа охвата скрининговыми мероприятиями."
+                    "application": "Используется для планирования и организации профилактических осмотров населения, формирования списков лиц, подлежащих обследованию, и анализа охвата скрининговыми мероприятиями."
                 }
             },
             {
-                id: 6,
-                title: "Приказ МЗ МО № 1100",
-                officialTitle: "Об организации раннего выявления туберкулёза в Московской области",
-                date: "Утверждён 15.09.2022 г.",
-                description: "Региональные особенности организации раннего выявления туберкулёза",
-                pdfFile: "documents/prikaz-1100.pdf",
-                pdfName: "Приказ_МЗ_МО_1100.pdf",
-                explanation: {
-                    keyPoints: [
+                "id": 6,
+                "title": "Приказ МЗ МО № 1100",
+                "officialTitle": "Об организации раннего выявления туберкулёза в Московской области",
+                "date": "Утверждён 15.09.2022 г.",
+                "description": "Региональные особенности организации раннего выявления туберкулёза",
+                "pdfFile": "documents/prikaz-1100.pdf",
+                "pdfName": "Приказ_МЗ_МО_1100.pdf",
+                "explanation": {
+                    "keyPoints": [
                         "Региональные особенности организации раннего выявления туберкулёза",
                         "Дополнительные группы риска, подлежащие обследованию в Московской области",
                         "Алгоритмы взаимодействия между ЛПУ и противотуберкулёзной службой",
                         "Система мониторинга и оценки эффективности скрининговых мероприятий",
                         "Порядок предоставления отчётности в региональные органы здравоохранения"
                     ],
-                    application: "Применяется при организации работы по раннему выявлению туберкулёза в медицинских учреждениях Московской области, планировании ресурсов и анализе эффективности проводимых мероприятий."
+                    "application": "Применяется при организации работы по раннему выявлению туберкулёза в медицинских учреждениях Московской области, планировании ресурсов и анализе эффективности проводимых мероприятий."
                 }
             }
         ];
+
+        // ========== ИНДИКАТОР ЗАГРУЗКИ ==========
+        window.addEventListener('load', function() {
+            const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+            const loadTimeSec = (loadTime / 1000).toFixed(2);
+            
+            document.querySelector('.load-time').textContent = loadTimeSec;
+            
+            let speedStatus = '';
+            let iconColor = '#4CAF50';
+            
+            if (loadTimeSec < 2) {
+                speedStatus = '⚡ Отличная скорость';
+            } else if (loadTimeSec < 4) {
+                speedStatus = '✓ Хорошая скорость';
+            } else if (loadTimeSec < 8) {
+                speedStatus = '⚠ Средняя скорость';
+                iconColor = '#FF9800';
+            } else {
+                speedStatus = '❌ Медленная загрузка';
+                iconColor = '#F44336';
+            }
+            
+            document.querySelector('.load-speed').textContent = speedStatus;
+            document.querySelector('.load-indicator-icon').style.background = iconColor;
+            
+            const indicator = document.getElementById('load-indicator');
+            indicator.style.display = 'block';
+            
+            // Автоскрытие через 3 секунды
+            setTimeout(() => {
+                indicator.style.opacity = '0';
+                indicator.style.transition = 'opacity 1s';
+                setTimeout(() => {
+                    indicator.style.display = 'none';
+                }, 1000);
+            }, 3000);
+        });
 
         // ========== ФУНКЦИЯ ДЛЯ СКАЧИВАНИЯ ВСЕХ ДОКУМЕНТОВ ==========
         function downloadAllDocuments() {
@@ -847,77 +979,77 @@ body {
         // ========== ФУНКЦИИ ==========
         
         function renderDocuments() {
-    const container = document.getElementById('documents-container');
-    container.innerHTML = '';
-    
-    allDocuments.forEach(doc => {
-        const card = document.createElement('article');
-        card.className = 'document-card';
-        card.dataset.id = doc.id;
-        
-        // Создаём HTML для кнопок
-        let buttonsHTML;
-        
-        // Для приказа №690 - 3 кнопки в порядке: PDF, Объяснение, Excel
-        if (doc.id === 8 && doc.excelFile) {
-            buttonsHTML = `
-                <a href="${doc.pdfFile}" 
-                   download="${doc.pdfName}"
-                   class="doc-btn btn-download">
-                    <i class="fas fa-download"></i>
-                    Скачать PDF
-                </a>
+            const container = document.getElementById('documents-container');
+            container.innerHTML = '';
+            
+            allDocuments.forEach(doc => {
+                const card = document.createElement('article');
+                card.className = 'document-card';
+                card.dataset.id = doc.id;
                 
-                <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
-                    <i class="fas fa-lightbulb"></i>
-                    Объяснение документа
-                </button>
+                // Создаём HTML для кнопок
+                let buttonsHTML;
                 
-                <a href="${doc.excelFile}" 
-                   download="${doc.excelName || 'Журнал_04-ТБ.xlsx'}"
-                   class="doc-btn btn-excel">
-                    <i class="fas fa-file-excel"></i>
-                    Скачать журнал
-                </a>
-            `;
-        } else {
-            // Для остальных документов - 2 кнопки: PDF и Объяснение
-            buttonsHTML = `
-                <a href="${doc.pdfFile}" 
-                   download="${doc.pdfName}"
-                   class="doc-btn btn-download">
-                    <i class="fas fa-download"></i>
-                    Скачать PDF
-                </a>
+                // Для приказа №690 - 3 кнопки в порядке: PDF, Объяснение, Excel
+                if (doc.id === 8 && doc.excelFile) {
+                    buttonsHTML = `
+                        <a href="${doc.pdfFile}" 
+                           download="${doc.pdfName}"
+                           class="doc-btn btn-download">
+                            <i class="fas fa-download"></i>
+                            Скачать PDF
+                        </a>
+                        
+                        <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
+                            <i class="fas fa-lightbulb"></i>
+                            Объяснение документа
+                        </button>
+                        
+                        <a href="${doc.excelFile}" 
+                           download="${doc.excelName || 'Журнал_04-ТБ.xlsx'}"
+                           class="doc-btn btn-excel">
+                            <i class="fas fa-file-excel"></i>
+                            Скачать журнал
+                        </a>
+                    `;
+                } else {
+                    // Для остальных документов - 2 кнопки: PDF и Объяснение
+                    buttonsHTML = `
+                        <a href="${doc.pdfFile}" 
+                           download="${doc.pdfName}"
+                           class="doc-btn btn-download">
+                            <i class="fas fa-download"></i>
+                            Скачать PDF
+                        </a>
+                        
+                        <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
+                            <i class="fas fa-lightbulb"></i>
+                            Объяснение документа
+                        </button>
+                    `;
+                }
                 
-                <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
-                    <i class="fas fa-lightbulb"></i>
-                    Объяснение документа
-                </button>
-            `;
+                card.innerHTML = `
+                    <div class="document-header">
+                        <h3 class="document-title">${doc.title}</h3>
+                        <div class="document-official-title">${doc.officialTitle}</div>
+                    </div>
+                    <div class="document-body">
+                        <p class="document-details">
+                            <strong>${doc.date}</strong><br>
+                            ${doc.description}
+                        </p>
+                        <div class="document-actions">
+                            ${buttonsHTML}
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            attachEventListeners();
         }
-        
-        card.innerHTML = `
-            <div class="document-header">
-                <h3 class="document-title">${doc.title}</h3>
-                <div class="document-official-title">${doc.officialTitle}</div>
-            </div>
-            <div class="document-body">
-                <p class="document-details">
-                    <strong>${doc.date}</strong><br>
-                    ${doc.description}
-                </p>
-                <div class="document-actions">
-                    ${buttonsHTML}
-                </div>
-            </div>
-        `;
-        
-        container.appendChild(card);
-    });
-    
-    attachEventListeners();
-}
         
         function attachEventListeners() {
             const explainBtns = document.querySelectorAll('.explain-btn');
