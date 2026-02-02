@@ -5,7 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Нормативная база | Навигатор по выявлению туберкулеза</title>
     
+    <!-- ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 (как в index.html) -->
     <style>
+        /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        
         :root {
             --primary-blue: #1A5F9E;
             --secondary-blue: #2C8BD4;
@@ -20,9 +54,9 @@
             --text-primary: #263238;
             --text-secondary: #546E7A;
             
-            --shadow-medium: 0 4px 12px rgba(26, 95, 158, 0.08);
+            --shadow: 0 4px 12px rgba(26, 95, 158, 0.08);
             --shadow-strong: 0 8px 24px rgba(26, 95, 158, 0.12);
-            --border-radius: 8px;
+            --radius: 6px;
         }
         
         * {
@@ -32,8 +66,7 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
-                         'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
             background-color: var(--light-blue);
@@ -41,56 +74,12 @@
             -webkit-font-smoothing: antialiased;
         }
         
-        /* ПРОГРЕСС-БАР */
-        #page-loading {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--light-blue);
-            z-index: 9999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.3s;
-        }
-        
-        .loader {
-            text-align: center;
-            padding: 30px;
-            background: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-medium);
-            min-width: 200px;
-        }
-        
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--gray-medium);
-            border-top: 4px solid var(--primary-blue);
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .loader .text {
-            color: var(--primary-blue);
-            font-weight: 500;
-            font-size: 1rem;
-        }
-        
-        /* ШАПКА */
+        /* ШАПКА (как в index.html) */
         .header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
-            padding: 2.5rem 0;
+            padding: 3rem 0;
             border-bottom: 4px solid var(--accent-red);
-            position: relative;
         }
         
         .header-container {
@@ -111,31 +100,24 @@
             align-items: center;
         }
         
-        .logo-icon {
-            background: rgba(255, 255, 255, 0.15);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            border: 2px solid rgba(255,255,255,0.2);
-            font-weight: bold;
-            font-size: 20px;
-        }
-        
         .logo-text h1 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 5px;
-            color: white;
         }
         
-        .logo-text p {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            color: white;
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .header-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            line-height: 1.5;
         }
         
         /* Кнопка назад */
@@ -157,22 +139,6 @@
             background: rgba(255, 255, 255, 0.25);
         }
         
-        .header-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            color: white;
-        }
-        
-        .header-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.95;
-            max-width: 800px;
-            line-height: 1.5;
-            color: white;
-        }
-        
         /* ОСНОВНОЙ КОНТЕНТ */
         .main-container {
             max-width: 1200px;
@@ -182,24 +148,25 @@
         
         .intro-section {
             background: var(--white);
-            border-radius: var(--border-radius);
-            padding: 2rem;
+            border-radius: var(--radius);
+            padding: 2.5rem;
             margin-bottom: 2.5rem;
-            box-shadow: var(--shadow-medium);
-            border-top: 4px solid var(--primary-blue);
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--accent-red);
         }
         
         .intro-title {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: 600;
             color: var(--primary-blue);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         .intro-text {
             color: var(--text-secondary);
             line-height: 1.7;
             margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
         
         .action-buttons {
@@ -214,7 +181,7 @@
             align-items: center;
             gap: 10px;
             padding: 12px 24px;
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
@@ -233,7 +200,7 @@
             background: var(--secondary-blue);
             border-color: var(--secondary-blue);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
+            box-shadow: var(--shadow);
         }
         
         .btn-secondary {
@@ -245,7 +212,7 @@
         .btn-secondary:hover {
             background: var(--light-blue);
             transform: translateY(-2px);
-            box-shadow: var(--shadow-medium);
+            box-shadow: var(--shadow);
         }
         
         /* СПИСОК ДОКУМЕНТОВ */
@@ -254,30 +221,25 @@
         }
         
         .section-title {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--primary-blue);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
         }
         
         .documents-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-            gap: 20px;
+            gap: 25px;
         }
         
-        @media (max-width: 768px) {
-            .documents-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* КАРТОЧКИ С ДОКУМЕНТАМИ */
+        /* КАРТОЧКИ С ДОКУМЕНТАМИ (стиль как в index.html) */
         .document-card {
             background: var(--white);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: var(--shadow-medium);
+            box-shadow: var(--shadow);
             border: 1px solid var(--gray-medium);
             transition: transform 0.3s, box-shadow 0.3s;
             display: flex;
@@ -291,37 +253,54 @@
         }
         
         .document-header {
-            background: var(--primary-blue);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
-            padding: 1.2rem 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            flex-shrink: 0;
+            padding: 1.5rem;
             min-height: 140px;
             height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .document-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-red);
         }
         
         .document-header .document-title {
-            color: white !important;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin: 0 0 8px 0;
-            line-height: 1.4;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 3.2em;
+            color: white;
         }
         
         .document-official-title {
             color: white;
             font-size: 0.95rem;
-            font-weight: 400;
+            font-weight: 300;
             line-height: 1.3;
             opacity: 0.95;
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-height: calc(1.3em * 4);
+            max-height: calc(1.3em * 3);
         }
         
         .document-body {
@@ -333,16 +312,16 @@
         
         .document-details {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             margin-bottom: 1.2rem;
-            line-height: 1.5;
+            line-height: 1.6;
             flex-grow: 1;
         }
         
-        /* КОМПАКТНЫЕ КНОПКИ */
+        /* КНОПКИ */
         .document-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
             margin-top: auto;
             padding-top: 1rem;
@@ -353,12 +332,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 6px 10px;
-            border-radius: var(--border-radius);
+            padding: 10px 16px;
+            border-radius: var(--radius);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s;
+            font-size: 0.95rem;
+            transition: background 0.3s;
             border: none;
             cursor: pointer;
         }
@@ -415,7 +394,7 @@
         
         .modal-content {
             background: var(--white);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             max-width: 700px;
             width: 100%;
             max-height: 80vh;
@@ -430,13 +409,24 @@
         }
         
         .modal-header {
-            background: var(--primary-blue);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
             padding: 1.5rem;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            border-radius: var(--radius) var(--radius) 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+        }
+        
+        .modal-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-red);
         }
         
         .modal-title {
@@ -473,7 +463,7 @@
         }
         
         .explanation-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
             color: var(--primary-blue);
             margin-bottom: 1rem;
@@ -483,12 +473,13 @@
             color: var(--text-secondary);
             line-height: 1.7;
             margin-bottom: 1rem;
+            font-size: 1.05rem;
         }
         
         .key-points {
             background: var(--light-blue);
             padding: 1.5rem;
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             border-left: 4px solid var(--secondary-blue);
             margin: 1.5rem 0;
         }
@@ -506,21 +497,36 @@
         .key-points li {
             margin-bottom: 0.5rem;
             color: var(--text-primary);
+            position: relative;
+            padding-left: 24px;
+            font-size: 1.05rem;
         }
         
-        /* ФУТЕР */
+        .key-points li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--secondary-blue);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* ФУТЕР (как в index.html) */
         .footer {
             background: var(--primary-blue);
             color: white;
-            padding: 1.5rem 0;
+            padding: 2rem 0;
             margin-top: 3rem;
-            text-align: center;
         }
         
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         
         .footer-info {
@@ -538,28 +544,39 @@
         .footer-info a:hover {
             text-decoration: underline;
         }
-               
+        
         /* АДАПТИВНОСТЬ */
         @media (max-width: 768px) {
             .header {
                 padding: 2rem 0;
             }
             
-            .header-top {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
             .header-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
+                text-align: center;
             }
             
             .header-subtitle {
+                text-align: center;
                 font-size: 1.1rem;
             }
             
-            .action-buttons {
+            .header-top {
                 flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .back-btn {
+                align-self: center;
+            }
+            
+            .intro-section {
+                padding: 1.8rem;
+            }
+            
+            .intro-title {
+                font-size: 1.5rem;
             }
             
             .documents-grid {
@@ -567,11 +584,9 @@
             }
             
             .footer-container {
-                padding: 0 20px;
-            }
-            
-            .modal-content {
-                max-height: 90vh;
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
             }
             
             .document-actions {
@@ -583,11 +598,8 @@
                 height: 150px;
             }
             
-            #load-indicator {
-                bottom: 10px;
-                right: 10px;
-                left: 10px;
-                max-width: none;
+            .modal-content {
+                max-height: 90vh;
             }
         }
         
@@ -604,17 +616,14 @@
                 min-height: 160px;
                 height: 160px;
             }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- ПРОГРЕСС-БАР -->
-    <div id="page-loading">
-        <div class="loader">
-            <div class="spinner"></div>
-            <div class="text">Загрузка страницы...</div>
-        </div>
-    </div>
 
 <header class="header">
     <div class="header-container">
@@ -625,7 +634,7 @@
                     <p>Филиал "Клинский"</p>
                 </div>
             </div>
-            <a href="https://klinmokptd.github.io/navigator_OLS/" class="back-btn">
+            <a href="index.html" class="back-btn">
                 ← Назад в навигатор
             </a>
         </div>
@@ -694,17 +703,7 @@
         </div>
     </footer>
 
-        <script>
-        // ========== ПРОГРЕСС-БАР ==========
-        const loader = document.getElementById('page-loading');
-        let timer = setTimeout(() => loader.style.display = 'flex', 300);
-        
-        window.addEventListener('load', () => {
-            clearTimeout(timer);
-            loader.style.opacity = '0';
-            setTimeout(() => loader.style.display = 'none', 300);
-        });
-
+    <script>
         // ========== ЕДИНЫЙ МАССИВ ВСЕХ ДОКУМЕНТОВ ==========
         const allDocuments = [
             {
@@ -721,13 +720,13 @@
                         "Обязательный первичный диагностический минимум для ОЛС (Раздел VII): Трехкратная микроскопия мокроты на КУМ в течение 2 дней, обзорная рентгенография/КТ органов грудной клетки, Диаскинтест. ПЦР мокроты на ДНК МБТ проводится при отрицательной микроскопии.",
                         "Алгоритм при выявлении КУМ в мокроте: Немедленная изоляция пациента и направление санитарным транспортом к фтизиатру в ПТД в тот же день.",
                         "Алгоритм при отрицательных результатах, но сохраняющемся подозрении: Проведение КТ органов грудной клетки и обязательная консультация фтизиатра.",
-                        "Дифференциальная диагностика (Раздел IV): Подробная таблица для сопоставления рентгенологических синдромов при туберкулезе и других заболеваниях (пневмония, рак, саркоидоз и др.).",
+                        "Дифференциальная диагностика (Раздел IV): Подробная таблица для сопоставления рентгенологических синдромов при туберкулезе и других заболеваниях (пневмония, рака, саркоидоз и др.).",
                         "Иммунодиагностика (Раздел V): Четкие схемы применения пробы Манту (дети до 7 лет) и Диаскинтеста (дети с 8 лет и взрослые по показаниям), критерии оценки.",
                         "Эндоскопические и хирургические методы (Раздел VI): Подробно описаны методы получения материала для верификации диагноза: бронхоскопия (включая видеобронхоскопию, БАЛ, различные виды биопсий), торакоскопия, медиастиноскопия. Указано, что они применяются при невозможности установить диагноз неинвазивными методами.",
                         "Особенности у пациентов с ВИЧ-инфекцией: При наличии лихорадки и иммуносупрессии КТ ОГК проводится обязательно, даже при нормальной рентгенограмме.",
                         "Соблюдение противоэпидемического режима: Забор мокроты в отдельном помещении с вентиляцией, использование СИЗ персоналом."
                     ],
-                    "application": "Этот документ служит пошаговой инструкцией и памяткой для врача поликлиники или общего стационара. Он даёт чёткие ответы на главные вопросы: кого именно нужно обследовать на туберкулез, какой минимальный набор исследований провести в первую очередь, как интерпретировать их результаты и что делать дальше. В нём также описаны методы дифференциальной диагностика, схемы иммунотестирования и современные эндоскопические процедуры для сложных случаев. Основная задача на этапе общей лечебной сети — своевременно заподозрить заболевание, быстро выявить заразного больного, предотвратить распространение инфекции и организовать его безопасную передачу специалистам-фтизиатрам."
+                    "application": "Этот документ служит пошаговой инструкцией и памяткой для врача поликлиники или общего стационара. Он даёт чёткие ответы на главные вопросы: кого именно нужно обследовать на туберкулез, какой минимальный набор исследований провести в первую очередь, как интерпретировать их результаты и что делать дальше. В нём также описаны методы дифференциальной диагностики, схемы иммунотестирования и современные эндоскопические процедуры для сложных случаев. Основная задача на этапе общей лечебной сети — своевременно заподозрить заболевание, быстро выявить заразного больного, предотвратить распространение инфекции и организовать его безопасную передачу специалистам-фтизиатрам."
                 }
             },
             {
@@ -762,7 +761,7 @@
                 "explanation": {
                     "keyPoints": [
                         "Обязательное немедленное уведомление МОКПТД при подозрении на туберкулёз как причину смерти",
-                        "Забор материала для микробиологическое исследование с целью выявления микобактерий туберкулеза (МБТ)",
+                        "Забор материала для микробиологического исследования с целью выявления микобактерий туберкулеза (МБТ)",
                         "Совместная оценка случая фтизиатром и патологоанатомом/судмедэкспертом",
                         "Определение ВИЧ-статуса для корректного установления причины смерти",
                         "Ежемесячные коллегиальные разборы случаев"
@@ -784,7 +783,7 @@
                     "keyPoints": [
                         "Утверждает стандартные учётные формы для микроскопической диагностики туберкулёза: формы 05-ТБ/у (направление), 04-ТБ/у (журнал исследований), 04-1-ТБ/у (журнал регистрации материала), 04-2-ТБ/у (сопроводительный лист).",
                         "Определяет правила сбора мокроты: в специально оборудованном проветриваемом помещении, с использованием СИЗ персоналом, правильная техника кашля для пациента.",
-                        "Устанавливает график сбора мокрота: 3 образца в течение 2 дней (1-й в ЛПУ, 2-й дома утром, 3-й в ЛПУ при приёме второго образца).",
+                        "Устанавливает график сбора мокроты: 3 образца в течение 2 дней (1-й в ЛПУ, 2-й дома утром, 3-й в ЛПУ при приёме второго образца).",
                         "Регламентирует транспортировку диагностического материала в закрытых биксах с сопроводительной документацией.",
                         "Предусматривает немедленное информирование врача при положительном результате микроскопии.",
                         "Определяет виды диагностического материала (26 позиций) помимо мокроты: ликвор, плевральная жидкость, кровь, биоптаты и др.",
@@ -871,8 +870,6 @@
                 }
             }
         ];
-
-        
 
         // ========== ФУНКЦИЯ ДЛЯ СКАЧИВАНИЯ ВСЕХ ДОКУМЕНТОВ ==========
         function downloadAllDocuments() {
@@ -977,6 +974,7 @@
                 });
             });
             
+            // Анимация появления карточек
             const cards = document.querySelectorAll('.document-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
