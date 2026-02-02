@@ -4,10 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Правила сбора и транспортировки мокроты | ГБУЗ МО МОКПТД</title>
-    <!-- ШРИФТЫ ИЗ РЕПОЗИТОРИЯ -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- ЛОКАЛЬНЫЕ ШРИФТЫ ИЗ РЕПОЗИТОРИЯ (как в normativka.html) -->
     <style>
+        /* ШРИФТЫ ИЗ РЕПОЗИТОРИЯ */
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/Inter-Regular.woff2') format('woff2'),
+                 url('assets/fonts/Inter-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/Inter-Medium.woff2') format('woff2'),
+                 url('assets/fonts/Inter-Medium.woff') format('woff');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/Inter-SemiBold.woff2') format('woff2'),
+                 url('assets/fonts/Inter-SemiBold.woff') format('woff');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('assets/fonts/Inter-Bold.woff2') format('woff2'),
+                 url('assets/fonts/Inter-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        
         /* ПРОГРЕСС-БАР */
         #page-loading {
             position: fixed;
@@ -51,6 +87,29 @@
             font-size: 1rem;
         }
         
+        /* КНОПКА НАЗАД */
+        .back-to-navigator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+            margin-bottom: 1rem;
+            float: right;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .back-to-navigator:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        /* ОСТАЛЬНЫЕ СТИЛИ КАК В ОРИГИНАЛЕ */
         :root {
             --primary-blue: #1A5F9E;
             --secondary-blue: #2C8BD4;
@@ -86,27 +145,6 @@
             padding: 20px;
         }
         
-        /* === КНОПКА НАЗАД === */
-        .back-to-navigator {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s;
-            margin-bottom: 1rem;
-            float: right;
-        }
-        
-        .back-to-navigator:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-        
         /* === ЗАГОЛОВОК И ВВОДНАЯ ИНФОРМАЦИЯ === */
         .document-header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
@@ -122,6 +160,7 @@
             font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
+            font-family: 'Inter', sans-serif;
         }
         
         .document-subtitle {
@@ -129,6 +168,7 @@
             opacity: 0.95;
             margin-bottom: 1.5rem;
             font-weight: 300;
+            font-family: 'Inter', sans-serif;
         }
         
         .important-note {
@@ -138,6 +178,7 @@
             border-radius: 4px;
             margin-top: 1.5rem;
             font-size: 0.95rem;
+            font-family: 'Inter', sans-serif;
         }
         
         /* === ОГЛАВЛЕНИЕ === */
@@ -157,6 +198,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-family: 'Inter', sans-serif;
         }
         
         .toc-list {
@@ -170,6 +212,7 @@
             padding: 8px 0;
             position: relative;
             padding-left: 24px;
+            font-family: 'Inter', sans-serif;
         }
         
         .toc-list li::before {
@@ -186,6 +229,7 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
+            font-family: 'Inter', sans-serif;
         }
         
         .toc-list a:hover {
@@ -220,12 +264,14 @@
             font-weight: 700;
             font-size: 1.2rem;
             flex-shrink: 0;
+            font-family: 'Inter', sans-serif;
         }
         
         .step-title {
             font-size: 1.6rem;
             font-weight: 600;
             color: var(--primary-blue);
+            font-family: 'Inter', sans-serif;
         }
         
         .step-content {
@@ -248,6 +294,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-family: 'Inter', sans-serif;
         }
         
         .subsection-title i {
@@ -257,6 +304,7 @@
         .subsection-content {
             color: var(--text-secondary);
             margin-left: 28px;
+            font-family: 'Inter', sans-serif;
         }
         
         .highlight-box {
@@ -265,6 +313,7 @@
             padding: 1.2rem;
             margin: 1.2rem 0;
             border-radius: 0 4px 4px 0;
+            font-family: 'Inter', sans-serif;
         }
         
         .warning-box {
@@ -273,6 +322,7 @@
             padding: 1.2rem;
             margin: 1.2rem 0;
             border-radius: 0 4px 4px 0;
+            font-family: 'Inter', sans-serif;
         }
         
         .success-box {
@@ -281,6 +331,7 @@
             padding: 1.2rem;
             margin: 1.2rem 0;
             border-radius: 0 4px 4px 0;
+            font-family: 'Inter', sans-serif;
         }
         
         /* === СПИСКИ === */
@@ -292,11 +343,13 @@
         li {
             margin-bottom: 0.5rem;
             color: var(--text-secondary);
+            font-family: 'Inter', sans-serif;
         }
         
         .key-point {
             font-weight: 600;
             color: var(--primary-blue);
+            font-family: 'Inter', sans-serif;
         }
         
         /* === ФУТЕР === */
@@ -307,6 +360,7 @@
             text-align: center;
             color: var(--text-secondary);
             font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
         }
         
         /* === АДАПТИВНОСТЬ === */
@@ -371,7 +425,7 @@
     <header class="document-header">
         <!-- КНОПКА НАЗАД В НАВИГАТОР -->
         <a href="https://klinmokptd.github.io/navigator_OLS/" class="back-to-navigator">
-            <i class="fas fa-arrow-left"></i> Назад в навигатор
+            ← Назад в навигатор
         </a>
         
         <h1 class="document-title">Краткая инструкция-памятка по сбору и транспортировке мокроты</h1>
@@ -520,7 +574,7 @@
             </ol>
             
             <div class="warning-box">
-                <p><strong>Помните:</strong> На нарушение правил транспортировки, температурного режима или оформления документов приводит к <strong>выбраковке материала</strong> и невозможности проведения исследования.</p>
+                <p><strong>Помните:</strong> Нарушение правил транспортировки, температурного режима или оформления документов приводит к <strong>выбраковке материала</strong> и невозможности проведения исследования.</p>
             </div>
         </div>
     </section>
@@ -531,7 +585,7 @@
     </footer>
 
     <script>
-        // ========== ПРОГРЕСС-БАР ==========
+        // ПРОГРЕСС-БАР
         const loader = document.getElementById('page-loading');
         let timer = setTimeout(() => loader.style.display = 'flex', 300);
         
