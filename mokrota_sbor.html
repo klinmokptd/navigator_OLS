@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Правила сбора и транспортировки мокроты | ГБУЗ МО МОКПТД</title>
+    <title>Сбор и транспортировка мокроты | ГБУЗ МО МОКПТД</title>
+    
+    <!-- Подключение Font Awesome из репозитория -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Подключение шрифтов из репозитория -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary-blue: #1A5F9E;
@@ -13,6 +18,7 @@
             --light-blue: #F0F7FF;
             --accent-red: #D32F2F;
             --accent-green: #2E7D32;
+            --accent-orange: #F57C00;
             --white: #FFFFFF;
             --gray-light: #F5F7FA;
             --gray-medium: #E0E5EC;
@@ -21,6 +27,7 @@
             --text-secondary: #546E7A;
             
             --shadow-medium: 0 4px 12px rgba(26, 95, 158, 0.08);
+            --shadow-strong: 0 8px 24px rgba(26, 95, 158, 0.12);
             --border-radius: 8px;
         }
         
@@ -31,119 +38,214 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.7;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
             color: var(--text-primary);
-            background-color: var(--white);
+            background-color: var(--light-blue);
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
         }
         
-        /* === ЗАГОЛОВОК И ВВОДНАЯ ИНФОРМАЦИЯ === */
-        .document-header {
+        /* ========== ПРОГРЕСС-БАР ========== */
+        #page-loading {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--light-blue);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+        
+        .loader {
+            text-align: center;
+            padding: 30px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+            min-width: 200px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--gray-medium);
+            border-top: 4px solid var(--primary-blue);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loader .text {
+            color: var(--primary-blue);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        
+        /* ========== ШАПКА ========== */
+        .header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
-            padding: 2.5rem;
-            border-radius: var(--border-radius);
-            margin-bottom: 2.5rem;
-            box-shadow: var(--shadow-medium);
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent-red);
+            position: relative;
         }
         
-        .document-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
         }
         
-        .document-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.95;
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 1.5rem;
-            font-weight: 300;
         }
         
-        .important-note {
-            background: rgba(255, 255, 255, 0.15);
-            border-left: 4px solid var(--accent-red);
-            padding: 1.2rem;
-            border-radius: 4px;
-            margin-top: 1.5rem;
-            font-size: 0.95rem;
-        }
-        
-        /* === ОГЛАВЛЕНИЕ === */
-        .toc-container {
-            background: var(--light-blue);
-            border-radius: var(--border-radius);
-            padding: 1.8rem;
-            margin-bottom: 2.5rem;
-            border: 1px solid var(--gray-medium);
-        }
-        
-        .toc-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-            margin-bottom: 1.2rem;
+        .logo-area {
             display: flex;
             align-items: center;
-            gap: 10px;
         }
         
-        .toc-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 10px;
-        }
-        
-        .toc-list li {
-            padding: 8px 0;
-            position: relative;
-            padding-left: 24px;
-        }
-        
-        .toc-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            color: var(--secondary-blue);
+        .logo-icon {
+            background: rgba(255, 255, 255, 0.15);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            border: 2px solid rgba(255,255,255,0.2);
             font-weight: bold;
+            font-size: 20px;
         }
         
-        .toc-list a {
-            color: var(--text-primary);
+        .logo-text h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .logo-text p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            color: white;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
         }
         
-        .toc-list a:hover {
-            color: var(--primary-blue);
-            text-decoration: underline;
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
         }
         
-        /* === БЛОКИ ЭТАПОВ === */
-        .step-container {
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            color: white;
+        }
+        
+        .header-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 800px;
+            line-height: 1.5;
+            color: white;
+        }
+        
+        /* ========== ВАЖНОЕ ПРИМЕЧАНИЕ ========== */
+        .important-header {
+            background: rgba(255, 255, 255, 0.15);
+            border-left: 4px solid var(--accent-red);
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .important-header p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .important-header strong {
+            color: white;
+        }
+        
+        /* ========== ОСНОВНОЙ КОНТЕНТ ========== */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 30px;
+        }
+        
+        /* ========== КАРТОЧКИ ЭТАПОВ ========== */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+            gap: 25px;
             margin-bottom: 3rem;
         }
         
+        @media (max-width: 768px) {
+            .steps-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .step-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--gray-medium);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .step-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+        }
+        
         .step-header {
-            background: var(--light-blue);
+            background: var(--primary-blue);
+            color: white;
             padding: 1.5rem;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
-            border-bottom: 2px solid var(--secondary-blue);
             display: flex;
             align-items: center;
             gap: 15px;
+            flex-shrink: 0;
         }
         
         .step-number {
-            background: var(--primary-blue);
+            background: rgba(255, 255, 255, 0.2);
             color: white;
             width: 40px;
             height: 40px;
@@ -154,45 +256,49 @@
             font-weight: 700;
             font-size: 1.2rem;
             flex-shrink: 0;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
         .step-title {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+            line-height: 1.3;
+        }
+        
+        .step-content {
+            padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .step-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* ========== СПИСКИ В КАРТОЧКАХ ========== */
+        .step-list {
+            margin-left: 1.2rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .step-list li {
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            line-height: 1.5;
+        }
+        
+        .key-point {
             font-weight: 600;
             color: var(--primary-blue);
         }
         
-        .step-content {
-            border: 1px solid var(--gray-medium);
-            border-top: none;
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
-            padding: 2rem;
-            background: var(--white);
-        }
-        
-        .subsection {
-            margin-bottom: 1.8rem;
-        }
-        
-        .subsection-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .subsection-title i {
-            color: var(--secondary-blue);
-        }
-        
-        .subsection-content {
-            color: var(--text-secondary);
-            margin-left: 28px;
-        }
-        
+        /* ========== СПЕЦИАЛЬНЫЕ БЛОКИ ========== */
         .highlight-box {
             background: #FFF8E1;
             border-left: 4px solid #FFB300;
@@ -217,102 +323,279 @@
             border-radius: 0 4px 4px 0;
         }
         
-        /* === СПИСКИ === */
-        ul, ol {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
+        /* ========== КНОПКИ ДЕЙСТВИЙ ========== */
+        .step-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: auto;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--gray-medium);
         }
         
-        li {
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-        }
-        
-        .key-point {
-            font-weight: 600;
-            color: var(--primary-blue);
-        }
-        
-        /* === ФУТЕР === */
-        .document-footer {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid var(--gray-medium);
-            text-align: center;
-            color: var(--text-secondary);
+        .step-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 500;
             font-size: 0.9rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
         
-        /* === АДАПТИВНОСТЬ === */
+        .btn-download {
+            background: var(--primary-blue);
+            color: white;
+        }
+        
+        .btn-download:hover {
+            background: var(--secondary-blue);
+        }
+        
+        .btn-print {
+            background: var(--accent-green);
+            color: white;
+        }
+        
+        .btn-print:hover {
+            background: #388E3C;
+        }
+        
+        .btn-note {
+            background: var(--accent-orange);
+            color: white;
+        }
+        
+        .btn-note:hover {
+            background: #FF9800;
+        }
+        
+        /* ========== СЕКЦИЯ "ЧТО ПЕРЕДАВАТЬ" ========== */
+        .transfer-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-medium);
+            border-top: 4px solid var(--accent-green);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .transfer-list {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .transfer-list li {
+            margin-bottom: 0.8rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+        }
+        
+        /* ========== БЫСТРЫЕ ЯРЛЫКИ ========== */
+        .quick-links {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        
+        .quick-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--white);
+            border: 2px solid var(--primary-blue);
+            border-radius: 30px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .quick-link:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+        
+        /* ========== ФУТЕР ========== */
+        .footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .footer-info {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .footer-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* ========== АДАПТИВНОСТЬ ========== */
         @media (max-width: 768px) {
-            body {
-                padding: 15px;
+            .header {
+                padding: 2rem 0;
             }
             
-            .document-header {
-                padding: 1.8rem;
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
             }
             
-            .document-title {
-                font-size: 1.8rem;
+            .header-title {
+                font-size: 2rem;
             }
             
-            .toc-list {
-                grid-template-columns: 1fr;
+            .header-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .main-container {
+                padding: 1.5rem 20px;
+            }
+            
+            .steps-container {
+                gap: 15px;
+            }
+            
+            .step-header {
+                padding: 1.2rem;
+            }
+            
+            .step-title {
+                font-size: 1.2rem;
             }
             
             .step-content {
-                padding: 1.5rem;
+                padding: 1.2rem;
+            }
+            
+            .quick-links {
+                flex-direction: column;
+            }
+            
+            .step-actions {
+                flex-direction: column;
             }
         }
         
-        @media print {
-            .toc-container, .document-footer {
-                display: none;
+        @media (max-width: 480px) {
+            .header-container {
+                padding: 0 20px;
             }
             
-            body {
-                max-width: 100%;
+            .header-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Заголовок и вводная информация -->
-    <header class="document-header">
-        <h1 class="document-title">Краткая инструкция-памятка по сбору и транспортировке мокроты</h1>
-        <p class="document-subtitle">Алгоритм действий для медицинского персонала ОЛС осуществляющих прямое отправление диагностического материала в лабораторию ГБУЗ МО МОКПТД </p>
-        
-        <div class="important-note">
-            <p><strong>Важно:</strong> Данная памятка является кратким ознакомительным изложением ключевых моментов. Полная, официальная процедура подробно описана в <strong>Приказе ГБУЗ МО «МОКПТД» от «01» ноября 2023г. №266/23</strong>. Ответственность за соблюдение <strong>всех требований данного приказа, а также действующих санитарно-эпидемиологических правил, норм безопасности и стандартов работы с биологическим материалом</strong> лежит на медицинском персонале.</p>
+    <!-- ПРОГРЕСС-БАР -->
+    <div id="page-loading">
+        <div class="loader">
+            <div class="spinner"></div>
+            <div class="text">Загрузка инструкции...</div>
+        </div>
+    </div>
+
+    <!-- ШАПКА -->
+    <header class="header">
+        <div class="header-container">
+            <div class="header-top">
+                <div class="logo-area">
+                    <div class="logo-icon">М</div>
+                    <div class="logo-text">
+                        <h1>ГБУЗ МО "МОКПТД"</h1>
+                        <p>Филиал "Клинский"</p>
+                    </div>
+                </div>
+                <!-- КНОПКА НАЗАД В НАВИГАТОР -->
+                <a href="https://klinmokptd.github.io/navigator_OLS/" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Назад в навигатор
+                </a>
+            </div>
+            
+            <h2 class="header-title">Сбор и транспортировка мокроты</h2>
+            <p class="header-subtitle">Краткая инструкция-памятка для медицинского персонала ОЛС</p>
+            
+            <div class="important-header">
+                <p><strong>Важно:</strong> Данная памятка является кратким ознакомительным изложением ключевых моментов. Полная, официальная процедура подробно описана в <strong>Приказе ГБУЗ МО «МОКПТД» от «01» ноября 2023г. №266/23</strong>. Ответственность за соблюдение <strong>всех требований данного приказа, а также действующих санитарно-эпидемиологических правил, норм безопасности и стандартов работы с биологическим материалом</strong> лежит на медицинском персонале.</p>
+            </div>
         </div>
     </header>
 
-    <!-- Оглавление -->
-    <nav class="toc-container">
-        <h2 class="toc-title"><i class="fas fa-list"></i> Содержание</h2>
-        <ul class="toc-list">
-            <li><a href="#step1">ШАГ 1: Подготовка в системе 1С ЛИС и особенности сбора</a></li>
-            <li><a href="#step2">ШАГ 2: Маркировка и контроль</a></li>
-            <li><a href="#step3">ШАГ 3: Упаковка (инфекционный материал)</a></li>
-            <li><a href="#step4">ШАГ 4: Транспортировка и хранение</a></li>
-            <li><a href="#step5">Что передавать в лабораторию?</a></li>
-        </ul>
-    </nav>
-
-    <!-- ШАГ 1 -->
-    <section class="step-container" id="step1">
-        <div class="step-header">
-            <div class="step-number">1</div>
-            <h2 class="step-title">Подготовка в системе 1С ЛИС и особенности сбора</h2>
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="main-container">
+        <!-- БЫСТРЫЕ ЯРЛЫКИ -->
+        <div class="quick-links">
+            <a href="#step1" class="quick-link">
+                <i class="fas fa-tasks"></i> ШАГ 1: Подготовка
+            </a>
+            <a href="#step2" class="quick-link">
+                <i class="fas fa-tag"></i> ШАГ 2: Маркировка
+            </a>
+            <a href="#step3" class="quick-link">
+                <i class="fas fa-box"></i> ШАГ 3: Упаковка
+            </a>
+            <a href="#step4" class="quick-link">
+                <i class="fas fa-truck"></i> ШАГ 4: Транспортировка
+            </a>
+            <a href="#step5" class="quick-link">
+                <i class="fas fa-clipboard-check"></i> Что передавать?
+            </a>
         </div>
-        
-        <div class="step-content">
-            <div class="subsection">
-                <h3 class="subsection-title"><i class="fas fa-tasks"></i> Формирование направлений</h3>
-                <div class="subsection-content">
-                    <p>На каждого пациента для полноценного анализа необходимо создать <strong>ДВА отдельных направления</strong> в 1С ЛИС:</p>
-                    <ul>
+
+        <!-- КАРТОЧКИ ЭТАПОВ -->
+        <div class="steps-container">
+            <!-- ШАГ 1 -->
+            <article class="step-card" id="step1">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Подготовка в системе 1С ЛИС и особенности сбора</h3>
+                </div>
+                
+                <div class="step-content">
+                    <p class="step-description">На каждого пациента для полноценного анализа необходимо создать <strong>ДВА отдельных направления</strong> в 1С ЛИС:</p>
+                    
+                    <ul class="step-list">
                         <li><span class="key-point">Направление 1, выбрать:</span> Люминесцентная микроскопия, Посев на плотных средах, Посев на жидких средах, <strong>МГМ</strong>.</li>
                         <li><span class="key-point">Направление 2, выбрать:</span> Люминесцентная микроскопия, Посев на плотных средах, Посев на жидких средах <strong>(без МГМ)</strong>.</li>
                     </ul>
@@ -320,107 +603,97 @@
                     <div class="highlight-box">
                         <p><strong>Крайне важно:</strong> Каждому направлению соответствует <strong>отдельный флакон</strong>. Таким образом, пациент сдает мокроту <strong>в два разных флакона</strong>. <strong>Мокрота собирается двукратно с интервалом времени (например, первый флакон — вечером, с последующим хранением в холодильнике, второй — утром следующего дня перед отправкой).</strong> Их сбор рекомендуется проводить <strong>в разное время</strong> для повышения информативности.</p>
                     </div>
+                    
+                    <div class="step-actions">
+                        <button class="step-btn btn-note" onclick="alert('После взятия материала переведите каждую заявку в статус «ПРОБА ВЗЯТА» в ЛИС!')">
+                            <i class="fas fa-clipboard-check"></i> Напоминание
+                        </button>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="subsection">
-                <h3 class="subsection-title"><i class="fas fa-clipboard-check"></i> Оформление после сбора</h3>
-                <div class="subsection-content">
-                    <p>После взятия материала медсестра находит пациента в ЛИС и <strong>обязательно переводит каждую заявку в статус «ПРОБА ВЗЯТА»</strong>. Без этого шага лаборатория исследование не примет.</p>
-                    <p>Распечатывается <strong>Сопроводительный лист (в 2-х экземплярах)</strong>. В нем нужно сверить: пациент с двумя направлениями должен быть указан в сопроводительном листе дважды, а количество флаконов должно строго совпадать с количеством строк в сопроводительном листе.</p>
+            </article>
+
+            <!-- ШАГ 2 -->
+            <article class="step-card" id="step2">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Маркировка и контроль</h3>
                 </div>
-            </div>
-            
-            <div class="subsection">
-                <h3 class="subsection-title"><i class="fas fa-user-md"></i> Работа с пациентом</h3>
-                <div class="subsection-content">
-                    <ul>
-                        <li>Медперсонал работает в полной защитной экипировке (халат, шапочка, респиратор, перчатки).</li>
-                        <li>Проводится идентификация пациента и инструктаж. <strong>Необходимо донести до пациента:</strong>
+                
+                <div class="step-content">
+                    <ul class="step-list">
+                        <li>На каждый флакон <strong>наклеивается штрих-код</strong> из ЛИС.</li>
+                        <li><strong>Аварийный вариант:</strong> если печать невозможна, на флаконе <strong>маркером печатными буквами</strong> разборчиво пишут <strong>ФИО (полностью) и дату рождения</strong>.</li>
+                        <li>Данные на флаконе (штрих-код или надпись) <strong>должны на 100% совпадать</strong> с данными в распечатанном сопроводительном листе.</li>
+                    </ul>
+                    
+                    <div class="warning-box">
+                        <p><strong>Контроль:</strong> Сверить количество флаконов с количеством строк в сопроводительном листе!</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- ШАГ 3 -->
+            <article class="step-card" id="step3">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Упаковка (инфекционный материал Категории В)</h3>
+                </div>
+                
+                <div class="step-content">
+                    <div class="warning-box">
+                        <p><strong>Мокрота — опасный инфекционный материал Категории В! № ООН 3373</strong></p>
+                    </div>
+                    
+                    <ul class="step-list">
+                        <li><strong>Организация вторичной тары:</strong> Используется прочный, герметичный контейнер (бикс)</li>
+                        <li><strong>Три обязательных правила внутри контейнера:</strong>
                             <ul>
-                                <li>Качество и объем мокроты напрямую влияют на диагноз и лечение.</li>
-                                <li><strong>Крышку контейнера открывать в последний момент и сразу закрывать.</strong></li>
-                                <li>Не класть крышку на поверхности, не касаться губами краев контейнера.</li>
+                                <li>Флаконы <strong>обязательно помещаются в штатив</strong> для устойчивости</li>
+                                <li>Внутрь помещается <strong>холодовой элемент</strong></li>
+                                <li>Флаконы должны быть <strong>обернуты адсорбирующим материалом</strong></li>
                             </ul>
                         </li>
-                        <li>Выдается специальный <strong>флакон-конус</strong>.</li>
+                        <li>Материалы разного типа <strong>(мокрота и моча) упаковываются в РАЗНЫЕ контейнеры</strong></li>
+                        <li>Папка с документами кладется <strong>только в наружный карман термоконтейнера</strong></li>
                     </ul>
                 </div>
-            </div>
-        </div>
-    </section>
+            </article>
 
-    <!-- ШАГ 2 -->
-    <section class="step-container" id="step2">
-        <div class="step-header">
-            <div class="step-number">2</div>
-            <h2 class="step-title">Маркировка и контроль</h2>
+            <!-- ШАГ 4 -->
+            <article class="step-card" id="step4">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Транспортировка и хранение</h3>
+                </div>
+                
+                <div class="step-content">
+                    <ul class="step-list">
+                        <li><strong>Доставить в лабораторию как можно быстрее.</strong></li>
+                        <li><strong>Температура при перевозке:</strong> строго <strong>+4°C … +10°C</strong>.</li>
+                        <li><strong>Если доставка задерживается:</strong>
+                            <ul>
+                                <li>Хранить в холодильнике при <strong>+4°C … +10°C не более 3 суток</strong>.</li>
+                                <li>Или заморозить (не более <strong>72 часов</strong>). <strong>ПОВТОРНОЕ ЗАМОРАЖИВАТЬ НЕЛЬЗЯ!</strong></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <div class="step-actions">
+                        <button class="step-btn btn-download" onclick="printPage()">
+                            <i class="fas fa-print"></i> Распечатать
+                        </button>
+                    </div>
+                </div>
+            </article>
         </div>
-        
-        <div class="step-content">
-            <ul>
-                <li>На каждый флакон <strong>наклеивается штрих-код</strong> из ЛИС.</li>
-                <li><strong>Аварийный вариант:</strong> если печать невозможна, на флаконе <strong>маркером печатными буквами</strong> разборчиво пишут <strong>ФИО (полностью) и дату рождения</strong>.</li>
-                <li>Данные на флаконе (штрих-код или надпись) <strong>должны на 100% совпадать</strong> с данными в распечатанном сопроводительном листе.</li>
-            </ul>
-        </div>
-    </section>
 
-    <!-- ШАГ 3 -->
-    <section class="step-container" id="step3">
-        <div class="step-header">
-            <div class="step-number">3</div>
-            <h2 class="step-title">Упаковка (Мокрота — опасный инфекционный материал Категории В! № ООН 3373)</h2>
-        </div>
-        
-        <div class="step-content">
-            <div class="warning-box">
-                <p><strong>Ключевой этап — правильная организация вторичной тары:</strong></p>
-            </div>
+        <!-- ЧТО ПЕРЕДАВАТЬ В ЛАБОРАТОРИЮ -->
+        <section class="transfer-section" id="step5">
+            <h3 class="section-title">
+                <i class="fas fa-clipboard-check"></i> Что передавать в лабораторию?
+            </h3>
             
-            <ol>
-                <li><strong>Организация вторичной тары:</strong> Используется прочный, герметичный контейнер (бикс). <strong>Обязательно соблюсти три правила внутри него:</strong>
-                    <ul>
-                        <li><span class="key-point">Штатив:</span> Флаконы <strong>обязательно помещаются в штатив</strong> для устойчивости. Штатив с флаконами должен быть надежно закреплен, чтобы не опрокинуться при транспортировке.</li>
-                        <li><span class="key-point">Холодовой элемент:</span> Внутрь контейнера обязательно помещается <strong>холодовой элемент</strong> для поддержания температуры.</li>
-                        <li><span class="key-point">Адсорбент:</span> Флаконы в штативе (или сам штатив) должны быть <strong>обернуты адсорбирующим материалом</strong> (например, салфетками) для впитывания возможной протечки.</li>
-                    </ul>
-                </li>
-                <li><strong>Разделение материалов:</strong> Материалы разного типа <strong>(мокрота и моча) должны упаковываться в РАЗНЫЕ вторичные контейнеры.</strong></li>
-                <li><strong>Наружная упаковка (термоконтейнер):</strong> Вторичный контейнер помещается в наружный термоконтейнер и дополнительно обкладывается <strong>хладагентами</strong>. <strong>Папка с документами кладется только в специальный наружный карман термоконтейнера</strong> (2 экз. сопроводительного листа).</li>
-            </ol>
-        </div>
-    </section>
-
-    <!-- ШАГ 4 -->
-    <section class="step-container" id="step4">
-        <div class="step-header">
-            <div class="step-number">4</div>
-            <h2 class="step-title">Транспортировка и хранение</h2>
-        </div>
-        
-        <div class="step-content">
-            <ul>
-                <li><strong>Доставить в лабораторию как можно быстрее.</strong></li>
-                <li><strong>Температура при перевозке:</strong> строго <strong>+4°C … +10°C</strong>.</li>
-                <li><strong>Если доставка задерживается:</strong>
-                    <ul>
-                        <li>Хранить в холодильнике при <strong>+4°C … +10°C не более 3 суток</strong>.</li>
-                        <li>Или заморозить (не более <strong>72 часов</strong>). <strong>ПОВТОРНОЕ ЗАМОРАЖИВАТЬ НЕЛЬЗЯ!</strong></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- ЧТО ПЕРЕДАВАТЬ -->
-    <section class="step-container" id="step5">
-        <div class="step-header">
-            <h2 class="step-title">Что передавать в лабораторию?</h2>
-        </div>
-        
-        <div class="step-content">
-            <ol>
+            <ol class="transfer-list">
                 <li>Закрытый <strong>термоконтейнер</strong> с биоматериалом.</li>
                 <li><strong>Отдельную папку</strong> с документами (сопроводительные листы).</li>
             </ol>
@@ -428,33 +701,58 @@
             <div class="warning-box">
                 <p><strong>Помните:</strong> Нарушение правил транспортировки, температурного режима или оформления документов приводит к <strong>выбраковке материала</strong> и невозможности проведения исследования.</p>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Футер -->
-    <footer class="document-footer">
-        <p><i class="fas fa-hospital-alt"></i> ГБУЗ МО "МОКПТД" | Филиал "Клинский"</p>
+    <!-- ФУТЕР -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <p>© 2026 ГБУЗ МО "МОКПТД" филиал "Клинский"</p>
+                <p>По вопросам и замечаниям: <a href="mailto:mz_mokptd_klin@mosreg.ru">mz_mokptd_klin@mosreg.ru</a></p>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // Плавная прокрутка для навигации по оглавлению
-        document.querySelectorAll('.toc-list a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 20,
-                    behavior: 'smooth'
-                });
+        // ========== ПРОГРЕСС-БАР ==========
+        const loader = document.getElementById('page-loading');
+        
+        // Показываем прогресс-бар через 300мс, если страница ещё не загрузилась
+        let timer = setTimeout(() => loader.style.display = 'flex', 300);
+        
+        // Скрываем прогресс-бар после полной загрузки страницы
+        window.addEventListener('load', () => {
+            clearTimeout(timer);
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 300);
+        });
+
+        // ========== ПЛАВНАЯ ПРОКРУТКА ==========
+        document.querySelectorAll('.quick-link, .back-btn').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.getAttribute('href').startsWith('#')) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
             });
         });
-        
-        // Подсветка текущего раздела при прокрутке
+
+        // ========== ПОДСВЕТКА АКТИВНОГО РАЗДЕЛА ==========
         window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('.step-container');
-            const scrollPosition = window.scrollY + 100;
+            const sections = document.querySelectorAll('.step-card, .transfer-section');
+            const quickLinks = document.querySelectorAll('.quick-link');
+            
+            let currentSection = '';
+            const scrollPosition = window.scrollY + 150;
             
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
@@ -462,15 +760,40 @@
                 const sectionId = section.getAttribute('id');
                 
                 if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    document.querySelectorAll('.toc-list a').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === '#' + sectionId) {
-                            link.classList.add('active');
-                            link.style.color = 'var(--primary-blue)';
-                            link.style.fontWeight = '600';
-                        }
-                    });
+                    currentSection = '#' + sectionId;
                 }
+            });
+            
+            quickLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === currentSection) {
+                    link.classList.add('active');
+                    link.style.background = 'var(--primary-blue)';
+                    link.style.color = 'white';
+                } else {
+                    link.style.background = '';
+                    link.style.color = '';
+                }
+            });
+        });
+
+        // ========== ФУНКЦИЯ ПЕЧАТИ ==========
+        function printPage() {
+            window.print();
+        }
+
+        // ========== АНИМАЦИЯ ПРИ ЗАГРУЗКЕ ==========
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.step-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.5s, transform 0.5s';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 200 * index);
             });
         });
     </script>
