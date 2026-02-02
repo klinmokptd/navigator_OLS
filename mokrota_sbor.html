@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Правила сбора и транспортировки мокроты | ГБУЗ МО МОКПТД</title>
     
-    <!-- ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 (как в index.html) -->
+    <!-- ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 (единый стиль как в tmk.html) -->
     <style>
         /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
         @font-face {
@@ -46,6 +46,7 @@
             --light-blue: #F0F7FF;
             --accent-red: #D32F2F;
             --accent-green: #2E7D32;
+            --accent-orange: #F57C00;
             --white: #FFFFFF;
             --gray-light: #F5F7FA;
             --gray-medium: #E0E5EC;
@@ -54,7 +55,7 @@
             --text-secondary: #546E7A;
             
             --shadow: 0 4px 12px rgba(26, 95, 158, 0.08);
-            --border-radius: 6px;
+            --radius: 6px;
         }
         
         * {
@@ -68,14 +69,12 @@
             line-height: 1.6;
             color: var(--text-primary);
             background-color: var(--light-blue);
-            font-weight: 400;
-            -webkit-font-smoothing: antialiased;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
         }
         
-        /* КНОПКА НАЗАД */
+        /* Кнопка назад в навигатор */
         .back-to-navigator {
             display: inline-flex;
             align-items: center;
@@ -90,7 +89,6 @@
             transition: all 0.3s;
             margin-bottom: 1rem;
             float: right;
-            font-family: 'Inter', sans-serif;
         }
         
         .back-to-navigator:hover {
@@ -102,7 +100,7 @@
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
             padding: 2.5rem;
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             margin-bottom: 2.5rem;
             box-shadow: var(--shadow);
             border-bottom: 4px solid var(--accent-red);
@@ -131,10 +129,20 @@
             font-size: 0.95rem;
         }
         
+        .important-note a {
+            color: #FFEB3B;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        
+        .important-note a:hover {
+            text-decoration: none;
+        }
+        
         /* === ОГЛАВЛЕНИЕ === */
         .toc-container {
             background: var(--white);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             padding: 1.8rem;
             margin-bottom: 2.5rem;
             border: 1px solid var(--gray-medium);
@@ -180,16 +188,18 @@
             transition: color 0.2s;
         }
         
-        .toc-list a:hover {
+        .toc-list a:hover,
+        .toc-list a.active {
             color: var(--primary-blue);
             text-decoration: underline;
+            font-weight: 600;
         }
         
-        /* === БЛОКИ ЭТАПОВ === */
+        /* === БЛОКИ ЭТАПОВ (единый стиль как в tmk.html) === */
         .step-container {
             margin-bottom: 2rem;
             background: var(--white);
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-medium);
@@ -301,14 +311,47 @@
             color: var(--primary-blue);
         }
         
-        /* === ФУТЕР === */
+        /* === КОНТАКТНАЯ ИНФОРМАЦИЯ (стиль из tmk.html для возможного использования) === */
+        .contact-info {
+            background: var(--light-blue);
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin: 1rem 0;
+            border-left: 4px solid var(--secondary-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+        }
+        
+        .contact-info::before {
+            content: '📞';
+            font-size: 1.2rem;
+        }
+        
+        .contact-info strong {
+            color: var(--primary-blue);
+        }
+        
+        /* === ИЗОБРАЖЕНИЕ (стиль из tmk.html для возможного использования) === */
+        .instruction-image {
+            display: block;
+            max-width: 600px;
+            width: 100%;
+            margin: 1.5rem auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-medium);
+        }
+        
+        /* === ФУТЕР (единый стиль как в tmk.html) === */
         .document-footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 2rem 0;
             margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid var(--gray-medium);
+            border-radius: var(--radius);
             text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
         }
         
         /* === АДАПТИВНОСТЬ === */
@@ -333,6 +376,10 @@
                 padding: 1.5rem;
             }
             
+            .instruction-image {
+                max-width: 100%;
+            }
+            
             .back-to-navigator {
                 float: none;
                 display: block;
@@ -352,6 +399,10 @@
             
             body {
                 max-width: 100%;
+            }
+            
+            .instruction-image {
+                max-width: 400px;
             }
             
             .back-to-navigator {
@@ -378,7 +429,7 @@
 
     <!-- Оглавление -->
     <nav class="toc-container">
-        <h2 class="toc-title">Содержание</h2>
+        <h2 class="toc-title">📋 Содержание</h2>
         <ul class="toc-list">
             <li><a href="#step1">ШАГ 1: Подготовка в системе 1С ЛИС и особенности сбора</a></li>
             <li><a href="#step2">ШАГ 2: Маркировка и контроль</a></li>
@@ -536,6 +587,29 @@
                     top: targetElement.offsetTop - 20,
                     behavior: 'smooth'
                 });
+            });
+        });
+        
+        // Подсветка текущего раздела при прокрутке (единый стиль как в tmk.html)
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.step-container');
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.toc-list a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                            link.style.color = 'var(--primary-blue)';
+                            link.style.fontWeight = '600';
+                        }
+                    });
+                }
             });
         });
     </script>
