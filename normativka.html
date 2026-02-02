@@ -6,110 +6,6 @@
     <title>Нормативная база | Навигатор по выявлению туберкулеза</title>
     
     <style>
-        /* СТИЛИ ПРОГРЕСС-БАРА */
-        .progress-bar-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: var(--light-blue);
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.5s, visibility 0.5s;
-        }
-
-        .progress-bar-container.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .progress-bar-wrapper {
-            width: 80%;
-            max-width: 500px;
-            text-align: center;
-            padding: 30px;
-            background: var(--white);
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-strong);
-        }
-
-        .progress-bar-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: var(--gray-medium);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-blue));
-            border-radius: 4px;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        .progress-percentage {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-            margin-bottom: 10px;
-        }
-
-        .progress-text {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-
-        .progress-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-
-        .progress-step {
-            text-align: center;
-            flex: 1;
-            position: relative;
-        }
-
-        .progress-step::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 10px;
-            background: var(--gray-medium);
-            border-radius: 50%;
-            transition: background 0.3s;
-        }
-
-        .progress-step.active::before {
-            background: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(26, 95, 158, 0.2);
-        }
-
-        .progress-step.completed::before {
-            background: var(--accent-green);
-        }
-
         :root {
             --primary-blue: #1A5F9E;
             --secondary-blue: #2C8BD4;
@@ -143,6 +39,49 @@
             background-color: var(--light-blue);
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
+        }
+        
+        /* ПРОГРЕСС-БАР */
+        #page-loading {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: var(--light-blue);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s;
+        }
+        
+        .loader {
+            text-align: center;
+            padding: 30px;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+            min-width: 200px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--gray-medium);
+            border-top: 4px solid var(--primary-blue);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .loader .text {
+            color: var(--primary-blue);
+            font-weight: 500;
+            font-size: 1rem;
         }
         
         /* ШАПКА */
@@ -719,15 +658,6 @@
                 left: 10px;
                 max-width: none;
             }
-            
-            .progress-bar-wrapper {
-                width: 90%;
-                padding: 20px;
-            }
-            
-            .progress-bar-title {
-                font-size: 1.3rem;
-            }
         }
         
         @media (max-width: 480px) {
@@ -743,37 +673,15 @@
                 min-height: 160px;
                 height: 160px;
             }
-            
-            .progress-bar-wrapper {
-                padding: 15px;
-            }
-            
-            .progress-bar-title {
-                font-size: 1.2rem;
-            }
-            
-            .progress-steps {
-                font-size: 0.7rem;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- ПРОГРЕСС-БАР ЗАГРУЗКИ -->
-    <div class="progress-bar-container" id="progressBar">
-        <div class="progress-bar-wrapper">
-            <h2 class="progress-bar-title">Загрузка нормативной базы</h2>
-            <div class="progress-percentage" id="progressPercentage">0%</div>
-            <div class="progress-bar">
-                <div class="progress-bar-fill" id="progressBarFill"></div>
-            </div>
-            <div class="progress-text" id="progressText">Инициализация...</div>
-            <div class="progress-steps">
-                <div class="progress-step" id="step1">HTML/CSS</div>
-                <div class="progress-step" id="step2">Данные</div>
-                <div class="progress-step" id="step3">Документы</div>
-                <div class="progress-step" id="step4">Готово</div>
-            </div>
+    <!-- ПРОГРЕСС-БАР -->
+    <div id="page-loading">
+        <div class="loader">
+            <div class="spinner"></div>
+            <div class="text">Загрузка страницы...</div>
         </div>
     </div>
 
@@ -868,65 +776,16 @@
     </div>
 
     <script>
-        // ========== УПРАВЛЕНИЕ ПРОГРЕСС-БАРОМ ==========
-        let progress = 0;
-        const progressBar = document.getElementById('progressBar');
-        const progressBarFill = document.getElementById('progressBarFill');
-        const progressPercentage = document.getElementById('progressPercentage');
-        const progressText = document.getElementById('progressText');
+        // ========== ПРОГРЕСС-БАР ==========
+        const loader = document.getElementById('page-loading');
+        let timer = setTimeout(() => loader.style.display = 'flex', 300);
         
-        function updateProgress(percent, text) {
-            progress = percent;
-            progressBarFill.style.width = percent + '%';
-            progressPercentage.textContent = Math.round(percent) + '%';
-            progressText.textContent = text;
-            
-            // Обновляем шаги
-            const steps = ['step1', 'step2', 'step3', 'step4'];
-            steps.forEach((stepId, index) => {
-                const step = document.getElementById(stepId);
-                const stepPercent = (index + 1) * 25;
-                
-                if (progress >= stepPercent) {
-                    step.classList.add('completed');
-                } else if (progress >= stepPercent - 10) {
-                    step.classList.add('active');
-                } else {
-                    step.classList.remove('active', 'completed');
-                }
-            });
-        }
-        
-        function simulateProgress() {
-            updateProgress(10, 'Загрузка стилей и шрифтов...');
-            
-            setTimeout(() => {
-                updateProgress(30, 'Инициализация данных...');
-                
-                setTimeout(() => {
-                    updateProgress(60, 'Генерация документов...');
-                    
-                    setTimeout(() => {
-                        updateProgress(85, 'Добавление карточек...');
-                        
-                        setTimeout(() => {
-                            updateProgress(100, 'Загрузка завершена!');
-                            
-                            // Анимация скрытия прогресс-бара
-                            setTimeout(() => {
-                                progressBar.classList.add('hidden');
-                                // Удаляем через 0.5 секунды после анимации
-                                setTimeout(() => {
-                                    progressBar.style.display = 'none';
-                                }, 500);
-                            }, 500);
-                            
-                        }, 500); // Время генерации карточек
-                    }, 300); // Время инициализации данных
-                }, 200); // Время загрузки стилей
-            }, 100); // Начальная задержка
-        }
-        
+        window.addEventListener('load', () => {
+            clearTimeout(timer);
+            loader.style.opacity = '0';
+            setTimeout(() => loader.style.display = 'none', 300);
+        });
+
         // ========== ЕДИНЫЙ МАССИВ ВСЕХ ДОКУМЕНТОВ ==========
         const allDocuments = [
             {
@@ -1006,7 +865,7 @@
                     "keyPoints": [
                         "Утверждает стандартные учётные формы для микроскопической диагностики туберкулёза: формы 05-ТБ/у (направление), 04-ТБ/у (журнал исследований), 04-1-ТБ/у (журнал регистрации материала), 04-2-ТБ/у (сопроводительный лист).",
                         "Определяет правила сбора мокроты: в специально оборудованном проветриваемом помещении, с использованием СИЗ персоналом, правильная техника кашля для пациента.",
-                        "Устанавливает график сбора мокроты: 3 образца в течение 2 дней (1-й в ЛПУ, 2-й дома утром, 3-й в ЛПУ при приёме второго образца).",
+                        "Устанавливает график сбора мокрота: 3 образца в течение 2 дней (1-й в ЛПУ, 2-й дома утром, 3-й в ЛПУ при приёме второго образца).",
                         "Регламентирует транспортировку диагностического материала в закрытых биксах с сопроводительной документацией.",
                         "Предусматривает немедленное информирование врача при положительном результате микроскопии.",
                         "Определяет виды диагностического материала (26 позиций) помимо мокроты: ликвор, плевральная жидкость, кровь, биоптаты и др.",
@@ -1059,7 +918,7 @@
                 "title": "Приказ Минздрава РФ № 932н",
                 "officialTitle": "О порядке проведения профилактических медицинских осмотров",
                 "date": "Утверждён 06.12.2021 г.",
-                "description": "Порядок и срокы проведения профилактических медицинских осмотров",
+                "description": "Порядок и сроки проведения профилактических медицинских осмотров",
                 "pdfFile": "documents/prikaz-932n.pdf",
                 "pdfName": "Приказ_Минздрава_932н.pdf",
                 "explanation": {
@@ -1332,13 +1191,8 @@
         const showAllBtn = document.getElementById('showAllExplanations');
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Запускаем прогресс-бар
-            simulateProgress();
-            
-            // Рендерим документы
             renderDocuments();
             
-            // Вешаем обработчики событий
             showAllBtn.addEventListener('click', showAllExplanations);
             closeModalBtn.addEventListener('click', closeModal);
             
