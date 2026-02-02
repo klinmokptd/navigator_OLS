@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Телемедицинские консультации с ГБУЗ МО МОКПТД</title>
+    
+    <!-- ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 (как в index.html) -->
     <style>
-        /* ШРИФТЫ ИЗ РЕПОЗИТОРИЯ */
+        /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
         @font-face {
             font-family: 'Inter';
-            src: url('assets/fonts/Inter-Regular.woff2') format('woff2'),
-                 url('assets/fonts/Inter-Regular.woff') format('woff');
+            src: url('assets/fonts/inter-cyrillic-400-normal.woff2') format('woff2');
             font-weight: 400;
             font-style: normal;
             font-display: swap;
@@ -17,8 +18,7 @@
         
         @font-face {
             font-family: 'Inter';
-            src: url('assets/fonts/Inter-Medium.woff2') format('woff2'),
-                 url('assets/fonts/Inter-Medium.woff') format('woff');
+            src: url('assets/fonts/inter-cyrillic-500-normal.woff2') format('woff2');
             font-weight: 500;
             font-style: normal;
             font-display: swap;
@@ -26,8 +26,7 @@
         
         @font-face {
             font-family: 'Inter';
-            src: url('assets/fonts/Inter-SemiBold.woff2') format('woff2'),
-                 url('assets/fonts/Inter-SemiBold.woff') format('woff');
+            src: url('assets/fonts/inter-cyrillic-600-normal.woff2') format('woff2');
             font-weight: 600;
             font-style: normal;
             font-display: swap;
@@ -35,8 +34,7 @@
         
         @font-face {
             font-family: 'Inter';
-            src: url('assets/fonts/Inter-Bold.woff2') format('woff2'),
-                 url('assets/fonts/Inter-Bold.woff') format('woff');
+            src: url('assets/fonts/inter-cyrillic-700-normal.woff2') format('woff2');
             font-weight: 700;
             font-style: normal;
             font-display: swap;
@@ -48,6 +46,7 @@
             --light-blue: #F0F7FF;
             --accent-red: #D32F2F;
             --accent-green: #2E7D32;
+            --accent-orange: #F57C00;
             --white: #FFFFFF;
             --gray-light: #F5F7FA;
             --gray-medium: #E0E5EC;
@@ -55,8 +54,8 @@
             --text-primary: #263238;
             --text-secondary: #546E7A;
             
-            --shadow-medium: 0 4px 12px rgba(26, 95, 158, 0.08);
-            --border-radius: 8px;
+            --shadow: 0 4px 12px rgba(26, 95, 158, 0.08);
+            --radius: 6px;
         }
         
         * {
@@ -66,13 +65,34 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.7;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
             color: var(--text-primary);
-            background-color: var(--white);
+            background-color: var(--light-blue);
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+        }
+        
+        /* Кнопка назад в навигатор */
+        .back-to-navigator {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s;
+            margin-bottom: 1rem;
+            float: right;
+        }
+        
+        .back-to-navigator:hover {
+            background: rgba(255, 255, 255, 0.25);
         }
         
         /* === ЗАГОЛОВОК И ВВОДНАЯ ИНФОРМАЦИЯ === */
@@ -80,15 +100,17 @@
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
             padding: 2.5rem;
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             margin-bottom: 2.5rem;
-            box-shadow: var(--shadow-medium);
+            box-shadow: var(--shadow);
+            border-bottom: 4px solid var(--accent-red);
         }
         
         .document-title {
             font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
+            line-height: 1.2;
         }
         
         .document-subtitle {
@@ -112,17 +134,19 @@
             font-weight: 600;
             text-decoration: underline;
         }
+        
         .important-note a:hover {
             text-decoration: none;
         }
         
         /* === ОГЛАВЛЕНИЕ === */
         .toc-container {
-            background: var(--light-blue);
-            border-radius: var(--border-radius);
+            background: var(--white);
+            border-radius: var(--radius);
             padding: 1.8rem;
             margin-bottom: 2.5rem;
             border: 1px solid var(--gray-medium);
+            box-shadow: var(--shadow);
         }
         
         .toc-title {
@@ -169,24 +193,39 @@
             text-decoration: underline;
         }
         
-        /* === БЛОКИ ЭТАПОВ === */
+        /* === БЛОКИ ЭТАПОВ (стиль как в index.html) === */
         .step-container {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-medium);
         }
         
         .step-header {
-            background: var(--light-blue);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
             padding: 1.5rem;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
-            border-bottom: 2px solid var(--secondary-blue);
             display: flex;
             align-items: center;
             gap: 15px;
+            position: relative;
+        }
+        
+        .step-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-red);
         }
         
         .step-number {
-            background: var(--primary-blue);
-            color: white;
+            background: var(--white);
+            color: var(--primary-blue);
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -201,15 +240,10 @@
         .step-title {
             font-size: 1.6rem;
             font-weight: 600;
-            color: var(--primary-blue);
         }
         
         .step-content {
-            border: 1px solid var(--gray-medium);
-            border-top: none;
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
             padding: 2rem;
-            background: var(--white);
         }
         
         .subsection {
@@ -226,15 +260,11 @@
             gap: 10px;
         }
         
-        .subsection-title .icon {
-            color: var(--secondary-blue);
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        
         .subsection-content {
             color: var(--text-secondary);
             margin-left: 28px;
+            font-size: 1.05rem;
+            line-height: 1.6;
         }
         
         .highlight-box {
@@ -270,6 +300,8 @@
         li {
             margin-bottom: 0.5rem;
             color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.6;
         }
         
         .key-point {
@@ -280,12 +312,13 @@
         .contact-info {
             background: var(--light-blue);
             padding: 1rem;
-            border-radius: var(--border-radius);
+            border-radius: var(--radius);
             margin: 1rem 0;
             border-left: 4px solid var(--secondary-blue);
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.05rem;
         }
         
         .contact-info::before {
@@ -303,19 +336,19 @@
             max-width: 600px;
             width: 100%;
             margin: 1.5rem auto;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow-medium);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
             border: 1px solid var(--gray-medium);
         }
         
-        /* === ФУТЕР === */
+        /* === ФУТЕР (как в index.html) === */
         .document-footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 2rem 0;
             margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid var(--gray-medium);
+            border-radius: var(--radius);
             text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
         }
         
         /* === АДАПТИВНОСТЬ === */
@@ -343,6 +376,17 @@
             .instruction-image {
                 max-width: 100%;
             }
+            
+            .back-to-navigator {
+                float: none;
+                display: block;
+                margin: 0 auto 1rem auto;
+                text-align: center;
+            }
+            
+            .step-title {
+                font-size: 1.4rem;
+            }
         }
         
         @media print {
@@ -357,12 +401,21 @@
             .instruction-image {
                 max-width: 400px;
             }
+            
+            .back-to-navigator {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <!-- Заголовок и вводная информация -->
     <header class="document-header">
+        <!-- КНОПКА НАЗАД В НАВИГАТОР -->
+        <a href="index.html" class="back-to-navigator">
+            ← Назад в навигатор
+        </a>
+        
         <h1 class="document-title">Телемедицинские консультации с ГБУЗ МО МОКПТД</h1>
         <p class="document-subtitle">Порядок проведения консультаций для оперативного решения сложных диагностических вопросов</p>
         
@@ -373,7 +426,7 @@
 
     <!-- Оглавление -->
     <nav class="toc-container">
-        <h2 class="toc-title"><span class="icon">📋</span> Содержание</h2>
+        <h2 class="toc-title">📋 Содержание</h2>
         <ul class="toc-list">
             <li><a href="#goal">Цель консультаций</a></li>
             <li><a href="#when">Когда может быть полезна консультация</a></li>
@@ -520,7 +573,7 @@
         </div>
     </section>
 
-        <!-- КРАТКАЯ ИНСТРУКЦИЯ ПО ПОДКЛЮЧЕНИЮ -->
+    <!-- КРАТКАЯ ИНСТРУКЦИЯ ПО ПОДКЛЮЧЕНИЮ -->
     <section class="step-container" id="instruction">
         <div class="step-header">
             <h2 class="step-title">Краткая инструкция по подключению (это просто):</h2>
@@ -551,7 +604,7 @@
         </div>
     </section>
 
-        <!-- Футер -->
+    <!-- Футер -->
     <footer class="document-footer">
         <p>ГБУЗ МО "МОКПТД" | Филиал "Клинский"</p>
     </footer>
