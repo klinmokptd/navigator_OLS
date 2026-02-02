@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Правила сбора и транспортировки мокроты | ГБУЗ МО МОКПТД</title>
     
-    <!-- ЛОКАЛЬНЫЕ ШРИФТЫ ИЗ РЕПОЗИТОРИЯ (как в normativka.html) -->
+    <!-- ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 (как в index.html) -->
     <style>
-        /* ШРИФТЫ ИЗ РЕПОЗИТОРИЯ */
+        /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
         @font-face {
             font-family: 'Inter';
-            src: url('assets/fonts/Inter-Regular.woff2') format('woff2'),
-                 url('assets/fonts/Inter-Regular.woff') format('woff');
+            src: url('assets/fonts/inter-cyrillic-400-normal.woff2') format('woff2');
             font-weight: 400;
             font-style: normal;
             font-display: swap;
@@ -19,8 +18,7 @@
         
         @font-face {
             font-family: 'Inter';
-            src: url('assets/fonts/Inter-Medium.woff2') format('woff2'),
-                 url('assets/fonts/Inter-Medium.woff') format('woff');
+            src: url('assets/fonts/inter-cyrillic-500-normal.woff2') format('woff2');
             font-weight: 500;
             font-style: normal;
             font-display: swap;
@@ -28,8 +26,7 @@
         
         @font-face {
             font-family: 'Inter';
-            src: url('assets/fonts/Inter-SemiBold.woff2') format('woff2'),
-                 url('assets/fonts/Inter-SemiBold.woff') format('woff');
+            src: url('assets/fonts/inter-cyrillic-600-normal.woff2') format('woff2');
             font-weight: 600;
             font-style: normal;
             font-display: swap;
@@ -37,11 +34,45 @@
         
         @font-face {
             font-family: 'Inter';
-            src: url('assets/fonts/Inter-Bold.woff2') format('woff2'),
-                 url('assets/fonts/Inter-Bold.woff') format('woff');
+            src: url('assets/fonts/inter-cyrillic-700-normal.woff2') format('woff2');
             font-weight: 700;
             font-style: normal;
             font-display: swap;
+        }
+        
+        :root {
+            --primary-blue: #1A5F9E;
+            --secondary-blue: #2C8BD4;
+            --light-blue: #F0F7FF;
+            --accent-red: #D32F2F;
+            --accent-green: #2E7D32;
+            --white: #FFFFFF;
+            --gray-light: #F5F7FA;
+            --gray-medium: #E0E5EC;
+            --gray-dark: #455A64;
+            --text-primary: #263238;
+            --text-secondary: #546E7A;
+            
+            --shadow: 0 4px 12px rgba(26, 95, 158, 0.08);
+            --border-radius: 6px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--light-blue);
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
         
         /* КНОПКА НАЗАД */
@@ -66,42 +97,6 @@
             background: rgba(255, 255, 255, 0.25);
         }
         
-        /* ОСТАЛЬНЫЕ СТИЛИ КАК В ОРИГИНАЛЕ */
-        :root {
-            --primary-blue: #1A5F9E;
-            --secondary-blue: #2C8BD4;
-            --light-blue: #F0F7FF;
-            --accent-red: #D32F2F;
-            --accent-green: #2E7D32;
-            --white: #FFFFFF;
-            --gray-light: #F5F7FA;
-            --gray-medium: #E0E5EC;
-            --gray-dark: #455A64;
-            --text-primary: #263238;
-            --text-secondary: #546E7A;
-            
-            --shadow-medium: 0 4px 12px rgba(26, 95, 158, 0.08);
-            --border-radius: 8px;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.7;
-            color: var(--text-primary);
-            background-color: var(--white);
-            font-weight: 400;
-            -webkit-font-smoothing: antialiased;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
         /* === ЗАГОЛОВОК И ВВОДНАЯ ИНФОРМАЦИЯ === */
         .document-header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
@@ -109,15 +104,15 @@
             padding: 2.5rem;
             border-radius: var(--border-radius);
             margin-bottom: 2.5rem;
-            box-shadow: var(--shadow-medium);
-            overflow: hidden;
+            box-shadow: var(--shadow);
+            border-bottom: 4px solid var(--accent-red);
         }
         
         .document-title {
             font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
-            font-family: 'Inter', sans-serif;
+            line-height: 1.2;
         }
         
         .document-subtitle {
@@ -125,7 +120,6 @@
             opacity: 0.95;
             margin-bottom: 1.5rem;
             font-weight: 300;
-            font-family: 'Inter', sans-serif;
         }
         
         .important-note {
@@ -135,16 +129,16 @@
             border-radius: 4px;
             margin-top: 1.5rem;
             font-size: 0.95rem;
-            font-family: 'Inter', sans-serif;
         }
         
         /* === ОГЛАВЛЕНИЕ === */
         .toc-container {
-            background: var(--light-blue);
+            background: var(--white);
             border-radius: var(--border-radius);
             padding: 1.8rem;
             margin-bottom: 2.5rem;
             border: 1px solid var(--gray-medium);
+            box-shadow: var(--shadow);
         }
         
         .toc-title {
@@ -155,7 +149,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-family: 'Inter', sans-serif;
         }
         
         .toc-list {
@@ -169,7 +162,6 @@
             padding: 8px 0;
             position: relative;
             padding-left: 24px;
-            font-family: 'Inter', sans-serif;
         }
         
         .toc-list li::before {
@@ -186,7 +178,6 @@
             text-decoration: none;
             font-weight: 500;
             transition: color 0.2s;
-            font-family: 'Inter', sans-serif;
         }
         
         .toc-list a:hover {
@@ -196,22 +187,37 @@
         
         /* === БЛОКИ ЭТАПОВ === */
         .step-container {
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-medium);
         }
         
         .step-header {
-            background: var(--light-blue);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
             padding: 1.5rem;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
-            border-bottom: 2px solid var(--secondary-blue);
             display: flex;
             align-items: center;
             gap: 15px;
+            position: relative;
+        }
+        
+        .step-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-red);
         }
         
         .step-number {
-            background: var(--primary-blue);
-            color: white;
+            background: var(--white);
+            color: var(--primary-blue);
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -221,22 +227,15 @@
             font-weight: 700;
             font-size: 1.2rem;
             flex-shrink: 0;
-            font-family: 'Inter', sans-serif;
         }
         
         .step-title {
             font-size: 1.6rem;
             font-weight: 600;
-            color: var(--primary-blue);
-            font-family: 'Inter', sans-serif;
         }
         
         .step-content {
-            border: 1px solid var(--gray-medium);
-            border-top: none;
-            border-radius: 0 0 var(--border-radius) var(--border-radius);
             padding: 2rem;
-            background: var(--white);
         }
         
         .subsection {
@@ -251,17 +250,13 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .subsection-title i {
-            color: var(--secondary-blue);
         }
         
         .subsection-content {
             color: var(--text-secondary);
             margin-left: 28px;
-            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.6;
         }
         
         .highlight-box {
@@ -270,7 +265,6 @@
             padding: 1.2rem;
             margin: 1.2rem 0;
             border-radius: 0 4px 4px 0;
-            font-family: 'Inter', sans-serif;
         }
         
         .warning-box {
@@ -279,7 +273,6 @@
             padding: 1.2rem;
             margin: 1.2rem 0;
             border-radius: 0 4px 4px 0;
-            font-family: 'Inter', sans-serif;
         }
         
         .success-box {
@@ -288,7 +281,6 @@
             padding: 1.2rem;
             margin: 1.2rem 0;
             border-radius: 0 4px 4px 0;
-            font-family: 'Inter', sans-serif;
         }
         
         /* === СПИСКИ === */
@@ -300,13 +292,13 @@
         li {
             margin-bottom: 0.5rem;
             color: var(--text-secondary);
-            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.6;
         }
         
         .key-point {
             font-weight: 600;
             color: var(--primary-blue);
-            font-family: 'Inter', sans-serif;
         }
         
         /* === ФУТЕР === */
@@ -317,7 +309,6 @@
             text-align: center;
             color: var(--text-secondary);
             font-size: 0.9rem;
-            font-family: 'Inter', sans-serif;
         }
         
         /* === АДАПТИВНОСТЬ === */
@@ -348,6 +339,10 @@
                 margin: 0 auto 1rem auto;
                 text-align: center;
             }
+            
+            .step-title {
+                font-size: 1.4rem;
+            }
         }
         
         @media print {
@@ -369,12 +364,12 @@
     <!-- Заголовок и вводная информация -->
     <header class="document-header">
         <!-- КНОПКА НАЗАД В НАВИГАТОР -->
-        <a href="https://klinmokptd.github.io/navigator_OLS/" class="back-to-navigator">
+        <a href="index.html" class="back-to-navigator">
             ← Назад в навигатор
         </a>
         
         <h1 class="document-title">Краткая инструкция-памятка по сбору и транспортировке мокроты</h1>
-        <p class="document-subtitle">Алгоритм действий для медицинского персонала ОЛС осуществляющих прямое отправление диагностического материала в лабораторию ГБУЗ МО МОКПТД </p>
+        <p class="document-subtitle">Алгоритм действий для медицинского персонала ОЛС осуществляющих прямое отправление диагностического материала в лабораторию ГБУЗ МО МОКПТД</p>
         
         <div class="important-note">
             <p><strong>Важно:</strong> Данная памятка является кратким ознакомительным изложением ключевых моментов. Полная, официальная процедура подробно описана в <strong>Приказе ГБУЗ МО «МОКПТД» от «01» ноября 2023г. №266/23</strong>. Ответственность за соблюдение <strong>всех требований данного приказа, а также действующих санитарно-эпидемиологических правил, норм безопасности и стандартов работы с биологическим материалом</strong> лежит на медицинском персонале.</p>
@@ -383,7 +378,7 @@
 
     <!-- Оглавление -->
     <nav class="toc-container">
-        <h2 class="toc-title"><i class="fas fa-list"></i> Содержание</h2>
+        <h2 class="toc-title">Содержание</h2>
         <ul class="toc-list">
             <li><a href="#step1">ШАГ 1: Подготовка в системе 1С ЛИС и особенности сбора</a></li>
             <li><a href="#step2">ШАГ 2: Маркировка и контроль</a></li>
@@ -402,7 +397,7 @@
         
         <div class="step-content">
             <div class="subsection">
-                <h3 class="subsection-title"><i class="fas fa-tasks"></i> Формирование направлений</h3>
+                <h3 class="subsection-title">Формирование направлений</h3>
                 <div class="subsection-content">
                     <p>На каждого пациента для полноценного анализа необходимо создать <strong>ДВА отдельных направления</strong> в 1С ЛИС:</p>
                     <ul>
@@ -417,15 +412,15 @@
             </div>
             
             <div class="subsection">
-                <h3 class="subsection-title"><i class="fas fa-clipboard-check"></i> Оформление после сбора</h3>
+                <h3 class="subsection-title">Оформление после сбора</h3>
                 <div class="subsection-content">
                     <p>После взятия материала медсестра находит пациента в ЛИС и <strong>обязательно переводит каждую заявку в статус «ПРОБА ВЗЯТА»</strong>. Без этого шага лаборатория исследование не примет.</p>
-                    <p>Распечатывается <strong>Сопроводительный лист (в 2-х экземплярах)</strong>. В нем нужно сверить: пациент с двумя направлениями должен быть указан в сопроводительном листе дважды, а количество флаконов должно строго совпадать с количеством строк в сопроводительном листе.</p>
+                    <p>Распечатывается <strong>Сопроводительный лист (в 2-х экземплярах)</strong>. В нем нужно сверить: пациент с двумя направлениями должен быть указан в сопроводительном листе дважды, а количество флаконов должно строго совпадать с количество строк в сопроводительном листе.</p>
                 </div>
             </div>
             
             <div class="subsection">
-                <h3 class="subsection-title"><i class="fas fa-user-md"></i> Работа с пациентом</h3>
+                <h3 class="subsection-title">Работа с пациентом</h3>
                 <div class="subsection-content">
                     <ul>
                         <li>Медперсонал работает в полной защитной экипировке (халат, шапочка, респиратор, перчатки).</li>
@@ -526,7 +521,7 @@
 
     <!-- Футер -->
     <footer class="document-footer">
-        <p><i class="fas fa-hospital-alt"></i> ГБУЗ МО "МОКПТД" | Филиал "Клинский"</p>
+        <p>ГБУЗ МО "МОКПТД" | Филиал "Клинский"</p>
     </footer>
 
     <script>
@@ -541,29 +536,6 @@
                     top: targetElement.offsetTop - 20,
                     behavior: 'smooth'
                 });
-            });
-        });
-        
-        // Подсветка текущего раздела при прокрутке
-        window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('.step-container');
-            const scrollPosition = window.scrollY + 100;
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                const sectionId = section.getAttribute('id');
-                
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    document.querySelectorAll('.toc-list a').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === '#' + sectionId) {
-                            link.classList.add('active');
-                            link.style.color = 'var(--primary-blue)';
-                            link.style.fontWeight = '600';
-                        }
-                    });
-                }
             });
         });
     </script>
