@@ -856,18 +856,23 @@ body {
         card.dataset.id = doc.id;
         
         // Создаём HTML для кнопок
-        let buttonsHTML = `
-            <a href="${doc.pdfFile}" 
-               download="${doc.pdfName}"
-               class="doc-btn btn-download">
-                <i class="fas fa-download"></i>
-                Скачать PDF
-            </a>
-        `;
+        let buttonsHTML;
         
-        // Добавляем кнопку для Excel только для приказа 690
+        // Для приказа №690 - 3 кнопки в порядке: PDF, Объяснение, Excel
         if (doc.id === 8 && doc.excelFile) {
-            buttonsHTML += `
+            buttonsHTML = `
+                <a href="${doc.pdfFile}" 
+                   download="${doc.pdfName}"
+                   class="doc-btn btn-download">
+                    <i class="fas fa-download"></i>
+                    Скачать PDF
+                </a>
+                
+                <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
+                    <i class="fas fa-lightbulb"></i>
+                    Объяснение документа
+                </button>
+                
                 <a href="${doc.excelFile}" 
                    download="${doc.excelName || 'Журнал_04-ТБ.xlsx'}"
                    class="doc-btn btn-excel">
@@ -875,14 +880,22 @@ body {
                     Скачать журнал
                 </a>
             `;
+        } else {
+            // Для остальных документов - 2 кнопки: PDF и Объяснение
+            buttonsHTML = `
+                <a href="${doc.pdfFile}" 
+                   download="${doc.pdfName}"
+                   class="doc-btn btn-download">
+                    <i class="fas fa-download"></i>
+                    Скачать PDF
+                </a>
+                
+                <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
+                    <i class="fas fa-lightbulb"></i>
+                    Объяснение документа
+                </button>
+            `;
         }
-        
-        buttonsHTML += `
-            <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
-                <i class="fas fa-lightbulb"></i>
-                Объяснение документа
-            </button>
-        `;
         
         card.innerHTML = `
             <div class="document-header">
