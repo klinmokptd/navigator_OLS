@@ -3,39 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Нормативная база по выявлению туберкулеза</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Нормативная база | Навигатор по выявлению туберкулеза</title>
+    
     <style>
+        /* ПОДКЛЮЧЕНИЕ ШРИФТОВ INTER ЛОКАЛЬНО */
         @font-face {
             font-family: 'Inter';
             font-style: normal;
             font-weight: 400;
             font-display: swap;
-            src: url('fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+            src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
         }
-        
+
         @font-face {
             font-family: 'Inter';
             font-style: normal;
             font-weight: 500;
             font-display: swap;
-            src: url('fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+            src: url('./fonts/inter-cyrillic-500-normal.woff2') format('woff2');
         }
-        
+
         @font-face {
             font-family: 'Inter';
             font-style: normal;
             font-weight: 600;
             font-display: swap;
-            src: url('fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+            src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
         }
-        
+
         @font-face {
             font-family: 'Inter';
             font-style: normal;
             font-weight: 700;
             font-display: swap;
-            src: url('fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+            src: url('./fonts/inter-cyrillic-700-normal.woff2') format('woff2');
         }
         
         :root {
@@ -64,63 +65,65 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.7;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 
+                         'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
             color: var(--text-primary);
-            background-color: var(--white);
+            background-color: var(--light-blue);
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
         }
         
-        /* === ЗАГОЛОВОК И ВВОДНАЯ ИНФОРМАЦИЯ === */
-        .document-header {
+        /* ШАПКА - УПРОЩЕННАЯ */
+        .header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
-            padding: 2.5rem;
-            border-radius: var(--border-radius);
-            margin-bottom: 2.5rem;
-            box-shadow: var(--shadow-medium);
+            padding: 1.8rem 0;
             border-bottom: 4px solid var(--accent-red);
+            position: relative;
         }
         
-        .document-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
         }
         
-        .document-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.95;
-            margin-bottom: 1.5rem;
-            font-weight: 300;
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.2rem;
         }
         
-        .important-note {
+        .logo-area {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-icon {
             background: rgba(255, 255, 255, 0.15);
-            border-left: 4px solid var(--accent-red);
-            padding: 1.2rem;
-            border-radius: 4px;
-            margin-top: 1.5rem;
-            font-size: 1.05rem;
-            line-height: 1.6;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            border: 2px solid rgba(255,255,255,0.2);
+            font-weight: bold;
+            font-size: 18px;
         }
         
-        .important-note a {
-            color: #FFEB3B;
-            font-weight: 600;
-            text-decoration: underline;
+        .logo-text h1 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+            color: white;
         }
         
-        .important-note a:hover {
-            text-decoration: none;
-        }
-        
-        /* === КНОПКА НАЗАД В НАВИГАТОР === */
-        .back-to-navigator {
+        /* Кнопка назад */
+        .back-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
@@ -132,21 +135,63 @@
             background: rgba(255, 255, 255, 0.15);
             border: 1px solid rgba(255,255,255,0.2);
             transition: all 0.3s;
-            margin-bottom: 1rem;
-            float: right;
+            font-size: 0.95rem;
         }
         
-        .back-to-navigator:hover {
+        .back-btn:hover {
             background: rgba(255, 255, 255, 0.25);
         }
         
-        /* === КНОПКИ ДЕЙСТВИЙ === */
+        .header-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            line-height: 1.2;
+            color: white;
+        }
+        
+        .header-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            max-width: 800px;
+            line-height: 1.5;
+            color: white;
+        }
+        
+        /* ОСНОВНОЙ КОНТЕНТ */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 30px;
+        }
+        
+        .intro-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-medium);
+            border-top: 4px solid var(--primary-blue);
+        }
+        
+        .intro-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .intro-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
         .action-buttons {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
-            margin: 2rem 0 3rem 0;
-            justify-content: center;
+            margin-top: 1.5rem;
         }
         
         .action-btn {
@@ -188,14 +233,31 @@
             box-shadow: var(--shadow-medium);
         }
         
-        /* === КАРТОЧКИ ДОКУМЕНТОВ === */
-        .documents-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
-            gap: 25px;
+        /* СПИСОК ДОКУМЕНТОВ */
+        .documents-section {
             margin-bottom: 3rem;
         }
         
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+        }
+        
+        .documents-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+            gap: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .documents-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* КАРТОЧКИ С ДОКУМЕНТАМИ */
         .document-card {
             background: var(--white);
             border-radius: var(--border-radius);
@@ -213,96 +275,59 @@
             box-shadow: var(--shadow-strong);
         }
         
-        /* ФИКСИРОВАННАЯ ШАПКА КАРТОЧКИ - 4 СТРОКИ */
-        .card-header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+        .document-header {
+            background: var(--primary-blue);
             color: white;
-            padding: 1.5rem;
-            /* ФИКСИРОВАННАЯ ВЫСОТА ДЛЯ 4 СТРОК */
-            min-height: 160px;
-            height: 160px;
+            padding: 1.2rem 1.5rem;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            position: relative;
+            align-items: flex-start;
             flex-shrink: 0;
+            min-height: 140px;
+            height: 140px;
         }
         
-        .card-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--accent-red);
+        .document-header .document-title {
+            color: white !important;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0 0 8px 0;
+            line-height: 1.4;
         }
         
-        /* ПЕРВАЯ СТРОКА - КОРОТКОЕ НАЗВАНИЕ */
-        .card-title {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 6px; /* Уменьшил расстояние между строками */
-            line-height: 1.2;
-            display: -webkit-box;
-            -webkit-line-clamp: 1;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            height: 1.7em;
+        .document-official-title {
             color: white;
-        }
-        
-        /* ВТОРАЯ СТРОКА - ДЛИННОЕ НАЗВАНИЕ */
-        .card-subtitle {
-            color: white;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             font-weight: 400;
             line-height: 1.3;
             opacity: 0.95;
-            margin-bottom: 8px;
             display: -webkit-box;
-            -webkit-line-clamp: 2; /* Максимум 2 строки для длинного названия */
+            -webkit-line-clamp: 4;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-height: calc(1.3em * 2);
+            max-height: calc(1.3em * 4);
         }
         
-        /* ТРЕТЬЯ И ЧЕТВЕРТАЯ СТРОКИ - ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ */
-        .card-info {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 0.95rem;
-            font-weight: 300;
-            line-height: 1.3;
-            margin-top: 4px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2; /* Максимум 2 строки для дополнительной информации */
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-height: calc(1.3em * 2);
-        }
-        
-        .card-body {
+        .document-body {
             padding: 1.5rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
         
-        .card-details {
+        .document-details {
             color: var(--text-secondary);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             margin-bottom: 1.2rem;
-            line-height: 1.6;
+            line-height: 1.5;
             flex-grow: 1;
         }
         
-        /* КНОПКИ В КАРТОЧКАХ */
-        .card-actions {
+        /* КОМПАКТНЫЕ КНОПКИ */
+        .document-actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             margin-top: auto;
             padding-top: 1rem;
@@ -313,12 +338,12 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 10px 16px;
+            padding: 6px 10px;
             border-radius: var(--border-radius);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.95rem;
-            transition: background 0.3s;
+            font-size: 0.9rem;
+            transition: all 0.3s;
             border: none;
             cursor: pointer;
         }
@@ -350,16 +375,7 @@
             background: #FF9800;
         }
         
-        /* === СЕКЦИЯ ЗАГОЛОВОК === */
-        .section-title {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-blue);
-            margin-bottom: 2.5rem;
-            text-align: center;
-        }
-        
-        /* === МОДАЛЬНОЕ ОКНО === */
+        /* МОДАЛЬНОЕ ОКНО */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -399,24 +415,13 @@
         }
         
         .modal-header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            background: var(--primary-blue);
             color: white;
             padding: 1.5rem;
             border-radius: var(--border-radius) var(--border-radius) 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-        }
-        
-        .modal-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--accent-red);
         }
         
         .modal-title {
@@ -453,9 +458,15 @@
         }
         
         .explanation-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .explanation-text {
+            color: var(--text-secondary);
+            line-height: 1.7;
             margin-bottom: 1rem;
         }
         
@@ -480,129 +491,168 @@
         .key-points li {
             margin-bottom: 0.5rem;
             color: var(--text-primary);
-            position: relative;
-            padding-left: 24px;
-            font-size: 1.05rem;
         }
         
-        .key-points li::before {
-            content: '•';
-            position: absolute;
-            left: 0;
-            top: 0;
-            color: var(--secondary-blue);
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        /* === ФУТЕР === */
-        .document-footer {
+        /* ФУТЕР */
+        .footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 1.5rem 0;
             margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 2px solid var(--gray-medium);
             text-align: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
         }
         
-        /* === АДАПТИВНОСТЬ === */
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        
+        .footer-info {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .footer-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .footer-info a:hover {
+            text-decoration: underline;
+        }
+               
+        /* АДАПТИВНОСТЬ */
         @media (max-width: 768px) {
-            body {
-                padding: 15px;
+            .header {
+                padding: 1.5rem 0;
             }
             
-            .document-header {
-                padding: 1.8rem;
+            .header-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
             }
             
-            .document-title {
+            .header-title {
                 font-size: 1.8rem;
             }
             
-            .documents-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .back-to-navigator {
-                float: none;
-                display: block;
-                margin: 0 auto 1rem auto;
-                text-align: center;
+            .header-subtitle {
+                font-size: 1rem;
             }
             
             .action-buttons {
                 flex-direction: column;
             }
             
-            .action-btn {
-                width: 100%;
-                justify-content: center;
+            .documents-grid {
+                grid-template-columns: 1fr;
             }
             
-            .card-actions {
+            .footer-container {
+                padding: 0 20px;
+            }
+            
+            .modal-content {
+                max-height: 90vh;
+            }
+            
+            .document-actions {
                 flex-direction: column;
             }
             
-            .doc-btn {
-                width: 100%;
-                justify-content: center;
-            }
-            
-            /* На мобильных устройствах высота шапки немного меньше */
-            .card-header {
+            .document-header {
                 min-height: 150px;
                 height: 150px;
-                padding: 1.2rem;
+            }
+            
+            .back-btn {
+                align-self: flex-start;
             }
         }
         
-        @media print {
-            .document-footer, .action-buttons, .back-to-navigator {
-                display: none;
+        @media (max-width: 480px) {
+            .header-container, .main-container {
+                padding: 0 20px;
             }
             
-            body {
-                max-width: 100%;
+            .header-title {
+                font-size: 1.6rem;
             }
             
-            .documents-grid {
-                grid-template-columns: 1fr;
+            .header-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .document-header {
+                min-height: 160px;
+                height: 160px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.2rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Заголовок и вводная информация -->
-    <header class="document-header">
-        <!-- КНОПКА НАЗАД В НАВИГАТОР -->
-        <a href="index.html" class="back-to-navigator">
-            ← Назад в навигатор
-        </a>
-        
-        <h1 class="document-title">Нормативная база по выявлению туберкулеза</h1>
-        <p class="document-subtitle">Законодательство, приказы, клинические рекомендации и стандарты по раннему выявлению и диагностике туберкулёза в ОЛС</p>
-        
-        <div class="important-note">
-            <p>В этом разделе собраны ключевые нормативные документы, регулирующие вопросы диагностики, профилактики и лечения туберкулёза. Для каждого документа доступна возможность скачать оригинал и получить краткое объяснение его содержания и применения на практике.</p>
+
+<header class="header">
+    <div class="header-container">
+        <div class="header-top">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    📋
+                </div>
+                <div class="logo-text">
+                    <h1>Нормативная база</h1>
+                </div>
+            </div>
+            <a href="https://klinmokptd.github.io/navigator_OLS/" class="back-btn">
+                ← Назад в навигатор
+            </a>
         </div>
-    </header>
-
-    <!-- Кнопки действий -->
-    <div class="action-buttons">
-        <button class="action-btn btn-primary" onclick="downloadAllDocuments()">
-            <i class="fas fa-download"></i> Скачать все документы
-        </button>
-        <button class="action-btn btn-secondary" id="showAllExplanations">
-            <i class="fas fa-lightbulb"></i> Показать все объяснения
-        </button>
+        
+        <p class="header-subtitle">Законодательство, приказы, клинические рекомендации и стандарты по раннему выявлению и диагностике туберкулёза в ОЛС</p>
     </div>
+</header>
 
-    <!-- Список документов -->
-    <h2 class="section-title">Перечень документов</h2>
-    
-    <div class="documents-grid" id="documents-container">
-        <!-- Документы будут добавлены сюда JavaScript -->
-    </div>
+    <!-- Основной контент -->
+    <main class="main-container">
+        <!-- Введение и кнопки -->
+        <section class="intro-section">
+            <h2 class="intro-title">
+                Как работать с нормативной базой
+            </h2>
+            <p class="intro-text">
+                В этом разделе собраны ключевые нормативные документы, регулирующие вопросы диагностики, профилактики и лечения туберкулёза. 
+                Для каждого документа доступна возможность скачать оригинал и получить краткое объяснение его содержания и применения на практике.
+            </p>
+            
+            <div class="action-buttons">
+                <button class="action-btn btn-primary" onclick="downloadAllDocuments()">
+                    📦 Скачать все документы
+                </button>
+                <button class="action-btn btn-secondary" id="showAllExplanations">
+                    💡 Показать все объяснения
+                </button>
+            </div>
+        </section>
+
+        <!-- Список документов - ДИНАМИЧЕСКИ ГЕНЕРИРУЕТСЯ JS -->
+        <section class="documents-section">
+            <h2 class="section-title">
+                📋 Перечень документов
+            </h2>
+            
+            <div class="documents-grid" id="documents-container">
+                <!-- Документы будут добавлены сюда JavaScript -->
+            </div>
+        </section>
+    </main>
 
     <!-- Модальное окно для объяснений -->
     <div class="modal-overlay" id="explanationModal">
@@ -620,18 +670,22 @@
     </div>
 
     <!-- Футер -->
-    <footer class="document-footer">
-        <p><i class="fas fa-hospital-alt"></i> ГБУЗ МО "МОКПТД" | Филиал "Клинский" | © 2026</p>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <p>© 2026 ГБУЗ МО "МОКПТД" филиал "Клинский"</p>
+                <p>По вопросам и замечаниям: <a href="mailto:mz_mokptd_klin@mosreg.ru">mz_mokptd_klin@mosreg.ru</a></p>
+            </div>
+        </div>
     </footer>
 
-    <script>
+        <script>
         // ========== ЕДИНЫЙ МАССИВ ВСЕХ ДОКУМЕНТОВ ==========
         const allDocuments = [
             {
                 "id": 7,
                 "title": "Приказ Минздрава РФ № 951",
                 "officialTitle": "Методические рекомендации по совершенствованию диагностики и лечения туберкулёза органов дыхания",
-                "additionalInfo": "Утверждён 29.12.2014 г.",
                 "date": "Утверждён 29.12.2014 г.",
                 "description": "Ключевой алгоритм для врачей ОЛС по диагностике и лечению туберкулёза органов дыхания.",
                 "pdfFile": "documents/prikaz-951.pdf",
@@ -642,7 +696,7 @@
                         "Обязательный первичный диагностический минимум для ОЛС (Раздел VII): Трехкратная микроскопия мокроты на КУМ в течение 2 дней, обзорная рентгенография/КТ органов грудной клетки, Диаскинтест. ПЦР мокроты на ДНК МБТ проводится при отрицательной микроскопии.",
                         "Алгоритм при выявлении КУМ в мокроте: Немедленная изоляция пациента и направление санитарным транспортом к фтизиатру в ПТД в тот же день.",
                         "Алгоритм при отрицательных результатах, но сохраняющемся подозрении: Проведение КТ органов грудной клетки и обязательная консультация фтизиатра.",
-                        "Дифференциальная диагностика (Раздел IV): Подробная таблица для сопоставления рентгенологических синдромов при туберкулезе и других заболеваниях (пневмония, рака, саркоидоз и др.).",
+                        "Дифференциальная диагностика (Раздел IV): Подробная таблица для сопоставления рентгенологических синдромов при туберкулезе и других заболеваний (пневмония, рак, саркоидоз и др.).",
                         "Иммунодиагностика (Раздел V): Четкие схемы применения пробы Манту (дети до 7 лет) и Диаскинтеста (дети с 8 лет и взрослые по показаниям), критерии оценки.",
                         "Эндоскопические и хирургические методы (Раздел VI): Подробно описаны методы получения материала для верификации диагноза: бронхоскопия (включая видеобронхоскопию, БАЛ, различные виды биопсий), торакоскопия, медиастиноскопия. Указано, что они применяются при невозможности установить диагноз неинвазивными методами.",
                         "Особенности у пациентов с ВИЧ-инфекцией: При наличии лихорадки и иммуносупрессии КТ ОГК проводится обязательно, даже при нормальной рентгенограмме.",
@@ -655,7 +709,6 @@
                 "id": 1,
                 "title": "Приказ Минздрава РФ № 190н",
                 "officialTitle": "Об утверждении порядка и сроков проведения профилактических медицинских осмотров граждан в целях выявления туберкулёза",
-                "additionalInfo": "Утверждён 11.04.2025 г.",
                 "date": "Утверждён 11.04.2025 г.",
                 "description": "Организация профилактических осмотров на туберкулёз врачами ОЛС: составление списков, планов, информирование и учёт",
                 "pdfFile": "documents/prikaz-190n.pdf",
@@ -677,15 +730,14 @@
                 "id": 2,
                 "title": "Приказ МЗ МО № 1725",
                 "officialTitle": "О порядке взаимодействия врачей-патологоанатомов, врачей-судебно-медицинских экспертов и врачей-фтизиатров на территории Московской области",
-                "additionalInfo": "Утверждён 25.12.2020 г.",
                 "date": "Утверждён 25.12.2020 г.",
                 "description": "Взаимодействие при установлении причины смерти, связанной с туберкулёзом",
                 "pdfFile": "documents/prikaz-1725.pdf",
                 "pdfName": "Приказ_МЗ_МО_1725.pdf",
                 "explanation": {
                     "keyPoints": [
-                        "Обязательное немедленное уведомление МОКПТД при подозрении на туберкулёз как причине смерти",
-                        "Забор материал для микробиологического исследования с целью выявления микобактерий туберкулеза (МБТ)",
+                        "Обязательное немедленное уведомление МОКПТД при подозрении на туберкулёз как причину смерти",
+                        "Забор материал для микробиологическое исследование с целью выявления микобактерий туберкулеза (МБТ)",
                         "Совместная оценка случая фтизиатром и патологоанатомом/судмедэкспертом",
                         "Определение ВИЧ-статуса для корректного установления причины смерти",
                         "Ежемесячные коллегиальные разборы случаев"
@@ -697,7 +749,6 @@
                 "id": 8,
                 "title": "Приказ Минздрава РФ № 690",
                 "officialTitle": "Об утверждении учетной документации по выявлению туберкулеза методом микроскопии",
-                "additionalInfo": "Утверждён 2 октября 2006 г.",
                 "date": "Утверждён 2 октября 2006 г.",
                 "description": "Утверждение форм учётной документации для микроскопической диагностики туберкулёза",
                 "pdfFile": "documents/prikaz-690.pdf",
@@ -708,7 +759,7 @@
                     "keyPoints": [
                         "Утверждает стандартные учётные формы для микроскопической диагностики туберкулёза: формы 05-ТБ/у (направление), 04-ТБ/у (журнал исследований), 04-1-ТБ/у (журнал регистрации материала), 04-2-ТБ/у (сопроводительный лист).",
                         "Определяет правила сбора мокроты: в специально оборудованном проветриваемом помещении, с использованием СИЗ персоналом, правильная техника кашля для пациента.",
-                        "Устанавливает график сбора мокроты: 3 образца в течение 2 дней (1-й в ЛПУ, 2-й дома утром, 3-й в ЛПУ при приёме второго образца).",
+                        "Устанавливает график сбора мокрота: 3 образца в течение 2 дней (1-й в ЛПУ, 2-й дома утром, 3-й в ЛПУ при приёме второго образца).",
                         "Регламентирует транспортировку диагностического материала в закрытых биксах с сопроводительной документацией.",
                         "Предусматривает немедленное информирование врача при положительном результате микроскопии.",
                         "Определяет виды диагностического материала (26 позиций) помимо мокроты: ликвор, плевральная жидкость, кровь, биоптаты и др.",
@@ -722,7 +773,6 @@
                 "id": 3,
                 "title": "Клинические рекомендации",
                 "officialTitle": "Туберкулёз у взрослых",
-                "additionalInfo": "Обновлены в 2023 г.",
                 "date": "Обновлены в 2023 г.",
                 "description": "Национальная ассоциация фтизиатров",
                 "pdfFile": "documents/klinrek-2023.pdf",
@@ -742,7 +792,6 @@
                 "id": 4,
                 "title": "СанПиН 3.3686-21",
                 "officialTitle": "Санитарно-эпидемиологические требования по профилактике инфекционных болезней",
-                "additionalInfo": "Утверждены 28.01.2021 г.",
                 "date": "Утверждены 28.01.2021 г.",
                 "description": "Требования к профилактике инфекционных заболеваний, включая туберкулёз",
                 "pdfFile": "documents/sanpin-3686.pdf",
@@ -762,7 +811,6 @@
                 "id": 5,
                 "title": "Приказ Минздрава РФ № 932н",
                 "officialTitle": "О порядке проведения профилактических медицинских осмотров",
-                "additionalInfo": "Утверждён 06.12.2021 г.",
                 "date": "Утверждён 06.12.2021 г.",
                 "description": "Порядок и сроки проведения профилактических медицинских осмотров",
                 "pdfFile": "documents/prikaz-932n.pdf",
@@ -782,7 +830,6 @@
                 "id": 6,
                 "title": "Приказ МЗ МО № 1100",
                 "officialTitle": "Об организации раннего выявления туберкулёза в Московской области",
-                "additionalInfo": "Утверждён 15.09.2022 г.",
                 "date": "Утверждён 15.09.2022 г.",
                 "description": "Региональные особенности организации раннего выявления туберкулёза",
                 "pdfFile": "documents/prikaz-1100.pdf",
@@ -830,10 +877,9 @@
             container.innerHTML = '';
             
             allDocuments.forEach(doc => {
-                const card = document.createElement('div');
+                const card = document.createElement('article');
                 card.className = 'document-card';
                 card.dataset.id = doc.id;
-                card.id = `doc-${doc.id}`;
                 
                 // Создаём HTML для кнопок
                 let buttonsHTML;
@@ -844,17 +890,17 @@
                         <a href="${doc.pdfFile}" 
                            download="${doc.pdfName}"
                            class="doc-btn btn-download">
-                            <i class="fas fa-file-pdf"></i> Скачать PDF
+                            📄 Скачать PDF
                         </a>
                         
                         <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
-                            <i class="fas fa-lightbulb"></i> Объяснение
+                            💡 Объяснение
                         </button>
                         
                         <a href="${doc.excelFile}" 
                            download="${doc.excelName || 'Журнал_04-ТБ.xlsx'}"
                            class="doc-btn btn-excel">
-                            <i class="fas fa-file-excel"></i> Скачать журнал
+                            📊 Скачать журнал
                         </a>
                     `;
                 } else {
@@ -863,35 +909,26 @@
                         <a href="${doc.pdfFile}" 
                            download="${doc.pdfName}"
                            class="doc-btn btn-download">
-                            <i class="fas fa-file-pdf"></i> Скачать PDF
+                            📄 Скачать PDF
                         </a>
                         
                         <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
-                            <i class="fas fa-lightbulb"></i> Объяснение
+                            💡 Объяснение
                         </button>
                     `;
                 }
                 
-                // ШАБЛОН С ФИКСИРОВАННОЙ ШАПКОЙ ИЗ 4 СТРОК
                 card.innerHTML = `
-                    <div class="card-header">
-                        <!-- СТРОКА 1: Короткое название -->
-                        <h3 class="card-title">${doc.title}</h3>
-                        
-                        <!-- СТРОКА 2: Длинное официальное название -->
-                        <div class="card-subtitle">${doc.officialTitle}</div>
-                        
-                        <!-- СТРОКА 3: Дополнительная информация -->
-                        <div class="card-info">${doc.additionalInfo || ''}</div>
-                        
-                        <!-- СТРОКА 4: Может быть пустой или содержать дополнительную информацию -->
-                        <div class="card-info"></div>
+                    <div class="document-header">
+                        <h3 class="document-title">${doc.title}</h3>
+                        <div class="document-official-title">${doc.officialTitle}</div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-details">
+                    <div class="document-body">
+                        <p class="document-details">
+                            <strong>${doc.date}</strong><br>
                             ${doc.description}
                         </p>
-                        <div class="card-actions">
+                        <div class="document-actions">
                             ${buttonsHTML}
                         </div>
                     </div>
@@ -913,7 +950,6 @@
                 });
             });
             
-            // Анимация появления карточек
             const cards = document.querySelectorAll('.document-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
@@ -952,7 +988,7 @@
                         <h4 class="explanation-title">
                             Практическое применение
                         </h4>
-                        <p style="color: var(--text-secondary); line-height: 1.7; font-size: 1.05rem;">${doc.explanation.application}</p>
+                        <p class="explanation-text">${doc.explanation.application}</p>
                     </div>
                 `;
             }
@@ -1028,6 +1064,7 @@
                 }
             });
         });
+
     </script>
 </body>
 </html>
