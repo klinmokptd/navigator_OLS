@@ -74,27 +74,6 @@
             padding: 20px;
         }
         
-        /* Кнопка назад в навигатор */
-        .back-to-navigator {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s;
-            margin-bottom: 1rem;
-            float: right;
-        }
-        
-        .back-to-navigator:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-        
         /* === ЗАГОЛОВОК И ВВОДНАЯ ИНФОРМАЦИЯ === */
         .document-header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
@@ -376,17 +355,6 @@
             .instruction-image {
                 max-width: 100%;
             }
-            
-            .back-to-navigator {
-                float: none;
-                display: block;
-                margin: 0 auto 1rem auto;
-                text-align: center;
-            }
-            
-            .step-title {
-                font-size: 1.4rem;
-            }
         }
         
         @media print {
@@ -401,21 +369,12 @@
             .instruction-image {
                 max-width: 400px;
             }
-            
-            .back-to-navigator {
-                display: none;
-            }
         }
     </style>
 </head>
 <body>
     <!-- Заголовок и вводная информация -->
     <header class="document-header">
-        <!-- КНОПКА НАЗАД В НАВИГАТОР -->
-        <a href="index.html" class="back-to-navigator">
-            ← Назад в навигатор
-        </a>
-        
         <h1 class="document-title">Телемедицинские консультации с ГБУЗ МО МОКПТД</h1>
         <p class="document-subtitle">Порядок проведения консультаций для оперативного решения сложных диагностических вопросов</p>
         
@@ -595,7 +554,7 @@
                 <li><strong>Дайте разрешения:</strong> при первом подключении система запросит доступ к камере и микрофону – нажмите <strong>«Разрешить»</strong>.</li>
                 <li><strong>Войдите в конференцию:</strong> в открывшемся окне укажите название вашей организации.</li>
                 <li><strong>Для выступления:</strong> во время эфира найдите и нажмите значок <strong>«+» (плюс)</strong>, затем выберите <strong>«Выступить на трибуне»</strong>.</li>
-                <li><strong>Чтобы показать снимки или документы:</strong> найдите и используйте функцию <strong>«Показать экран»</strong>. <strong>Обратите внимание:</strong> если вы заранее отправили архив исследований по защищенному каналу, демонстрация экрана может не потребоваться, так как специалисты уже будут иметь доступ к материалам.</li>
+                <li><strong>Чтобы показать снимки или документы:</strong> найдите и используйте функцию <strong>«Показать экран»</strong>. <strong>Обратите внимание:</strong> если вы заранее отправили архив исследований по защищенному каналу, демонстрация экрана может не потребоваться, так как специалисты уже будут иметь доступ к материалов.</li>
             </ol>
             
             <div class="highlight-box">
