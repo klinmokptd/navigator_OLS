@@ -5,8 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Нормативная база по выявлению туберкулеза</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 500;
+            font-display: swap;
+            src: url('fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url('fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url('fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+        }
+        
         :root {
             --primary-blue: #1A5F9E;
             --secondary-blue: #2C8BD4;
@@ -559,15 +590,15 @@
     <!-- Кнопки действий -->
     <div class="action-buttons">
         <button class="action-btn btn-primary" onclick="downloadAllDocuments()">
-            <i class="fas fa-download"></i> 📦 Скачать все документы
+            <i class="fas fa-download"></i> Скачать все документы
         </button>
         <button class="action-btn btn-secondary" id="showAllExplanations">
-            <i class="fas fa-lightbulb"></i> 💡 Показать все объяснения
+            <i class="fas fa-lightbulb"></i> Показать все объяснения
         </button>
     </div>
 
     <!-- Список документов -->
-    <h2 class="section-title">📋 Перечень документов</h2>
+    <h2 class="section-title">Перечень документов</h2>
     
     <div class="documents-grid" id="documents-container">
         <!-- Документы будут добавлены сюда JavaScript -->
