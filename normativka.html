@@ -109,65 +109,12 @@
             background: rgba(255, 255, 255, 0.25);
         }
         
-        /* === ОГЛАВЛЕНИЕ === */
-        .toc-container {
-            background: var(--light-blue);
-            border-radius: var(--border-radius);
-            padding: 1.8rem;
-            margin-bottom: 2.5rem;
-            border: 1px solid var(--gray-medium);
-        }
-        
-        .toc-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .toc-list {
-            list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 10px;
-        }
-        
-        .toc-list li {
-            padding: 8px 0;
-            position: relative;
-            padding-left: 24px;
-        }
-        
-        .toc-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            color: var(--secondary-blue);
-            font-weight: bold;
-        }
-        
-        .toc-list a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        
-        .toc-list a:hover {
-            color: var(--primary-blue);
-            text-decoration: underline;
-        }
-        
         /* === КНОПКИ ДЕЙСТВИЙ === */
         .action-buttons {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
-            margin: 2rem 0;
+            margin: 2rem 0 3rem 0;
             justify-content: center;
         }
         
@@ -235,12 +182,14 @@
             box-shadow: var(--shadow-strong);
         }
         
+        /* ФИКСИРОВАННАЯ ШАПКА КАРТОЧКИ - 4 СТРОКИ */
         .card-header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
             padding: 1.5rem;
-            min-height: 140px;
-            height: 140px;
+            /* ФИКСИРОВАННАЯ ВЫСОТА ДЛЯ 4 СТРОК */
+            min-height: 160px;
+            height: 160px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -258,32 +207,50 @@
             background: var(--accent-red);
         }
         
+        /* ПЕРВАЯ СТРОКА - КОРОТКОЕ НАЗВАНИЕ */
         .card-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            line-height: 1.3;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 6px; /* Уменьшил расстояние между строками */
+            line-height: 1.2;
             display: -webkit-box;
-            -webkit-line-clamp: 2;
+            -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            height: 3.2em;
+            height: 1.7em;
             color: white;
         }
         
+        /* ВТОРАЯ СТРОКА - ДЛИННОЕ НАЗВАНИЕ */
         .card-subtitle {
             color: white;
-            font-size: 0.95rem;
-            font-weight: 300;
+            font-size: 1.05rem;
+            font-weight: 400;
             line-height: 1.3;
             opacity: 0.95;
+            margin-bottom: 8px;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2; /* Максимум 2 строки для длинного названия */
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-height: calc(1.3em * 3);
+            max-height: calc(1.3em * 2);
+        }
+        
+        /* ТРЕТЬЯ И ЧЕТВЕРТАЯ СТРОКИ - ДОПОЛНИТЕЛЬНАЯ ИНФОРМАЦИЯ */
+        .card-info {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.3;
+            margin-top: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Максимум 2 строки для дополнительной информации */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-height: calc(1.3em * 2);
         }
         
         .card-body {
@@ -521,10 +488,6 @@
                 font-size: 1.8rem;
             }
             
-            .toc-list {
-                grid-template-columns: 1fr;
-            }
-            
             .documents-grid {
                 grid-template-columns: 1fr;
             }
@@ -553,10 +516,17 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            /* На мобильных устройствах высота шапки немного меньше */
+            .card-header {
+                min-height: 150px;
+                height: 150px;
+                padding: 1.2rem;
+            }
         }
         
         @media print {
-            .toc-container, .document-footer, .action-buttons, .back-to-navigator {
+            .document-footer, .action-buttons, .back-to-navigator {
                 display: none;
             }
             
@@ -585,14 +555,6 @@
             <p>В этом разделе собраны ключевые нормативные документы, регулирующие вопросы диагностики, профилактики и лечения туберкулёза. Для каждого документа доступна возможность скачать оригинал и получить краткое объяснение его содержания и применения на практике.</p>
         </div>
     </header>
-
-    <!-- Оглавление -->
-    <nav class="toc-container">
-        <h2 class="toc-title"><i class="fas fa-list"></i> Содержание</h2>
-        <ul class="toc-list" id="documents-toc">
-            <!-- JavaScript добавит сюда ссылки -->
-        </ul>
-    </nav>
 
     <!-- Кнопки действий -->
     <div class="action-buttons">
@@ -638,6 +600,7 @@
                 "id": 7,
                 "title": "Приказ Минздрава РФ № 951",
                 "officialTitle": "Методические рекомендации по совершенствованию диагностики и лечения туберкулёза органов дыхания",
+                "additionalInfo": "Утверждён 29.12.2014 г.",
                 "date": "Утверждён 29.12.2014 г.",
                 "description": "Ключевой алгоритм для врачей ОЛС по диагностике и лечению туберкулёза органов дыхания.",
                 "pdfFile": "documents/prikaz-951.pdf",
@@ -661,6 +624,7 @@
                 "id": 1,
                 "title": "Приказ Минздрава РФ № 190н",
                 "officialTitle": "Об утверждении порядка и сроков проведения профилактических медицинских осмотров граждан в целях выявления туберкулёза",
+                "additionalInfo": "Утверждён 11.04.2025 г.",
                 "date": "Утверждён 11.04.2025 г.",
                 "description": "Организация профилактических осмотров на туберкулёз врачами ОЛС: составление списков, планов, информирование и учёт",
                 "pdfFile": "documents/prikaz-190n.pdf",
@@ -682,13 +646,14 @@
                 "id": 2,
                 "title": "Приказ МЗ МО № 1725",
                 "officialTitle": "О порядке взаимодействия врачей-патологоанатомов, врачей-судебно-медицинских экспертов и врачей-фтизиатров на территории Московской области",
+                "additionalInfo": "Утверждён 25.12.2020 г.",
                 "date": "Утверждён 25.12.2020 г.",
                 "description": "Взаимодействие при установлении причины смерти, связанной с туберкулёзом",
                 "pdfFile": "documents/prikaz-1725.pdf",
                 "pdfName": "Приказ_МЗ_МО_1725.pdf",
                 "explanation": {
                     "keyPoints": [
-                        "Обязательное немедленное уведомление МОКПТД при подозрении на туберкулёз как причину смерти",
+                        "Обязательное немедленное уведомление МОКПТД при подозрении на туберкулёз как причине смерти",
                         "Забор материал для микробиологического исследования с целью выявления микобактерий туберкулеза (МБТ)",
                         "Совместная оценка случая фтизиатром и патологоанатомом/судмедэкспертом",
                         "Определение ВИЧ-статуса для корректного установления причины смерти",
@@ -701,6 +666,7 @@
                 "id": 8,
                 "title": "Приказ Минздрава РФ № 690",
                 "officialTitle": "Об утверждении учетной документации по выявлению туберкулеза методом микроскопии",
+                "additionalInfo": "Утверждён 2 октября 2006 г.",
                 "date": "Утверждён 2 октября 2006 г.",
                 "description": "Утверждение форм учётной документации для микроскопической диагностики туберкулёза",
                 "pdfFile": "documents/prikaz-690.pdf",
@@ -725,6 +691,7 @@
                 "id": 3,
                 "title": "Клинические рекомендации",
                 "officialTitle": "Туберкулёз у взрослых",
+                "additionalInfo": "Обновлены в 2023 г.",
                 "date": "Обновлены в 2023 г.",
                 "description": "Национальная ассоциация фтизиатров",
                 "pdfFile": "documents/klinrek-2023.pdf",
@@ -744,6 +711,7 @@
                 "id": 4,
                 "title": "СанПиН 3.3686-21",
                 "officialTitle": "Санитарно-эпидемиологические требования по профилактике инфекционных болезней",
+                "additionalInfo": "Утверждены 28.01.2021 г.",
                 "date": "Утверждены 28.01.2021 г.",
                 "description": "Требования к профилактике инфекционных заболеваний, включая туберкулёз",
                 "pdfFile": "documents/sanpin-3686.pdf",
@@ -763,6 +731,7 @@
                 "id": 5,
                 "title": "Приказ Минздрава РФ № 932н",
                 "officialTitle": "О порядке проведения профилактических медицинских осмотров",
+                "additionalInfo": "Утверждён 06.12.2021 г.",
                 "date": "Утверждён 06.12.2021 г.",
                 "description": "Порядок и сроки проведения профилактических медицинских осмотров",
                 "pdfFile": "documents/prikaz-932n.pdf",
@@ -782,6 +751,7 @@
                 "id": 6,
                 "title": "Приказ МЗ МО № 1100",
                 "officialTitle": "Об организации раннего выявления туберкулёза в Московской области",
+                "additionalInfo": "Утверждён 15.09.2022 г.",
                 "date": "Утверждён 15.09.2022 г.",
                 "description": "Региональные особенности организации раннего выявления туберкулёза",
                 "pdfFile": "documents/prikaz-1100.pdf",
@@ -823,31 +793,6 @@
         }
 
         // ========== ФУНКЦИИ ==========
-        
-        function renderTOC() {
-            const tocContainer = document.getElementById('documents-toc');
-            tocContainer.innerHTML = '';
-            
-            allDocuments.forEach(doc => {
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = `#doc-${doc.id}`;
-                link.textContent = doc.title;
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const target = document.querySelector(`#doc-${doc.id}`);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        target.style.boxShadow = '0 0 0 3px rgba(26, 95, 158, 0.3)';
-                        setTimeout(() => {
-                            target.style.boxShadow = '';
-                        }, 2000);
-                    }
-                });
-                listItem.appendChild(link);
-                tocContainer.appendChild(listItem);
-            });
-        }
         
         function renderDocuments() {
             const container = document.getElementById('documents-container');
@@ -896,14 +841,23 @@
                     `;
                 }
                 
+                // ШАБЛОН С ФИКСИРОВАННОЙ ШАПКОЙ ИЗ 4 СТРОК
                 card.innerHTML = `
                     <div class="card-header">
+                        <!-- СТРОКА 1: Короткое название -->
                         <h3 class="card-title">${doc.title}</h3>
+                        
+                        <!-- СТРОКА 2: Длинное официальное название -->
                         <div class="card-subtitle">${doc.officialTitle}</div>
+                        
+                        <!-- СТРОКА 3: Дополнительная информация -->
+                        <div class="card-info">${doc.additionalInfo || ''}</div>
+                        
+                        <!-- СТРОКА 4: Может быть пустой или содержать дополнительную информацию -->
+                        <div class="card-info"></div>
                     </div>
                     <div class="card-body">
                         <p class="card-details">
-                            <strong>${doc.date}</strong><br>
                             ${doc.description}
                         </p>
                         <div class="card-actions">
@@ -939,45 +893,6 @@
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
                 }, 100 * index);
-            });
-            
-            // Плавная прокрутка для навигации по оглавлению
-            document.querySelectorAll('.toc-list a').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 100,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-            
-            // Подсветка текущего раздела при прокрутке
-            window.addEventListener('scroll', function() {
-                const cards = document.querySelectorAll('.document-card');
-                const scrollPosition = window.scrollY + 150;
-                
-                cards.forEach(card => {
-                    const cardTop = card.offsetTop;
-                    const cardHeight = card.clientHeight;
-                    const cardId = card.getAttribute('id');
-                    
-                    if (scrollPosition >= cardTop && scrollPosition < cardTop + cardHeight) {
-                        document.querySelectorAll('.toc-list a').forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === '#' + cardId) {
-                                link.classList.add('active');
-                                link.style.color = 'var(--primary-blue)';
-                                link.style.fontWeight = '600';
-                            }
-                        });
-                    }
-                });
             });
         }
 
@@ -1065,7 +980,6 @@
         const showAllBtn = document.getElementById('showAllExplanations');
 
         document.addEventListener('DOMContentLoaded', () => {
-            renderTOC();
             renderDocuments();
             
             showAllBtn.addEventListener('click', showAllExplanations);
