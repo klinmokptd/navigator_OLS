@@ -306,13 +306,59 @@
         }
         
         @media (max-width: 768px) {
-            .header { padding: 2rem 0; }
-            .header-title { font-size: 2.2rem; text-align: center; }
-            .header-subtitle { text-align: center; font-size: 1.1rem; }
-            .logo-area { flex-direction: column; text-align: center; }
-            .blocks-grid { grid-template-columns: 1fr; }
-            .footer-container { flex-direction: column; text-align: center; gap: 20px; }
-        }
+    .header { padding: 2rem 0; }
+    .header-title { font-size: 2.2rem; text-align: center; }
+    .header-subtitle { text-align: center; font-size: 1.1rem; }
+    .logo-area { flex-direction: column; text-align: center; }
+    .blocks-grid { grid-template-columns: 1fr; }
+    
+    /* Убираем узкие боковые отступы у контейнеров с контентом */
+    .header-container,
+    .mission-container,
+    .blocks-container,
+    .footer-container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* Увеличиваем ширину текстовых карточек, уменьшая их боковые отступы */
+    .content-block {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .block-content {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    /* Исправляем футер: контакты в столбик, номера без переносов */
+    .footer-container { 
+        flex-direction: column; 
+        text-align: center; 
+        gap: 25px; 
+        align-items: flex-start;
+    }
+    .footer-info {
+        width: 100%;
+    }
+    .footer-info p {
+        margin-bottom: 10px;
+        text-align: left;
+    }
+    /* Запрещаем перенос номеров телефонов */
+    .footer-info a {
+        white-space: nowrap;
+        display: inline-block;
+    }
+    
+    /* Дополнительно: увеличиваем шрифты в карточках для мобилок */
+    .block-description {
+        font-size: 1.1rem;
+    }
+    .block-features li {
+        font-size: 1.05rem;
+    }
+}
     </style>
 </head>
 <body>
