@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Навигатор по выявлению туберкулеза | ГБУЗ МО МОКПТД филиал Клинский</title>
     <link rel="icon" href="/navigator_OLS/favicon.ico" sizes="any">
-
-    
     <style>
         /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
         @font-face {
@@ -144,12 +142,29 @@
             padding: 0 30px;
         }
         
-        .section-title {
-            font-size: 2rem;
+        .toggle-all-btn {
+            display: block;
+            margin: 0 auto 2.5rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: var(--radius);
+            font-size: 1.3rem;
             font-weight: 700;
-            color: var(--primary-blue);
-            margin-bottom: 2.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+            border-bottom: 4px solid var(--accent-red);
             text-align: center;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .toggle-all-btn:hover {
+            background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(26, 95, 158, 0.15);
         }
         
         .blocks-grid {
@@ -166,6 +181,19 @@
             border: 1px solid #E0E5EC;
             display: flex;
             flex-direction: column;
+            transition: all 0.4s ease;
+        }
+        
+        /* Стиль для свернутой карточки */
+        .content-block.collapsed {
+            height: 140px;
+            min-height: 140px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .content-block.collapsed .block-content {
+            display: none;
         }
         
         .block-header {
@@ -306,59 +334,66 @@
         }
         
         @media (max-width: 768px) {
-    .header { padding: 2rem 0; }
-    .header-title { font-size: 2.2rem; text-align: center; }
-    .header-subtitle { text-align: center; font-size: 1.1rem; }
-    .logo-area { flex-direction: column; text-align: center; }
-    .blocks-grid { grid-template-columns: 1fr; }
-    
-    /* Убираем узкие боковые отступы у контейнеров с контентом */
-    .header-container,
-    .mission-container,
-    .blocks-container,
-    .footer-container {
-        padding-left: 15px;
-        padding-right: 15px;
-    }
-    
-    /* Увеличиваем ширину текстовых карточек, уменьшая их боковые отступы */
-    .content-block {
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    .block-content {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-    
-    /* Исправляем футер: контакты в столбик, номера без переносов */
-    .footer-container { 
-        flex-direction: column; 
-        text-align: center; 
-        gap: 25px; 
-        align-items: flex-start;
-    }
-    .footer-info {
-        width: 100%;
-    }
-    .footer-info p {
-        margin-bottom: 10px;
-        text-align: left;
-    }
-    /* Запрещаем перенос номеров телефонов */
-    .footer-info a {
-        white-space: nowrap;
-        display: inline-block;
-    }
-    
-    /* Дополнительно: увеличиваем шрифты в карточках для мобилок */
-    .block-description {
-        font-size: 1.1rem;
-    }
-    .block-features li {
-        font-size: 1.05rem;
-    }
-}
+            .header { padding: 2rem 0; }
+            .header-title { font-size: 2.2rem; text-align: center; }
+            .header-subtitle { text-align: center; font-size: 1.1rem; }
+            .logo-area { flex-direction: column; text-align: center; }
+            .blocks-grid { grid-template-columns: 1fr; }
+            
+            /* Убираем узкие боковые отступы у контейнеров с контентом */
+            .header-container,
+            .mission-container,
+            .blocks-container,
+            .footer-container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            
+            /* Увеличиваем ширину текстовых карточек, уменьшая их боковые отступы */
+            .content-block {
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            .block-content {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+            
+            /* Адаптируем кнопку */
+            .toggle-all-btn {
+                font-size: 1.15rem;
+                padding: 14px 25px;
+                max-width: 100%;
+            }
+            
+            /* Исправляем футер: контакты в столбик, номера без переносов */
+            .footer-container { 
+                flex-direction: column; 
+                text-align: center; 
+                gap: 25px; 
+                align-items: flex-start;
+            }
+            .footer-info {
+                width: 100%;
+            }
+            .footer-info p {
+                margin-bottom: 10px;
+                text-align: left;
+            }
+            /* Запрещаем перенос номеров телефонов */
+            .footer-info a {
+                white-space: nowrap;
+                display: inline-block;
+            }
+            
+            /* Дополнительно: увеличиваем шрифты в карточках для мобилок */
+            .block-description {
+                font-size: 1.1rem;
+            }
+            .block-features li {
+                font-size: 1.05rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -390,11 +425,12 @@
 
     <section class="blocks-section">
         <div class="blocks-container">
-            <h2 class="section-title">Структура навигатора</h2>
+            <!-- Кнопка вместо заголовка "Структура навигатора" -->
+            <button class="toggle-all-btn" id="toggleAllCards">Открыть все карточки</button>
             
-            <div class="blocks-grid">
+            <div class="blocks-grid" id="cardsContainer">
                 <!-- Карточка 1: Почему туберкулёз — ваша задача? -->
-                <article class="content-block">
+                <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
                             <h3 class="block-title">Почему туберкулёз — ваша задача?</h3>
@@ -416,7 +452,7 @@
                 </article>
 
                 <!-- Карточка 2: Нормативная база -->
-                <article class="content-block">
+                <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
                             <h3 class="block-title">Нормативная база</h3>
@@ -438,7 +474,7 @@
                 </article>
 
                 <!-- Карточка 3: Контроль выполнения -->
-                <article class="content-block">
+                <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
                             <h3 class="block-title">Контроль выполнения:<br>планы и факты</h3>
@@ -457,29 +493,31 @@
                         </div>
                     </div>
                 </article>
-<!-- Карточка 4: Мониторинг раннего выявления туберкулёза -->
-<article class="content-block">
-    <div class="block-header">
-        <div class="block-text">
-            <h3 class="block-title">Мониторинг раннего выявления туберкулёза</h3>
-            <p class="block-subtitle">Для ответственных за МедИнфо</p>
-        </div>
-    </div>
-    <div class="block-content">
-        <p class="block-description">Работа с распоряжением № 445 от 09.04.2025 об организации мониторинга профилактических осмотров.</p>
-        <ul class="block-features">
-            <li>Формы для заполнения в МедИнфо</li>
-            <li>Сроки подачи отчётов</li>
-            <li>Критерии несвоевременного выявления</li>
-            <li>Сводные планы и статистика</li>
-        </ul>
-        <div class="block-actions">
-            <a href="#" class="block-btn">Открыть раздел</a>
-        </div>
-    </div>
-</article>
-                <!-- Карточка 4: Диагностические алгоритмы -->
-                <article class="content-block">
+
+                <!-- Карточка 4: Мониторинг раннего выявления туберкулёза -->
+                <article class="content-block collapsed">
+                    <div class="block-header">
+                        <div class="block-text">
+                            <h3 class="block-title">Мониторинг раннего выявления туберкулёза</h3>
+                            <p class="block-subtitle">Для ответственных за МедИнфо</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Работа с распоряжением № 445 от 09.04.2025 об организации мониторинга профилактических осмотров.</p>
+                        <ul class="block-features">
+                            <li>Формы для заполнения в МедИнфо</li>
+                            <li>Сроки подачи отчётов</li>
+                            <li>Критерии несвоевременного выявления</li>
+                            <li>Сводные планы и статистика</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Открыть раздел</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Карточка 5: Диагностические алгоритмы -->
+                <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
                             <h3 class="block-title">Диагностические алгоритмы</h3>
@@ -490,7 +528,7 @@
                         <p class="block-description">Четкие схемы действий при различных клинических ситуациях и результатах обследований.</p>
                         <ul class="block-features">
                             <li>Алгоритм при изменении на флюорографии</li>
-                            <li>Работа с группами риска</li>
+                            <li>Работа с группой риска</li>
                             <li>Дифференциальная диагностика</li>
                             <li>Действия при отказе от обследования</li>
                         </ul>
@@ -500,8 +538,8 @@
                     </div>
                 </article>
 
-                <!-- Карточка 5: Телемедицина -->
-                <article class="content-block">
+                <!-- Карточка 6: Телемедицина -->
+                <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
                             <h3 class="block-title">Телемедицина с ГБУЗ МО МОКПТД</h3>
@@ -521,8 +559,8 @@
                     </div>
                 </article>
 
-                <!-- Карточка 6: Сбор мокроты -->
-                <article class="content-block">
+                <!-- Карточка 7: Сбор мокроты -->
+                <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
                             <h3 class="block-title">Сбор биоматериала: мокрота</h3>
@@ -543,8 +581,8 @@
                     </div>
                 </article>
 
-                <!-- Карточка 7: Патологоанатомы -->
-                <article class="content-block">
+                <!-- Карточка 8: Патологоанатомы -->
+                <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
                             <h3 class="block-title">Взаимодействие с патологоанатомами</h3>
@@ -565,8 +603,8 @@
                     </div>
                 </article>
 
-                <!-- Карточка 8: Разбор случаев -->
-                <article class="content-block">
+                <!-- Карточка 9: Разбор случаев -->
+                <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
                             <h3 class="block-title">Разбор случаев выявления</h3>
@@ -587,8 +625,8 @@
                     </div>
                 </article>
 
-                <!-- Карточка 9: Ресурсы и контакты -->
-                <article class="content-block">
+                <!-- Карточка 10: Ресурсы и контакты -->
+                <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
                             <h3 class="block-title">Ресурсы и контакты</h3>
@@ -609,8 +647,8 @@
                     </div>
                 </article>
 
-                <!-- Карточка 10: Образовательные материалы -->
-                <article class="content-block">
+                <!-- Карточка 11: Образовательные материалы -->
+                <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
                             <h3 class="block-title">Образовательные материалы</h3>
@@ -631,8 +669,8 @@
                     </div>
                 </article>
 
-                <!-- Карточка 11: Опыт других учреждений -->
-                <article class="content-block">
+                <!-- Карточка 12: Опыт других учреждений -->
+                <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
                             <h3 class="block-title">Опыт других учреждений ОЛС</h3>
@@ -671,5 +709,76 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('toggleAllCards');
+            const cardsContainer = document.getElementById('cardsContainer');
+            const allCards = document.querySelectorAll('.content-block');
+            let allExpanded = false;
+            
+            // Функция для переключения состояния всех карточек
+            function toggleAllCards() {
+                allExpanded = !allExpanded;
+                
+                if (allExpanded) {
+                    // Развернуть все карточки
+                    allCards.forEach(card => {
+                        card.classList.remove('collapsed');
+                    });
+                    toggleBtn.textContent = 'Закрыть все карточки';
+                } else {
+                    // Свернуть все карточки
+                    allCards.forEach(card => {
+                        card.classList.add('collapsed');
+                    });
+                    toggleBtn.textContent = 'Открыть все карточки';
+                }
+            }
+            
+            // Обработчик для кнопки "Открыть/Закрыть все карточки"
+            toggleBtn.addEventListener('click', toggleAllCards);
+            
+            // Обработчики для отдельных карточек
+            allCards.forEach(card => {
+                const header = card.querySelector('.block-header');
+                
+                header.addEventListener('click', function(e) {
+                    // Если клик был по ссылке внутри карточки, не сворачиваем/разворачиваем
+                    if (e.target.tagName === 'A') {
+                        return;
+                    }
+                    
+                    // Переключаем состояние конкретной карточки
+                    card.classList.toggle('collapsed');
+                    
+                    // Обновляем состояние кнопки "Открыть все карточки"
+                    updateToggleButtonState();
+                });
+            });
+            
+            // Функция для обновления состояния кнопки "Открыть все карточки"
+            function updateToggleButtonState() {
+                const collapsedCards = document.querySelectorAll('.content-block.collapsed').length;
+                
+                if (collapsedCards === 0) {
+                    // Все карточки развернуты
+                    toggleBtn.textContent = 'Закрыть все карточки';
+                    allExpanded = true;
+                } else if (collapsedCards === allCards.length) {
+                    // Все карточки свернуты
+                    toggleBtn.textContent = 'Открыть все карточки';
+                    allExpanded = false;
+                } else {
+                    // Не все карточки в одном состоянии
+                    toggleBtn.textContent = 'Открыть все карточки';
+                    allExpanded = false;
+                }
+            }
+            
+            // Инициализация состояния
+            updateToggleButtonState();
+        });
+    </script>
 </body>
 </html>
