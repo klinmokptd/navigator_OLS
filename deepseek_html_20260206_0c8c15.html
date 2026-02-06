@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Роль общей лечебной сети в раннем выявлении туберкулёза</title>
+    
+    <!-- ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 (как в примере) -->
+    <style>
+        /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        :root {
+            --primary-blue: #1A5F9E;
+            --secondary-blue: #2C8BD4;
+            --light-blue: #F0F7FF;
+            --accent-red: #D32F2F;
+            --accent-green: #2E7D32;
+            --accent-orange: #F57C00;
+            --white: #FFFFFF;
+            --gray-light: #F5F7FA;
+            --gray-medium: #E0E5EC;
+            --gray-dark: #455A64;
+            --text-primary: #263238;
+            --text-secondary: #546E7A;
+            
+            --shadow: 0 4px 12px rgba(26, 95, 158, 0.08);
+            --radius: 6px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--light-blue);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* === ЗАГОЛОВОК И ВВОДНАЯ ИНФОРМАЦИЯ === */
+        .document-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+            border-bottom: 4px solid var(--accent-red);
+        }
+        
+        .document-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        
+        .document-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+        
+        .important-note {
+            background: rgba(255, 255, 255, 0.15);
+            border-left: 4px solid var(--accent-red);
+            padding: 1.2rem;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .important-note a {
+            color: #FFEB3B;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        
+        .important-note a:hover {
+            text-decoration: none;
+        }
+        
+        /* === ОГЛАВЛЕНИЕ === */
+        .toc-container {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 1.8rem;
+            margin-bottom: 2.5rem;
+            border: 1px solid var(--gray-medium);
+            box-shadow: var(--shadow);
+        }
+        
+        .toc-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .toc-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 10px;
+        }
+        
+        .toc-list li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 24px;
+        }
+        
+        .toc-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: var(--secondary-blue);
+            font-weight: bold;
+        }
+        
+        .toc-list a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        .toc-list a:hover {
+            color: var(--primary-blue);
+            text-decoration: underline;
+        }
+        
+        /* === БЛОКИ ЭТАПОВ (стиль как в примере) === */
+        .step-container {
+            margin-bottom: 2rem;
+            background: var(--white);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-medium);
+        }
+        
+        .step-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
+        
+        .step-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--accent-red);
+        }
+        
+        .step-number {
+            background: var(--white);
+            color: var(--primary-blue);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .step-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+        
+        .step-content {
+            padding: 2rem;
+        }
+        
+        .subsection {
+            margin-bottom: 1.8rem;
+        }
+        
+        .subsection-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .subsection-content {
+            color: var(--text-secondary);
+            margin-left: 28px;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .highlight-box {
+            background: #FFF8E1;
+            border-left: 4px solid #FFB300;
+            padding: 1.2rem;
+            margin: 1.2rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .warning-box {
+            background: #FFEBEE;
+            border-left: 4px solid var(--accent-red);
+            padding: 1.2rem;
+            margin: 1.2rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .success-box {
+            background: #E8F5E9;
+            border-left: 4px solid var(--accent-green);
+            padding: 1.2rem;
+            margin: 1.2rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        /* === СПИСКИ === */
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .key-point {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+        
+        .contact-info {
+            background: var(--light-blue);
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin: 1rem 0;
+            border-left: 4px solid var(--secondary-blue);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+        }
+        
+        .contact-info::before {
+            content: '📞';
+            font-size: 1.2rem;
+        }
+        
+        .contact-info strong {
+            color: var(--primary-blue);
+        }
+        
+        /* === ИЗОБРАЖЕНИЕ В ИНСТРУКЦИИ === */
+        .instruction-image {
+            display: block;
+            max-width: 600px;
+            width: 100%;
+            margin: 1.5rem auto;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-medium);
+        }
+        
+        /* === БЛОКИ С ИКОНКАМИ === */
+        .icon-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background: var(--light-blue);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--secondary-blue);
+        }
+        
+        .icon-box .icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+        }
+        
+        .icon-box-content {
+            flex-grow: 1;
+        }
+        
+        .icon-box-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-blue);
+        }
+        
+        /* === ФУТЕР (как в примере) === */
+        .document-footer {
+            background: var(--primary-blue);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-radius: var(--radius);
+            text-align: center;
+        }
+        
+        /* === АДАПТИВНОСТЬ === */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            
+            .document-header {
+                padding: 1.8rem;
+            }
+            
+            .document-title {
+                font-size: 1.8rem;
+            }
+            
+            .toc-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .step-content {
+                padding: 1.5rem;
+            }
+            
+            .instruction-image {
+                max-width: 100%;
+            }
+            
+            .icon-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        
+        @media print {
+            .toc-container, .document-footer {
+                display: none;
+            }
+            
+            body {
+                max-width: 100%;
+            }
+            
+            .instruction-image {
+                max-width: 400px;
+            }
+        }
+    </style>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Заголовок и вводная информация -->
+    <header class="document-header">
+        <h1 class="document-title">Роль общей лечебной сети в раннем выявлении туберкулёза</h1>
+        <p class="document-subtitle">Навигатор для врачей и руководителей общей лечебной сети</p>
+        
+        <div class="important-note">
+            <p><strong>Раннее выявление туберкулёза в Российской Федерации организовано как часть профилактической и первичной медико-санитарной помощи.</strong> Ключевая роль в выявлении заболевания на ранних стадиях принадлежит медицинским организациям общей лечебной сети, работающим с прикреплённым населением.</p>
+        </div>
+    </header>
+
+    <!-- Оглавление -->
+    <nav class="toc-container">
+        <h2 class="toc-title">📋 Содержание</h2>
+        <ul class="toc-list">
+            <li><a href="#role">Роль общей лечебной сети</a></li>
+            <li><a href="#tasks">Ключевые задачи в выявлении туберкулёза</a></li>
+            <li><a href="#normative">Нормативные основы</a></li>
+            <li><a href="#responsibility">Разделение ответственности</a></li>
+            <li><a href="#principle">Принцип взаимодействия</a></li>
+            <li><a href="#conclusion">Заключение</a></li>
+        </ul>
+    </nav>
+
+    <!-- РОЛЬ ОБЩЕЙ ЛЕЧЕБНОЙ СЕТИ -->
+    <section class="step-container" id="role">
+        <div class="step-header">
+            <div class="step-number">1</div>
+            <h2 class="step-title">Роль общей лечебной сети</h2>
+        </div>
+        <div class="step-content">
+            <p>Раннее выявление туберкулёза в Российской Федерации организовано как часть профилактической и первичной медико-санитарной помощи. Это означает, что ключевая роль в выявлении заболевания на ранних стадиях принадлежит медицинским организациям общей лечебной сети, работающим с прикреплённым населением.</p>
+            
+            <div class="icon-box">
+                <div class="icon">🏥</div>
+                <div class="icon-box-content">
+                    <p class="icon-box-title">Именно общая лечебная сеть:</p>
+                    <ul>
+                        <li>Осуществляет профилактические медицинские осмотры;</li>
+                        <li>Проводит диспансеризацию и наблюдение за условно здоровым населением;</li>
+                        <li>Является первым и зачастую единственным звеном, где пациент контактирует с системой здравоохранения до появления тяжёлых клинических форм заболевания.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КЛЮЧЕВЫЕ ЗАДАЧИ В ВЫЯВЛЕНИИ ТУБЕРКУЛЁЗА -->
+    <section class="step-container" id="tasks">
+        <div class="step-header">
+            <div class="step-number">2</div>
+            <h2 class="step-title">Ключевые задачи в выявлении туберкулёза</h2>
+        </div>
+        <div class="step-content">
+            <p>Нормативные документы Российской Федерации рассматривают выявление туберкулёза не как специализированную фтизиатрическую помощь, а как результат:</p>
+            
+            <ul>
+                <li><span class="key-point">Регулярного скрининга</span> организованного в рамках профилактических мероприятий;</li>
+                <li><span class="key-point">Клинической настороженности</span> врачей первичного звена;</li>
+                <li><span class="key-point">Своевременного направления</span> пациентов с подозрением на заболевание.</li>
+            </ul>
+            
+            <div class="warning-box">
+                <p><strong>Санитарно-эпидемиологические правила прямо устанавливают, что выявление туберкулёза осуществляется медицинскими работниками всех специальностей и медицинских организаций, а не только противотуберкулёзной службы.</strong></p>
+            </div>
+            
+            <p>Таким образом, участие врачей общей лечебной сети в выявлении туберкулёза является обязательным элементом их профессиональной деятельности, а не дополнительной или факультативной функцией.</p>
+        </div>
+    </section>
+
+    <!-- НОРМАТИВНЫЕ ОСНОВЫ -->
+    <section class="step-container" id="normative">
+        <div class="step-header">
+            <div class="step-number">3</div>
+            <h2 class="step-title">Нормативные основы</h2>
+        </div>
+        <div class="step-content">
+            <div class="highlight-box">
+                <p>Согласно действующим нормативным документам Российской Федерации, выявление туберкулёза является задачей всех медицинских организаций, оказывающих первичную медико-санитарную помощь населению.</p>
+            </div>
+            
+            <p>Противотуберкулёзная служба подключается к пациенту после выявления подозрения на туберкулёз — для подтверждения диагноза, определения тактики лечения и последующего диспансерного наблюдения.</p>
+            
+            <div class="icon-box">
+                <div class="icon">⚖️</div>
+                <div class="icon-box-content">
+                    <p class="icon-box-title">Важно понимать:</p>
+                    <p>Противотуберкулёзная служба не организует профилактические осмотры населения и не имеет прямого доступа к прикреплённому контингенту, что объективно исключает возможность возложения на неё функции раннего выявления.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- РАЗДЕЛЕНИЕ ОТВЕТСТВЕННОСТИ -->
+    <section class="step-container" id="responsibility">
+        <div class="step-header">
+            <div class="step-number">4</div>
+            <h2 class="step-title">Разделение ответственности в системе борьбы с туберкулёзом</h2>
+        </div>
+        <div class="step-content">
+            <p>Таким образом, система борьбы с туберкулёзом в Российской Федерации построена по принципу чёткого разделения ролей:</p>
+            
+            <div class="icon-box">
+                <div class="icon">👨‍⚕️</div>
+                <div class="icon-box-content">
+                    <p class="icon-box-title">Общая лечебная сеть</p>
+                    <ul>
+                        <li>Выявляет заболевание на ранних этапах в рамках профилактических осмотров и первичного приёма;</li>
+                        <li>Осуществляет скрининг и клиническое наблюдение;</li>
+                        <li>Направляет пациентов с подозрением на туберкулёз.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="icon-box">
+                <div class="icon">🏥</div>
+                <div class="icon-box-content">
+                    <p class="icon-box-title">Противотуберкулезная служба</p>
+                    <ul>
+                        <li>Подтверждает диагноз на основе полученных направлений;</li>
+                        <li>Осуществляет специализированное лечение;</li>
+                        <li>Ведёт диспансерное наблюдение за пациентами.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ПРИНЦИП ВЗАИМОДЕЙСТВИЯ -->
+    <section class="step-container" id="principle">
+        <div class="step-header">
+            <div class="step-number">5</div>
+            <h2 class="step-title">Принцип взаимодействия</h2>
+        </div>
+        <div class="step-content">
+            <p>Настоящий навигатор предназначен для врачей и руководителей общей лечебной сети и направлен на формирование единого понимания:</p>
+            
+            <div class="success-box">
+                <p><strong>Раннее выявление туберкулёза — это задача первичного звена здравоохранения, реализуемая в рамках повседневной профилактической и клинической работы.</strong></p>
+            </div>
+            
+            <p>Эффективное взаимодействие между общей лечебной сетью и противотуберкулёзной службой строится на:</p>
+            
+            <ul>
+                <li>Чётком понимании своих ролей и ответственности;</li>
+                <li>Своевременном направлении пациентов с подозрением на туберкулёз;</li>
+                <li>Использовании современных инструментов взаимодействия (включая телемедицинские консультации);</li>
+                <li>Непрерывном профессиональном развитии и повышении клинической настороженности.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ЗАКЛЮЧЕНИЕ -->
+    <section class="step-container" id="conclusion">
+        <div class="step-header">
+            <h2 class="step-title">Заключение</h2>
+        </div>
+        <div class="step-content">
+            <p>Раннее выявление туберкулёза — это комплексная задача, успешное решение которой зависит от слаженной работы всей системы здравоохранения. Общая лечебная сеть играет в этом процессе ключевую роль, выступая первым и наиболее важным звеном в цепочке выявления заболевания.</p>
+            
+            <div class="highlight-box">
+                <p><strong>Своевременное и качественное выполнение своих функций врачами общей лечебной сети позволяет выявлять туберкулёз на ранних стадиях, что значительно повышает эффективность лечения, снижает риск распространения инфекции и улучшает прогноз для пациента.</strong></p>
+            </div>
+            
+            <p>Использование современных подходов, включая телемедицинские консультации с профильными специалистами, позволяет оптимизировать взаимодействие между различными звеньями системы здравоохранения и обеспечить пациентам своевременную и качественную медицинскую помощь.</p>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="document-footer">
+        <p>ГБУЗ МО "МОКПТД" | Навигатор для врачей общей лечебной сети</p>
+    </footer>
+
+    <script>
+        // Плавная прокрутка для навигации по оглавлению
+        document.querySelectorAll('.toc-list a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Подсветка текущего раздела при прокрутке
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.step-container');
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.toc-list a').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + sectionId) {
+                            link.classList.add('active');
+                            link.style.color = 'var(--primary-blue)';
+                            link.style.fontWeight = '600';
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
