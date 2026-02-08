@@ -7,7 +7,7 @@
     
     <!-- ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 (как в примере) -->
     <style>
-                /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
+                        /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
         @font-face {
             font-family: 'Inter';
             src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
@@ -56,7 +56,7 @@
             
             --shadow-soft: 0 2px 8px rgba(26, 95, 158, 0.04);
             --shadow: 0 4px 12px rgba(26, 95, 158, 0.08);
-            --radius: 8px; /* Немного увеличил */
+            --radius: 8px;
         }
         
         * {
@@ -67,16 +67,15 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.7; /* Увеличил межстрочный интервал для читаемости */
+            line-height: 1.7;
             color: var(--text-primary);
-            background-color: var(--white); /* Сделал фон белым для чистоты */
-            max-width: 1000px; /* Немного сузил для удобства чтения */
+            background-color: var(--white);
+            max-width: 1000px;
             margin: 0 auto;
             padding: 30px 20px;
         }
         
         /* === ЗАГОЛОВОК И ВВОДНАЯ ИНФОРМАЦИЯ === */
-        /* Оставляем этот блок ярким и заметным, как и было */
         .document-header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
@@ -120,67 +119,78 @@
             text-decoration: none;
         }
         
-        /* === ОГЛАВЛЕНИЕ === */
+        /* === ОГЛАВЛЕНИЕ (КОМПАКТНОЕ И СТИЛЬНОЕ) === */
         .toc-container {
-            background: var(--gray-light);
+            background: var(--white);
             border-radius: var(--radius);
-            padding: 2rem;
+            padding: 1.5rem;
             margin-bottom: 3rem;
             border: 1px solid var(--gray-medium);
             box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .toc-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--secondary-blue));
         }
         
         .toc-title {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: var(--primary-blue);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
+            padding-left: 10px;
         }
         
         .toc-list {
             list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         
         .toc-list li {
-            padding: 10px 0;
-            position: relative;
-            padding-left: 28px;
-        }
-        
-        .toc-list li::before {
-            content: '›';
-            position: absolute;
-            left: 8px;
-            top: 10px;
-            color: var(--secondary-blue);
-            font-weight: bold;
-            font-size: 1.2rem;
+            display: inline-block;
         }
         
         .toc-list a {
-            color: var(--text-primary);
+            display: inline-block;
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s, padding-left 0.2s;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            background: var(--gray-light);
+            border-radius: 20px;
+            border: 1px solid var(--gray-medium);
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
         
         .toc-list a:hover,
         .toc-list a.active {
-            color: var(--primary-blue);
-            padding-left: 5px;
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(26, 95, 158, 0.2);
         }
         
-        /* === БЛОКИ ЭТАПОВ (ПЕРЕДЕЛАНЫ - УБРАН ЦВЕТНОЙ ФОН) === */
+        /* === БЛОКИ ЭТАПОВ === */
         .step-container {
-            margin-bottom: 3.5rem; /* Увеличил отступ между разделами */
+            margin-bottom: 3.5rem;
             padding-bottom: 2.5rem;
-            border-bottom: 1px solid var(--gray-medium); /* Разделяем разделы тонкой линией */
+            border-bottom: 1px solid var(--gray-medium);
         }
         
         .step-container:last-of-type {
@@ -188,9 +198,8 @@
             margin-bottom: 2rem;
         }
         
-        /* Заголовок раздела теперь чистый и элегантный */
         .step-header {
-            padding: 0 0 1.5rem 0; /* Убрали отступы сверху/снизу, добавили снизу */
+            padding: 0 0 1.5rem 0;
             display: flex;
             align-items: center;
             gap: 20px;
@@ -198,7 +207,6 @@
             margin-bottom: 1.5rem;
         }
         
-        /* Красная черта теперь под заголовком раздела */
         .step-header::after {
             content: '';
             position: absolute;
@@ -232,7 +240,7 @@
         }
         
         .step-content {
-            padding: 0; /* Убрали внутренние отступы, так как они теперь в элементе .step-header */
+            padding: 0;
         }
         
         .step-content > p:first-of-type {
@@ -243,7 +251,6 @@
         }
         
         /* === ВАЖНАЯ ФРАЗА (ПРО "НЕ ФАКУЛЬТАТИВ") === */
-        /* Выделим её прямо в тексте, не вынося в отдельный блок */
         .mandatory-duty {
             color: var(--accent-red);
             font-weight: 700;
@@ -252,26 +259,7 @@
             border-radius: 3px;
         }
         
-        /* === ПОДРАЗДЕЛЫ (если будут добавляться) === */
-        .subsection {
-            margin-bottom: 2rem;
-        }
-        
-        .subsection-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: var(--primary-blue);
-            margin-bottom: 1rem;
-            padding-top: 0.5rem;
-        }
-        
-        .subsection-content {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-            line-height: 1.7;
-        }
-        
-        /* === ИНФОРМАЦИОННЫЕ БЛОКИ (СДЕЛАЕМ ИХ СВЕТЛЕЕ) === */
+        /* === ИНФОРМАЦИОННЫЕ БЛОКИ === */
         .highlight-box, .warning-box, .success-box, .icon-box {
             background: var(--gray-light);
             padding: 1.5rem;
@@ -313,7 +301,7 @@
             color: var(--primary-blue);
         }
         
-        /* === БЛОКИ С ИКОНКАМИ (УПРОЩЕННЫЙ ДИЗАЙН) === */
+        /* === БЛОКИ С ИКОНКАМИ === */
         .icon-box {
             border-left-color: var(--secondary-blue);
             background: var(--light-blue);
@@ -373,7 +361,7 @@
             border: 1px solid var(--gray-medium);
         }
         
-        /* === ФУТЕР (УПРОЩАЕМ) === */
+        /* === ФУТЕР === */
         .document-footer {
             background: var(--gray-light);
             color: var(--text-secondary);
@@ -400,7 +388,15 @@
             }
             
             .toc-list {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+                gap: 6px;
+            }
+            
+            .toc-list a {
+                width: 100%;
+                text-align: center;
+                white-space: normal;
+                padding: 10px 16px;
             }
             
             .step-title {
@@ -615,7 +611,7 @@
         <p>ГБУЗ МО "МОКПТД" | Навигатор для врачей общей лечебной сети</p>
     </footer>
 
-    <script>
+        <script>
         // Плавная прокрутка для навигации по оглавлению
         document.querySelectorAll('.toc-list a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
@@ -635,20 +631,22 @@
             const sections = document.querySelectorAll('.step-container');
             const scrollPosition = window.scrollY + 100;
             
+            // Сначала убираем активный класс у всех ссылок
+            document.querySelectorAll('.toc-list a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Затем находим текущий раздел и активируем соответствующую ссылку
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
                 const sectionId = section.getAttribute('id');
                 
                 if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    document.querySelectorAll('.toc-list a').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === '#' + sectionId) {
-                            link.classList.add('active');
-                            link.style.color = 'var(--primary-blue)';
-                            link.style.fontWeight = '600';
-                        }
-                    });
+                    const correspondingLink = document.querySelector(`.toc-list a[href="#${sectionId}"]`);
+                    if (correspondingLink) {
+                        correspondingLink.classList.add('active');
+                    }
                 }
             });
         });
