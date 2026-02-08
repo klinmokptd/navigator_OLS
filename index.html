@@ -393,6 +393,40 @@
             .block-features li {
                 font-size: 1.05rem;
             }
+            /* Обновляем существующий .footer-container */
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+/* Левая часть футера */
+.footer-left {
+    flex: 1;
+}
+
+/* Правая часть футера */
+.footer-right {
+    flex: 1;
+    text-align: right;
+}
+
+/* Адаптация для мобилок */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 25px;
+        text-align: left;
+    }
+    
+    .footer-right {
+        text-align: left;
+    }
+}
         }
     </style>
 </head>
@@ -744,7 +778,7 @@
             <p>
                 <em>Автор идеи, создатель контента и разработчик сайта</em><br>
                 Лукаш Игорь Александрович<br>
-                заведующий филиалом Клинский ГБУЗ МО "МОКПТД"
+                заведующий филиалом "Клинский" ГБУЗ МО "МОКПТД"
             </p>
             
             <p style="margin-top: 1rem;">
