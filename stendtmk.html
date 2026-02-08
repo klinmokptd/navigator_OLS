@@ -6,12 +6,7 @@
     <title>Памятка для стенда: Телемедицинские консультации с МОКПТД</title>
     
     <style>
-        /* МАКСИМАЛЬНО КРУПНЫЕ ШРИФТЫ И МИНИМАЛЬНЫЕ ОТСТУПЫ */
-        @page {
-            margin: 8mm;
-            size: A4 portrait;
-        }
-        
+        /* УБИРАЕМ ВСЕ ФИКСИРОВАННЫЕ РАЗМЕРЫ В MM */
         * {
             margin: 0;
             padding: 0;
@@ -24,129 +19,97 @@
             line-height: 1.3;
             color: #000;
             background: white;
-            /* ФИКСИРОВАННЫЕ РАЗМЕРЫ ДЛЯ ПЕЧАТИ */
-            width: 210mm;
-            min-height: 297mm;
-            margin: 0 auto;
-            padding: 0;
+            /* УБИРАЕМ ФИКСИРОВАННЫЕ РАЗМЕРЫ */
+            width: 100%;
+            margin: 0;
+            padding: 20px;
             -webkit-print-color-adjust: exact;
             print-color-adjust: exact;
         }
         
-        /* ЗАГОЛОВОК - ОГРОМНЫЙ */
+        /* ЗАГОЛОВОК */
         .document-header {
             background: #1A5F9E;
             color: white;
-            padding: 8mm 10mm;
-            margin-bottom: 4mm;
+            padding: 15px;
+            margin-bottom: 10px;
             text-align: center;
-            border-bottom: 3mm solid #D32F2F;
+            border-bottom: 5px solid #D32F2F;
         }
         
         .document-title {
-            font-size: 32pt;
+            font-size: 28px;
             font-weight: bold;
-            margin-bottom: 3mm;
-            line-height: 1.1;
+            margin-bottom: 5px;
         }
         
         .document-subtitle {
-            font-size: 18pt;
+            font-size: 18px;
             margin-bottom: 0;
-            opacity: 0.95;
         }
         
         .important-note {
             background: rgba(255, 255, 255, 0.15);
-            border-left: 3mm solid #D32F2F;
-            padding: 3mm;
-            margin-top: 3mm;
-            font-size: 15pt;
+            border-left: 4px solid #D32F2F;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 15px;
             text-align: left;
-            border-radius: 1mm;
         }
         
         /* ОСНОВНОЙ КОНТЕНТ */
         .main-content {
-            padding: 0 10mm;
+            padding: 0 10px;
         }
         
         .section {
-            margin-bottom: 5mm;
-            page-break-inside: avoid;
+            margin-bottom: 15px;
         }
         
         .section-title {
-            font-size: 20pt;
+            font-size: 20px;
             font-weight: bold;
             color: #1A5F9E;
-            margin-bottom: 3mm;
-            padding-bottom: 1mm;
+            margin-bottom: 8px;
+            padding-bottom: 3px;
             border-bottom: 2px solid #ccc;
         }
         
         /* СПИСКИ */
         ul {
-            margin-left: 8mm;
-            margin-bottom: 3mm;
+            margin-left: 20px;
+            margin-bottom: 10px;
         }
         
         li {
-            margin-bottom: 1.5mm;
-            font-size: 15pt;
-            padding-left: 2mm;
-            line-height: 1.3;
+            margin-bottom: 8px;
+            font-size: 15px;
         }
         
         /* БЛОК ТЕЛЕФОНОВ */
         .phones-block {
             background: #F0F7FF;
-            border-left: 4mm solid #2C8BD4;
-            padding: 4mm;
-            margin: 4mm 0;
-            font-size: 15pt;
-            border-radius: 2mm;
+            border-left: 5px solid #2C8BD4;
+            padding: 12px;
+            margin: 12px 0;
+            font-size: 15px;
         }
         
         .phone-item {
-            margin-bottom: 3mm;
-            padding-bottom: 3mm;
-            border-bottom: 1px solid #d0e0f0;
-        }
-        
-        .phone-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
+            margin-bottom: 10px;
         }
         
         .phone-item strong {
             color: #1A5F9E;
             display: block;
-            margin-bottom: 1mm;
-            font-size: 17pt;
-        }
-        
-        .phone-details {
-            display: block;
-            margin: 0.5mm 0;
-            line-height: 1.3;
-        }
-        
-        .phone-comment {
-            display: block;
-            font-style: italic;
-            color: #666;
-            font-size: 13pt;
-            margin-top: 0.5mm;
+            margin-bottom: 3px;
         }
         
         /* ДВЕ КОЛОНКИ */
         .two-columns {
             display: flex;
-            gap: 8mm;
-            margin: 4mm 0;
-            align-items: flex-start;
+            gap: 20px;
+            margin: 15px 0;
         }
         
         .column-left {
@@ -154,111 +117,83 @@
         }
         
         .column-right {
-            flex: 1;
+            flex: 0 0 200px;
             text-align: center;
         }
         
         /* QR-КОД */
         .qr-section {
-            padding: 3mm;
+            padding: 10px;
             border: 1px solid #ccc;
-            border-radius: 2mm;
-            background: #f9f9f9;
+            border-radius: 5px;
             text-align: center;
         }
         
         .qr-title {
-            font-size: 16pt;
+            font-size: 16px;
             font-weight: bold;
             color: #1A5F9E;
-            margin-bottom: 2mm;
+            margin-bottom: 8px;
         }
         
         .qr-image {
-            width: 50mm;
-            height: 50mm;
-            margin: 2mm auto;
+            width: 120px;
+            height: 120px;
+            margin: 8px auto;
             display: block;
             border: 1px solid #ddd;
-            padding: 1mm;
-            background: white;
-        }
-        
-        .qr-description {
-            font-size: 13pt;
-            color: #666;
-            margin-top: 1mm;
-        }
-        
-        /* ИНФОРМАЦИЯ В ЛЕВОМ СТОЛБЦЕ */
-        .info-section {
-            margin-top: 2mm;
-        }
-        
-        .info-section p {
-            margin-bottom: 2mm;
-            font-size: 15pt;
-            line-height: 1.3;
         }
         
         /* ФУТЕР */
         .document-footer {
             text-align: center;
-            font-size: 13pt;
+            font-size: 13px;
             color: #666;
-            margin-top: 4mm;
-            padding-top: 1mm;
+            margin-top: 20px;
+            padding-top: 10px;
             border-top: 1px solid #ccc;
-            padding-bottom: 2mm;
         }
         
-        /* ОСНОВНОЙ СТИЛЬ ДЛЯ ПЕЧАТИ - БЕЗ ИЗМЕНЕНИЯ РАЗМЕРОВ */
+        /* ПРОСТЫЕ СТИЛИ ДЛЯ ПЕЧАТИ */
         @media print {
             body {
-                /* ВАЖНО: сохраняем те же размеры */
-                width: 210mm !important;
-                min-height: 297mm !important;
+                padding: 0 !important;
                 margin: 0 !important;
-                font-size: 15pt !important;
+                font-size: 14px !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             
             .document-header {
-                -webkit-print-color-adjust: exact !important;
-                print-color-adjust: exact !important;
-                color-adjust: exact !important;
-            }
-            
-            .document-header * {
                 color: white !important;
-            }
-            
-            .important-note {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
             
-            /* Отключаем тени при печати */
-            * {
-                box-shadow: none !important;
-                text-shadow: none !important;
+            .qr-image {
+                width: 100px !important;
+                height: 100px !important;
+            }
+            
+            /* УБИРАЕМ ВСЕ ФИКСИРОВАННЫЕ ШИРИНЫ */
+            body, .document-header, .main-content, .two-columns {
+                width: 100% !important;
+                max-width: 100% !important;
             }
         }
         
-        /* ДЛЯ ЭКРАНА - ДОБАВЛЯЕМ ТОЛЬКО ВИЗУАЛЬНЫЕ ЭФФЕКТЫ */
+        /* ДЛЯ ЭКРАНА */
         @media screen {
             body {
-                width: 210mm;
-                min-height: 297mm;
-                margin: 8mm auto;
+                max-width: 210mm;
+                margin: 20px auto;
                 box-shadow: 0 0 10px rgba(0,0,0,0.1);
             }
         }
     </style>
 </head>
 <body>
-    <!-- ЗАГОЛОВОК -->
+    <!-- ВАШ КОНТЕНТ БЕЗ ИЗМЕНЕНИЙ -->
     <header class="document-header">
         <h1 class="document-title">Телемедицинские консультации с МОКПТД</h1>
         <p class="document-subtitle">Ваш инструмент для быстрой диагностики сложных случаев туберкулеза</p>
@@ -268,9 +203,7 @@
         </div>
     </header>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <main class="main-content">
-        <!-- КОГДА ЭТО НУЖНО -->
         <section class="section">
             <h2 class="section-title">Когда это нужно именно вам?</h2>
             <ul>
@@ -281,68 +214,61 @@
             </ul>
         </section>
 
-        <!-- ТЕЛЕФОНЫ ДЛЯ СВЯЗИ -->
         <section class="section">
             <h2 class="section-title">Контакты для связи</h2>
             
             <div class="phones-block">
                 <div class="phone-item">
                     <strong>Организация ТМК</strong>
-                    <span class="phone-details">Курганская Юлия Анатольевна</span>
-                    <span class="phone-details"><strong>8 (496) 563-60-16</strong></span>
-                    <span class="phone-comment">пн–пт, 9:00–16:00</span>
+                    <span>Курганская Юлия Анатольевна</span><br>
+                    <strong>8 (496) 563-60-16</strong><br>
+                    <em>пн–пт, 9:00–16:00</em>
                 </div>
                 
                 <div class="phone-item">
                     <strong>Окружной фтизиатр для г.о.:</strong>
-                    <span class="phone-details">Клин, Солнечногорск, Химки, Долгопрудный, Лобня</span>
-                    <span class="phone-details">Лукаш Игорь Александрович</span>
-                    <span class="phone-details"><strong>8 (929) 690-10-80</strong></span>
+                    <span>Клин, Солнечногорск, Химки, Долгопрудный, Лобня</span><br>
+                    <span>Лукаш Игорь Александрович</span><br>
+                    <strong>8 (929) 690-10-80</strong>
                 </div>
                 
                 <div class="phone-item">
                     <strong>Дежурный врач</strong>
-                    <span class="phone-details">Только по вопросам срочной госпитализации</span>
-                    <span class="phone-details"><strong>8 (915) 136-08-88</strong></span>
-                    <span class="phone-comment">в нерабочее время и выходные</span>
+                    <span>Только по вопросам срочной госпитализации</span><br>
+                    <strong>8 (915) 136-08-88</strong><br>
+                    <em>в нерабочее время и выходные</em>
                 </div>
             </div>
         </section>
 
-        <!-- БОЛЕЕ ПОДРОБНАЯ ИНФОРМАЦИЯ - В 2 КОЛОНКИ -->
         <section class="section">
             <h2 class="section-title">Более подробная информация</h2>
             
             <div class="two-columns">
-                <!-- ЛЕВАЯ КОЛОНКА - ТЕКСТ -->
                 <div class="column-left">
-                    <div class="info-section">
-                        <p>Интерактивные ссылки и полная инструкция доступны в <strong>Навигаторе по выявлению туберкулеза</strong>.</p>
-                        
-                        <p><strong>В навигаторе вы найдете:</strong></p>
-                        <ul>
-                            <li>Интерактивные ссылки для подключения к консультациям</li>
-                            <li>Пошаговую инструкцию по проведению ТМК</li>
-                            <li>Алгоритмы диагностики туберкулеза и многое другое</li>
-                        </ul>
-                        
-                        <p>В навигаторе смотрите раздел <strong>"Телемедицинские консультации"</strong> </p>
-                    </div>
+                    <p>Интерактивные ссылки и полная инструкция доступны в <strong>Навигаторе по выявлению туберкулеза</strong>.</p>
+                    
+                    <p><strong>В навигаторе вы найдете:</strong></p>
+                    <ul>
+                        <li>Интерактивные ссылки для подключения к консультациям</li>
+                        <li>Пошаговую инструкцию по проведению ТМК</li>
+                        <li>Алгоритмы диагностики туберкулеза и многое другое</li>
+                    </ul>
+                    
+                    <p>В навигаторе смотрите раздел <strong>"Телемедицинские консультации"</strong></p>
                 </div>
                 
-                <!-- ПРАВАЯ КОЛОНКА - QR-КОД -->
                 <div class="column-right">
                     <div class="qr-section">
                         <p class="qr-title">Сканируйте QR-код для доступа к навигатору:</p>
-                        <img src="QR-code-navigator.png" alt="QR-код навигатора по выявлению туберкулеза" class="qr-image">
-                        <p class="qr-description">Наведите камеру телефона на QR-код</p>
+                        <img src="QR-code-navigator.png" alt="QR-код" class="qr-image">
+                        <p>Наведите камеру телефона на QR-код</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ФУТЕР -->
     <footer class="document-footer">
         <p>ГБУЗ МО "МОКПТД" | Филиал "Клинский"</p>
         <p>Памятка для информационного стенда</p>
