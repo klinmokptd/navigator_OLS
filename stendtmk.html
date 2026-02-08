@@ -20,12 +20,13 @@
         
         body {
             font-family: 'Arial', 'Helvetica', sans-serif;
-            font-size: 16pt; /* ОЧЕНЬ КРУПНЫЙ ШРИФТ */
-            line-height: 1.3; /* МЕНЬШЕ МЕЖСТРОЧНЫЙ ИНТЕРВАЛ */
+            font-size: 16pt;
+            line-height: 1.3;
             color: #000;
             background: white;
-            width: 194mm; /* 210мм - 16мм маргинов */
-            min-height: 281mm; /* 297мм - 16мм маргинов */
+            /* ФИКСИРОВАННЫЕ РАЗМЕРЫ ДЛЯ ПЕЧАТИ */
+            width: 210mm;
+            min-height: 297mm;
             margin: 0 auto;
             padding: 0;
             -webkit-print-color-adjust: exact;
@@ -36,21 +37,21 @@
         .document-header {
             background: #1A5F9E;
             color: white;
-            padding: 8mm 10mm; /* МЕНЬШЕ ПАДДИНГ */
-            margin-bottom: 4mm; /* МЕНЬШЕ ОТСТУП */
+            padding: 8mm 10mm;
+            margin-bottom: 4mm;
             text-align: center;
             border-bottom: 3mm solid #D32F2F;
         }
         
         .document-title {
-            font-size: 32pt; /* ОЧЕНЬ КРУПНЫЙ ЗАГОЛОВОК */
+            font-size: 32pt;
             font-weight: bold;
-            margin-bottom: 3mm; /* МЕНЬШЕ ОТСТУП */
+            margin-bottom: 3mm;
             line-height: 1.1;
         }
         
         .document-subtitle {
-            font-size: 18pt; /* БОЛЬШОЙ ПОДЗАГОЛОВОК */
+            font-size: 18pt;
             margin-bottom: 0;
             opacity: 0.95;
         }
@@ -59,57 +60,57 @@
             background: rgba(255, 255, 255, 0.15);
             border-left: 3mm solid #D32F2F;
             padding: 3mm;
-            margin-top: 3mm; /* МЕНЬШЕ ОТСТУП */
-            font-size: 15pt; /* БОЛЬШОЙ ТЕКСТ */
+            margin-top: 3mm;
+            font-size: 15pt;
             text-align: left;
             border-radius: 1mm;
         }
         
-        /* ОСНОВНОЙ КОНТЕНТ - МАЛО ОТСТУПОВ */
+        /* ОСНОВНОЙ КОНТЕНТ */
         .main-content {
             padding: 0 10mm;
         }
         
         .section {
-            margin-bottom: 5mm; /* МЕНЬШЕ ОТСТУП МЕЖДУ РАЗДЕЛАМИ */
+            margin-bottom: 5mm;
             page-break-inside: avoid;
         }
         
         .section-title {
-            font-size: 20pt; /* КРУПНЫЙ ЗАГОЛОВОК РАЗДЕЛА */
+            font-size: 20pt;
             font-weight: bold;
             color: #1A5F9E;
-            margin-bottom: 3mm; /* МЕНЬШЕ ОТСТУП */
-            padding-bottom: 1mm; /* МЕНЬШЕ ПАДДИНГ */
+            margin-bottom: 3mm;
+            padding-bottom: 1mm;
             border-bottom: 2px solid #ccc;
         }
         
-        /* СПИСКИ - КРУПНЫЕ И ПЛОТНЫЕ */
+        /* СПИСКИ */
         ul {
             margin-left: 8mm;
-            margin-bottom: 3mm; /* МЕНЬШЕ ОТСТУП */
+            margin-bottom: 3mm;
         }
         
         li {
-            margin-bottom: 1.5mm; /* МЕНЬШЕ ОТСТУП МЕЖДУ ЭЛЕМЕНТАМИ */
-            font-size: 15pt; /* БОЛЬШОЙ ТЕКСТ СПИСКОВ */
+            margin-bottom: 1.5mm;
+            font-size: 15pt;
             padding-left: 2mm;
-            line-height: 1.3; /* МЕНЬШЕ МЕЖСТРОЧНЫЙ ИНТЕРВАЛ */
+            line-height: 1.3;
         }
         
-        /* БЛОК ТЕЛЕФОНОВ - КРУПНЫЙ И ПЛОТНЫЙ */
+        /* БЛОК ТЕЛЕФОНОВ */
         .phones-block {
             background: #F0F7FF;
             border-left: 4mm solid #2C8BD4;
-            padding: 4mm; /* МЕНЬШЕ ПАДДИНГ */
-            margin: 4mm 0; /* МЕНЬШЕ ОТСТУП */
+            padding: 4mm;
+            margin: 4mm 0;
             font-size: 15pt;
             border-radius: 2mm;
         }
         
         .phone-item {
-            margin-bottom: 3mm; /* МЕНЬШЕ ОТСТУП */
-            padding-bottom: 3mm; /* МЕНЬШЕ ПАДДИНГ */
+            margin-bottom: 3mm;
+            padding-bottom: 3mm;
             border-bottom: 1px solid #d0e0f0;
         }
         
@@ -122,14 +123,14 @@
         .phone-item strong {
             color: #1A5F9E;
             display: block;
-            margin-bottom: 1mm; /* МЕНЬШЕ ОТСТУП */
-            font-size: 17pt; /* БОЛЬШЕ ЗАГОЛОВКИ ТЕЛЕФОНОВ */
+            margin-bottom: 1mm;
+            font-size: 17pt;
         }
         
         .phone-details {
             display: block;
-            margin: 0.5mm 0; /* МЕНЬШЕ ОТСТУП */
-            line-height: 1.3; /* МЕНЬШЕ МЕЖСТРОЧНЫЙ ИНТЕРВАЛ */
+            margin: 0.5mm 0;
+            line-height: 1.3;
         }
         
         .phone-comment {
@@ -137,14 +138,14 @@
             font-style: italic;
             color: #666;
             font-size: 13pt;
-            margin-top: 0.5mm; /* МЕНЬШЕ ОТСТУП */
+            margin-top: 0.5mm;
         }
         
-        /* ДВЕ КОЛОНКИ - МАЛО МЕСТА МЕЖДУ НИМИ */
+        /* ДВЕ КОЛОНКИ */
         .two-columns {
             display: flex;
-            gap: 8mm; /* МЕНЬШЕ РАССТОЯНИЕ МЕЖДУ КОЛОНКАМИ */
-            margin: 4mm 0; /* МЕНЬШЕ ОТСТУП */
+            gap: 8mm;
+            margin: 4mm 0;
             align-items: flex-start;
         }
         
@@ -157,9 +158,9 @@
             text-align: center;
         }
         
-        /* QR-КОД - КРУПНЫЙ */
+        /* QR-КОД */
         .qr-section {
-            padding: 3mm; /* МЕНЬШЕ ПАДДИНГ */
+            padding: 3mm;
             border: 1px solid #ccc;
             border-radius: 2mm;
             background: #f9f9f9;
@@ -167,57 +168,60 @@
         }
         
         .qr-title {
-            font-size: 16pt; /* БОЛЬШОЙ ЗАГОЛОВОК QR */
+            font-size: 16pt;
             font-weight: bold;
             color: #1A5F9E;
-            margin-bottom: 2mm; /* МЕНЬШЕ ОТСТУП */
+            margin-bottom: 2mm;
         }
         
         .qr-image {
-            width: 50mm; /* БОЛЬШОЙ QR-КОД */
+            width: 50mm;
             height: 50mm;
-            margin: 2mm auto; /* МЕНЬШЕ ОТСТУП */
+            margin: 2mm auto;
             display: block;
             border: 1px solid #ddd;
-            padding: 1mm; /* МЕНЬШЕ ПАДДИНГ */
+            padding: 1mm;
             background: white;
         }
         
         .qr-description {
             font-size: 13pt;
             color: #666;
-            margin-top: 1mm; /* МЕНЬШЕ ОТСТУП */
+            margin-top: 1mm;
         }
         
         /* ИНФОРМАЦИЯ В ЛЕВОМ СТОЛБЦЕ */
         .info-section {
-            margin-top: 2mm; /* МЕНЬШЕ ОТСТУП */
+            margin-top: 2mm;
         }
         
         .info-section p {
-            margin-bottom: 2mm; /* МЕНЬШЕ ОТСТУП */
-            font-size: 15pt; /* БОЛЬШОЙ ТЕКСТ */
-            line-height: 1.3; /* МЕНЬШЕ МЕЖСТРОЧНЫЙ ИНТЕРВАЛ */
+            margin-bottom: 2mm;
+            font-size: 15pt;
+            line-height: 1.3;
         }
         
-        /* ФУТЕР - МИНИМАЛЬНОЕ МЕСТО */
+        /* ФУТЕР */
         .document-footer {
             text-align: center;
             font-size: 13pt;
             color: #666;
-            margin-top: 4mm; /* МАЛО ОТСТУПА */
-            padding-top: 1mm; /* МАЛО ПАДДИНГА */
+            margin-top: 4mm;
+            padding-top: 1mm;
             border-top: 1px solid #ccc;
-            padding-bottom: 2mm; /* МАЛО ПАДДИНГА СНИЗУ */
+            padding-bottom: 2mm;
         }
         
-        /* ПЕЧАТЬ */
+        /* ОСНОВНОЙ СТИЛЬ ДЛЯ ПЕЧАТИ - БЕЗ ИЗМЕНЕНИЯ РАЗМЕРОВ */
         @media print {
             body {
-                width: auto;
-                margin: 0;
-                padding: 0;
-                font-size: 15pt !important; /* БОЛЬШОЙ ПРИ ПЕЧАТИ */
+                /* ВАЖНО: сохраняем те же размеры */
+                width: 210mm !important;
+                min-height: 297mm !important;
+                margin: 0 !important;
+                font-size: 15pt !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
             
             .document-header {
@@ -235,12 +239,14 @@
                 print-color-adjust: exact !important;
             }
             
-            @page {
-                margin: 8mm !important; /* МАЛЫЕ ПОЛЯ */
+            /* Отключаем тени при печати */
+            * {
+                box-shadow: none !important;
+                text-shadow: none !important;
             }
         }
         
-        /* ДЛЯ ЭКРАНА */
+        /* ДЛЯ ЭКРАНА - ДОБАВЛЯЕМ ТОЛЬКО ВИЗУАЛЬНЫЕ ЭФФЕКТЫ */
         @media screen {
             body {
                 width: 210mm;
@@ -318,7 +324,6 @@
                             <li>Интерактивные ссылки для подключения к консультациям</li>
                             <li>Пошаговую инструкцию по проведению ТМК</li>
                             <li>Алгоритмы диагностики туберкулеза и многое другое</li>
-                           
                         </ul>
                         
                         <p>В навигаторе смотрите раздел <strong>"Телемедицинские консультации"</strong> </p>
@@ -330,17 +335,17 @@
                     <div class="qr-section">
                         <p class="qr-title">Сканируйте QR-код для доступа к навигатору:</p>
                         <img src="QR-code-navigator.png" alt="QR-код навигатора по выявлению туберкулеза" class="qr-image">
+                        <p class="qr-description">Наведите камеру телефона на QR-код</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ФУТЕР - МАЛО МЕСТА -->
+    <!-- ФУТЕР -->
     <footer class="document-footer">
         <p>ГБУЗ МО "МОКПТД" | Филиал "Клинский"</p>
         <p>Памятка для информационного стенда</p>
     </footer>
-
 </body>
 </html>
