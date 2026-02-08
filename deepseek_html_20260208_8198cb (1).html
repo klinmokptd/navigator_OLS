@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Телемедицинские консультации с МОКПТД</title>
+    
+    <style>
+        /* ОЧЕНЬ КОМПАКТНЫЕ СТИЛИ ДЛЯ ПЕЧАТИ НА ОДНОЙ СТРАНИЦЕ */
+        @page {
+            margin: 0.5cm;
+            size: A4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            font-size: 10pt;
+            line-height: 1.2;
+            color: #000;
+            background: white;
+            max-width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        
+        /* ВЕРХНИЙ БЛОК - КОМПАКТНЫЙ */
+        .document-header {
+            background: #1A5F9E;
+            color: white;
+            padding: 8mm;
+            margin-bottom: 5mm;
+            border-bottom: 2mm solid #D32F2F;
+            page-break-after: avoid;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        
+        .document-title {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-bottom: 2mm;
+            line-height: 1.1;
+        }
+        
+        .document-subtitle {
+            font-size: 10pt;
+            margin-bottom: 3mm;
+            opacity: 0.9;
+        }
+        
+        .important-note {
+            background: rgba(255, 255, 255, 0.15);
+            border-left: 2mm solid #D32F2F;
+            padding: 3mm;
+            font-size: 9pt;
+            margin-top: 3mm;
+        }
+        
+        /* ОСНОВНОЙ КОНТЕНТ - МАКСИМАЛЬНО КОМПАКТНЫЙ */
+        .main-content {
+            padding: 0 8mm;
+        }
+        
+        .section {
+            margin-bottom: 5mm;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #1A5F9E;
+            margin-bottom: 2mm;
+            padding-bottom: 1mm;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        /* СПИСКИ КОМПАКТНЫЕ */
+        ul {
+            margin-left: 5mm;
+            margin-bottom: 2mm;
+        }
+        
+        li {
+            margin-bottom: 1mm;
+            font-size: 9pt;
+            padding-left: 1mm;
+        }
+        
+        /* БЛОК ТЕЛЕФОНОВ */
+        .phones-block {
+            background: #F0F7FF;
+            border-left: 2mm solid #2C8BD4;
+            padding: 3mm;
+            margin: 3mm 0;
+            font-size: 9pt;
+        }
+        
+        .phone-item {
+            margin-bottom: 1mm;
+        }
+        
+        .phone-item strong {
+            color: #1A5F9E;
+        }
+        
+        /* QR-КОД И ИНФОРМАЦИЯ */
+        .qr-section {
+            text-align: center;
+            margin: 5mm 0;
+            padding: 3mm;
+            border: 1px solid #ccc;
+            border-radius: 2mm;
+            page-break-before: avoid;
+        }
+        
+        .qr-title {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #1A5F9E;
+            margin-bottom: 2mm;
+        }
+        
+        .qr-image {
+            max-width: 40mm;
+            height: auto;
+            margin: 2mm auto;
+            display: block;
+            border: 1px solid #ddd;
+            padding: 1mm;
+        }
+        
+        .qr-description {
+            font-size: 8pt;
+            color: #666;
+            margin-top: 2mm;
+        }
+        
+        /* ФУТЕР МИНИМАЛЬНЫЙ */
+        .document-footer {
+            text-align: center;
+            font-size: 8pt;
+            color: #666;
+            margin-top: 8mm;
+            padding-top: 2mm;
+            border-top: 1px solid #ccc;
+        }
+        
+        /* СКРЫТЬ НЕНУЖНОЕ ПРИ ПЕЧАТИ */
+        .no-print {
+            display: none !important;
+        }
+        
+        /* ОБЯЗАТЕЛЬНЫЕ СТИЛИ ДЛЯ ПЕЧАТИ ЦВЕТА */
+        @media print {
+            .document-header,
+            .document-header * {
+                color: white !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            
+            * {
+                box-shadow: none !important;
+                text-shadow: none !important;
+            }
+            
+            body {
+                font-size: 9pt !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ЗАГОЛОВОК -->
+    <header class="document-header">
+        <h1 class="document-title">Телемедицинские консультации с МОКПТД</h1>
+        <p class="document-subtitle">Ваш инструмент для быстрой диагностики сложных случаев туберкулеза</p>
+        
+        <div class="important-note">
+            <p><strong>Этот сервис создан специально для вас — врачей общей лечебной сети.</strong> Когда диагноз под вопросом, а время решает всё, вы можете за 1 час получить заключение от противотуберкулезного центра области.</p>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ -->
+    <main class="main-content">
+        <!-- КОГДА ЭТО НУЖНО -->
+        <section class="section">
+            <h2 class="section-title">Когда это нужно именно вам?</h2>
+            <ul>
+                <li><strong>Спорный случай</strong> — нужен «второй взгляд» от профильных экспертов</li>
+                <li><strong>Сомнения в тактике</strong> — если решение местного фтизиатра вызывает вопросы</li>
+                <li><strong>Срочный вопрос</strong> — требуется быстро определить дальнейшие действия</li>
+                <li><strong>Нет доступа к фтизиатру</strong> — специалист временно недоступен</li>
+            </ul>
+        </section>
+
+        <!-- ТЕЛЕФОНЫ ДЛЯ СВЯЗИ -->
+        <section class="section">
+            <h2 class="section-title">Контакты для связи</h2>
+            
+            <div class="phones-block">
+                <div class="phone-item">
+                    <strong>Основной (организация ТМК):</strong><br>
+                    Курганская Ю.А. — <strong>8 (496) 563-60-16</strong><br>
+                    <em>пн–пт, 9:00–16:00</em>
+                </div>
+                
+                <div class="phone-item">
+                    <strong>Для г.о. (Клин, Солнечногорск, Химки, Долгопрудный, Лобня):</strong><br>
+                    Лукаш И.А. — <strong>8 (916) 232-23-22</strong>
+                </div>
+                
+                <div class="phone-item">
+                    <strong>Дежурный врач (в нерабочее время):</strong><br>
+                    <strong>8 (915) 136-08-88</strong><br>
+                    <em>только по вопросам срочной госпитализации</em>
+                </div>
+            </div>
+        </section>
+
+        <!-- БОЛЕЕ ПОДРОБНАЯ ИНФОРМАЦИЯ -->
+        <section class="section">
+            <h2 class="section-title">Более подробная информация</h2>
+            <p>Интерактивные ссылки и полная инструкция доступны в <strong>Навигаторе по выявлению туберкулеза</strong>.</p>
+            
+            <div class="qr-section">
+                <p class="qr-title">Сканируйте QR-код для доступа к навигатору:</p>
+                <img src="QR-code-navigator.png" alt="QR-код навигатора по выявлению туберкулеза" class="qr-image">
+                <p class="qr-description">В навигаторе смотрите раздел <strong>"Телемедицинские консультации"</strong> для получения полной информации</p>
+            </div>
+            
+            <p><strong>В навигаторе вы найдете:</strong></p>
+            <ul>
+                <li>Интерактивные ссылки для подключения</li>
+                <li>Пошаговую инструкцию по проведению ТМК</li>
+                <li>Формы документов для оформления</li>
+                <li>Актуальные контакты и график работы</li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- ФУТЕР -->
+    <footer class="document-footer">
+        <p>ГБУЗ МО "МОКПТД" | Телемедицинские консультации для врачей общей лечебной сети</p>
+    </footer>
+
+</body>
+</html>
