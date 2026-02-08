@@ -383,6 +383,63 @@
             font-size: 0.95rem;
         }
         
+        /* === КНОПКА ДЛЯ СТЕНДА === */
+        .stand-button-container {
+            text-align: center;
+            margin: 3rem 0 4rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border-radius: var(--radius);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+        
+        .stand-button-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        
+        .stand-button-description {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .stand-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .stand-button:hover {
+            background: transparent;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stand-button:active {
+            transform: translateY(-1px);
+        }
+        
+        .button-icon {
+            margin-right: 8px;
+            font-size: 1.3rem;
+        }
+        
         /* === АДАПТИВНОСТЬ === */
         @media (max-width: 768px) {
             body {
@@ -432,10 +489,28 @@
             .instruction-image {
                 max-width: 100%;
             }
+            
+            .stand-button-container {
+                padding: 1.5rem;
+                margin: 2rem 0 3rem 0;
+            }
+            
+            .stand-button-title {
+                font-size: 1.3rem;
+            }
+            
+            .stand-button-description {
+                font-size: 1rem;
+            }
+            
+            .stand-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 1.1rem;
+            }
         }
         
         @media print {
-            .toc-container, .document-footer {
+            .toc-container, .document-footer, .stand-button-container {
                 display: none;
             }
             
@@ -597,6 +672,14 @@
             </div>
         </div>
     </section>
+
+    <!-- БЛОК ДЛЯ СТЕНДА -->
+    <div class="stand-button-container">
+        <p class="stand-button-description">Скачайте и распечатайте краткую памятку по телемедицинским консультациям для размещения на информационном стенде в вашем медицинском учреждении</p>
+        <a href="stendtmk.html" class="stand-button" target="_blank">
+            <span class="button-icon">📄</span> Скачать памятку для стенда
+        </a>
+    </div>
 
     <!-- Футер -->
     <footer class="document-footer">
