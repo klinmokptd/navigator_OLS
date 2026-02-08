@@ -306,14 +306,12 @@
             background: var(--secondary-blue);
         }
         
-        /* ================= ФУТЕР ================= */
-/* ================= ФУТЕР ================= */
+       /* ================= ФУТЕР ================= */
 .footer {
     background: #1a365d;
     color: #e2e8f0;
     padding: 2.5rem 0 1.5rem;
     margin-top: 4rem;
-    border-top: 3px solid #d32f2f;
     font-family: 'Inter', sans-serif;
 }
 
@@ -355,32 +353,24 @@
     flex: 1;
 }
 
-.author-title {
-    font-size: 1.1rem;
+.author-desc {
+    font-size: 1rem;
     font-weight: 600;
     color: white;
     margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    line-height: 1.4;
 }
 
 .author-name {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 1.1rem;
+    font-weight: 700;
     color: white;
     margin-bottom: 5px;
 }
 
 .author-role {
     font-size: 0.95rem;
-    margin-bottom: 8px;
     opacity: 0.9;
-}
-
-.author-desc {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    font-style: italic;
     line-height: 1.4;
 }
 
@@ -393,7 +383,6 @@
     font-weight: 600;
     color: white;
     margin-bottom: 12px;
-    text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
@@ -425,12 +414,6 @@
     opacity: 0.8;
 }
 
-.footer-note {
-    font-size: 0.85rem;
-    opacity: 0.7;
-    font-style: italic;
-}
-
 /* Адаптация для мобилок */
 @media (max-width: 768px) {
     .footer {
@@ -460,13 +443,20 @@
         text-align: center;
     }
     
-    .author-title,
     .contacts-title {
         font-size: 1rem;
     }
     
     .footer-title {
         font-size: 1.3rem;
+    }
+    
+    .author-desc {
+        font-size: 0.95rem;
+    }
+    
+    .author-name {
+        font-size: 1rem;
     }
 }
 /* ================= КОНЕЦ ФУТЕРА ================= */
@@ -813,10 +803,9 @@
             </div>
             
             <div class="footer-author">
-                <div class="author-title">Автор и разработчик</div>
+                <div class="author-desc">Автор идеи, создатель контента, разработчик сайта</div>
                 <div class="author-name">Лукаш Игорь Александрович</div>
                 <div class="author-role">Заведующий филиалом "Клинский"</div>
-                <div class="author-desc">Автор идеи, создатель контента, разработчик сайта</div>
             </div>
             
             <div class="footer-contacts">
@@ -832,7 +821,6 @@
         
         <div class="footer-bottom">
             <div class="copyright">© 2025. Все права защищены.</div>
-            <div class="footer-note">Материалы защищены авторским правом</div>
         </div>
     </div>
 </footer>
