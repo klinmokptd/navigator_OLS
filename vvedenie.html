@@ -7,7 +7,7 @@
     
     <!-- ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 (как в примере) -->
     <style>
-        /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
+                /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
         @font-face {
             font-family: 'Inter';
             src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
@@ -54,8 +54,9 @@
             --text-primary: #263238;
             --text-secondary: #546E7A;
             
+            --shadow-soft: 0 2px 8px rgba(26, 95, 158, 0.04);
             --shadow: 0 4px 12px rgba(26, 95, 158, 0.08);
-            --radius: 6px;
+            --radius: 8px; /* Немного увеличил */
         }
         
         * {
@@ -66,21 +67,22 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
+            line-height: 1.7; /* Увеличил межстрочный интервал для читаемости */
             color: var(--text-primary);
-            background-color: var(--light-blue);
-            max-width: 1200px;
+            background-color: var(--white); /* Сделал фон белым для чистоты */
+            max-width: 1000px; /* Немного сузил для удобства чтения */
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px 20px;
         }
         
         /* === ЗАГОЛОВОК И ВВОДНАЯ ИНФОРМАЦИЯ === */
+        /* Оставляем этот блок ярким и заметным, как и было */
         .document-header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
-            padding: 2.5rem;
+            padding: 3rem;
             border-radius: var(--radius);
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             box-shadow: var(--shadow);
             border-bottom: 4px solid var(--accent-red);
         }
@@ -120,189 +122,240 @@
         
         /* === ОГЛАВЛЕНИЕ === */
         .toc-container {
-            background: var(--white);
+            background: var(--gray-light);
             border-radius: var(--radius);
-            padding: 1.8rem;
-            margin-bottom: 2.5rem;
+            padding: 2rem;
+            margin-bottom: 3rem;
             border: 1px solid var(--gray-medium);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-soft);
         }
         
         .toc-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: var(--primary-blue);
-            margin-bottom: 1.2rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
         
         .toc-list {
             list-style: none;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 10px;
+            gap: 12px;
         }
         
         .toc-list li {
-            padding: 8px 0;
+            padding: 10px 0;
             position: relative;
-            padding-left: 24px;
+            padding-left: 28px;
         }
         
         .toc-list li::before {
-            content: '→';
+            content: '›';
             position: absolute;
-            left: 0;
-            top: 8px;
+            left: 8px;
+            top: 10px;
             color: var(--secondary-blue);
             font-weight: bold;
+            font-size: 1.2rem;
         }
         
         .toc-list a {
             color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s;
+            transition: color 0.2s, padding-left 0.2s;
         }
         
-        .toc-list a:hover {
+        .toc-list a:hover,
+        .toc-list a.active {
             color: var(--primary-blue);
-            text-decoration: underline;
+            padding-left: 5px;
         }
         
-        /* === БЛОКИ ЭТАПОВ (стиль как в примере) === */
+        /* === БЛОКИ ЭТАПОВ (ПЕРЕДЕЛАНЫ - УБРАН ЦВЕТНОЙ ФОН) === */
         .step-container {
-            margin-bottom: 2rem;
-            background: var(--white);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-medium);
+            margin-bottom: 3.5rem; /* Увеличил отступ между разделами */
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--gray-medium); /* Разделяем разделы тонкой линией */
         }
         
+        .step-container:last-of-type {
+            border-bottom: none;
+            margin-bottom: 2rem;
+        }
+        
+        /* Заголовок раздела теперь чистый и элегантный */
         .step-header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-            color: white;
-            padding: 1.5rem;
+            padding: 0 0 1.5rem 0; /* Убрали отступы сверху/снизу, добавили снизу */
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             position: relative;
+            margin-bottom: 1.5rem;
         }
         
+        /* Красная черта теперь под заголовком раздела */
         .step-header::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
-            right: 0;
-            height: 4px;
+            width: 60px;
+            height: 3px;
             background: var(--accent-red);
+            border-radius: 2px;
         }
         
         .step-number {
-            background: var(--white);
+            background: var(--light-blue);
             color: var(--primary-blue);
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             flex-shrink: 0;
+            border: 2px solid var(--gray-medium);
         }
         
         .step-title {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 600;
+            color: var(--text-primary);
         }
         
         .step-content {
-            padding: 2rem;
+            padding: 0; /* Убрали внутренние отступы, так как они теперь в элементе .step-header */
         }
         
-        .subsection {
+        .step-content > p:first-of-type {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-primary);
             margin-bottom: 1.8rem;
         }
         
+        /* === ВАЖНАЯ ФРАЗА (ПРО "НЕ ФАКУЛЬТАТИВ") === */
+        /* Выделим её прямо в тексте, не вынося в отдельный блок */
+        .mandatory-duty {
+            color: var(--accent-red);
+            font-weight: 700;
+            background-color: rgba(211, 47, 47, 0.05);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        /* === ПОДРАЗДЕЛЫ (если будут добавляться) === */
+        .subsection {
+            margin-bottom: 2rem;
+        }
+        
         .subsection-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+            padding-top: 0.5rem;
         }
         
         .subsection-content {
             color: var(--text-secondary);
-            margin-left: 28px;
             font-size: 1.05rem;
-            line-height: 1.6;
+            line-height: 1.7;
+        }
+        
+        /* === ИНФОРМАЦИОННЫЕ БЛОКИ (СДЕЛАЕМ ИХ СВЕТЛЕЕ) === */
+        .highlight-box, .warning-box, .success-box, .icon-box {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            margin: 1.8rem 0;
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-medium);
+            box-shadow: var(--shadow-soft);
+            border-left-width: 4px;
         }
         
         .highlight-box {
-            background: #FFF8E1;
-            border-left: 4px solid #FFB300;
-            padding: 1.2rem;
-            margin: 1.2rem 0;
-            border-radius: 0 4px 4px 0;
+            border-left-color: var(--accent-orange);
         }
         
         .warning-box {
-            background: #FFEBEE;
-            border-left: 4px solid var(--accent-red);
-            padding: 1.2rem;
-            margin: 1.2rem 0;
-            border-radius: 0 4px 4px 0;
+            border-left-color: var(--accent-red);
         }
         
         .success-box {
-            background: #E8F5E9;
-            border-left: 4px solid var(--accent-green);
-            padding: 1.2rem;
-            margin: 1.2rem 0;
-            border-radius: 0 4px 4px 0;
+            border-left-color: var(--accent-green);
         }
         
         /* === СПИСКИ === */
         ul, ol {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
+            margin-left: 1.8rem;
+            margin-bottom: 1.5rem;
         }
         
         li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             color: var(--text-secondary);
             font-size: 1.05rem;
-            line-height: 1.6;
+            line-height: 1.7;
+            padding-left: 0.3rem;
         }
         
         .key-point {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary-blue);
         }
         
+        /* === БЛОКИ С ИКОНКАМИ (УПРОЩЕННЫЙ ДИЗАЙН) === */
+        .icon-box {
+            border-left-color: var(--secondary-blue);
+            background: var(--light-blue);
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+        }
+        
+        .icon-box .icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            opacity: 0.9;
+        }
+        
+        .icon-box-content {
+            flex-grow: 1;
+        }
+        
+        .icon-box-title {
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+        
+        /* === КОНТАКТНАЯ ИНФОРМАЦИЯ === */
         .contact-info {
             background: var(--light-blue);
-            padding: 1rem;
+            padding: 1.2rem;
             border-radius: var(--radius);
-            margin: 1rem 0;
+            margin: 1.5rem 0;
             border-left: 4px solid var(--secondary-blue);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
             font-size: 1.05rem;
         }
         
         .contact-info::before {
             content: '📞';
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            opacity: 0.7;
         }
         
         .contact-info strong {
@@ -314,57 +367,32 @@
             display: block;
             max-width: 600px;
             width: 100%;
-            margin: 1.5rem auto;
+            margin: 2rem auto;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             border: 1px solid var(--gray-medium);
         }
         
-        /* === БЛОКИ С ИКОНКАМИ === */
-        .icon-box {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin: 1.5rem 0;
-            padding: 1.2rem;
-            background: var(--light-blue);
-            border-radius: var(--radius);
-            border-left: 4px solid var(--secondary-blue);
-        }
-        
-        .icon-box .icon {
-            font-size: 1.8rem;
-            flex-shrink: 0;
-        }
-        
-        .icon-box-content {
-            flex-grow: 1;
-        }
-        
-        .icon-box-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--primary-blue);
-        }
-        
-        /* === ФУТЕР (как в примере) === */
+        /* === ФУТЕР (УПРОЩАЕМ) === */
         .document-footer {
-            background: var(--primary-blue);
-            color: white;
-            padding: 2rem 0;
-            margin-top: 3rem;
+            background: var(--gray-light);
+            color: var(--text-secondary);
+            padding: 2.5rem;
+            margin-top: 4rem;
             border-radius: var(--radius);
             text-align: center;
+            border-top: 1px solid var(--gray-medium);
+            font-size: 0.95rem;
         }
         
         /* === АДАПТИВНОСТЬ === */
         @media (max-width: 768px) {
             body {
-                padding: 15px;
+                padding: 20px 15px;
             }
             
             .document-header {
-                padding: 1.8rem;
+                padding: 2rem;
             }
             
             .document-title {
@@ -375,17 +403,24 @@
                 grid-template-columns: 1fr;
             }
             
-            .step-content {
-                padding: 1.5rem;
+            .step-title {
+                font-size: 1.6rem;
             }
             
-            .instruction-image {
-                max-width: 100%;
+            .step-number {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
             }
             
             .icon-box {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 12px;
+            }
+            
+            .icon-box .icon {
+                font-size: 1.8rem;
             }
         }
         
@@ -396,10 +431,12 @@
             
             body {
                 max-width: 100%;
+                padding: 0;
             }
             
-            .instruction-image {
-                max-width: 400px;
+            .step-container {
+                break-inside: avoid;
+                border-bottom: 1px solid #ccc;
             }
         }
     </style>
@@ -471,7 +508,7 @@
                 <p><strong>Санитарно-эпидемиологические правила прямо устанавливают, что выявление туберкулёза осуществляется медицинскими работниками всех специальностей и медицинских организаций, а не только противотуберкулёзной службы.</strong></p>
             </div>
             
-            <p>Таким образом, участие врачей общей лечебной сети в выявлении туберкулёза является обязательным элементом их профессиональной деятельности, а не дополнительной или факультативной функцией.</p>
+            <p>Таким образом, участие врачей общей лечебной сети в выявлении туберкулёза является <span class="mandatory-duty">обязательным элементом их профессиональной деятельности, а не дополнительной или факультативной функцией</span>.</p>
         </div>
     </section>
 
