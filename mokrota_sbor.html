@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Правила сбора и транспортировки мокроты | ГБУЗ МО МОКПТД</title>
     
-    <!-- ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 (единый стиль как в tmk.html) -->
+    <!-- ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 (единый стиль как в vvedenie.html) -->
     <style>
         /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
         @font-face {
@@ -54,8 +54,9 @@
             --text-primary: #263238;
             --text-secondary: #546E7A;
             
+            --shadow-soft: 0 2px 8px rgba(26, 95, 158, 0.04);
             --shadow: 0 4px 12px rgba(26, 95, 158, 0.08);
-            --radius: 6px;
+            --radius: 8px;
         }
         
         * {
@@ -66,42 +67,21 @@
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
+            line-height: 1.7;
             color: var(--text-primary);
-            background-color: var(--light-blue);
-            max-width: 1200px;
+            background-color: var(--white);
+            max-width: 1000px;
             margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* Кнопка назад в навигатор */
-        .back-to-navigator {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s;
-            margin-bottom: 1rem;
-            float: right;
-        }
-        
-        .back-to-navigator:hover {
-            background: rgba(255, 255, 255, 0.25);
+            padding: 30px 20px;
         }
         
         /* === ЗАГОЛОВОК И ВВОДНАЯ ИНФОРМАЦИЯ === */
         .document-header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
-            padding: 2.5rem;
+            padding: 3rem;
             border-radius: var(--radius);
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             box-shadow: var(--shadow);
             border-bottom: 4px solid var(--accent-red);
         }
@@ -139,80 +119,92 @@
             text-decoration: none;
         }
         
-        /* === ОГЛАВЛЕНИЕ === */
+        /* === ОГЛАВЛЕНИЕ (КОМПАКТНОЕ И СТИЛЬНОЕ) === */
         .toc-container {
             background: var(--white);
             border-radius: var(--radius);
-            padding: 1.8rem;
-            margin-bottom: 2.5rem;
+            padding: 1.5rem;
+            margin-bottom: 3rem;
             border: 1px solid var(--gray-medium);
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .toc-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--secondary-blue));
         }
         
         .toc-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: var(--primary-blue);
             margin-bottom: 1.2rem;
             display: flex;
             align-items: center;
             gap: 10px;
+            padding-left: 10px;
         }
         
         .toc-list {
             list-style: none;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         
         .toc-list li {
-            padding: 8px 0;
-            position: relative;
-            padding-left: 24px;
-        }
-        
-        .toc-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            top: 8px;
-            color: var(--secondary-blue);
-            font-weight: bold;
+            display: inline-block;
         }
         
         .toc-list a {
-            color: var(--text-primary);
+            display: inline-block;
+            color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.2s;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            background: var(--gray-light);
+            border-radius: 20px;
+            border: 1px solid var(--gray-medium);
+            transition: all 0.2s ease;
+            white-space: nowrap;
         }
         
         .toc-list a:hover,
         .toc-list a.active {
-            color: var(--primary-blue);
-            text-decoration: underline;
-            font-weight: 600;
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(26, 95, 158, 0.2);
         }
         
-        /* === БЛОКИ ЭТАПОВ (единый стиль как в tmk.html) === */
+        /* === БЛОКИ ЭТАПОВ === */
         .step-container {
+            margin-bottom: 3.5rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid var(--gray-medium);
+        }
+        
+        .step-container:last-of-type {
+            border-bottom: none;
             margin-bottom: 2rem;
-            background: var(--white);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-medium);
         }
         
         .step-header {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-            color: white;
-            padding: 1.5rem;
+            padding: 0 0 1.5rem 0;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
             position: relative;
+            margin-bottom: 1.5rem;
         }
         
         .step-header::after {
@@ -220,43 +212,54 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            right: 0;
-            height: 4px;
+            width: 60px;
+            height: 3px;
             background: var(--accent-red);
+            border-radius: 2px;
         }
         
         .step-number {
-            background: var(--white);
+            background: var(--light-blue);
             color: var(--primary-blue);
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             flex-shrink: 0;
+            border: 2px solid var(--gray-medium);
         }
         
         .step-title {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 600;
+            color: var(--text-primary);
         }
         
         .step-content {
-            padding: 2rem;
+            padding: 0;
         }
         
-        .subsection {
+        .step-content > p:first-of-type {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-primary);
             margin-bottom: 1.8rem;
         }
         
+        /* === ПОДРАЗДЕЛЫ === */
+        .subsection {
+            margin-bottom: 2rem;
+        }
+        
         .subsection-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -264,104 +267,99 @@
         
         .subsection-content {
             color: var(--text-secondary);
-            margin-left: 28px;
             font-size: 1.05rem;
-            line-height: 1.6;
+            line-height: 1.7;
+            margin-left: 0;
+        }
+        
+        /* === ИНФОРМАЦИОННЫЕ БЛОКИ === */
+        .highlight-box, .warning-box, .success-box, .icon-box {
+            background: var(--gray-light);
+            padding: 1.5rem;
+            margin: 1.8rem 0;
+            border-radius: var(--radius);
+            border: 1px solid var(--gray-medium);
+            box-shadow: var(--shadow-soft);
+            border-left-width: 4px;
         }
         
         .highlight-box {
-            background: #FFF8E1;
-            border-left: 4px solid #FFB300;
-            padding: 1.2rem;
-            margin: 1.2rem 0;
-            border-radius: 0 4px 4px 0;
+            border-left-color: var(--accent-orange);
         }
         
         .warning-box {
-            background: #FFEBEE;
-            border-left: 4px solid var(--accent-red);
-            padding: 1.2rem;
-            margin: 1.2rem 0;
-            border-radius: 0 4px 4px 0;
+            border-left-color: var(--accent-red);
         }
         
         .success-box {
-            background: #E8F5E9;
-            border-left: 4px solid var(--accent-green);
-            padding: 1.2rem;
-            margin: 1.2rem 0;
-            border-radius: 0 4px 4px 0;
+            border-left-color: var(--accent-green);
         }
         
         /* === СПИСКИ === */
         ul, ol {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
+            margin-left: 1.8rem;
+            margin-bottom: 1.5rem;
         }
         
         li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             color: var(--text-secondary);
             font-size: 1.05rem;
-            line-height: 1.6;
+            line-height: 1.7;
+            padding-left: 0.3rem;
         }
         
         .key-point {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary-blue);
         }
         
-        /* === КОНТАКТНАЯ ИНФОРМАЦИЯ (стиль из tmk.html для возможного использования) === */
-        .contact-info {
+        /* === БЛОКИ С ИКОНКАМИ === */
+        .icon-box {
+            border-left-color: var(--secondary-blue);
             background: var(--light-blue);
-            padding: 1rem;
-            border-radius: var(--radius);
-            margin: 1rem 0;
-            border-left: 4px solid var(--secondary-blue);
             display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.05rem;
+            align-items: flex-start;
+            gap: 18px;
         }
         
-        .contact-info::before {
-            content: '📞';
+        .icon-box .icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            opacity: 0.9;
+        }
+        
+        .icon-box-content {
+            flex-grow: 1;
+        }
+        
+        .icon-box-title {
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--primary-blue);
             font-size: 1.2rem;
         }
         
-        .contact-info strong {
-            color: var(--primary-blue);
-        }
-        
-        /* === ИЗОБРАЖЕНИЕ (стиль из tmk.html для возможного использования) === */
-        .instruction-image {
-            display: block;
-            max-width: 600px;
-            width: 100%;
-            margin: 1.5rem auto;
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            border: 1px solid var(--gray-medium);
-        }
-        
-        /* === ФУТЕР (единый стиль как в tmk.html) === */
+        /* === ФУТЕР === */
         .document-footer {
-            background: var(--primary-blue);
-            color: white;
-            padding: 2rem 0;
-            margin-top: 3rem;
+            background: var(--gray-light);
+            color: var(--text-secondary);
+            padding: 2.5rem;
+            margin-top: 4rem;
             border-radius: var(--radius);
             text-align: center;
+            border-top: 1px solid var(--gray-medium);
+            font-size: 0.95rem;
         }
         
         /* === АДАПТИВНОСТЬ === */
         @media (max-width: 768px) {
             body {
-                padding: 15px;
+                padding: 20px 15px;
             }
             
             .document-header {
-                padding: 1.8rem;
+                padding: 2rem;
             }
             
             .document-title {
@@ -369,26 +367,29 @@
             }
             
             .toc-list {
-                grid-template-columns: 1fr;
+                flex-direction: column;
+                gap: 6px;
             }
             
-            .step-content {
-                padding: 1.5rem;
-            }
-            
-            .instruction-image {
-                max-width: 100%;
-            }
-            
-            .back-to-navigator {
-                float: none;
-                display: block;
-                margin: 0 auto 1rem auto;
+            .toc-list a {
+                width: 100%;
                 text-align: center;
+                white-space: normal;
+                padding: 10px 16px;
             }
             
             .step-title {
-                font-size: 1.4rem;
+                font-size: 1.6rem;
+            }
+            
+            .step-number {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+            
+            .subsection-title {
+                font-size: 1.2rem;
             }
         }
         
@@ -399,14 +400,13 @@
             
             body {
                 max-width: 100%;
+                padding: 0;
             }
             
-            .instruction-image {
-                max-width: 400px;
+            .step-container {
+                break-inside: avoid;
+                border-bottom: 1px solid #ccc;
             }
-            
-            .back-to-navigator {
-                display: none;
         }
     </style>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
@@ -414,8 +414,6 @@
 <body>
     <!-- Заголовок и вводная информация -->
     <header class="document-header">
-        <!-- КНОПКА НАЗАД В НАВИГАТОР УДАЛЕНА -->
-        
         <h1 class="document-title">Краткая инструкция-памятка по сбору и транспортировке мокроты</h1>
         <p class="document-subtitle">Алгоритм действий для медицинского персонала ОЛС осуществляющих прямое отправление диагностического материала в лабораторию ГБУЗ МО МОКПТД</p>
         
@@ -428,10 +426,10 @@
     <nav class="toc-container">
         <h2 class="toc-title">📋 Содержание</h2>
         <ul class="toc-list">
-            <li><a href="#step1">ШАГ 1: Подготовка в системе 1С ЛИС и особенности сбора</a></li>
+            <li><a href="#step1">ШАГ 1: Подготовка и сбор</a></li>
             <li><a href="#step2">ШАГ 2: Маркировка и контроль</a></li>
-            <li><a href="#step3">ШАГ 3: Упаковка (инфекционный материал)</a></li>
-            <li><a href="#step4">ШАГ 4: Транспортировка и хранение</a></li>
+            <li><a href="#step3">ШАГ 3: Упаковка материала</a></li>
+            <li><a href="#step4">ШАГ 4: Транспортировка</a></li>
             <li><a href="#step5">Что передавать в лабораторию?</a></li>
         </ul>
     </nav>
@@ -587,25 +585,27 @@
             });
         });
         
-        // Подсветка текущего раздела при прокрутке (единый стиль как в tmk.html)
+        // Подсветка текущего раздела при прокрутке
         window.addEventListener('scroll', function() {
             const sections = document.querySelectorAll('.step-container');
             const scrollPosition = window.scrollY + 100;
             
+            // Сначала убираем активный класс у всех ссылок
+            document.querySelectorAll('.toc-list a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Затем находим текущий раздел и активируем соответствующую ссылку
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
                 const sectionId = section.getAttribute('id');
                 
                 if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    document.querySelectorAll('.toc-list a').forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === '#' + sectionId) {
-                            link.classList.add('active');
-                            link.style.color = 'var(--primary-blue)';
-                            link.style.fontWeight = '600';
-                        }
-                    });
+                    const correspondingLink = document.querySelector(`.toc-list a[href="#${sectionId}"]`);
+                    if (correspondingLink) {
+                        correspondingLink.classList.add('active');
+                    }
                 }
             });
         });
