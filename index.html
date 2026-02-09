@@ -996,7 +996,7 @@ body {
 </footer>
 
     ```javascript
-    <script>
+        <script>
         document.addEventListener('DOMContentLoaded', function() {
             const toggleBtn = document.getElementById('toggleAllCards');
             const cardsContainer = document.getElementById('cardsContainer');
@@ -1057,31 +1057,19 @@ body {
             if (heartButton) {
                 const heartSound = new Audio('heartbeat.mp3');
                 heartSound.preload = 'auto';
-                let soundTimer = null;
+                heartSound.loop = true; // ЗАЦИКЛИВАЕМ ЗВУК
                 
                 heartButton.addEventListener('mouseenter', function() {
                     heartSound.currentTime = 0;
                     heartSound.play();
-                    soundTimer = setInterval(function() {
-                        heartSound.currentTime = 0;
-                        heartSound.play();
-                    }, 1800);
                 });
                 
                 heartButton.addEventListener('mouseleave', function() {
-                    if (soundTimer) {
-                        clearInterval(soundTimer);
-                        soundTimer = null;
-                    }
                     heartSound.pause();
                     heartSound.currentTime = 0;
                 });
                 
                 heartButton.addEventListener('click', function() {
-                    if (soundTimer) {
-                        clearInterval(soundTimer);
-                        soundTimer = null;
-                    }
                     heartSound.pause();
                     heartSound.currentTime = 0;
                 });
