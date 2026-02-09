@@ -995,6 +995,7 @@ body {
     </div>
 </footer>
 
+    ```javascript
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const toggleBtn = document.getElementById('toggleAllCards');
@@ -1002,18 +1003,15 @@ body {
             const allCards = document.querySelectorAll('.content-block');
             let allExpanded = false;
             
-            // Функция для переключения состояния всех карточек
             function toggleAllCards() {
                 allExpanded = !allExpanded;
                 
                 if (allExpanded) {
-                    // Развернуть все карточки
                     allCards.forEach(card => {
                         card.classList.remove('collapsed');
                     });
                     toggleBtn.textContent = 'Закрыть все карточки';
                 } else {
-                    // Свернуть все карточки
                     allCards.forEach(card => {
                         card.classList.add('collapsed');
                     });
@@ -1021,49 +1019,77 @@ body {
                 }
             }
             
-            // Обработчик для кнопки "Открыть/Закрыть все карточки"
             toggleBtn.addEventListener('click', toggleAllCards);
             
-            // Обработчики для отдельных карточек
             allCards.forEach(card => {
                 const header = card.querySelector('.block-header');
                 
                 header.addEventListener('click', function(e) {
-                    // Если клик был по ссылке внутри карточки, не сворачиваем/разворачиваем
                     if (e.target.tagName === 'A') {
                         return;
                     }
                     
-                    // Переключаем состояние конкретной карточки
                     card.classList.toggle('collapsed');
-                    
-                    // Обновляем состояние кнопки "Открыть все карточки"
                     updateToggleButtonState();
                 });
             });
             
-            // Функция для обновления состояния кнопки "Открыть все карточки"
             function updateToggleButtonState() {
                 const collapsedCards = document.querySelectorAll('.content-block.collapsed').length;
                 
                 if (collapsedCards === 0) {
-                    // Все карточки развернуты
                     toggleBtn.textContent = 'Закрыть все карточки';
                     allExpanded = true;
                 } else if (collapsedCards === allCards.length) {
-                    // Все карточки свернуты
                     toggleBtn.textContent = 'Открыть все карточки';
                     allExpanded = false;
                 } else {
-                    // Не все карточки в одном состоянии
                     toggleBtn.textContent = 'Открыть все карточки';
                     allExpanded = false;
                 }
             }
             
-            // Инициализация состояния
             updateToggleButtonState();
+            
+            // ============ ЗВУК СЕРДЦА ДЛЯ КНОПКИ ============
+            const heartButton = document.querySelector('a[href="vvedenie.html"]');
+            
+            if (heartButton) {
+                const heartSound = new Audio('heartbeat.mp3');
+                heartSound.preload = 'auto';
+                let soundTimer = null;
+                
+                heartButton.addEventListener('mouseenter', function() {
+                    heartSound.currentTime = 0;
+                    heartSound.play();
+                    soundTimer = setInterval(function() {
+                        heartSound.currentTime = 0;
+                        heartSound.play();
+                    }, 1800);
+                });
+                
+                heartButton.addEventListener('mouseleave', function() {
+                    if (soundTimer) {
+                        clearInterval(soundTimer);
+                        soundTimer = null;
+                    }
+                    heartSound.pause();
+                    heartSound.currentTime = 0;
+                });
+                
+                heartButton.addEventListener('click', function() {
+                    if (soundTimer) {
+                        clearInterval(soundTimer);
+                        soundTimer = null;
+                    }
+                    heartSound.pause();
+                    heartSound.currentTime = 0;
+                });
+            }
+            // ============ КОНЕЦ ЗВУКА СЕРДЦА ============
+            
         });
     </script>
+```
 </body>
 </html>
