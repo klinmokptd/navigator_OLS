@@ -1006,6 +1006,16 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // ============ АНИМАЦИЯ ЛОГОТИПА ЛЕГКИХ ============
+        const lungsAnimation = lottie.loadAnimation({
+            container: document.getElementById('lungs-logo'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'lungs.json'
+        });
+        
+        // ============ КАРТОЧКИ И ПЕРЕКЛЮЧАТЕЛИ ============
         const toggleBtn = document.getElementById('toggleAllCards');
         const cardsContainer = document.getElementById('cardsContainer');
         const allCards = document.querySelectorAll('.content-block');
