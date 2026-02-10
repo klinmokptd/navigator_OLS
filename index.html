@@ -1068,15 +1068,7 @@
                 autoplay: true,
                 path: 'lungs.json' // Путь к файлу анимации
             });
-            lungsAnimation.addEventListener('DOMLoaded', () => {
-    console.log('Lottie DOMLoaded — анимация отрисована');
-    alert('Анимация Lottie DOMLoaded!');
-});
-
-lungsAnimation.addEventListener('data_failed', () => {
-    console.error('Lottie: данные не загрузились');
-    alert('Lottie: JSON не загрузился!');
-});
+            
             
             // Настраиваем анимацию
             lungsAnimation.setSpeed(1);
