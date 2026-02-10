@@ -75,7 +75,7 @@ body {
 .header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
     color: white;
-    padding: 2rem 0 3rem 0; /* Уменьшен верхний padding, чтобы лого было ближе к заголовку */
+    padding: 3rem 0;
     border-bottom: 4px solid var(--accent-red);
     width: 100%;
 }
@@ -87,29 +87,29 @@ body {
     width: 100%;
 }
 
-/* ИЗМЕНЕНО: Теперь лого располагается прямо над заголовком */
 .logo-area {
-    margin-bottom: 1.5rem; /* Уменьшен отступ, чтобы было ближе к заголовку */
-    text-align: left;
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 
 .logo-text h1 {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    margin-bottom: 0.2rem;
+    margin-bottom: 5px;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .logo-text p {
-    font-size: 1rem;
-    opacity: 0.9;
+    text-align: left; /* Выровнено по левому краю */
 }
 
-/* КОНТЕЙНЕР ДЛЯ ЗАГОЛОВКА С АНИМАЦИЕЙ */
+/* НОВЫЙ КОНТЕЙНЕР ДЛЯ ЗАГОЛОВКА С АНИМАЦИЕЙ */
 .header-title-area {
     display: flex;
     align-items: flex-start;
     gap: 25px;
-    margin-bottom: 0; /* Убрали отступ снизу */
+    margin-bottom: 1.2rem;
 }
 
 /* КОНТЕЙНЕР ДЛЯ АНИМАЦИИ ЛЁГКИХ - УВЕЛИЧЕН */
@@ -117,7 +117,7 @@ body {
     flex-shrink: 0;
     width: 200px; /* Увеличен с 120px */
     height: 200px; /* Увеличен с 120px */
-    margin-top: 10px; /* Подбираем чтобы было ровно с заголовком */
+    margin-top: -5px;
 }
 
 #lungsAnimation {
@@ -127,6 +127,7 @@ body {
 
 .header-title-block {
     flex: 1;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .header-title {
@@ -135,6 +136,7 @@ body {
     margin-bottom: 0.5rem;
     line-height: 1.2;
     letter-spacing: -0.5px;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .header-subtitle {
@@ -142,6 +144,7 @@ body {
     opacity: 0.95;
     max-width: 800px;
     line-height: 1.5;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .mission-section {
@@ -170,6 +173,7 @@ body {
     font-weight: 600;
     color: var(--primary-blue);
     margin-bottom: 1.5rem;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .mission-text {
@@ -177,6 +181,7 @@ body {
     line-height: 1.7;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .blocks-section {
@@ -277,6 +282,7 @@ body {
     justify-content: center;
     min-height: 50px;
     width: 100%;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-title {
@@ -290,12 +296,14 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     height: 3.2em;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-subtitle {
     font-size: 0.9rem;
     opacity: 0.9;
     font-weight: 300;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-content {
@@ -304,6 +312,7 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 /* УВЕЛИЧЕННЫЕ ШРИФТЫ В КАРТОЧКАХ */
@@ -313,11 +322,13 @@ body {
     line-height: 1.6;
     flex-grow: 1;
     font-size: 1.05rem;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-features {
     list-style: none;
     margin-bottom: 1.5rem;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-features li {
@@ -326,6 +337,7 @@ body {
     position: relative;
     color: var(--text-primary);
     font-size: 1rem;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-features li::before {
@@ -342,6 +354,7 @@ body {
     margin-top: auto;
     padding-top: 1rem;
     border-top: 1px solid #E0E5EC;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-btn {
@@ -354,6 +367,7 @@ body {
     font-weight: 500;
     font-size: 0.95rem;
     transition: background 0.3s;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-btn:hover {
@@ -389,14 +403,15 @@ body {
 
 .footer-brand {
     flex: 1;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .footer-title {
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-size: 1.1rem; /* Уменьшен с 1.4rem до 1.1rem (как у правого) */
+    font-weight: 600;
     color: white;
     margin-bottom: 8px;
-    letter-spacing: -0.3px;
+    letter-spacing: 0.5px;
 }
 
 .footer-org {
@@ -407,10 +422,11 @@ body {
 
 .footer-author {
     flex: 1;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .author-desc {
-    font-size: 1rem;
+    font-size: 1.1rem; /* Увеличен до 1.1rem (как у правого) */
     font-weight: 600;
     color: white;
     margin-bottom: 10px;
@@ -432,6 +448,7 @@ body {
 
 .footer-contacts {
     flex: 1;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .contacts-title {
@@ -450,6 +467,7 @@ body {
     font-size: 0.95rem;
     transition: color 0.2s;
     padding: 3px 0;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 .contact-link:hover {
@@ -468,6 +486,7 @@ body {
 .copyright {
     font-size: 0.9rem;
     opacity: 0.8;
+    text-align: left; /* Выровнено по левому краю */
 }
 
 /* ================= МОБИЛЬНАЯ ВЕРСИЯ ================= */
@@ -483,11 +502,11 @@ body {
         width: 100% !important;
     }
     
-    /* Адаптация заголовка с анимацией */
+    /* НОВОЕ: Адаптация заголовка с анимацией */
     .header-title-area {
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 15px;
         text-align: center;
     }
     
@@ -499,35 +518,28 @@ body {
     
     .header-title-block {
         width: 100%;
+        text-align: center; /* На мобильных центрируем */
+    }
+    
+    .header-title,
+    .header-subtitle {
+        text-align: center; /* На мобильных центрируем */
     }
     
     /* Исправление для заголовка */
     .header {
-        padding: 1.5rem 0 2rem 0;
+        padding: 2rem 0;
     }
     
     .header-title {
         font-size: 1.8rem;
         line-height: 1.3;
-        margin-bottom: 0.8rem;
+        margin-bottom: 1rem;
     }
     
     .header-subtitle {
         font-size: 1.1rem;
         line-height: 1.4;
-    }
-    
-    /* Лого ближе к заголовку на мобильных */
-    .logo-area {
-        margin-bottom: 1rem;
-    }
-    
-    .logo-text h1 {
-        font-size: 1.1rem;
-    }
-    
-    .logo-text p {
-        font-size: 0.9rem;
     }
     
     /* Исправление для сетки карточек */
@@ -549,10 +561,12 @@ body {
     
     .mission-title {
         font-size: 1.5rem;
+        text-align: left; /* На мобильных всё равно лево */
     }
     
     .mission-text {
         font-size: 1rem;
+        text-align: left; /* На мобильных всё равно лево */
     }
     
     /* Исправление для кнопки */
@@ -584,6 +598,7 @@ body {
     .footer-author,
     .footer-contacts {
         width: 100%;
+        text-align: left; /* На мобильных всё равно лево */
     }
     
     .footer-bottom {
@@ -592,16 +607,10 @@ body {
         text-align: center;
     }
     
+    .footer-title,
+    .author-desc,
     .contacts-title {
-        font-size: 1rem;
-    }
-    
-    .footer-title {
-        font-size: 1.3rem;
-    }
-    
-    .author-desc {
-        font-size: 0.95rem;
+        font-size: 1rem; /* На мобильных чуть меньше */
     }
     
     .author-name {
@@ -625,11 +634,7 @@ body {
     }
     
     .logo-text h1 {
-        font-size: 1rem;
-    }
-    
-    .logo-text p {
-        font-size: 0.85rem;
+        font-size: 1.2rem;
     }
     
     .block-title {
