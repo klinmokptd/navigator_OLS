@@ -76,7 +76,7 @@ body {
 .header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
     color: white;
-    padding: 1.8rem 0; /* Уменьшено с 2.5rem */
+    padding: 1.8rem 0;
     border-bottom: 4px solid var(--accent-red);
     width: 100%;
     text-align: center;
@@ -96,7 +96,7 @@ body {
 .logo-area {
     width: 100%;
     text-align: center;
-    margin-bottom: 1.2rem; /* Уменьшено с 1.5rem */
+    margin-bottom: 1.2rem;
 }
 
 .logo-text h1 {
@@ -115,20 +115,29 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem; /* Уменьшено с 1rem */
+    gap: 0.8rem;
     margin-bottom: 0.5rem;
     width: 100%;
 }
 
-/* УВЕЛИЧИВАЕМ АНИМАЦИЮ ЛЁГКИХ */
+/* КОНТЕЙНЕР ДЛЯ АНИМАЦИИ ЛЁГКИХ - АВТОПОДГОНКА */
 .lungs-animation-container {
-    width: 300px; /* Увеличено с 180px */
-    height: 300px; /* Увеличено с 180px */
+    width: fit-content; /* Автоподгонка под содержимое */
+    height: fit-content;
+    max-width: 300px; /* Максимальные размеры для контроля */
+    max-height: 300px;
+    margin: 0 auto;
 }
 
+/* SVG анимация занимает всю доступную площадь */
 #lungsAnimation {
     width: 100%;
     height: 100%;
+}
+
+/* Для контроля размеров SVG элемента внутри */
+#lungsAnimation svg {
+    display: block;
 }
 
 .header-title-block {
@@ -138,18 +147,18 @@ body {
 
 /* ДЕЛАЕМ ТЕКСТОВЫЙ БЛОК КОМПАКТНЕЕ */
 .header-title {
-    font-size: 2.2rem; /* Уменьшено с 2.5rem */
+    font-size: 2.2rem;
     font-weight: 700;
-    margin-bottom: 0.5rem; /* Уменьшено с 0.8rem */
+    margin-bottom: 0.5rem;
     line-height: 1.2;
     letter-spacing: -0.5px;
 }
 
 .header-subtitle {
-    font-size: 1.15rem; /* Уменьшено с 1.25rem */
+    font-size: 1.15rem;
     opacity: 0.95;
     max-width: 900px;
-    line-height: 1.4; /* Уменьшено с 1.5 */
+    line-height: 1.4;
     margin: 0 auto;
 }
 
@@ -467,7 +476,7 @@ body {
     }
     
     .header {
-        padding: 1.5rem 0; /* Адаптивно уменьшено */
+        padding: 1.5rem 0;
     }
     
     .logo-text h1 {
@@ -479,12 +488,12 @@ body {
     }
     
     .lungs-animation-container {
-        width: 220px; /* Адаптивно для мобилок */
-        height: 220px;
+        max-width: 220px; /* Уменьшаем максимальные размеры для мобилок */
+        max-height: 220px;
     }
     
     .header-title {
-        font-size: 1.6rem; /* Адаптивно уменьшено */
+        font-size: 1.6rem;
     }
     
     .header-subtitle {
@@ -563,8 +572,8 @@ body {
     }
     
     .lungs-animation-container {
-        width: 180px; /* Для очень маленьких экранов */
-        height: 180px;
+        max-width: 180px; /* Для очень маленьких экранов */
+        max-height: 180px;
     }
     
     .blocks-section {
@@ -593,12 +602,12 @@ body {
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .lungs-animation-container {
-        width: 280px; /* Для планшетов */
-        height: 280px;
+        max-width: 280px; /* Для планшетов */
+        max-height: 280px;
     }
     
     .header-title {
-        font-size: 2rem; /* Немного уменьшаем для планшетов */
+        font-size: 2rem;
     }
     
     .blocks-grid {
@@ -979,15 +988,94 @@ body {
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-    // ============ АНИМАЦИЯ ЛЁГКИХ ============
+    // ============ АНИМАЦИЯ ЛЁГКИХ С АВТОПОДГОНКОЙ ============
+    const container = document.getElementById('lungsAnimation');
+    const animationContainer = document.querySelector('.lungs-animation-container');
+    
+    // Устанавливаем резервные размеры (на случай если автоподгонка не сработает)
+    animationContainer.style.width = '180px';
+    animationContainer.style.height = '180px';
+    
     const lungsAnimation = lottie.loadAnimation({
-        container: document.getElementById('lungsAnimation'),
-        renderer: 'svg', // Используем SVG рендерер
+        container: container,
+        renderer: 'svg',
         loop: true,
         autoplay: true,
         path: 'lungs.json'
     });
-
+    
+    // Функция для умной подгонки размера анимации
+    function smartResizeAnimation() {
+        const svg = container.querySelector('svg');
+        
+        if (!svg) {
+            console.log('SVG не найден, пробуем снова через 200мс');
+            setTimeout(smartResizeAnimation, 200);
+            return;
+        }
+        
+        // Очищаем любые инлайн-стили, которые могут мешать
+        svg.removeAttribute('width');
+        svg.removeAttribute('height');
+        svg.style.width = '';
+        svg.style.height = '';
+        
+        // Способ 1: Используем viewBox (самый точный)
+        const viewBox = svg.getAttribute('viewBox');
+        if (viewBox) {
+            const values = viewBox.split(' ');
+            if (values.length >= 4) {
+                const width = parseFloat(values[2]);
+                const height = parseFloat(values[3]);
+                
+                if (width > 0 && height > 0) {
+                    // Устанавливаем размеры контейнера
+                    animationContainer.style.width = width + 'px';
+                    animationContainer.style.height = height + 'px';
+                    console.log('Анимация лёгких: установлены размеры из viewBox:', width, 'x', height);
+                    return;
+                }
+            }
+        }
+        
+        // Способ 2: Используем bounding box
+        try {
+            const bbox = svg.getBBox();
+            if (bbox.width > 10 && bbox.height > 10) {
+                animationContainer.style.width = bbox.width + 'px';
+                animationContainer.style.height = bbox.height + 'px';
+                console.log('Анимация лёгких: установлены размеры из bbox:', bbox.width, 'x', bbox.height);
+                return;
+            }
+        } catch (e) {
+            console.log('Не удалось получить bbox:', e);
+        }
+        
+        // Способ 3: Используем атрибуты width/height самого SVG
+        const svgWidth = svg.getAttribute('width');
+        const svgHeight = svg.getAttribute('height');
+        
+        if (svgWidth && svgHeight) {
+            animationContainer.style.width = svgWidth;
+            animationContainer.style.height = svgHeight;
+            console.log('Анимация лёгких: установлены размеры из атрибутов SVG:', svgWidth, 'x', svgHeight);
+            return;
+        }
+        
+        // Если ничего не сработало, оставляем резервные размеры
+        console.log('Анимация лёгких: не удалось определить размеры, используются резервные 180x180px');
+    }
+    
+    // Запускаем автоподгонку при загрузке анимации
+    lungsAnimation.addEventListener('DOMLoaded', function() {
+        // Пробуем несколько раз с разными интервалами для надежности
+        setTimeout(smartResizeAnimation, 100);
+        setTimeout(smartResizeAnimation, 500);
+    });
+    
+    // Также пробуем через 1.5 секунды на всякий случай
+    setTimeout(smartResizeAnimation, 1500);
+    
     // ============ УПРАВЛЕНИЕ КАРТОЧКАМИ ============
     const toggleBtn = document.getElementById('toggleAllCards');
     const cardsContainer = document.getElementById('cardsContainer');
