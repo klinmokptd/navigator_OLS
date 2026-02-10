@@ -73,10 +73,11 @@ body {
 }
 
 /* ================= ШАПКА ================= */
+/* ================= ШАПКА (СУПЕР КОМПАКТНАЯ) ================= */
 .header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
     color: white;
-    padding: 1.8rem 0;
+    padding: 0.8rem 0; /* ЕЩЁ МЕНЬШЕ */
     border-bottom: 4px solid var(--accent-red);
     width: 100%;
     text-align: center;
@@ -85,81 +86,81 @@ body {
 .header-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 20px; /* Уменьшили боковые отступы */
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* ЛОГОТИП - ЦЕНТР */
+/* ЛОГОТИП */
 .logo-area {
     width: 100%;
     text-align: center;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.5rem; /* МИНИМУМ */
 }
 
 .logo-text h1 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 0;
+    line-height: 1.1;
 }
 
 .logo-text p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     opacity: 0.9;
+    margin: 0;
 }
 
-/* БЛОК С АНИМАЦИЕЙ И ЗАГОЛОВКОМ - ЦЕНТР */
+/* БЛОК С АНИМАЦИЕЙ И ТЕКСТОМ */
 .header-title-area {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 0.5rem;
+    gap: 0;
+    margin: 0;
+    padding: 0;
     width: 100%;
 }
 
-/* КОНТЕЙНЕР ДЛЯ АНИМАЦИИ ЛЁГКИХ - АВТОПОДГОНКА */
+/* АНИМАЦИЯ ЛЁГКИХ - УМЕНЬШЕННАЯ */
 .lungs-animation-container {
-    width: fit-content; /* Автоподгонка под содержимое */
-    height: fit-content;
-    max-width: 300px; /* Максимальные размеры для контроля */
-    max-height: 300px;
-    margin: 0 auto;
+    width: 250px; /* Меньше размер */
+    height: 250px;
+    margin: 0;
+    padding: 0;
 }
 
-/* SVG анимация занимает всю доступную площадь */
 #lungsAnimation {
     width: 100%;
     height: 100%;
 }
 
-/* Для контроля размеров SVG элемента внутри */
-#lungsAnimation svg {
-    display: block;
-}
-
 .header-title-block {
     width: 100%;
     text-align: center;
+    margin: 0.2rem 0 0 0; /* САМЫЙ МИНИМАЛЬНЫЙ ОТСТУП */
+    padding: 0;
 }
 
-/* ДЕЛАЕМ ТЕКСТОВЫЙ БЛОК КОМПАКТНЕЕ */
+/* ТЕКСТ - КОМПАКТНЫЙ */
 .header-title {
-    font-size: 2.2rem;
+    font-size: 2rem; /* Немного меньше */
     font-weight: 700;
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
-    letter-spacing: -0.5px;
+    margin: 0 0 0.1rem 0; /* ОЧЕНЬ МАЛО */
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+    padding: 0;
 }
 
 .header-subtitle {
-    font-size: 1.15rem;
+    font-size: 1.05rem; /* Меньше */
     opacity: 0.95;
     max-width: 900px;
-    line-height: 1.4;
+    line-height: 1.3; /* Компактнее */
     margin: 0 auto;
+    padding: 0;
 }
 
 /* ================= ЦЕЛЬ ПРОЕКТА ================= */
