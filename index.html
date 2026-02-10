@@ -72,14 +72,13 @@ body {
     background-color: var(--light-blue);
 }
 
-/* ================= ШАПКА ================= */
+/* ================= ХЕДЕР ================= */
 .header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
     color: white;
     padding: 2.5rem 0;
     border-bottom: 4px solid var(--accent-red);
     width: 100%;
-    text-align: center;
 }
 
 .header-container {
@@ -87,42 +86,22 @@ body {
     margin: 0 auto;
     padding: 0 30px;
     width: 100%;
+}
+
+.header-content {
     display: flex;
-    flex-direction: column;
     align-items: center;
-}
-
-/* ЛОГОТИП - ЦЕНТР */
-.logo-area {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 1.5rem;
-}
-
-.logo-text h1 {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.logo-text p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
-
-/* БЛОК С АНИМАЦИЕЙ И ЗАГОЛОВКОМ - ЦЕНТР */
-.header-title-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.5rem;
+    gap: 2.5rem;
     width: 100%;
 }
 
-.lungs-animation-container {
+/* АНИМАЦИЯ ЛЁГКИХ - МАКСИМАЛЬНО СЛЕВА */
+.lungs-animation-wrapper {
+    flex-shrink: 0;
     width: 180px;
     height: 180px;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 #lungsAnimation {
@@ -130,25 +109,41 @@ body {
     height: 100%;
 }
 
-.header-title-block {
-    width: 100%;
-    text-align: center;
+/* ТЕКСТОВЫЙ БЛОК - СПРАВА ОТ АНИМАЦИИ */
+.header-text {
+    flex: 1;
+    text-align: left;
 }
 
-.header-title {
+.org-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+}
+
+.org-separator {
+    opacity: 0.7;
+}
+
+.main-title {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.8rem;
     line-height: 1.2;
     letter-spacing: -0.5px;
+    color: white;
 }
 
-.header-subtitle {
+.subtitle {
     font-size: 1.25rem;
     opacity: 0.95;
     max-width: 900px;
     line-height: 1.5;
-    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.95);
 }
 
 /* ================= ЦЕЛЬ ПРОЕКТА ================= */
@@ -396,14 +391,12 @@ body {
     text-align: left;
 }
 
-/* ВСЕ КОЛОНКИ ФУТЕРА ОДИНАКОВЫЕ */
 .footer-brand,
 .footer-author,
 .footer-contacts {
     flex: 1;
 }
 
-/* ВСЕ ЗАГОЛОВКИ В ФУТЕРЕ ОДИНАКОВЫЕ */
 .footer-title,
 .author-desc,
 .contacts-title {
@@ -414,7 +407,6 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* ОСНОВНОЙ ТЕКСТ ФУТЕРА ОДИНАКОВЫЙ */
 .footer-org,
 .author-name,
 .author-role,
@@ -468,24 +460,32 @@ body {
         padding: 2rem 0;
     }
     
-    .logo-text h1 {
-        font-size: 1.4rem;
+    .header-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
     }
     
-    .logo-text p {
-        font-size: 1rem;
-    }
-    
-    .lungs-animation-container {
+    .lungs-animation-wrapper {
         width: 150px;
         height: 150px;
+        margin: 0 auto;
     }
     
-    .header-title {
+    .header-text {
+        text-align: center;
+    }
+    
+    .org-line {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .main-title {
         font-size: 1.8rem;
     }
     
-    .header-subtitle {
+    .subtitle {
         font-size: 1.1rem;
     }
     
@@ -551,15 +551,15 @@ body {
 }
 
 @media (max-width: 480px) {
-    .header-title {
+    .main-title {
         font-size: 1.6rem;
     }
     
-    .header-subtitle {
+    .subtitle {
         font-size: 1rem;
     }
     
-    .lungs-animation-container {
+    .lungs-animation-wrapper {
         width: 120px;
         height: 120px;
     }
@@ -589,12 +589,12 @@ body {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-    .lungs-animation-container {
+    .lungs-animation-wrapper {
         width: 160px;
         height: 160px;
     }
     
-    .header-title {
+    .main-title {
         font-size: 2.2rem;
     }
     
@@ -607,28 +607,26 @@ body {
 </head>
 <body>
     <header class="header">
-        <div class="header-container">
-            <div class="logo-area">
-                <div class="logo-text">
-                    <h1>ГБУЗ МО "МОКПД"</h1>
-                    <p>Филиал "Клинский"</p>
-                </div>
+    <div class="header-container">
+        <div class="header-content">
+            <!-- Анимация слева -->
+            <div class="lungs-animation-wrapper">
+                <div id="lungsAnimation"></div>
             </div>
             
-            <!-- НОВАЯ СТРУКТУРА С АНИМАЦИЕЙ ЛЁГКИХ -->
-            <div class="header-title-area">
-                <div class="lungs-animation-container">
-                    <!-- Контейнер для анимации лёгких -->
-                    <div id="lungsAnimation"></div>
+            <!-- Текст справа -->
+            <div class="header-text">
+                <div class="org-line">
+                    <span class="org-main">ГБУЗ МО "МОКПД"</span>
+                    <span class="org-separator">|</span>
+                    <span class="org-filial">Филиал "Клинский"</span>
                 </div>
-                
-                <div class="header-title-block">
-                    <h2 class="header-title">Навигатор по выявлению туберкулеза</h2>
-                    <p class="header-subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена, узких специалистов и сотрудников профильных служб</p>
-                </div>
+                <h1 class="main-title">Навигатор по выявлению туберкулёза</h1>
+                <p class="subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена, узких специалистов и сотрудников профильных служб</p>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
     <section class="mission-section">
         <div class="mission-container">
