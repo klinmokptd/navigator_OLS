@@ -1090,6 +1090,24 @@
             // Добавляем скрипт в конец body
             document.body.appendChild(script);
         }
+        function initSound() {
+    const btn = document.querySelector('a[href="vvedenie.html"]');
+    if (!btn) return;
+    let sound = new Audio('heartbeat.mp3');
+    sound.preload = 'none';
+    btn.addEventListener('mouseenter', () => {
+        sound.currentTime = 0;
+        sound.play().catch(() => {});
+    });
+    btn.addEventListener('mouseleave', () => {
+        if (!sound.paused) {
+            sound.pause();
+            sound.currentTime = 0;
+        }
+    });
+}
+
+initSound();
     </script>
 </body>
 </html>
