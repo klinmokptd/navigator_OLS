@@ -1034,115 +1034,116 @@ body {
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    // ============ АНИМАЦИЯ ЛЕГКИХ - ФИКС МАСШТАБИРОВАНИЯ ============
-    const lungsAnimation = lottie.loadAnimation({
-        container: document.getElementById('lungs-logo'),
-        renderer: 'svg',
-        loop: true,
-        autoplay: true,
-        path: 'lungs.json',
-        rendererSettings: {
-            preserveAspectRatio: 'xMidYMid meet',
-            clearCanvas: false,
-            progressiveLoad: true,
-            hideOnTransparent: true
-        }
-    });
-    
-    // Принудительное масштабирование после загрузки
-    lungsAnimation.addEventListener('DOMLoaded', function() {
-        const svg = document.querySelector('#lungs-logo svg');
-        if (svg) {
-            svg.style.width = '100%';
-            svg.style.height = '100%';
-            svg.style.transform = 'scale(1.1)';
-            svg.style.transformOrigin = 'center';
-        }
-    });
-    
-    // ============ КАРТОЧКИ И ПЕРЕКЛЮЧАТЕЛИ ============
-    const toggleBtn = document.getElementById('toggleAllCards');
-    const cardsContainer = document.getElementById('cardsContainer');
-    const allCards = document.querySelectorAll('.content-block');
-    let allExpanded = false;
-    
-    function toggleAllCards() {
-        allExpanded = !allExpanded;
-        
-        if (allExpanded) {
-            allCards.forEach(card => {
-                card.classList.remove('collapsed');
-            });
-            toggleBtn.textContent = 'Закрыть все карточки';
-        } else {
-            allCards.forEach(card => {
-                card.classList.add('collapsed');
-            });
-            toggleBtn.textContent = 'Открыть все карточки';
-        }
-    }
-    
-    toggleBtn.addEventListener('click', toggleAllCards);
-    
-    allCards.forEach(card => {
-        const header = card.querySelector('.block-header');
-        
-        header.addEventListener('click', function(e) {
-            if (e.target.tagName === 'A') {
-                return;
+        // ============ АНИМАЦИЯ ЛЕГКИХ ============
+        const lungsAnimation = lottie.loadAnimation({
+            container: document.getElementById('lungs-logo'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: 'lungs.json',
+            rendererSettings: {
+                preserveAspectRatio: 'xMidYMid meet',
+                clearCanvas: false,
+                progressiveLoad: true,
+                hideOnTransparent: true
             }
+        });
+        
+        // Принудительное масштабирование после загрузки
+        lungsAnimation.addEventListener('DOMLoaded', function() {
+            const svg = document.querySelector('#lungs-logo svg');
+            if (svg) {
+                svg.style.width = '100%';
+                svg.style.height = '100%';
+                svg.style.transform = 'scale(1.1)';
+                svg.style.transformOrigin = 'center';
+            }
+        });
+        
+        // ============ КАРТОЧКИ И ПЕРЕКЛЮЧАТЕЛИ ============
+        const toggleBtn = document.getElementById('toggleAllCards');
+        const cardsContainer = document.getElementById('cardsContainer');
+        const allCards = document.querySelectorAll('.content-block');
+        let allExpanded = false;
+        
+        function toggleAllCards() {
+            allExpanded = !allExpanded;
             
-            card.classList.toggle('collapsed');
-            updateToggleButtonState();
-        });
-    });
-    
-    function updateToggleButtonState() {
-        const collapsedCards = document.querySelectorAll('.content-block.collapsed').length;
-        
-        if (collapsedCards === 0) {
-            toggleBtn.textContent = 'Закрыть все карточки';
-            allExpanded = true;
-        } else if (collapsedCards === allCards.length) {
-            toggleBtn.textContent = 'Открыть все карточки';
-            allExpanded = false;
-        } else {
-            toggleBtn.textContent = 'Открыть все карточки';
-            allExpanded = false;
-        }
-    }
-    
-    updateToggleButtonState();
-    
-    // ============ ЗВУК СЕРДЦА ДЛЯ КНОПКИ ============
-    const heartButton = document.querySelector('a[href="vvedenie.html"]');
-    
-    if (heartButton) {
-        const heartSound = new Audio('heartbeat.mp3');
-        heartSound.preload = 'auto';
-        heartSound.loop = true;
-        heartSound.volume = 0.3;
-        
-        heartButton.addEventListener('mouseenter', function() {
-            try {
-                heartSound.currentTime = 0;
-                heartSound.play();
-            } catch(e) {
-                console.log('Звук не воспроизводится:', e);
+            if (allExpanded) {
+                allCards.forEach(card => {
+                    card.classList.remove('collapsed');
+                });
+                toggleBtn.textContent = 'Закрыть все карточки';
+            } else {
+                allCards.forEach(card => {
+                    card.classList.add('collapsed');
+                });
+                toggleBtn.textContent = 'Открыть все карточки';
             }
+        }
+        
+        toggleBtn.addEventListener('click', toggleAllCards);
+        
+        allCards.forEach(card => {
+            const header = card.querySelector('.block-header');
+            
+            header.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    return;
+                }
+                
+                card.classList.toggle('collapsed');
+                updateToggleButtonState();
+            });
         });
         
-        heartButton.addEventListener('mouseleave', function() {
-            heartSound.pause();
-            heartSound.currentTime = 0;
-        });
+        function updateToggleButtonState() {
+            const collapsedCards = document.querySelectorAll('.content-block.collapsed').length;
+            
+            if (collapsedCards === 0) {
+                toggleBtn.textContent = 'Закрыть все карточки';
+                allExpanded = true;
+            } else if (collapsedCards === allCards.length) {
+                toggleBtn.textContent = 'Открыть все карточки';
+                allExpanded = false;
+            } else {
+                toggleBtn.textContent = 'Открыть все карточки';
+                allExpanded = false;
+            }
+        }
         
-        heartButton.addEventListener('click', function() {
-            heartSound.pause();
-            heartSound.currentTime = 0;
-        });
-    }
-});
+        updateToggleButtonState();
+        
+        // ============ ЗВУК СЕРДЦА ДЛЯ КНОПКИ ============
+        const heartButton = document.querySelector('a[href="vvedenie.html"]');
+        
+        if (heartButton) {
+            const heartSound = new Audio('heartbeat.mp3');
+            heartSound.preload = 'auto';
+            heartSound.loop = true;
+            heartSound.volume = 0.3;
+            
+            heartButton.addEventListener('mouseenter', function() {
+                try {
+                    heartSound.currentTime = 0;
+                    heartSound.play();
+                } catch(e) {
+                    console.log('Звук не воспроизводится:', e);
+                }
+            });
+            
+            heartButton.addEventListener('mouseleave', function() {
+                heartSound.pause();
+                heartSound.currentTime = 0;
+            });
+            
+            heartButton.addEventListener('click', function() {
+                heartSound.pause();
+                heartSound.currentTime = 0;
+            });
+        }
+    });
+</script>
 </script>
 </body>
 </html>
