@@ -72,12 +72,14 @@ body {
     background-color: var(--light-blue);
 }
 
+/* ================= ШАПКА ================= */
 .header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
     color: white;
-    padding: 3rem 0;
+    padding: 2.5rem 0;
     border-bottom: 4px solid var(--accent-red);
     width: 100%;
+    text-align: center;
 }
 
 .header-container {
@@ -85,39 +87,42 @@ body {
     margin: 0 auto;
     padding: 0 30px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+/* ЛОГОТИП - ЦЕНТР */
 .logo-area {
-    display: flex;
-    align-items: center;
-    margin-bottom: 2rem;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
 .logo-text h1 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 5px;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .logo-text p {
-    text-align: left; /* Выровнено по левому краю */
+    font-size: 1.1rem;
+    opacity: 0.9;
 }
 
-/* НОВЫЙ КОНТЕЙНЕР ДЛЯ ЗАГОЛОВКА С АНИМАЦИЕЙ */
+/* БЛОК С АНИМАЦИЕЙ И ЗАГОЛОВКОМ - ЦЕНТР */
 .header-title-area {
     display: flex;
-    align-items: flex-start;
-    gap: 25px;
-    margin-bottom: 1.2rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    width: 100%;
 }
 
-/* КОНТЕЙНЕР ДЛЯ АНИМАЦИИ ЛЁГКИХ - УВЕЛИЧЕН */
 .lungs-animation-container {
-    flex-shrink: 0;
-    width: 200px; /* Увеличен с 120px */
-    height: 200px; /* Увеличен с 120px */
-    margin-top: -5px;
+    width: 180px;
+    height: 180px;
 }
 
 #lungsAnimation {
@@ -126,30 +131,30 @@ body {
 }
 
 .header-title-block {
-    flex: 1;
-    text-align: left; /* Выровнено по левому краю */
+    width: 100%;
+    text-align: center;
 }
 
 .header-title {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     line-height: 1.2;
     letter-spacing: -0.5px;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .header-subtitle {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     opacity: 0.95;
-    max-width: 800px;
+    max-width: 900px;
     line-height: 1.5;
-    text-align: left; /* Выровнено по левому краю */
+    margin: 0 auto;
 }
 
+/* ================= ЦЕЛЬ ПРОЕКТА ================= */
 .mission-section {
     background: var(--white);
-    padding: 3rem 0;
+    padding: 2.5rem 0;
     width: 100%;
 }
 
@@ -166,6 +171,7 @@ body {
     padding: 2.5rem;
     box-shadow: var(--shadow);
     border-top: 4px solid var(--accent-red);
+    text-align: left;
 }
 
 .mission-title {
@@ -173,7 +179,6 @@ body {
     font-weight: 600;
     color: var(--primary-blue);
     margin-bottom: 1.5rem;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .mission-text {
@@ -181,11 +186,11 @@ body {
     line-height: 1.7;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
-    text-align: left; /* Выровнено по левому краю */
 }
 
+/* ================= КАРТОЧКИ ================= */
 .blocks-section {
-    padding: 3rem 0;
+    padding: 2.5rem 0;
     width: 100%;
 }
 
@@ -238,9 +243,9 @@ body {
     flex-direction: column;
     transition: all 0.4s ease;
     width: 100%;
+    text-align: left;
 }
 
-/* Стиль для свернутой карточки */
 .content-block.collapsed {
     height: 140px;
     min-height: 140px;
@@ -282,7 +287,6 @@ body {
     justify-content: center;
     min-height: 50px;
     width: 100%;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-title {
@@ -296,14 +300,12 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     height: 3.2em;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-subtitle {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     opacity: 0.9;
     font-weight: 300;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-content {
@@ -312,23 +314,19 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    text-align: left; /* Выровнено по левому краю */
 }
 
-/* УВЕЛИЧЕННЫЕ ШРИФТЫ В КАРТОЧКАХ */
 .block-description {
     color: var(--text-secondary);
     margin-bottom: 1.2rem;
     line-height: 1.6;
     flex-grow: 1;
     font-size: 1.05rem;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-features {
     list-style: none;
     margin-bottom: 1.5rem;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-features li {
@@ -337,7 +335,6 @@ body {
     position: relative;
     color: var(--text-primary);
     font-size: 1rem;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-features li::before {
@@ -354,7 +351,6 @@ body {
     margin-top: auto;
     padding-top: 1rem;
     border-top: 1px solid #E0E5EC;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-btn {
@@ -367,7 +363,6 @@ body {
     font-weight: 500;
     font-size: 0.95rem;
     transition: background 0.3s;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .block-btn:hover {
@@ -379,7 +374,7 @@ body {
     background: #1a365d;
     color: #e2e8f0;
     padding: 2.5rem 0 1.5rem;
-    margin-top: 4rem;
+    margin-top: 3rem;
     font-family: 'Inter', sans-serif;
     width: 100%;
 }
@@ -391,7 +386,6 @@ body {
     width: 100%;
 }
 
-/* Основная часть футера */
 .footer-main {
     display: flex;
     justify-content: space-between;
@@ -399,64 +393,40 @@ body {
     margin-bottom: 2rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
 }
 
-.footer-brand {
-    flex: 1;
-    text-align: left; /* Выровнено по левому краю */
-}
-
-.footer-title {
-    font-size: 1.1rem; /* Уменьшен с 1.4rem до 1.1rem (как у правого) */
-    font-weight: 600;
-    color: white;
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
-}
-
-.footer-org {
-    font-size: 0.95rem;
-    opacity: 0.9;
-    line-height: 1.4;
-}
-
-.footer-author {
-    flex: 1;
-    text-align: left; /* Выровнено по левому краю */
-}
-
-.author-desc {
-    font-size: 1.1rem; /* Увеличен до 1.1rem (как у правого) */
-    font-weight: 600;
-    color: white;
-    margin-bottom: 10px;
-    line-height: 1.4;
-}
-
-.author-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 5px;
-}
-
-.author-role {
-    font-size: 0.95rem;
-    opacity: 0.9;
-    line-height: 1.4;
-}
-
+/* ВСЕ КОЛОНКИ ФУТЕРА ОДИНАКОВЫЕ */
+.footer-brand,
+.footer-author,
 .footer-contacts {
     flex: 1;
-    text-align: left; /* Выровнено по левому краю */
 }
 
+/* ВСЕ ЗАГОЛОВКИ В ФУТЕРЕ ОДИНАКОВЫЕ */
+.footer-title,
+.author-desc,
 .contacts-title {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     color: white;
     margin-bottom: 12px;
     letter-spacing: 0.5px;
+}
+
+/* ОСНОВНОЙ ТЕКСТ ФУТЕРА ОДИНАКОВЫЙ */
+.footer-org,
+.author-name,
+.author-role,
+.contact-link {
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.author-name {
+    font-weight: 600;
+    color: white;
+    margin-bottom: 5px;
 }
 
 .contact-link {
@@ -464,10 +434,8 @@ body {
     color: #e2e8f0;
     text-decoration: none;
     margin-bottom: 8px;
-    font-size: 0.95rem;
     transition: color 0.2s;
     padding: 3px 0;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 .contact-link:hover {
@@ -475,7 +443,6 @@ body {
     text-decoration: underline;
 }
 
-/* Нижняя часть футера */
 .footer-bottom {
     display: flex;
     justify-content: space-between;
@@ -486,71 +453,42 @@ body {
 .copyright {
     font-size: 0.9rem;
     opacity: 0.8;
-    text-align: left; /* Выровнено по левому краю */
 }
 
 /* ================= МОБИЛЬНАЯ ВЕРСИЯ ================= */
 @media (max-width: 768px) {
-    /* Исправление для контейнеров */
     .header-container,
     .mission-container,
     .blocks-container,
     .footer-content {
         padding: 0 20px !important;
-        max-width: 100% !important;
-        margin: 0 auto !important;
-        width: 100% !important;
     }
     
-    /* НОВОЕ: Адаптация заголовка с анимацией */
-    .header-title-area {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        text-align: center;
-    }
-    
-    .lungs-animation-container {
-        width: 150px; /* Увеличен для мобильных */
-        height: 150px;
-        margin-top: 0;
-    }
-    
-    .header-title-block {
-        width: 100%;
-        text-align: center; /* На мобильных центрируем */
-    }
-    
-    .header-title,
-    .header-subtitle {
-        text-align: center; /* На мобильных центрируем */
-    }
-    
-    /* Исправление для заголовка */
     .header {
         padding: 2rem 0;
     }
     
+    .logo-text h1 {
+        font-size: 1.4rem;
+    }
+    
+    .logo-text p {
+        font-size: 1rem;
+    }
+    
+    .lungs-animation-container {
+        width: 150px;
+        height: 150px;
+    }
+    
     .header-title {
         font-size: 1.8rem;
-        line-height: 1.3;
-        margin-bottom: 1rem;
     }
     
     .header-subtitle {
         font-size: 1.1rem;
-        line-height: 1.4;
     }
     
-    /* Исправление для сетки карточек */
-    .blocks-grid {
-        grid-template-columns: 1fr !important;
-        gap: 20px;
-        margin: 0;
-        width: 100%;
-    }
-    
-    /* Исправление для карточек миссии */
     .mission-section {
         padding: 2rem 0;
     }
@@ -561,15 +499,17 @@ body {
     
     .mission-title {
         font-size: 1.5rem;
-        text-align: left; /* На мобильных всё равно лево */
     }
     
     .mission-text {
         font-size: 1rem;
-        text-align: left; /* На мобильных всё равно лево */
     }
     
-    /* Исправление для кнопки */
+    .blocks-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px;
+    }
+    
     .toggle-all-btn {
         padding: 12px 20px;
         font-size: 1.1rem;
@@ -577,14 +517,9 @@ body {
         max-width: 100%;
     }
     
-    /* Футер для мобилок */
     .footer {
         padding: 2rem 0 1rem;
         margin-top: 2rem;
-    }
-    
-    .footer-content {
-        padding: 0 20px;
     }
     
     .footer-main {
@@ -592,13 +527,14 @@ body {
         gap: 30px;
         margin-bottom: 1.5rem;
         padding-bottom: 1.5rem;
+        text-align: center;
     }
     
     .footer-brand,
     .footer-author,
     .footer-contacts {
         width: 100%;
-        text-align: left; /* На мобильных всё равно лево */
+        text-align: center;
     }
     
     .footer-bottom {
@@ -610,55 +546,22 @@ body {
     .footer-title,
     .author-desc,
     .contacts-title {
-        font-size: 1rem; /* На мобильных чуть меньше */
-    }
-    
-    .author-name {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 }
 
-/* Для очень маленьких экранов */
 @media (max-width: 480px) {
-    .lungs-animation-container {
-        width: 120px;
-        height: 120px;
-    }
-    
     .header-title {
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
     
     .header-subtitle {
-        font-size: 0.95rem;
-    }
-    
-    .logo-text h1 {
-        font-size: 1.2rem;
-    }
-    
-    .block-title {
-        font-size: 1.1rem;
-    }
-    
-    .block-subtitle {
-        font-size: 0.85rem;
-    }
-    
-    .toggle-all-btn {
-        padding: 10px 15px;
         font-size: 1rem;
     }
     
-    .block-header {
-        padding: 1rem;
+    .lungs-animation-container {
+        width: 120px;
         height: 120px;
-        min-height: 120px;
-    }
-    
-    .content-block.collapsed {
-        height: 120px;
-        min-height: 120px;
     }
     
     .blocks-section {
@@ -673,43 +576,30 @@ body {
         font-size: 1.3rem;
     }
     
-    .mission-text {
-        font-size: 0.95rem;
+    .block-header {
+        padding: 1rem;
+        height: 120px;
+        min-height: 120px;
     }
     
-    .block-description {
-        font-size: 0.95rem;
-    }
-    
-    .block-features li {
-        font-size: 0.95rem;
+    .content-block.collapsed {
+        height: 120px;
+        min-height: 120px;
     }
 }
 
-/* Для планшетов */
 @media (min-width: 769px) and (max-width: 1024px) {
     .lungs-animation-container {
-        width: 180px;
-        height: 180px;
+        width: 160px;
+        height: 160px;
     }
     
     .header-title {
         font-size: 2.2rem;
     }
     
-    .header-subtitle {
-        font-size: 1.1rem;
-    }
-    
     .blocks-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-    
-    .header-container,
-    .blocks-container,
-    .footer-content {
-        padding: 0 20px;
     }
 }
 /* ================= КОНЕЦ МОБИЛЬНОЙ ВЕРСИИ ================= */
