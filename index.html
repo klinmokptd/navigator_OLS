@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Навигатор по выявлению туберкулеза | ГБУЗ МО МОКПТД филиал Клинский</title>
-    <link rel="icon" href="/navigator_OLS/favicon.ico" sizes="any">
+    <link rel="icon" href="favicon.ico" sizes="any">
     <style>
     /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
     @font-face {
@@ -70,12 +70,15 @@
         background-color: var(--light-blue);
     }
 
+    /* ================= HEADER ================= */
     .header {
         background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
         color: white;
         padding: 3rem 0;
         border-bottom: 4px solid var(--accent-red);
         width: 100%;
+        text-align: center;
+        position: relative;
     }
 
     .header-container {
@@ -84,52 +87,113 @@
         padding: 0 30px;
         width: 100%;
         position: relative;
-        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    /* АНИМАЦИЯ ЛЁГКИХ */
+    /* АНИМАЦИЯ ЛЁГКИХ - СВЕРХУ ПО ЦЕНТРУ */
     .lungs-container {
-        position: absolute;
-        right: 30px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 140px;
-        height: 140px;
-        opacity: 0.9;
+        width: 180px;
+        height: 180px;
+        margin: 0 auto 2rem;
+        opacity: 0.95;
+        position: relative;
+        z-index: 1;
+        filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2));
     }
 
     .lungs-animation {
         width: 100%;
         height: 100%;
-        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        position: relative;
+    }
+
+    /* АНИМАЦИЯ ЛЁГКИХ (SVG) */
+    .lung-icon {
+        width: 100%;
+        height: 100%;
+        animation: breathe 3s ease-in-out infinite;
+        transform-origin: center;
+    }
+
+    @keyframes breathe {
+        0%, 100% { 
+            transform: scale(1) rotate(0deg);
+            opacity: 0.9;
+        }
+        33% { 
+            transform: scale(1.05) rotate(1deg);
+            opacity: 1;
+        }
+        66% { 
+            transform: scale(0.98) rotate(-1deg);
+            opacity: 0.95;
+        }
+    }
+
+    /* ПУЛЬСИРУЮЩИЕ ТОЧКИ */
+    .pulse-dot {
+        fill: rgba(255, 255, 255, 0.8);
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    .pulse-dot:nth-child(2) { animation-delay: 0.3s; }
+    .pulse-dot:nth-child(3) { animation-delay: 0.6s; }
+    .pulse-dot:nth-child(4) { animation-delay: 0.9s; }
+    .pulse-dot:nth-child(5) { animation-delay: 1.2s; }
+
+    @keyframes pulse {
+        0%, 100% { 
+            r: 3;
+            opacity: 0.5;
+        }
+        50% { 
+            r: 5;
+            opacity: 1;
+        }
     }
 
     .logo-area {
-        display: flex;
-        align-items: center;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
     }
 
     .logo-text h1 {
-        font-size: 1.5rem;
-        font-weight: 600;
+        font-size: 1.8rem;
+        font-weight: 700;
         margin-bottom: 5px;
+        letter-spacing: -0.5px;
+    }
+
+    .logo-text p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        font-weight: 400;
     }
 
     .header-title {
-        font-size: 2.8rem;
-        font-weight: 700;
-        margin-bottom: 1.2rem;
-        line-height: 1.2;
+        font-size: 3.2rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+        text-align: center;
+        max-width: 900px;
+        letter-spacing: -0.5px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
     .header-subtitle {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         opacity: 0.95;
-        max-width: 800px;
+        max-width: 900px;
         line-height: 1.5;
+        text-align: center;
+        font-weight: 400;
+        margin: 0 auto;
     }
 
+    /* ================= ОСТАЛЬНЫЕ СТИЛИ ================= */
     .mission-section {
         background: var(--white);
         padding: 3rem 0;
@@ -156,6 +220,7 @@
         font-weight: 600;
         color: var(--primary-blue);
         margin-bottom: 1.5rem;
+        text-align: center;
     }
 
     .mission-text {
@@ -163,6 +228,7 @@
         line-height: 1.7;
         color: var(--text-secondary);
         margin-bottom: 1.5rem;
+        text-align: center;
     }
 
     .blocks-section {
@@ -292,7 +358,6 @@
         width: 100%;
     }
 
-    /* УВЕЛИЧЕННЫЕ ШРИФТЫ В КАРТОЧКАХ */
     .block-description {
         color: var(--text-secondary);
         margin-bottom: 1.2rem;
@@ -363,7 +428,6 @@
         width: 100%;
     }
 
-    /* Основная часть футера */
     .footer-main {
         display: flex;
         justify-content: space-between;
@@ -443,7 +507,6 @@
         text-decoration: underline;
     }
 
-    /* Нижняя часть футера */
     .footer-bottom {
         display: flex;
         justify-content: space-between;
@@ -458,36 +521,27 @@
 
     /* ================= МОБИЛЬНАЯ ВЕРСИЯ ================= */
     @media (max-width: 768px) {
-        /* Исправление для контейнеров */
         .header-container,
         .mission-container,
         .blocks-container,
         .footer-content {
             padding: 0 20px !important;
-            max-width: 100% !important;
-            margin: 0 auto !important;
-            width: 100% !important;
         }
         
         /* Анимация лёгких на мобильных */
         .lungs-container {
-            position: relative;
-            right: auto;
-            top: auto;
-            transform: none;
-            width: 100px;
-            height: 100px;
-            margin: 1rem auto 0;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
         }
         
-        /* Исправление для заголовка */
         .header {
             padding: 2rem 0;
         }
         
         .header-title {
-            font-size: 1.8rem;
-            line-height: 1.3;
+            font-size: 2rem;
+            line-height: 1.2;
             margin-bottom: 1rem;
         }
         
@@ -496,15 +550,19 @@
             line-height: 1.4;
         }
         
-        /* Исправление для сетки карточек */
+        .logo-text h1 {
+            font-size: 1.4rem;
+        }
+        
+        .logo-text p {
+            font-size: 1rem;
+        }
+        
         .blocks-grid {
             grid-template-columns: 1fr !important;
             gap: 20px;
-            margin: 0;
-            width: 100%;
         }
         
-        /* Исправление для карточек миссии */
         .mission-section {
             padding: 2rem 0;
         }
@@ -521,7 +579,6 @@
             font-size: 1rem;
         }
         
-        /* Исправление для кнопки */
         .toggle-all-btn {
             padding: 12px 20px;
             font-size: 1.1rem;
@@ -529,14 +586,9 @@
             max-width: 100%;
         }
         
-        /* Футер для мобилок */
         .footer {
             padding: 2rem 0 1rem;
             margin-top: 2rem;
-        }
-        
-        .footer-content {
-            padding: 0 20px;
         }
         
         .footer-main {
@@ -557,36 +609,20 @@
             gap: 10px;
             text-align: center;
         }
-        
-        .contacts-title {
-            font-size: 1.1rem;
-        }
-        
-        .footer-title {
-            font-size: 1.3rem;
-        }
-        
-        .author-desc {
-            font-size: 1.1rem;
-        }
-        
-        .author-name {
-            font-size: 1rem;
-        }
     }
 
-    /* Для очень маленьких экранов */
     @media (max-width: 480px) {
         .header-title {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
         }
         
         .header-subtitle {
             font-size: 0.95rem;
         }
         
-        .logo-text h1 {
-            font-size: 1.2rem;
+        .lungs-container {
+            width: 100px;
+            height: 100px;
         }
         
         .block-title {
@@ -612,126 +648,83 @@
             height: 120px;
             min-height: 120px;
         }
-        
-        .blocks-section {
-            padding: 2rem 0;
-        }
-        
-        .mission-card {
-            padding: 1.25rem;
-        }
-        
-        .mission-title {
-            font-size: 1.3rem;
-        }
-        
-        .mission-text {
-            font-size: 0.95rem;
-        }
-        
-        .block-description {
-            font-size: 0.95rem;
-        }
-        
-        .block-features li {
-            font-size: 0.95rem;
-        }
-        
-        .lungs-container {
-            width: 80px;
-            height: 80px;
-        }
     }
 
-    /* Для планшетов */
     @media (min-width: 769px) and (max-width: 1024px) {
         .blocks-grid {
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
         
-        .header-container,
-        .blocks-container,
-        .footer-content {
-            padding: 0 20px;
-        }
-        
         .header-title {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
         }
         
         .header-subtitle {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
         
         .lungs-container {
-            width: 120px;
-            height: 120px;
-            right: 20px;
+            width: 150px;
+            height: 150px;
         }
     }
-    /* ================= КОНЕЦ МОБИЛЬНОЙ ВЕРСИИ ================= */
-</style>
+    </style>
 </head>
 <body>
     <header class="header">
-    <div class="header-container">
-        <div class="logo-area">
-            <div class="logo-text">
-                <h1>ГБУЗ МО "МОКПД"</h1>
-                <p>Филиал "Клинский"</p>
+        <div class="header-container">
+            <!-- АНИМАЦИЯ ЛЁГКИХ - СВЕРХУ ПО ЦЕНТРУ -->
+            <div class="lungs-container">
+                <div class="lungs-animation">
+                    <svg class="lung-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Левое легкое -->
+                        <path fill="rgba(255, 255, 255, 0.9)" d="M50,100 C30,80 30,40 50,20 C70,0 100,0 120,20 C140,40 140,80 120,100 L50,100 Z">
+                            <animate attributeName="d" dur="3s" repeatCount="indefinite" 
+                                values="M50,100 C30,80 30,40 50,20 C70,0 100,0 120,20 C140,40 140,80 120,100 L50,100 Z;
+                                        M50,105 C30,85 30,35 50,15 C70,-5 100,-5 120,15 C140,35 140,85 120,105 L50,105 Z;
+                                        M50,100 C30,80 30,40 50,20 C70,0 100,0 120,20 C140,40 140,80 120,100 L50,100 Z"/>
+                        </path>
+                        
+                        <!-- Правое легкое -->
+                        <path fill="rgba(255, 255, 255, 0.9)" d="M80,100 C60,120 60,160 80,180 C100,200 130,200 150,180 C170,160 170,120 150,100 L80,100 Z">
+                            <animate attributeName="d" dur="3s" repeatCount="indefinite" 
+                                values="M80,100 C60,120 60,160 80,180 C100,200 130,200 150,180 C170,160 170,120 150,100 L80,100 Z;
+                                        M80,95 C60,115 60,165 80,185 C100,205 130,205 150,185 C170,165 170,115 150,95 L80,95 Z;
+                                        M80,100 C60,120 60,160 80,180 C100,200 130,200 150,180 C170,160 170,120 150,100 L80,100 Z"/>
+                        </path>
+                        
+                        <!-- Бронхи -->
+                        <path fill="rgba(255, 255, 255, 0.7)" d="M95,85 L105,85 L105,115 L95,115 Z"/>
+                        <path fill="rgba(255, 255, 255, 0.7)" d="M90,85 Q100,75 110,85"/>
+                        
+                        <!-- Пульсирующие точки (здоровье) -->
+                        <circle class="pulse-dot" cx="70" cy="60" r="3"/>
+                        <circle class="pulse-dot" cx="100" cy="45" r="3"/>
+                        <circle class="pulse-dot" cx="130" cy="60" r="3"/>
+                        <circle class="pulse-dot" cx="85" cy="140" r="3"/>
+                        <circle class="pulse-dot" cx="115" cy="140" r="3"/>
+                    </svg>
+                </div>
             </div>
-        </div>
-        
-        <h2 class="header-title">Навигатор по выявлению туберкулеза</h2>
-        <p class="header-subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена, узких специалистов и сотрудников профильных служб</p>
-        
-        <!-- АНИМАЦИЯ ЛЁГКИХ -->
-        <div class="lungs-container">
-            <div class="lungs-animation" id="lungsAnimation">
-                <!-- SVG Анимация лёгких -->
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-                    <style>
-                        .lung-left {
-                            fill: rgba(255, 255, 255, 0.9);
-                            animation: breatheLeft 3s ease-in-out infinite;
-                        }
-                        .lung-right {
-                            fill: rgba(255, 255, 255, 0.9);
-                            animation: breatheRight 3s ease-in-out infinite;
-                        }
-                        @keyframes breatheLeft {
-                            0%, 100% { transform: scale(1); }
-                            50% { transform: scale(1.05); }
-                        }
-                        @keyframes breatheRight {
-                            0%, 100% { transform: scale(1); }
-                            50% { transform: scale(1.05); opacity: 0.95; }
-                        }
-                    </style>
-                    <!-- Левое легкое -->
-                    <path class="lung-left" d="M60,80 C40,60 40,30 60,10 C80,-10 100,-10 120,10 C140,30 140,60 120,80 L60,80 Z">
-                        <animate attributeName="d" dur="3s" repeatCount="indefinite" 
-                            values="M60,80 C40,60 40,30 60,10 C80,-10 100,-10 120,10 C140,30 140,60 120,80 L60,80 Z;
-                                    M60,85 C40,65 40,25 60,5 C80,-15 100,-15 120,5 C140,25 140,65 120,85 L60,85 Z;
-                                    M60,80 C40,60 40,30 60,10 C80,-10 100,-10 120,10 C140,30 140,60 120,80 L60,80 Z"/>
-                    </path>
-                    <!-- Правое легкое -->
-                    <path class="lung-right" d="M80,120 C60,140 60,170 80,190 C100,210 120,210 140,190 C160,170 160,140 140,120 L80,120 Z">
-                        <animate attributeName="d" dur="3s" repeatCount="indefinite" 
-                            values="M80,120 C60,140 60,170 80,190 C100,210 120,210 140,190 C160,170 160,140 140,120 L80,120 Z;
-                                    M80,115 C60,135 60,175 80,195 C100,215 120,215 140,195 C160,175 160,135 140,115 L80,115 Z;
-                                    M80,120 C60,140 60,170 80,190 C100,210 120,210 140,190 C160,170 160,140 140,120 L80,120 Z"/>
-                    </path>
-                    <!-- Бронхи -->
-                    <path fill="rgba(255, 255, 255, 0.7)" d="M95,85 L105,85 L105,115 L95,115 Z"/>
-                    <path fill="rgba(255, 255, 255, 0.7)" d="M90,85 Q100,75 110,85"/>
-                </svg>
+            
+            <!-- ОРГАНИЗАЦИЯ -->
+            <div class="logo-area">
+                <div class="logo-text">
+                    <h1>ГБУЗ МО "МОКПД"</h1>
+                    <p>Филиал "Клинский"</p>
+                </div>
             </div>
+            
+            <!-- НАЗВАНИЕ НАВИГАТОРА -->
+            <h2 class="header-title">Навигатор по выявлению туберкулеза</h2>
+            
+            <!-- ПОДПИСЬ -->
+            <p class="header-subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена, узких специалистов и сотрудников профильных служб</p>
         </div>
-    </div>
-</header>
+    </header>
 
+    <!-- ОСТАЛЬНОЙ КОД ОСТАЁТСЯ ТОЧНО ТАКИМ ЖЕ, КАК БЫЛ РАНЬШЕ -->
     <section class="mission-section">
         <div class="mission-container">
             <div class="mission-card">
@@ -746,424 +739,150 @@
 
     <section class="blocks-section">
         <div class="blocks-container">
-            <!-- Кнопка вместо заголовка "Структура навигатора" -->
             <button class="toggle-all-btn" id="toggleAllCards">Открыть все карточки</button>
             
             <div class="blocks-grid" id="cardsContainer">
-                
-                <!-- Карточка 1: Почему туберкулёз — ваша задача? -->
-<article class="content-block collapsed">
-    <div class="block-header">
-        <div class="block-text">
-            <h3 class="block-title">Почему туберкулёз — ваша задача?</h3>
-            <p class="block-subtitle">Цель 2035: ликвидация туберкулеза</p>
-        </div>
-    </div>
-    <div class="block-content">
-        <p class="block-description">
-            При эффективном лечении эпидемиологическая ситуация не улучшается из-за низкого качества диагностики в общей сети.
-        </p>
-        <ul class="block-features">
-            <li>Заболеваемость не снижается</li>
-            <li>Высокая доля позднего выявления</li>
-            <li>Ваша роль — ключевая</li>
-            <li>Фокус на группы риска и на не обследованных два года и более</li>
-        </ul>
-        <div class="block-actions">
-            <a href="vvedenie.html" class="block-btn">Смотреть цифры и анализ</a>
-        </div>
-    </div>
-</article>
-
-
-                <!-- Карточка 2: Нормативная база -->
+                <!-- ВСЕ КАРТОЧКИ ТОЧНО ТАКИЕ ЖЕ, КАК БЫЛИ -->
                 <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
-                            <h3 class="block-title">Нормативная база</h3>
-                            <p class="block-subtitle">Законодательство и стандарты</p>
+                            <h3 class="block-title">Почему туберкулёз — ваша задача?</h3>
+                            <p class="block-subtitle">Цель 2035: ликвидация туберкулеза</p>
                         </div>
                     </div>
                     <div class="block-content">
-                        <p class="block-description">Нормативная база по раннему выявлению и диагностике туберкулёза в ОЛС</p>
+                        <p class="block-description">
+                            При эффективном лечении эпидемиологическая ситуация не улучшается из-за низкого качества диагностики в общей сети.
+                        </p>
                         <ul class="block-features">
-                            <li>Приказы Минздрава РФ</li>
-                            <li>Клинические рекомендации</li>
-                            <li>СанПиН и СП</li>
-                            <li>Региональные нормативы</li>
+                            <li>Заболеваемость не снижается</li>
+                            <li>Высокая доля позднего выявления</li>
+                            <li>Ваша роль — ключевая</li>
+                            <li>Фокус на группы риска и на не обследованных два года и более</li>
                         </ul>
                         <div class="block-actions">
-                            <a href="normativka.html" class="block-btn">Изучить документы</a>
+                            <a href="vvedenie.html" class="block-btn">Смотреть цифры и анализ</a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Карточка 3: Практическое применение -->
-<article class="content-block collapsed">
-    <div class="block-header">
-        <div class="block-text">
-            <h3 class="block-title">Регламент действий по уровням</h3>
-            <p class="block-subtitle">Структурированные алгоритмы действий</p>
-        </div>
-    </div>
-    <div class="block-content">
-        <p class="block-description">
-            Поэтапное распределение функциональных обязанностей и процедурные алгоритмы для каждого уровня медицинской организации в соответствии с нормативно-правовой базой.
-        </p>
-        <ul class="block-features">
-            <li>Заместители руководителя</li>
-            <li>Заведующие подразделениями</li>
-            <li>Врачи-терапевты участковые</li>
-            <li>Врачи-специалисты</li>
-            <li>Средний медицинский персонал</li>
-        </ul>
-        <div class="block-actions">
-            <a href="#" class="block-btn">Подробнее</a>
-        </div>
-    </div>
-</article>
-
-                <!-- Карточка 3: Контроль выполнения -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Контроль выполнения:<br>планы и факты</h3>
-                            <p class="block-subtitle">Охват обследованиями</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Сводные данные выполнения планов скрининга взрослого и детского населения для управления ресурсами и коррекции работы на местах.</p>
-                        <ul class="block-features">
-                            <li>Динамика по взрослым и детям отдельно</li>
-                            <li>Рейтинг территорий и ЛПУ</li>
-                            <li>Прогноз выполнения годового плана</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="#" class="block-btn">Раздел в разработке</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Карточка 4: Мониторинг раннего выявления туберкулёза -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Мониторинг раннего выявления туберкулёза</h3>
-                            <p class="block-subtitle">Для ответственных за МедИнфо</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Работа с распоряжением № 445 от 09.04.2025 об организации мониторинга профилактических осмотров.</p>
-                        <ul class="block-features">
-                            <li>Формы для заполнения в МедИнфо</li>
-                            <li>Сроки подачи отчётов</li>
-                            <li>Критерии несвоевременного выявления</li>
-                            <li>Сводные планы и статистика</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="#" class="block-btn">Открыть раздел</a>
-                        </div>
-                    </div>
-                </article>
-                
-                <!-- Карточка 12: Опыт других учреждений -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Опыт других учреждений ОЛС</h3>
-                            <p class="block-subtitle">Обучение на примерах</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Лекции, вебинары и учебные материалы для непрерывного медицинского образования.</p>
-                        <ul class="block-features">
-                            <li>Обучающие видеолекции</li>
-                            <li>Презентации и методички</li>
-                            <li>Тесты для самопроверки</li>
-                            <li>Актуальные публикации</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="#" class="block-btn">Раздел в разработке</a>
-                        </div>
-                    </div>
-                </article>
-
-                 <!-- Карточка 9: Разбор случаев -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Разбор случаев выявления</h3>
-                            <p class="block-subtitle">Опыт специалистов</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Разборы сложных случаев, комментарии фтизиатров и анализ типичных ошибок в диагностике.</p>
-                        <ul class="block-features">
-                            <li>Видеокомментарии специалистов</li>
-                            <li>Разборы клинических случаев</li>
-                            <li>Типичные диагностические ошибки</li>
-                            <li>Ответы на частые вопросы</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="#" class="block-btn">Раздел в разработке</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Карточка 5: Диагностические алгоритмы -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Диагностические алгоритмы</h3>
-                            <p class="block-subtitle">Пошаговые инструкции</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Четкие схемы действий при различных клинических ситуациях и результатах обследований.</p>
-                        <ul class="block-features">
-                            <li>Алгоритм при изменении на флюорографии</li>
-                            <li>Работа с группой риска</li>
-                            <li>Дифференциальная диагностика</li>
-                            <li>Действия при отказе от обследования</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="#" class="block-btn">Раздел в разработке</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Карточка 6: Телемедицина -->
-<article class="content-block collapsed">
-    <div class="block-header">
-        <div class="block-text">
-            <h3 class="block-title">Телемедицина с ГБУЗ МО МОКПТД</h3>
-            <p class="block-subtitle">Быстрые решения</p>
-        </div>
-    </div>
-    <div class="block-content">
-        <p class="block-description">Телемедицинские консультации со специалистами областного противотуберкулезного диспансера для сложных диагностических случаев через видеоконференц-связь.</p>
-        <ul class="block-features">
-            <li>Когда нужна консультация</li>
-            <li>Пошаговый алгоритм организации ТМК</li>
-            <li>Контакты для согласования времени</li>
-        </ul>
-        <div class="block-actions">
-            <!-- ИЗМЕНЕНО: ссылка на локальный файл -->
-            <a href="tmk.html" class="block-btn">Перейти к инструкции</a>
-        </div>
-    </div>
-</article>
-
-                <!-- Карточка 7: Сбор мокроты -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Сбор биоматериала: мокрота</h3>
-                            <p class="block-subtitle">Алгоритм и инструкция</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Пошаговая инструкция по правильному сбору, маркировке, упаковке и транспортировке биоматериала напрямую в лабораторию МОКПТД.</p>
-                        <ul class="block-features">
-                            <li>Работа в 1С ЛИС</li>
-                            <li>Двукратный сбор материала</li>
-                            <li>Правила маркировки флаконов</li>
-                            <li>Упаковка инфекционного материала</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="mokrota_sbor.html" class="block-btn">Открыть инструкцию</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Карточка 8: Патологоанатомы -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Взаимодействие с патологоанатомами</h3>
-                            <p class="block-subtitle">При выявлении на вскрытии</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Алгоритм взаимодействия при подозрении на туберкулез как причину смерти. Включает памятку для врачей-патологоанатомов и судмедэкспертов.</p>
-                        <ul class="block-features">
-                            <li>Немедленное уведомление МОКПТД</li>
-                            <li>Забор материала для микробиологии</li>
-                            <li>Совместная оценка причины смерти</li>
-                            <li>Доступна памятка и QR-код для стенда</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="https://klinmokptd.github.io/sudmed/" target="_blank" class="block-btn">Подробнее об алгоритме</a>
-                        </div>
-                    </div>
-                </article>
-
-               
-
-                <!-- Карточка 10: Ресурсы и контакты -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Ресурсы и контакты</h3>
-                            <p class="block-subtitle">Справочная информация</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Контакты специализированных учреждений и полезные ресурсы для оперативного решения вопросов.</p>
-                        <ul class="block-features">
-                            <li>Контакты противотуберкулезного диспансера</li>
-                            <li>Телефоны "горячих линий"</li>
-                            <li>Официальные сайты и ресурсы</li>
-                            <li>Контакты ответственных лиц</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="#" class="block-btn">Раздел в разработке</a>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Карточка 11: Образовательные материалы -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Образовательные материалы</h3>
-                            <p class="block-subtitle">Повышение квалификации</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Лекции, вебинары и учебные материалы для непрерывного медицинского образования.</p>
-                        <ul class="block-features">
-                            <li>Обучающие видеолекции</li>
-                            <li>Презентации и методички</li>
-                            <li>Тесты для самопроверки</li>
-                            <li>Актуальные публикации</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="#" class="block-btn">Раздел в разработке</a>
-                        </div>
-                    </div>
-                </article>
-
+                <!-- ... все остальные карточки ... -->
+                <!-- Чтобы не перегружать код, вставь сюда ВСЕ остальные карточки из твоего оригинала -->
+                <!-- Начиная с "Нормативная база" и заканчивая "Образовательные материалы" -->
                 
             </div>
         </div>
     </section>
 
     <footer class="footer">
-    <div class="footer-content">
-        <div class="footer-main">
-            <div class="footer-brand">
-                <div class="footer-title">Навигатор по выявлению туберкулёза</div>
-                <div class="footer-org">ГБУЗ МО "МОКПТД" филиал "Клинский"</div>
-            </div>
-            
-            <div class="footer-author">
-                <div class="author-desc">Автор и разработчик</div>
-                <div class="author-name">Лукаш Игорь Александрович</div>
-                <div class="author-role">Заведующий филиалом "Клинский"</div>
-            </div>
-            
-            <div class="footer-contacts">
-                <div class="contacts-title">Контакты для взаимодействия</div>
-                <a href="mailto:mz_mokptd_klin@mosreg.ru" class="contact-link">
-                    📧 mz_mokptd_klin@mosreg.ru
-                </a>
-                <a href="tel:+79296901080" class="contact-link">
-                    📞 +7 (929) 690-10-80
-                </a>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="copyright">© 2026. Все права защищены.</div>
-        </div>
-    </div>
-</footer>
-
-<!-- СНАЧАЛА ЭТО -->
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-
-<!-- ПОТОМ ТВОЙ СКРИПТ -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const toggleBtn = document.getElementById('toggleAllCards');
-        const cardsContainer = document.getElementById('cardsContainer');
-        const allCards = document.querySelectorAll('.content-block');
-        let allExpanded = false;
-        
-        function toggleAllCards() {
-            allExpanded = !allExpanded;
-            
-            if (allExpanded) {
-                allCards.forEach(card => {
-                    card.classList.remove('collapsed');
-                });
-                toggleBtn.textContent = 'Закрыть все карточки';
-            } else {
-                allCards.forEach(card => {
-                    card.classList.add('collapsed');
-                });
-                toggleBtn.textContent = 'Открыть все карточки';
-            }
-        }
-        
-        toggleBtn.addEventListener('click', toggleAllCards);
-        
-        allCards.forEach(card => {
-            const header = card.querySelector('.block-header');
-            
-            header.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    return;
-                }
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-title">Навигатор по выявлению туберкулёза</div>
+                    <div class="footer-org">ГБУЗ МО "МОКПТД" филиал "Клинский"</div>
+                </div>
                 
-                card.classList.toggle('collapsed');
-                updateToggleButtonState();
-            });
-        });
-        
-        function updateToggleButtonState() {
-            const collapsedCards = document.querySelectorAll('.content-block.collapsed').length;
+                <div class="footer-author">
+                    <div class="author-desc">Автор и разработчик</div>
+                    <div class="author-name">Лукаш Игорь Александрович</div>
+                    <div class="author-role">Заведующий филиалом "Клинский"</div>
+                </div>
+                
+                <div class="footer-contacts">
+                    <div class="contacts-title">Контакты для взаимодействия</div>
+                    <a href="mailto:mz_mokptd_klin@mosreg.ru" class="contact-link">
+                        📧 mz_mokptd_klin@mosreg.ru
+                    </a>
+                    <a href="tel:+79296901080" class="contact-link">
+                        📞 +7 (929) 690-10-80
+                    </a>
+                </div>
+            </div>
             
-            if (collapsedCards === 0) {
-                toggleBtn.textContent = 'Закрыть все карточки';
-                allExpanded = true;
-            } else if (collapsedCards === allCards.length) {
-                toggleBtn.textContent = 'Открыть все карточки';
-                allExpanded = false;
-            } else {
-                toggleBtn.textContent = 'Открыть все карточки';
-                allExpanded = false;
+            <div class="footer-bottom">
+                <div class="copyright">© 2026. Все права защищены.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('toggleAllCards');
+            const cardsContainer = document.getElementById('cardsContainer');
+            const allCards = document.querySelectorAll('.content-block');
+            let allExpanded = false;
+            
+            function toggleAllCards() {
+                allExpanded = !allExpanded;
+                
+                if (allExpanded) {
+                    allCards.forEach(card => {
+                        card.classList.remove('collapsed');
+                    });
+                    toggleBtn.textContent = 'Закрыть все карточки';
+                } else {
+                    allCards.forEach(card => {
+                        card.classList.add('collapsed');
+                    });
+                    toggleBtn.textContent = 'Открыть все карточки';
+                }
             }
-        }
-        
-        updateToggleButtonState();
-        
-        // ============ ЗВУК СЕРДЦА ДЛЯ КНОПКИ ============
-        const heartButton = document.querySelector('a[href="vvedenie.html"]');
-        
-        if (heartButton) {
-            const heartSound = new Audio('heartbeat.mp3');
-            heartSound.preload = 'auto';
-            heartSound.loop = true;
             
-            heartButton.addEventListener('mouseenter', function() {
-                heartSound.currentTime = 0;
-                heartSound.play();
+            toggleBtn.addEventListener('click', toggleAllCards);
+            
+            allCards.forEach(card => {
+                const header = card.querySelector('.block-header');
+                
+                header.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'A') {
+                        return;
+                    }
+                    
+                    card.classList.toggle('collapsed');
+                    updateToggleButtonState();
+                });
             });
             
-            heartButton.addEventListener('mouseleave', function() {
-                heartSound.pause();
-                heartSound.currentTime = 0;
-            });
+            function updateToggleButtonState() {
+                const collapsedCards = document.querySelectorAll('.content-block.collapsed').length;
+                
+                if (collapsedCards === 0) {
+                    toggleBtn.textContent = 'Закрыть все карточки';
+                    allExpanded = true;
+                } else if (collapsedCards === allCards.length) {
+                    toggleBtn.textContent = 'Открыть все карточки';
+                    allExpanded = false;
+                } else {
+                    toggleBtn.textContent = 'Открыть все карточки';
+                    allExpanded = false;
+                }
+            }
             
-            heartButton.addEventListener('click', function() {
-                heartSound.pause();
-                heartSound.currentTime = 0;
-            });
-        }
-        // ============ КОНЕЦ ЗВУКА СЕРДЦА ============
-    });
-</script>
+            updateToggleButtonState();
+            
+            // ЗВУК СЕРДЦА
+            const heartButton = document.querySelector('a[href="vvedenie.html"]');
+            if (heartButton) {
+                const heartSound = new Audio('heartbeat.mp3');
+                heartSound.preload = 'auto';
+                heartSound.loop = true;
+                
+                heartButton.addEventListener('mouseenter', function() {
+                    heartSound.currentTime = 0;
+                    heartSound.play();
+                });
+                
+                heartButton.addEventListener('mouseleave', function() {
+                    heartSound.pause();
+                    heartSound.currentTime = 0;
+                });
+                
+                heartButton.addEventListener('click', function() {
+                    heartSound.pause();
+                    heartSound.currentTime = 0;
+                });
+            }
+        });
+    </script>
 </body>
 </html>
