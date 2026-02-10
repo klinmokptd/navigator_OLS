@@ -95,18 +95,37 @@ body {
     width: 100%;
 }
 
-/* АНИМАЦИЯ ЛЁГКИХ - МАКСИМАЛЬНО СЛЕВА */
+<!-- В разделе CSS, в медиа-запросах не меняем, но в основном стиле: -->
 .lungs-animation-wrapper {
     flex-shrink: 0;
-    width: 180px;
-    height: 180px;
+    width: 220px; /* Увеличено с 180px */
+    height: 220px; /* Увеличено с 180px */
     margin-left: 0;
     padding-left: 0;
 }
 
-#lungsAnimation {
-    width: 100%;
-    height: 100%;
+/* Для планшетов (769px-1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .lungs-animation-wrapper {
+        width: 190px; /* Увеличено с 160px */
+        height: 190px; /* Увеличено с 160px */
+    }
+}
+
+/* Для мобильных (max-width: 768px) */
+@media (max-width: 768px) {
+    .lungs-animation-wrapper {
+        width: 170px; /* Увеличено с 150px */
+        height: 170px; /* Увеличено с 150px */
+    }
+}
+
+/* Для очень маленьких экранов (max-width: 480px) */
+@media (max-width: 480px) {
+    .lungs-animation-wrapper {
+        width: 140px; /* Увеличено с 120px */
+        height: 140px; /* Увеличено с 120px */
+    }
 }
 
 /* ТЕКСТОВЫЙ БЛОК - СПРАВА ОТ АНИМАЦИИ */
