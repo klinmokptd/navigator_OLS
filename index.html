@@ -73,6 +73,7 @@ body {
 }
 
 /* ================= ШАПКА ================= */
+./* ================= ШАПКА ================= */
 .header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
     color: white;
@@ -88,43 +89,14 @@ body {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 30px;
+    justify-content: flex-start; /* Все к левому краю */
+    gap: 40px;
 }
 
-/* ЛОГОТИП - СЛЕВА */
-.logo-area {
-    flex-shrink: 0;
-    text-align: left;
-    max-width: 320px;
-}
-
-.logo-text h1 {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-    line-height: 1.2;
-}
-
-.logo-text p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    line-height: 1.3;
-}
-
-/* БЛОК С АНИМАЦИЕЙ И ЗАГОЛОВКОМ - ГОРИЗОНТАЛЬНО */
-.header-title-area {
-    display: flex;
-    align-items: center;
-    gap: 30px;
-    flex-grow: 1;
-    justify-content: flex-start;
-}
-
-/* АНИМАЦИЯ ЛЁГКИХ - СЛЕВА ВНУТРИ БЛОКА */
+/* АНИМАЦИЯ ЛЁГКИХ - САМАЯ ЛЕВАЯ ЧАСТЬ */
 .lungs-animation-container {
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     flex-shrink: 0;
 }
 
@@ -134,12 +106,12 @@ body {
 }
 
 /* ТЕКСТОВЫЙ БЛОК - СПРАВА ОТ АНИМАЦИИ */
-.header-title-block {
+.header-content {
     text-align: left;
     flex-grow: 1;
 }
 
-.header-title {
+.organization-title {
     font-size: 1.8rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
@@ -147,11 +119,30 @@ body {
     letter-spacing: -0.3px;
 }
 
-.header-subtitle {
+.navigator-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+    color: #FFEB3B;
+    border-left: 4px solid var(--accent-red);
+    padding-left: 15px;
+    margin-left: 15px;
+}
+
+.organization-subtitle {
     font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 0.8rem;
+    font-weight: 400;
+}
+
+.navigator-subtitle {
+    font-size: 1.2rem;
     opacity: 0.95;
     line-height: 1.4;
-    max-width: 700px;
+    max-width: 800px;
+    font-weight: 500;
 }
 
 /* ================= ЦЕЛЬ ПРОЕКТА ================= */
@@ -665,28 +656,28 @@ body {
 </head>
 <body>
     <header class="header">
-        <div class="header-container">
-            <div class="logo-area">
-                <div class="logo-text">
-                    <h1>ГБУЗ МО "МОКПД"</h1>
-                    <p>Филиал "Клинский"</p>
-                </div>
+    <div class="header-container">
+        <!-- АНИМАЦИЯ ЛЁГКИХ - САМАЯ ЛЕВАЯ -->
+        <div class="lungs-animation-container">
+            <div id="lungsAnimation"></div>
+        </div>
+        
+        <!-- ВЕСЬ ТЕКСТ СПРАВА ОТ АНИМАЦИИ -->
+        <div class="header-content">
+            <!-- СТРОКА 1: Организация и навигатор -->
+            <div style="display: flex; align-items: baseline; margin-bottom: 0.8rem;">
+                <h1 class="organization-title">ГБУЗ МО "МОКПД" | Филиал "Клинский"</h1>
+                <h2 class="navigator-title">Навигатор по выявлению туберкулеза</h2>
             </div>
             
-            <!-- НОВАЯ СТРУКТУРА С АНИМАЦИЕЙ ЛЁГКИХ -->
-            <div class="header-title-area">
-                <div class="lungs-animation-container">
-                    <!-- Контейнер для анимации лёгких -->
-                    <div id="lungsAnimation"></div>
-                </div>
-                
-                <div class="header-title-block">
-                    <h2 class="header-title">Навигатор по выявлению туберкулеза</h2>
-                    <p class="header-subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена, узких специалистов и сотрудников профильных служб</p>
-                </div>
+            <!-- СТРОКА 2: Подзаголовки -->
+            <div>
+                <p class="organization-subtitle">Профилактика, диагностика, алгоритмы действий</p>
+                <p class="navigator-subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена, узких специалистов и сотрудников профильных служб</p>
             </div>
         </div>
-    </header>
+    </div>
+</header>
 
     <section class="mission-section">
         <div class="mission-container">
