@@ -76,7 +76,7 @@ body {
 .header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
     color: white;
-    padding: 2.5rem 0;
+    padding: 1.8rem 0; /* Уменьшено с 2.5rem */
     border-bottom: 4px solid var(--accent-red);
     width: 100%;
     text-align: center;
@@ -96,7 +96,7 @@ body {
 .logo-area {
     width: 100%;
     text-align: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem; /* Уменьшено с 1.5rem */
 }
 
 .logo-text h1 {
@@ -115,14 +115,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 0.8rem; /* Уменьшено с 1rem */
     margin-bottom: 0.5rem;
     width: 100%;
 }
 
+/* УВЕЛИЧИВАЕМ АНИМАЦИЮ ЛЁГКИХ */
 .lungs-animation-container {
-    width: 180px;
-    height: 180px;
+    width: 300px; /* Увеличено с 180px */
+    height: 300px; /* Увеличено с 180px */
 }
 
 #lungsAnimation {
@@ -135,19 +136,20 @@ body {
     text-align: center;
 }
 
+/* ДЕЛАЕМ ТЕКСТОВЫЙ БЛОК КОМПАКТНЕЕ */
 .header-title {
-    font-size: 2.5rem;
+    font-size: 2.2rem; /* Уменьшено с 2.5rem */
     font-weight: 700;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem; /* Уменьшено с 0.8rem */
     line-height: 1.2;
     letter-spacing: -0.5px;
 }
 
 .header-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.15rem; /* Уменьшено с 1.25rem */
     opacity: 0.95;
     max-width: 900px;
-    line-height: 1.5;
+    line-height: 1.4; /* Уменьшено с 1.5 */
     margin: 0 auto;
 }
 
@@ -465,7 +467,7 @@ body {
     }
     
     .header {
-        padding: 2rem 0;
+        padding: 1.5rem 0; /* Адаптивно уменьшено */
     }
     
     .logo-text h1 {
@@ -477,16 +479,17 @@ body {
     }
     
     .lungs-animation-container {
-        width: 150px;
-        height: 150px;
+        width: 220px; /* Адаптивно для мобилок */
+        height: 220px;
     }
     
     .header-title {
-        font-size: 1.8rem;
+        font-size: 1.6rem; /* Адаптивно уменьшено */
     }
     
     .header-subtitle {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        line-height: 1.3;
     }
     
     .mission-section {
@@ -552,16 +555,16 @@ body {
 
 @media (max-width: 480px) {
     .header-title {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
     
     .header-subtitle {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
     
     .lungs-animation-container {
-        width: 120px;
-        height: 120px;
+        width: 180px; /* Для очень маленьких экранов */
+        height: 180px;
     }
     
     .blocks-section {
@@ -590,12 +593,12 @@ body {
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .lungs-animation-container {
-        width: 160px;
-        height: 160px;
+        width: 280px; /* Для планшетов */
+        height: 280px;
     }
     
     .header-title {
-        font-size: 2.2rem;
+        font-size: 2rem; /* Немного уменьшаем для планшетов */
     }
     
     .blocks-grid {
