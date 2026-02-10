@@ -73,13 +73,13 @@ body {
 }
 
 /* ================= ХЕДЕР ================= */
-/* ================= ХЕДЕР ================= */
 .header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
     color: white;
     padding: 2.5rem 0;
     border-bottom: 4px solid var(--accent-red);
     width: 100%;
+    position: relative;
 }
 
 .header-container {
@@ -95,6 +95,7 @@ body {
     align-items: center;
     text-align: center;
     width: 100%;
+    position: relative;
 }
 
 /* Верхняя строка - над анимацией */
@@ -103,28 +104,34 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin-bottom: -40px; /* Увеличено для большего наложения */
+    margin-bottom: 10px; /* Только небольшой отступ */
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
+    position: relative;
+    z-index: 2;
 }
 
 /* Анимация по центру - увеличена в 1.5 раза */
 .lungs-animation-wrapper {
     width: 360px; /* Было 240px, стало 360px (+120px) */
     height: 360px; /* Было 240px, стало 360px (+120px) */
-    margin: 0 auto;
+    margin: -40px auto -40px; /* Отрицательные отступы сверху и снизу */
+    position: relative;
+    z-index: 1;
 }
 
 /* Заголовок - под анимацией */
 .main-title {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-top: -40px; /* Увеличено для большего наложения */
+    margin-top: 10px; /* Только небольшой отступ */
     margin-bottom: 0.8rem;
     line-height: 1.2;
     letter-spacing: -0.5px;
     color: white;
+    position: relative;
+    z-index: 2;
 }
 
 .subtitle {
@@ -134,37 +141,28 @@ body {
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.95);
     margin-top: 0.5rem;
+    position: relative;
+    z-index: 2;
 }
 
 /* Для планшетов (769px-1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
     .lungs-animation-wrapper {
-        width: 280px; /* Увеличено с 240px */
-        height: 280px; /* Увеличено с 240px */
-    }
-    
-    .org-line {
-        margin-bottom: -30px;
-    }
-    
-    .main-title {
-        margin-top: -30px;
+        width: 280px;
+        height: 280px;
+        margin: -30px auto -30px;
     }
 }
 
 /* Для мобильных (max-width: 768px) */
 @media (max-width: 768px) {
     .lungs-animation-wrapper {
-        width: 280px; /* Увеличено с 200px */
-        height: 280px; /* Увеличено с 200px */
-    }
-    
-    .org-line {
-        margin-bottom: -30px; /* Увеличено с -20px */
+        width: 280px;
+        height: 280px;
+        margin: -25px auto -25px;
     }
     
     .main-title {
-        margin-top: -30px; /* Увеличено с -20px */
         font-size: 1.8rem;
     }
 }
@@ -172,16 +170,12 @@ body {
 /* Для очень маленьких экранов (max-width: 480px) */
 @media (max-width: 480px) {
     .lungs-animation-wrapper {
-        width: 200px; /* Увеличено с 140px */
-        height: 200px; /* Увеличено с 140px */
-    }
-    
-    .org-line {
-        margin-bottom: -20px; /* Увеличено с -10px */
+        width: 200px;
+        height: 200px;
+        margin: -20px auto -20px;
     }
     
     .main-title {
-        margin-top: -20px; /* Увеличено с -15px */
         font-size: 1.6rem;
     }
 }
