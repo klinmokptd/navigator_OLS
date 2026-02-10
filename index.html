@@ -3,48 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <title>Навигатор по выявлению туберкулёза | ГБУЗ МО МОКПТД филиал Клинский</title>
+    <title>Навигатор по выявлению туберкулеза | ГБУЗ МО МОКПТД филиал Клинский</title>
+    <link rel="icon" href="/navigator_OLS/favicon.ico" sizes="any">
     
     <!-- Preconnect для CDN Lottie -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     
     <style>
-        /* Подключение локальных шрифтов Inter (как в первом файле) */
+        /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 (как в первом файле) */
         @font-face {
             font-family: 'Inter';
-            font-style: normal;
-            font-weight: 400;
             src: url('fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
             font-display: swap;
         }
 
         @font-face {
             font-family: 'Inter';
-            font-style: normal;
-            font-weight: 500;
             src: url('fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
             font-display: swap;
         }
 
         @font-face {
             font-family: 'Inter';
-            font-style: normal;
-            font-weight: 600;
             src: url('fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
             font-display: swap;
         }
 
         @font-face {
             font-family: 'Inter';
-            font-style: normal;
-            font-weight: 700;
             src: url('fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
             font-display: swap;
         }
 
-        /* Переменные цветов (синяя тема как во втором файле) */
         :root {
             --primary-blue: #1A5F9E;
             --secondary-blue: #2C8BD4;
@@ -57,33 +56,40 @@
             --radius: 6px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
         }
 
         body {
-            background: var(--light-blue);
-            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            color: var(--text-primary);
+            background-color: var(--light-blue);
             min-height: 100vh;
         }
 
-        /* ШАПКА */
+        /* ================= ХЕДЕР ================= */
         .header {
             background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
             color: white;
             padding: 2.5rem 0;
             border-bottom: 4px solid var(--accent-red);
+            width: 100%;
         }
 
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 30px;
+            width: 100%;
         }
 
         .header-content {
@@ -91,49 +97,52 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+            width: 100%;
         }
 
+        /* ОРИГИНАЛЬНЫЕ СТИЛИ - текст наезжает на анимацию */
         .org-line {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 10px;
-            margin-bottom: 1rem;
+            margin-bottom: -80px;  /* ← Вот этот важный отступ */
             font-size: 1.2rem;
             font-weight: 600;
+            color: white;
         }
 
-        /* Контейнер для анимации - СНАЧАЛА ПУСТОЙ */
         .lungs-animation-wrapper {
             width: 360px;
             height: 360px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Placeholder пока анимация не загружена */
+        .lungs-placeholder {
+            width: 100%;
+            height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
+            font-size: 120px;
+            opacity: 0.2;
+            color: white;
         }
 
-        /* Заглушка пока анимация не загружена */
-        .lungs-placeholder {
-            font-size: 100px;
-            opacity: 0.3;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.5; }
-        }
-
+        /* ОРИГИНАЛЬНЫЕ СТИЛИ - заголовок поднимается вверх */
         .main-title {
             font-size: 2.5rem;
             font-weight: 700;
-            margin-top: 1rem;
+            margin-top: -80px;  /* ← Вот этот важный отступ */
             margin-bottom: 0.8rem;
             line-height: 1.2;
+            letter-spacing: -0.5px;
+            color: white;
+            position: relative;
+            z-index: 2;
         }
 
         .subtitle {
@@ -141,18 +150,70 @@
             opacity: 0.95;
             max-width: 900px;
             line-height: 1.5;
+            color: rgba(255, 255, 255, 0.95);
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 2;
         }
 
-        /* ЦЕЛЬ ПРОЕКТА */
+        @media (max-width: 768px) {
+            .header {
+                padding: 2rem 0;
+            }
+            
+            .org-line {
+                margin-bottom: -60px;
+                font-size: 1.1rem;
+            }
+            
+            .lungs-animation-wrapper {
+                width: 280px;
+                height: 280px;
+            }
+            
+            .main-title {
+                margin-top: -60px;
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .org-line {
+                margin-bottom: -40px;
+                font-size: 1rem;
+            }
+            
+            .lungs-animation-wrapper {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .main-title {
+                margin-top: -40px;
+                font-size: 1.6rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* ================= ЦЕЛЬ ПРОЕКТА ================= */
         .mission-section {
             background: var(--white);
             padding: 2.5rem 0;
+            width: 100%;
         }
 
         .mission-container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 0 30px;
+            width: 100%;
         }
 
         .mission-card {
@@ -161,6 +222,7 @@
             padding: 2.5rem;
             box-shadow: var(--shadow);
             border-top: 4px solid var(--accent-red);
+            text-align: left;
         }
 
         .mission-title {
@@ -174,17 +236,20 @@
             font-size: 1.15rem;
             line-height: 1.7;
             color: var(--text-secondary);
+            margin-bottom: 1.5rem;
         }
 
-        /* КАРТОЧКИ */
+        /* ================= КАРТОЧКИ ================= */
         .blocks-section {
             padding: 2.5rem 0;
+            width: 100%;
         }
 
         .blocks-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 30px;
+            width: 100%;
         }
 
         .toggle-all-btn {
@@ -201,19 +266,22 @@
             transition: all 0.3s;
             box-shadow: var(--shadow);
             border-bottom: 4px solid var(--accent-red);
-            max-width: 500px;
+            text-align: center;
             width: 100%;
+            max-width: 500px;
         }
 
         .toggle-all-btn:hover {
             background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
             transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(26, 95, 158, 0.15);
         }
 
         .blocks-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 25px;
+            width: 100%;
         }
 
         .content-block {
@@ -222,7 +290,11 @@
             overflow: hidden;
             box-shadow: var(--shadow);
             border: 1px solid #E0E5EC;
-            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s ease;
+            width: 100%;
+            text-align: left;
         }
 
         .content-block.collapsed {
@@ -245,6 +317,8 @@
             display: flex;
             align-items: center;
             position: relative;
+            flex-shrink: 0;
+            width: 100%;
         }
 
         .block-header::after {
@@ -257,11 +331,26 @@
             background: var(--accent-red);
         }
 
+        .block-text {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 50px;
+            width: 100%;
+        }
+
         .block-title {
             font-size: 1.3rem;
             font-weight: 600;
             margin-bottom: 5px;
             line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 3.2em;
         }
 
         .block-subtitle {
@@ -272,12 +361,18 @@
 
         .block-content {
             padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
         }
 
         .block-description {
             color: var(--text-secondary);
             margin-bottom: 1.2rem;
             line-height: 1.6;
+            flex-grow: 1;
+            font-size: 1.05rem;
         }
 
         .block-features {
@@ -290,6 +385,7 @@
             padding-left: 24px;
             position: relative;
             color: var(--text-primary);
+            font-size: 1rem;
         }
 
         .block-features li::before {
@@ -303,6 +399,7 @@
         }
 
         .block-actions {
+            margin-top: auto;
             padding-top: 1rem;
             border-top: 1px solid #E0E5EC;
         }
@@ -315,6 +412,7 @@
             border-radius: var(--radius);
             text-decoration: none;
             font-weight: 500;
+            font-size: 0.95rem;
             transition: background 0.3s;
         }
 
@@ -322,18 +420,21 @@
             background: var(--secondary-blue);
         }
 
-        /* ФУТЕР */
+        /* ================= ФУТЕР ================= */
         .footer {
             background: #1a365d;
             color: #e2e8f0;
             padding: 2.5rem 0 1.5rem;
             margin-top: 3rem;
+            font-family: 'Inter', sans-serif;
+            width: 100%;
         }
 
         .footer-content {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 30px;
+            width: 100%;
         }
 
         .footer-main {
@@ -343,6 +444,7 @@
             margin-bottom: 2rem;
             padding-bottom: 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
         }
 
         .footer-brand,
@@ -358,6 +460,15 @@
             font-weight: 600;
             color: white;
             margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-org,
+        .author-name,
+        .author-role,
+        .contact-link {
+            font-size: 1rem;
+            line-height: 1.5;
         }
 
         .author-name {
@@ -372,6 +483,7 @@
             text-decoration: none;
             margin-bottom: 8px;
             transition: color 0.2s;
+            padding: 3px 0;
         }
 
         .contact-link:hover {
@@ -391,21 +503,20 @@
             opacity: 0.8;
         }
 
-        /* АДАПТИВНОСТЬ */
         @media (max-width: 768px) {
+            .header-container,
+            .mission-container,
+            .blocks-container,
+            .footer-content {
+                padding: 0 20px !important;
+            }
+            
             .header {
                 padding: 2rem 0;
             }
             
-            .org-line {
-                flex-direction: column;
-                gap: 5px;
-                margin-bottom: 1.5rem;
-            }
-            
-            .lungs-animation-wrapper {
-                width: 280px;
-                height: 280px;
+            .header-content {
+                gap: 1rem;
             }
             
             .main-title {
@@ -416,22 +527,68 @@
                 font-size: 1.1rem;
             }
             
+            .mission-section {
+                padding: 2rem 0;
+            }
+            
+            .mission-card {
+                padding: 1.5rem;
+            }
+            
+            .mission-title {
+                font-size: 1.5rem;
+            }
+            
+            .mission-text {
+                font-size: 1rem;
+            }
+            
             .blocks-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
+                gap: 20px;
+            }
+            
+            .toggle-all-btn {
+                padding: 12px 20px;
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+                max-width: 100%;
+            }
+            
+            .footer {
+                padding: 2rem 0 1rem;
+                margin-top: 2rem;
             }
             
             .footer-main {
                 flex-direction: column;
+                gap: 30px;
+                margin-bottom: 1.5rem;
+                padding-bottom: 1.5rem;
                 text-align: center;
+            }
+            
+            .footer-brand,
+            .footer-author,
+            .footer-contacts {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .footer-title,
+            .author-desc,
+            .contacts-title {
+                font-size: 1.1rem;
             }
         }
 
         @media (max-width: 480px) {
-            .lungs-animation-wrapper {
-                width: 200px;
-                height: 200px;
-            }
-            
             .main-title {
                 font-size: 1.6rem;
             }
@@ -440,16 +597,16 @@
                 font-size: 1rem;
             }
             
+            .blocks-section {
+                padding: 2rem 0;
+            }
+            
             .mission-card {
-                padding: 1.5rem;
+                padding: 1.25rem;
             }
             
             .mission-title {
                 font-size: 1.3rem;
-            }
-            
-            .mission-text {
-                font-size: 1rem;
             }
             
             .block-header {
@@ -463,10 +620,24 @@
                 min-height: 120px;
             }
         }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .main-title {
+                font-size: 2.2rem;
+            }
+            
+            .blocks-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .lungs-animation-wrapper {
+                width: 400px;
+                height: 400px;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- ШАПКА -->
     <header class="header">
         <div class="header-container">
             <div class="header-content">
@@ -483,15 +654,11 @@
                 
                 <h1 class="main-title">Навигатор по выявлению туберкулёза</h1>
                 
-                <p class="subtitle">
-                    Нормативные документы, алгоритмы и инструменты для врачей первичного звена,<br>
-                    узких специалистов и сотрудников профильных служб
-                </p>
+                <p class="subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена,<br>узких специалистов и сотрудников профильных служб</p>
             </div>
         </div>
     </header>
 
-    <!-- ЦЕЛЬ ПРОЕКТА -->
     <section class="mission-section">
         <div class="mission-container">
             <div class="mission-card">
@@ -504,13 +671,12 @@
         </div>
     </section>
 
-    <!-- КАРТОЧКИ -->
     <section class="blocks-section">
         <div class="blocks-container">
             <button class="toggle-all-btn" id="toggleAllCards">Открыть все карточки</button>
             
             <div class="blocks-grid" id="cardsContainer">
-                <!-- Карточка 1 -->
+                <!-- Карточка 1: Почему туберкулёз — ваша задача? -->
                 <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
@@ -534,8 +700,7 @@
                     </div>
                 </article>
 
-                <!-- Остальные карточки остаются без изменений -->
-                <!-- Карточка 2 -->
+                <!-- Карточка 2: Нормативная база -->
                 <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
@@ -557,10 +722,228 @@
                     </div>
                 </article>
 
-                <!-- Добавьте остальные 11 карточек здесь... -->
-                <!-- Для экономии места показываю только первые 2 -->
+                <!-- Карточка 3: Практическое применение -->
+                <article class="content-block collapsed">
+                    <div class="block-header">
+                        <div class="block-text">
+                            <h3 class="block-title">Регламент действий по уровням</h3>
+                            <p class="block-subtitle">Структурированные алгоритмы действий</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">
+                            Поэтапное распределение функциональных обязанностей и процедурные алгоритмы для каждого уровня медицинской организации в соответствии с нормативно-правовой базой.
+                        </p>
+                        <ul class="block-features">
+                            <li>Заместители руководителя</li>
+                            <li>Заведующие подразделениями</li>
+                            <li>Врачи-терапевты участковые</li>
+                            <li>Врачи-специалисты</li>
+                            <li>Средний медицинский персонал</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Подробнее</a>
+                        </div>
+                    </div>
+                </article>
 
-                <!-- Карточка 13 -->
+                <!-- Карточка 4: Контроль выполнения -->
+                <article class="content-block collapsed">
+                    <div class="block-header">
+                        <div class="block-text">
+                            <h3 class="block-title">Контроль выполнения:<br>планы и факты</h3>
+                            <p class="block-subtitle">Охват обследованиями</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Сводные данные выполнения планов скрининга взрослого и детского населения для управления ресурсами и коррекции работы на местах.</p>
+                        <ul class="block-features">
+                            <li>Динамика по взрослым и детям отдельно</li>
+                            <li>Рейтинг территорий и ЛПУ</li>
+                            <li>Прогноз выполнения годового плана</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Раздел в разработке</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Карточка 5: Мониторинг раннего выявления туберкулёза -->
+                <article class="content-block collapsed">
+                    <div class="block-header">
+                        <div class="block-text">
+                            <h3 class="block-title">Мониторинг раннего выявления туберкулёза</h3>
+                            <p class="block-subtitle">Для ответственных за МедИнфо</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Работа с распоряжением № 445 от 09.04.2025 об организации мониторинга профилактических осмотров.</p>
+                        <ul class="block-features">
+                            <li>Формы для заполнения в МедИнфо</li>
+                            <li>Сроки подачи отчётов</li>
+                            <li>Критерии несвоевременного выявления</li>
+                            <li>Сводные планы и статистика</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Открыть раздел</a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Карточка 6: Опыт других учреждений -->
+                <article class="content-block collapsed">
+                    <div class="block-header">
+                        <div class="block-text">
+                            <h3 class="block-title">Опыт других учреждений ОЛС</h3>
+                            <p class="block-subtitle">Обучение на примерах</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Лекции, вебинары и учебные материалы для непрерывного медицинского образования.</p>
+                        <ul class="block-features">
+                            <li>Обучающие видеолекции</li>
+                            <li>Презентации и методички</li>
+                            <li>Тесты для самопроверки</li>
+                            <li>Актуальные публикации</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Раздел в разработке</a>
+                        </div>
+                    </div>
+                </article>
+
+                 <!-- Карточка 7: Разбор случаев -->
+                <article class="content-block collapsed">
+                    <div class="block-header">
+                        <div class="block-text">
+                            <h3 class="block-title">Разбор случаев выявления</h3>
+                            <p class="block-subtitle">Опыт специалистов</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Разборы сложных случаев, комментарии фтизиатров и анализ типичных ошибок в диагностике.</p>
+                        <ul class="block-features">
+                            <li>Видеокомментарии специалистов</li>
+                            <li>Разборы клинических случаев</li>
+                            <li>Типичные диагностические ошибки</li>
+                            <li>Ответы на частые вопросы</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Раздел в разработке</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Карточка 8: Диагностические алгоритмы -->
+                <article class="content-block collapsed">
+                    <div class="block-header">
+                        <div class="block-text">
+                            <h3 class="block-title">Диагностические алгоритмы</h3>
+                            <p class="block-subtitle">Пошаговые инструкции</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Четкие схемы действий при различных клинических ситуациях и результатах обследований.</p>
+                        <ul class="block-features">
+                            <li>Алгоритм при изменении на флюорографии</li>
+                            <li>Работа с группой риска</li>
+                            <li>Дифференциальная диагностика</li>
+                            <li>Действия при отказе от обследования</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Раздел в разработке</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Карточка 9: Телемедицина -->
+                <article class="content-block collapsed">
+                    <div class="block-header">
+                        <div class="block-text">
+                            <h3 class="block-title">Телемедицина с ГБУЗ МО МОКПТД</h3>
+                            <p class="block-subtitle">Быстрые решения</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Телемедицинские консультации со специалистами областного противотуберкулезного диспансера для сложных диагностических случаев через видеоконференц-связь.</p>
+                        <ul class="block-features">
+                            <li>Когда нужна консультация</li>
+                            <li>Пошаговый алгоритм организации ТМК</li>
+                            <li>Контакты для согласования времени</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="tmk.html" class="block-btn">Перейти к инструкции</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Карточка 10: Сбор мокроты -->
+                <article class="content-block collapsed">
+                    <div class="block-header">
+                        <div class="block-text">
+                            <h3 class="block-title">Сбор биоматериала: мокрота</h3>
+                            <p class="block-subtitle">Алгоритм и инструкция</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Пошаговая инструкция по правильному сбору, маркировке, упаковке и транспортировке биоматериала напрямую в лабораторию МОКПТД.</p>
+                        <ul class="block-features">
+                            <li>Работа в 1С ЛИС</li>
+                            <li>Двукратный сбор материала</li>
+                            <li>Правила маркировки флаконов</li>
+                            <li>Упаковка инфекционного материала</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="mokrota_sbor.html" class="block-btn">Открыть инструкцию</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Карточка 11: Патологоанатомы -->
+                <article class="content-block collapsed">
+                    <div class="block-header">
+                        <div class="block-text">
+                            <h3 class="block-title">Взаимодействие с патологоанатомами</h3>
+                            <p class="block-subtitle">При выявлении на вскрытии</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Алгоритм взаимодействия при подозрении на туберкулез как причину смерти. Включает памятку для врачей-патологоанатомов и судмедэкспертов.</p>
+                        <ul class="block-features">
+                            <li>Немедленное уведомление МОКПТД</li>
+                            <li>Забор материала для микробиологии</li>
+                            <li>Совместная оценка причины смерти</li>
+                            <li>Доступна памятка и QR-код для стенда</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="https://klinmokptd.github.io/sudmed/" target="_blank" class="block-btn">Подробнее об алгоритме</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Карточка 12: Ресурсы и контакты -->
+                <article class="content-block collapsed">
+                    <div class="block-header">
+                        <div class="block-text">
+                            <h3 class="block-title">Ресурсы и контакты</h3>
+                            <p class="block-subtitle">Справочная информация</p>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <p class="block-description">Контакты специализированных учреждений и полезные ресурсы для оперативного решения вопросов.</p>
+                        <ul class="block-features">
+                            <li>Контакты противотуберкулезного диспансера</li>
+                            <li>Телефоны "горячих линий"</li>
+                            <li>Официальные сайты и ресурсы</li>
+                            <li>Контакты ответственных лиц</li>
+                        </ul>
+                        <div class="block-actions">
+                            <a href="#" class="block-btn">Раздел в разработке</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Карточка 13: Образовательные материалы -->
                 <article class="content-block collapsed">
                     <div class="block-header">
                         <div class="block-text">
@@ -581,11 +964,11 @@
                         </div>
                     </div>
                 </article>
+                
             </div>
         </div>
     </section>
 
-    <!-- ФУТЕР -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-main">
@@ -617,13 +1000,13 @@
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // 1. ОСНОВНАЯ ЛОГИКА СТРАНИЦЫ (загружается сразу)
+        // УПРОЩЕННЫЙ И ОПТИМИЗИРОВАННЫЙ КОД
+        
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Основной контент загружен');
+            console.log('Основной контент загружен - страница открыта!');
             
-            // Управление карточками
+            // 1. Управление карточками (работает сразу)
             const toggleBtn = document.getElementById('toggleAllCards');
             const allCards = document.querySelectorAll('.content-block');
             let allExpanded = false;
@@ -654,34 +1037,32 @@
                 }
             });
             
-            // 2. ЗАГРУЗКА АНИМАЦИИ ПОСЛЕ ОСНОВНОГО КОНТЕНТА
-            setTimeout(loadLottieAnimation, 2000); // Ждем 2 секунды
+            // 2. Загрузка анимации ПОСЛЕ основного контента (через 2 секунды)
+            setTimeout(loadLottieAnimation, 2000);
         });
         
-        // 3. ФУНКЦИЯ ЗАГРУЗКИ АНИМАЦИИ (выполняется через 2 секунды)
+        // Функция загрузки анимации Lottie
         function loadLottieAnimation() {
-            console.log('Начинаем загрузку анимации Lottie...');
+            console.log('Начинаем фоновую загрузку анимации...');
             
             const container = document.getElementById('lungsContainer');
             const placeholder = document.getElementById('lungsPlaceholder');
             
-            if (!container) {
-                console.log('Контейнер для анимации не найден');
-                return;
-            }
+            if (!container) return;
             
             // Создаем скрипт Lottie динамически
             const script = document.createElement('script');
             script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js';
             script.crossOrigin = 'anonymous';
+            script.async = true;
             
             script.onload = function() {
-                console.log('Lottie.js загружен, загружаем анимацию...');
+                console.log('Lottie.js загружен, пробуем запустить анимацию...');
                 
-                // Пытаемся загрузить анимацию
                 try {
                     if (typeof lottie !== 'undefined') {
-                        lottie.loadAnimation({
+                        // Пробуем загрузить анимацию
+                        const animation = lottie.loadAnimation({
                             container: container,
                             renderer: 'svg',
                             loop: true,
@@ -689,38 +1070,26 @@
                             path: 'lungs.json'
                         });
                         
-                        // Убираем placeholder
+                        // Скрываем placeholder при успехе
                         if (placeholder) {
                             placeholder.style.display = 'none';
                         }
                         
-                        console.log('Анимация Lottie успешно загружена');
+                        console.log('Анимация Lottie запущена');
                     }
                 } catch (error) {
-                    console.error('Ошибка загрузки анимации:', error);
-                    // Оставляем placeholder
+                    console.log('Анимация не загрузилась, оставляем эмодзи');
                 }
             };
             
             script.onerror = function() {
-                console.log('Не удалось загрузить Lottie.js, оставляем эмодзи');
+                console.log('Не удалось загрузить Lottie.js');
                 // Оставляем emoji как fallback
             };
             
-            // Добавляем скрипт на страницу (начнется загрузка)
-            document.head.appendChild(script);
+            // Добавляем скрипт в конец body
+            document.body.appendChild(script);
         }
-        
-        // 4. Fallback: если через 5 секунд анимация не загрузилась
-        setTimeout(function() {
-            const placeholder = document.getElementById('lungsPlaceholder');
-            if (placeholder && placeholder.style.display !== 'none') {
-                console.log('Анимация не загрузилась за 5 секунд, используем эмодзи');
-                // Можно добавить стилизацию для постоянного отображения
-                placeholder.style.animation = 'none';
-                placeholder.style.opacity = '0.7';
-            }
-        }, 5000);
     </script>
 </body>
 </html>
