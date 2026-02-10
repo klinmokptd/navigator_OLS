@@ -95,7 +95,6 @@ body {
     margin-bottom: 2rem;
 }
 
-/* ФИКС ДЛЯ АНИМАЦИИ ЛЕГКИХ */
 .logo-animation {
     width: 91px;
     height: 91px;
@@ -117,7 +116,7 @@ body {
 #lungs-logo svg {
     width: 100% !important;
     height: 100% !important;
-    transform: scale(1.1); /* Лёгкая корректировка размера */
+    transform: scale(1.1);
     transform-origin: center;
 }
 
@@ -380,67 +379,55 @@ body {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.footer-brand {
-    flex: 1;
-}
-
-.footer-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 8px;
-    letter-spacing: -0.3px;
-}
-
-.footer-org {
-    font-size: 0.95rem;
-    opacity: 0.9;
-    line-height: 1.4;
-}
-
-.footer-author {
-    flex: 1;
-}
-
-.author-desc {
-    font-size: 1rem;
-    font-weight: 600;
-    color: white;
-    margin-bottom: 10px;
-    line-height: 1.4;
-}
-
-.author-name {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 5px;
-}
-
-.author-role {
-    font-size: 0.95rem;
-    opacity: 0.9;
-    line-height: 1.4;
-}
-
+.footer-brand,
+.footer-author,
 .footer-contacts {
     flex: 1;
 }
 
+/* ЕДИНЫЙ СТИЛЬ ДЛЯ ВСЕХ ЗАГОЛОВКОВ ФУТЕРА */
+.footer-title,
+.author-desc,
 .contacts-title {
     font-size: 1.1rem;
     font-weight: 600;
     color: white;
     margin-bottom: 12px;
-    letter-spacing: 0.5px;
+    line-height: 1.4;
+    letter-spacing: 0.2px;
+}
+
+/* ЕДИНЫЙ СТИЛЬ ДЛЯ ВСЕХ ТЕКСТОВ ФУТЕРА */
+.footer-org,
+.author-name,
+.author-role,
+.contact-link {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #e2e8f0;
+}
+
+/* Специфичные настройки */
+.footer-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.author-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.author-role {
+    opacity: 0.9;
 }
 
 .contact-link {
     display: block;
-    color: #e2e8f0;
     text-decoration: none;
     margin-bottom: 8px;
-    font-size: 0.95rem;
     transition: color 0.2s;
     padding: 3px 0;
 }
@@ -460,6 +447,7 @@ body {
 .copyright {
     font-size: 0.9rem;
     opacity: 0.8;
+    color: #e2e8f0;
 }
 
 @media (max-width: 768px) {
@@ -552,20 +540,22 @@ body {
         text-align: center;
     }
     
+    .footer-title {
+        font-size: 1.2rem;
+    }
+    
+    .footer-title,
+    .author-desc,
     .contacts-title {
         font-size: 1rem;
+        margin-bottom: 10px;
     }
     
-    .footer-title {
-        font-size: 1.3rem;
-    }
-    
-    .author-desc {
-        font-size: 0.95rem;
-    }
-    
-    .author-name {
-        font-size: 1rem;
+    .footer-org,
+    .author-name,
+    .author-role,
+    .contact-link {
+        font-size: 0.9rem;
     }
 }
 
@@ -634,6 +624,28 @@ body {
     
     .block-features li {
         font-size: 0.95rem;
+    }
+    
+    .footer-title {
+        font-size: 1.1rem;
+    }
+    
+    .footer-title,
+    .author-desc,
+    .contacts-title {
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+    
+    .footer-org,
+    .author-name,
+    .author-role,
+    .contact-link {
+        font-size: 0.85rem;
+    }
+    
+    .copyright {
+        font-size: 0.8rem;
     }
 }
 
