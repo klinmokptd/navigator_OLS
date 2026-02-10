@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -79,6 +79,8 @@ body {
     padding: 2.5rem 0;
     border-bottom: 4px solid var(--accent-red);
     width: 100%;
+    position: relative; /* Для позиционирования анимации */
+    overflow: hidden; /* Чтобы анимация не выходила за границы */
 }
 
 .header-container {
@@ -86,82 +88,77 @@ body {
     margin: 0 auto;
     padding: 0 30px;
     width: 100%;
+    position: relative; /* Для z-index */
+    z-index: 2; /* Чтобы текст был поверх анимации */
+}
+
+/* Контейнер для анимации как фона */
+.animation-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Под текстом */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Чтобы можно было кликать сквозь анимацию */
+}
+
+.lungs-animation-wrapper {
+    width: 500px; /* Увеличено для фона */
+    height: 500px;
+    opacity: 0.15; /* Прозрачность для фона */
 }
 
 .header-content {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 2.5rem;
+    text-align: center;
+    gap: 1.5rem;
     width: 100%;
+    position: relative;
+    z-index: 2; /* Поверх анимации */
 }
 
-.lungs-animation-wrapper {
-    flex-shrink: 0;
-    width: 240px; /* Было 180px, стало 190px (+10px) */
-    height: 240px; /* Было 180px, стало 190px (+10px) */
-    margin-left: 0;
-    padding-left: 0;
-}
-
-/* Для планшетов (769px-1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .lungs-animation-wrapper {
-        width: 150px; /* Увеличено с 160px */
-        height: 150px; /* Увеличено с 160px */
-    }
-}
-
-/* Для мобильных (max-width: 768px) */
-@media (max-width: 768px) {
-    .lungs-animation-wrapper {
-        width: 200px; /* Увеличено с 150px */
-        height: 200px; /* Увеличено с 150px */
-    }
-}
-
-/* Для очень маленьких экранов (max-width: 480px) */
-@media (max-width: 480px) {
-    .lungs-animation-wrapper {
-        width: 140px; /* Увеличено с 120px */
-        height: 140px; /* Увеличено с 120px */
-    }
-}
-
-/* ТЕКСТОВЫЙ БЛОК - СПРАВА ОТ АНИМАЦИИ */
-/* ТЕКСТОВЫЙ БЛОК - СПРАВА ОТ АНИМАЦИИ */
+/* ТЕКСТОВЫЙ БЛОК - ПО ЦЕНТРУ ПОВЕРХ АНИМАЦИИ */
 .header-text {
-    flex: 1;
-    text-align: left;
-    padding-top: 0.5rem; /* ДОБАВЬ ЭТО - поднимет весь текст немного вверх */
+    width: 100%;
+    text-align: center;
+    padding: 1rem 0;
 }
 
 .org-line {
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 10px;
-    margin-bottom: 1.8rem; /* Оставь как есть */
+    margin-bottom: 1.5rem;
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
-    margin-top: -0.5rem; /* ДОБАВЬ ЭТУ СТРОКУ */
 }
 
 .main-title {
-    font-size: 2.5rem;
+    font-size: 2.8rem; /* Увеличено для лучшей читаемости */
     font-weight: 700;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     line-height: 1.2;
     letter-spacing: -0.5px;
     color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Тень для лучшей читаемости на фоне */
 }
 
 .subtitle {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     opacity: 0.95;
     max-width: 900px;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.95);
-    margin-top: -0.3rem; /* ДОБАВЬ ЭТО - немного поднимет подзаголовок */
+    margin: 0 auto;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Легкая тень для контраста */
 }
 
 /* ================= ЦЕЛЬ ПРОЕКТА ================= */
@@ -479,28 +476,15 @@ body {
     }
     
     .header-content {
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
+        gap: 1rem;
     }
     
-    .lungs-animation-wrapper {
-        width: 150px;
-        height: 150px;
-        margin: 0 auto;
-    }
-    
-    .header-text {
-        text-align: center;
-    }
-    
-    .org-line {
-        justify-content: center;
-        flex-wrap: wrap;
+    .animation-background {
+        display: none; /* На мобильных скрываем фоновую анимацию */
     }
     
     .main-title {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     
     .subtitle {
@@ -577,11 +561,6 @@ body {
         font-size: 1rem;
     }
     
-    .lungs-animation-wrapper {
-        width: 120px;
-        height: 120px;
-    }
-    
     .blocks-section {
         padding: 2rem 0;
     }
@@ -607,11 +586,6 @@ body {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-    .lungs-animation-wrapper {
-        width: 160px;
-        height: 160px;
-    }
-    
     .main-title {
         font-size: 2.2rem;
     }
@@ -619,32 +593,39 @@ body {
     .blocks-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+    
+    .lungs-animation-wrapper {
+        width: 400px;
+        height: 400px;
+    }
 }
 /* ================= КОНЕЦ МОБИЛЬНОЙ ВЕРСИИ ================= */
     </style>
 </head>
 <body>
     <header class="header">
-    <div class="header-container">
-        <div class="header-content">
-            <!-- Анимация слева -->
+        <!-- Анимация как фон -->
+        <div class="animation-background">
             <div class="lungs-animation-wrapper">
                 <div id="lungsAnimation"></div>
             </div>
-            
-            <!-- Текст справа -->
-            <div class="header-text">
-                <div class="org-line">
-                    <span class="org-main">ГБУЗ МО "МОКПД"</span>
-                    <span class="org-separator">|</span>
-                    <span class="org-filial">Филиал "Клинский"</span>
+        </div>
+        
+        <div class="header-container">
+            <div class="header-content">
+                <!-- Текст поверх анимации -->
+                <div class="header-text">
+                    <div class="org-line">
+                        <span class="org-main">ГБУЗ МО "МОКПД"</span>
+                        <span class="org-separator">|</span>
+                        <span class="org-filial">Филиал "Клинский"</span>
+                    </div>
+                    <h1 class="main-title">Навигатор по выявлению туберкулёза</h1>
+                    <p class="subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена, узких специалистов и сотрудников профильных служб</p>
                 </div>
-                <h1 class="main-title">Навигатор по выявлению туберкулёза</h1>
-                <p class="subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена, узких специалистов и сотрудников профильных служб</p>
             </div>
         </div>
-    </div>
-</header>
+    </header>
 
     <section class="mission-section">
         <div class="mission-container">
@@ -658,6 +639,7 @@ body {
         </div>
     </section>
 
+    <!-- Остальной код остаётся без изменений -->
     <section class="blocks-section">
         <div class="blocks-container">
             <!-- Кнопка вместо заголовка "Структура навигатора" -->
