@@ -74,6 +74,7 @@ body {
 
 /* ================= ШАПКА ================= */
 ./* ================= ШАПКА ================= */
+/* ================= ШАПКА ================= */
 .header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
     color: white;
@@ -88,16 +89,16 @@ body {
     padding: 0 30px;
     width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Все к левому краю */
-    gap: 40px;
+    align-items: flex-start; /* Выравниваем по верху */
+    gap: 30px;
 }
 
-/* АНИМАЦИЯ ЛЁГКИХ - САМАЯ ЛЕВАЯ ЧАСТЬ */
+/* АНИМАЦИЯ ЛЁГКИХ - ЛЕВАЯ ЧАСТЬ */
 .lungs-animation-container {
-    width: 200px;
-    height: 200px;
+    width: 180px;
+    height: 180px;
     flex-shrink: 0;
+    margin-top: 10px; /* Чтобы выровнять с текстом */
 }
 
 #lungsAnimation {
@@ -105,44 +106,53 @@ body {
     height: 100%;
 }
 
-/* ТЕКСТОВЫЙ БЛОК - СПРАВА ОТ АНИМАЦИИ */
+/* ВСЁ ТЕКСТОВОЕ СОДЕРЖИМОЕ */
 .header-content {
-    text-align: left;
     flex-grow: 1;
+    text-align: left;
 }
 
-.organization-title {
+/* ПЕРВАЯ СТРОКА: Организация и филиал */
+.header-line-1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+    flex-wrap: wrap;
+}
+
+.org-name {
     font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
-    letter-spacing: -0.3px;
 }
 
-.navigator-title {
+.separator {
     font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.filial-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+/* ВТОРАЯ СТРОКА: Название навигатора */
+.header-line-2 {
+    margin-bottom: 8px;
+}
+
+.nav-title {
+    font-size: 2.2rem;
+    font-weight: 700;
     line-height: 1.2;
-    color: #FFEB3B;
-    border-left: 4px solid var(--accent-red);
-    padding-left: 15px;
-    margin-left: 15px;
 }
 
-.organization-subtitle {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    margin-bottom: 0.8rem;
-    font-weight: 400;
-}
-
-.navigator-subtitle {
-    font-size: 1.2rem;
+/* ТРЕТЬЯ СТРОКА: Описание */
+.header-line-3 .nav-description {
+    font-size: 1.15rem;
     opacity: 0.95;
+    max-width: 900px;
     line-height: 1.4;
-    max-width: 800px;
-    font-weight: 500;
 }
 
 /* ================= ЦЕЛЬ ПРОЕКТА ================= */
@@ -657,23 +667,31 @@ body {
 <body>
     <header class="header">
     <div class="header-container">
-        <!-- АНИМАЦИЯ ЛЁГКИХ - САМАЯ ЛЕВАЯ -->
+        <!-- АНИМАЦИЯ ЛЁГКИХ - ЛЕВАЯ ЧАСТЬ -->
         <div class="lungs-animation-container">
             <div id="lungsAnimation"></div>
         </div>
         
-        <!-- ВЕСЬ ТЕКСТ СПРАВА ОТ АНИМАЦИИ -->
+        <!-- ВСЁ ТЕКСТОВОЕ СОДЕРЖИМОЕ -->
         <div class="header-content">
-            <!-- СТРОКА 1: Организация и навигатор -->
-            <div style="display: flex; align-items: baseline; margin-bottom: 0.8rem;">
-                <h1 class="organization-title">ГБУЗ МО "МОКПД" | Филиал "Клинский"</h1>
-                <h2 class="navigator-title">Навигатор по выявлению туберкулеза</h2>
+            <!-- СТРОКА 1: Организация | Филиал -->
+            <div class="header-line-1">
+                <div class="org-name">ГБУЗ МО "МОКПД"</div>
+                <div class="separator">|</div>
+                <div class="filial-name">Филиал "Клинский"</div>
             </div>
             
-            <!-- СТРОКА 2: Подзаголовки -->
-            <div>
-                <p class="organization-subtitle">Профилактика, диагностика, алгоритмы действий</p>
-                <p class="navigator-subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена, узких специалистов и сотрудников профильных служб</p>
+            <!-- СТРОКА 2: Название навигатора -->
+            <div class="header-line-2">
+                <h1 class="nav-title">Навигатор по выявлению туберкулеза</h1>
+            </div>
+            
+            <!-- СТРОКА 3: Описание -->
+            <div class="header-line-3">
+                <p class="nav-description">
+                    Нормативные документы, алгоритмы и инструменты для врачей первичного звена, 
+                    узких специалистов и сотрудников профильных служб
+                </p>
             </div>
         </div>
     </div>
