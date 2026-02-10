@@ -79,7 +79,6 @@ body {
     padding: 2.5rem 0;
     border-bottom: 4px solid var(--accent-red);
     width: 100%;
-    position: relative;
 }
 
 .header-container {
@@ -95,43 +94,36 @@ body {
     align-items: center;
     text-align: center;
     width: 100%;
-    position: relative;
 }
 
-/* Верхняя строка - над анимацией */
+/* Верхняя строка */
 .org-line {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin-bottom: 10px; /* Только небольшой отступ */
+    margin-bottom: -80px; /* ОЧЕНЬ сильный отрицательный отступ */
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
-    position: relative;
-    z-index: 2;
 }
 
-/* Анимация по центру - увеличена в 1.5 раза */
+/* Анимация по центру - увеличена */
 .lungs-animation-wrapper {
-    width: 360px; /* Было 240px, стало 360px (+120px) */
-    height: 360px; /* Было 240px, стало 360px (+120px) */
-    margin: -40px auto -40px; /* Отрицательные отступы сверху и снизу */
-    position: relative;
-    z-index: 1;
+    width: 360px;
+    height: 360px;
+    margin: 0 auto;
 }
 
-/* Заголовок - под анимацией */
+/* Заголовок - сильно поднимаем вверх */
 .main-title {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-top: 10px; /* Только небольшой отступ */
+    margin-top: -80px; /* ОЧЕНЬ сильный отрицательный отступ */
     margin-bottom: 0.8rem;
     line-height: 1.2;
     letter-spacing: -0.5px;
     color: white;
-    position: relative;
-    z-index: 2;
 }
 
 .subtitle {
@@ -141,42 +133,52 @@ body {
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.95);
     margin-top: 0.5rem;
-    position: relative;
-    z-index: 2;
 }
 
-/* Для планшетов (769px-1024px) */
-@media (min-width: 769px) and (max-width: 1024px) {
-    .lungs-animation-wrapper {
-        width: 280px;
-        height: 280px;
-        margin: -30px auto -30px;
-    }
-}
-
-/* Для мобильных (max-width: 768px) */
+/* Мобильная версия */
 @media (max-width: 768px) {
+    .header {
+        padding: 2rem 0;
+    }
+    
+    .org-line {
+        margin-bottom: -60px; /* Уменьшено для мобильных */
+        font-size: 1.1rem;
+    }
+    
     .lungs-animation-wrapper {
         width: 280px;
         height: 280px;
-        margin: -25px auto -25px;
     }
     
     .main-title {
+        margin-top: -60px; /* Уменьшено для мобильных */
         font-size: 1.8rem;
+    }
+    
+    .subtitle {
+        font-size: 1.1rem;
     }
 }
 
-/* Для очень маленьких экранов (max-width: 480px) */
 @media (max-width: 480px) {
+    .org-line {
+        margin-bottom: -40px;
+        font-size: 1rem;
+    }
+    
     .lungs-animation-wrapper {
         width: 200px;
         height: 200px;
-        margin: -20px auto -20px;
     }
     
     .main-title {
+        margin-top: -40px;
         font-size: 1.6rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
     }
 }
 /* ================= ЦЕЛЬ ПРОЕКТА ================= */
