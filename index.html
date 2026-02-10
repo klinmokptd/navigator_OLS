@@ -1040,8 +1040,11 @@
     </div>
 </footer>
 
-    ```javascript
-        <script>
+<!-- СНАЧАЛА ЭТО -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+<!-- ПОТОМ ТВОЙ СКРИПТ -->
+<script>
     document.addEventListener('DOMContentLoaded', function() {
         const toggleBtn = document.getElementById('toggleAllCards');
         const cardsContainer = document.getElementById('cardsContainer');
@@ -1119,27 +1122,22 @@
                 heartSound.currentTime = 0;
             });
         }
+        // ============ КОНЕЦ ЗВУКА СЕРДЦА ============
         
         // ============ АНИМАЦИЯ ЛЁГКИХ ============
         const lungsContainer = document.querySelector('.lungs-container');
         if (lungsContainer) {
-            // Загружаем Lottie player
-            const script = document.createElement('script');
-            script.src = 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js';
-            document.head.appendChild(script);
-            
-            script.onload = function() {
-                lungsContainer.innerHTML = `
-                    <lottie-player
-                        src="lungs.json"
-                        background="transparent"
-                        speed="0.8"
-                        style="width: 100%; height: 100%;"
-                        loop
-                        autoplay>
-                    </lottie-player>
-                `;
-            };
+            // ВСТАВЛЯЕМ АНИМАЦИЮ
+            lungsContainer.innerHTML = `
+                <lottie-player
+                    src="lungs.json"
+                    background="transparent"
+                    speed="0.8"
+                    style="width: 100%; height: 100%;"
+                    loop
+                    autoplay>
+                </lottie-player>
+            `;
         }
     });
 </script>
