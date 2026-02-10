@@ -73,99 +73,85 @@ body {
 }
 
 /* ================= ШАПКА ================= */
-/* ================= ШАПКА (СУПЕР КОМПАКТНАЯ) ================= */
-/* ================= ШАПКА (УЛЬТРА-КОМПАКТНАЯ) ================= */
 .header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
     color: white;
-    padding: 0.6rem 0; /* Минимальные отступы сверху/снизу */
+    padding: 1.8rem 0;
     border-bottom: 4px solid var(--accent-red);
     width: 100%;
-    text-align: center;
 }
 
 .header-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px; /* Минимальные боковые отступы */
+    padding: 0 30px;
     width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: space-between;
+    gap: 30px;
 }
 
-/* ЛОГОТИП - КОМПАКТНЫЙ */
+/* ЛОГОТИП - СЛЕВА */
 .logo-area {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 0.3rem; /* ОЧЕНЬ МАЛО */
+    flex-shrink: 0;
+    text-align: left;
+    max-width: 320px;
 }
 
 .logo-text h1 {
-    font-size: 1.4rem; /* Немного меньше */
+    font-size: 1.6rem;
     font-weight: 600;
-    margin-bottom: 0;
-    line-height: 1;
+    margin-bottom: 5px;
+    line-height: 1.2;
 }
 
 .logo-text p {
-    font-size: 0.95rem;
+    font-size: 1.1rem;
     opacity: 0.9;
-    margin: 0;
-    line-height: 1.1;
+    line-height: 1.3;
 }
 
-/* ГЛАВНЫЙ БЛОК - БЕЗ ЛИШНИХ ОТСТУПОВ */
+/* БЛОК С АНИМАЦИЕЙ И ЗАГОЛОВКОМ - ГОРИЗОНТАЛЬНО */
 .header-title-area {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0; /* ВООБЩЕ БЕЗ ОТСТУПОВ */
-    margin: 0;
-    padding: 0;
-    width: 100%;
+    gap: 30px;
+    flex-grow: 1;
+    justify-content: flex-start;
 }
 
-/* АНИМАЦИЯ ЛЁГКИХ - УМЕНЬШАЕМ РАЗМЕР */
+/* АНИМАЦИЯ ЛЁГКИХ - СЛЕВА ВНУТРИ БЛОКА */
 .lungs-animation-container {
-    width: 200px; /* МЕНЬШЕ, чем 300px */
-    height: 200px;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Обрезаем лишнее */
+    width: 180px;
+    height: 180px;
+    flex-shrink: 0;
 }
 
 #lungsAnimation {
     width: 100%;
     height: 100%;
-    transform: scale(1.2); /* Увеличиваем, чтобы заполнить */
-    transform-origin: center;
 }
 
-/* ТЕКСТ ПРЯМО ПОД АНИМАЦИЕЙ */
+/* ТЕКСТОВЫЙ БЛОК - СПРАВА ОТ АНИМАЦИИ */
 .header-title-block {
-    width: 100%;
-    text-align: center;
-    margin: 0.1rem 0 0 0; /* САМЫЙ МИНИМУМ */
-    padding: 0;
+    text-align: left;
+    flex-grow: 1;
 }
 
 .header-title {
-    font-size: 1.8rem; /* Меньше для компактности */
+    font-size: 1.8rem;
     font-weight: 700;
-    margin: 0 0 0.05rem 0; /* ПОЧТИ НЕТ ОТСТУПА */
-    line-height: 1.1;
-    letter-spacing: -0.2px;
-    padding: 0;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
 }
 
 .header-subtitle {
-    font-size: 1rem; /* Стандартный размер */
+    font-size: 1.1rem;
     opacity: 0.95;
-    max-width: 900px;
-    line-height: 1.2; /* Компактное межстрочное */
-    margin: 0 auto;
-    padding: 0;
+    line-height: 1.4;
+    max-width: 700px;
 }
 
 /* ================= ЦЕЛЬ ПРОЕКТА ================= */
@@ -413,14 +399,12 @@ body {
     text-align: left;
 }
 
-/* ВСЕ КОЛОНКИ ФУТЕРА ОДИНАКОВЫЕ */
 .footer-brand,
 .footer-author,
 .footer-contacts {
     flex: 1;
 }
 
-/* ВСЕ ЗАГОЛОВКИ В ФУТЕРЕ ОДИНАКОВЫЕ */
 .footer-title,
 .author-desc,
 .contacts-title {
@@ -431,7 +415,6 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* ОСНОВНОЙ ТЕКСТ ФУТЕРА ОДИНАКОВЫЙ */
 .footer-org,
 .author-name,
 .author-role,
@@ -473,16 +456,68 @@ body {
 }
 
 /* ================= МОБИЛЬНАЯ ВЕРСИЯ ================= */
+@media (max-width: 1024px) {
+    .header-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .logo-area {
+        max-width: 100%;
+        text-align: center;
+    }
+    
+    .header-title-area {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .lungs-animation-container {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .header-title-block {
+        text-align: center;
+    }
+    
+    .header-title {
+        font-size: 1.6rem;
+    }
+    
+    .header-subtitle {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+    
+    .blocks-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    
+    .footer-main {
+        flex-wrap: wrap;
+    }
+    
+    .footer-brand,
+    .footer-author,
+    .footer-contacts {
+        flex: 1 1 300px;
+    }
+}
+
 @media (max-width: 768px) {
+    .header {
+        padding: 1.5rem 0;
+    }
+    
     .header-container,
     .mission-container,
     .blocks-container,
     .footer-content {
         padding: 0 20px !important;
-    }
-    
-    .header {
-        padding: 1.5rem 0;
     }
     
     .logo-text h1 {
@@ -494,16 +529,16 @@ body {
     }
     
     .lungs-animation-container {
-        max-width: 220px; /* Уменьшаем максимальные размеры для мобилок */
-        max-height: 220px;
+        width: 180px;
+        height: 180px;
     }
     
     .header-title {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
     
     .header-subtitle {
-        font-size: 1rem;
+        font-size: 0.95rem;
         line-height: 1.3;
     }
     
@@ -570,16 +605,16 @@ body {
 
 @media (max-width: 480px) {
     .header-title {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
     
     .header-subtitle {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
     }
     
     .lungs-animation-container {
-        max-width: 180px; /* Для очень маленьких экранов */
-        max-height: 180px;
+        width: 150px;
+        height: 150px;
     }
     
     .blocks-section {
@@ -604,22 +639,27 @@ body {
         height: 120px;
         min-height: 120px;
     }
+    
+    .block-title {
+        font-size: 1.2rem;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .lungs-animation-container {
-        max-width: 280px; /* Для планшетов */
-        max-height: 280px;
+        width: 200px;
+        height: 200px;
     }
     
     .header-title {
-        font-size: 2rem;
+        font-size: 1.7rem;
     }
     
     .blocks-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+/* ================= КОНЕЦ МОБИЛЬНОЙ ВЕРСИИ ================= */
 /* ================= КОНЕЦ МОБИЛЬНОЙ ВЕРСИИ ================= */
     </style>
 </head>
