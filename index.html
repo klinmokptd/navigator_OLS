@@ -73,14 +73,13 @@ body {
 }
 
 /* ================= ХЕДЕР ================= */
+/* ================= ХЕДЕР ================= */
 .header {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
     color: white;
     padding: 2.5rem 0;
     border-bottom: 4px solid var(--accent-red);
     width: 100%;
-    position: relative; /* Для позиционирования анимации */
-    overflow: hidden; /* Чтобы анимация не выходила за границы */
 }
 
 .header-container {
@@ -88,28 +87,6 @@ body {
     margin: 0 auto;
     padding: 0 30px;
     width: 100%;
-    position: relative; /* Для z-index */
-    z-index: 2; /* Чтобы текст был поверх анимации */
-}
-
-/* Контейнер для анимации как фона */
-.animation-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1; /* Под текстом */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    pointer-events: none; /* Чтобы можно было кликать сквозь анимацию */
-}
-
-.lungs-animation-wrapper {
-    width: 500px; /* Увеличено для фона */
-    height: 500px;
-    opacity: 0.15; /* Прозрачность для фона */
 }
 
 .header-content {
@@ -117,50 +94,47 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 1.5rem;
     width: 100%;
-    position: relative;
-    z-index: 2; /* Поверх анимации */
 }
 
-/* ТЕКСТОВЫЙ БЛОК - ПО ЦЕНТРУ ПОВЕРХ АНИМАЦИИ */
-.header-text {
-    width: 100%;
-    text-align: center;
-    padding: 1rem 0;
-}
-
+/* Верхняя строка - над анимацией */
 .org-line {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-    margin-bottom: 1.5rem;
+    margin-bottom: -10px; /* Накладывается на анимацию */
     font-size: 1.2rem;
     font-weight: 600;
     color: white;
 }
 
+/* Анимация по центру */
+.lungs-animation-wrapper {
+    width: 240px;
+    height: 240px;
+    margin: 0 auto;
+}
+
+/* Заголовок - под анимацией */
 .main-title {
-    font-size: 2.8rem; /* Увеличено для лучшей читаемости */
+    font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-top: -20px; /* Накладывается на анимацию */
+    margin-bottom: 0.8rem;
     line-height: 1.2;
     letter-spacing: -0.5px;
     color: white;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Тень для лучшей читаемости на фоне */
 }
 
 .subtitle {
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     opacity: 0.95;
     max-width: 900px;
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.95);
-    margin: 0 auto;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* Легкая тень для контраста */
+    margin-top: 0.5rem;
 }
-
 /* ================= ЦЕЛЬ ПРОЕКТА ================= */
 .mission-section {
     background: var(--white);
@@ -604,28 +578,28 @@ body {
 </head>
 <body>
     <header class="header">
-        <!-- Анимация как фон -->
-        <div class="animation-background">
+    <div class="header-container">
+        <div class="header-content">
+            <!-- Верхняя строка -->
+            <div class="org-line">
+                <span class="org-main">ГБУЗ МО "МОКПД"</span>
+                <span class="org-separator">|</span>
+                <span class="org-filial">Филиал "Клинский"</span>
+            </div>
+            
+            <!-- Анимация по центру -->
             <div class="lungs-animation-wrapper">
                 <div id="lungsAnimation"></div>
             </div>
+            
+            <!-- Основной заголовок -->
+            <h1 class="main-title">Навигатор по выявлению туберкулёза</h1>
+            
+            <!-- Подзаголовок -->
+            <p class="subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена, узких специалистов и сотрудников профильных служб</p>
         </div>
-        
-        <div class="header-container">
-            <div class="header-content">
-                <!-- Текст поверх анимации -->
-                <div class="header-text">
-                    <div class="org-line">
-                        <span class="org-main">ГБУЗ МО "МОКПД"</span>
-                        <span class="org-separator">|</span>
-                        <span class="org-filial">Филиал "Клинский"</span>
-                    </div>
-                    <h1 class="main-title">Навигатор по выявлению туберкулёза</h1>
-                    <p class="subtitle">Нормативные документы, алгоритмы и инструменты для врачей первичного звена, узких специалистов и сотрудников профильных служб</p>
-                </div>
-            </div>
-        </div>
-    </header>
+    </div>
+</header>
 
     <section class="mission-section">
         <div class="mission-container">
