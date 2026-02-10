@@ -7,7 +7,6 @@
     <link rel="icon" href="/navigator_OLS/favicon.ico" sizes="any">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <style>
-        /* Полный CSS-код остаётся БЕЗ ИЗМЕНЕНИЙ */
         /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
         @font-face {
             font-family: 'Inter';
@@ -70,6 +69,7 @@
             line-height: 1.6;
             color: var(--text-primary);
             background-color: var(--light-blue);
+            min-height: 100vh;
         }
 
         /* ================= ХЕДЕР ================= */
@@ -651,7 +651,7 @@
             <button class="toggle-all-btn" id="toggleAllCards">Открыть все карточки</button>
             
             <div class="blocks-grid" id="cardsContainer">
-                
+                <!-- Все карточки остаются без изменений -->
                 <!-- Карточка 1: Почему туберкулёз — ваша задача? -->
                 <article class="content-block collapsed">
                     <div class="block-header">
@@ -977,92 +977,156 @@
     </footer>
 
     <script>
+        // УПРОЩЕННЫЙ И ИСПРАВЛЕННЫЙ КОД ДЛЯ ПРОИЗВОДИТЕЛЬНОСТИ
         document.addEventListener('DOMContentLoaded', function() {
-            // ============ АНИМАЦИЯ ЛЁГКИХ ============
-            const lungsAnimation = lottie.loadAnimation({
-                container: document.getElementById('lungsAnimation'),
-                renderer: 'svg',
-                loop: true,
-                autoplay: true,
-                path: 'lungs.json'
-            });
+            console.log('DOM загружен, инициализируем...');
+            
+            // 1. Анимация лёгких - ОТКЛЮЧАЕМ при проблемах с производительностью
+            let lungsAnimation = null;
+            try {
+                lungsAnimation = lottie.loadAnimation({
+                    container: document.getElementById('lungsAnimation'),
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: 'lungs.json'
+                });
+            } catch (e) {
+                console.warn('Анимация не загружена:', e);
+            }
 
-            // ============ УПРАВЛЕНИЕ КАРТОЧКАМИ ============
+            // 2. Управление карточками - УПРОЩЕННАЯ ВЕРСИЯ
             const toggleBtn = document.getElementById('toggleAllCards');
             const allCards = document.querySelectorAll('.content-block');
             let allExpanded = false;
             
+            // Оптимизированная функция переключения
             function toggleAllCards() {
                 allExpanded = !allExpanded;
                 
-                if (allExpanded) {
+                // Используем requestAnimationFrame для плавности
+                requestAnimationFrame(() => {
                     allCards.forEach(card => {
-                        card.classList.remove('collapsed');
+                        if (allExpanded) {
+                            card.classList.remove('collapsed');
+                        } else {
+                            card.classList.add('collapsed');
+                        }
                     });
-                    toggleBtn.textContent = 'Закрыть все карточки';
-                } else {
-                    allCards.forEach(card => {
-                        card.classList.add('collapsed');
-                    });
-                    toggleBtn.textContent = 'Открыть все карточки';
-                }
+                    
+                    toggleBtn.textContent = allExpanded ? 
+                        'Закрыть все карточки' : 'Открыть все карточки';
+                });
             }
             
+            // Обработчик для кнопки
             toggleBtn.addEventListener('click', toggleAllCards);
             
+            // Обработчики для каждой карточки
             allCards.forEach(card => {
                 const header = card.querySelector('.block-header');
                 
                 header.addEventListener('click', function(e) {
-                    if (e.target.tagName === 'A') {
+                    // Пропускаем клики по ссылкам
+                    if (e.target.tagName === 'A' || e.target.closest('a')) {
                         return;
                     }
                     
-                    card.classList.toggle('collapsed');
-                    updateToggleButtonState();
+                    // Переключаем состояние карточки
+                    const isCollapsed = card.classList.contains('collapsed');
+                    
+                    requestAnimationFrame(() => {
+                        if (isCollapsed) {
+                            card.classList.remove('collapsed');
+                        } else {
+                            card.classList.add('collapsed');
+                        }
+                        
+                        // Обновляем состояние кнопки
+                        updateToggleButtonState();
+                    });
                 });
             });
             
+            // Упрощенная функция обновления кнопки
             function updateToggleButtonState() {
                 const collapsedCards = document.querySelectorAll('.content-block.collapsed').length;
                 
                 if (collapsedCards === 0) {
-                    toggleBtn.textContent = 'Закрыть все карточки';
                     allExpanded = true;
+                    toggleBtn.textContent = 'Закрыть все карточки';
                 } else if (collapsedCards === allCards.length) {
-                    toggleBtn.textContent = 'Открыть все карточки';
                     allExpanded = false;
+                    toggleBtn.textContent = 'Открыть все карточки';
                 } else {
+                    // Частично открыты - оставляем кнопку как есть
                     toggleBtn.textContent = 'Открыть все карточки';
-                    allExpanded = false;
                 }
             }
             
+            // Инициализация
             updateToggleButtonState();
             
-            // ============ ЗВУК СЕРДЦА ДЛЯ КНОПКИ ============
+            // 3. Звук сердца - ОТКЛЮЧАЕМ если есть проблемы
             const heartButton = document.querySelector('a[href="vvedenie.html"]');
+            let heartSound = null;
             
             if (heartButton) {
-                const heartSound = new Audio('heartbeat.mp3');
-                heartSound.preload = 'auto';
-                heartSound.loop = true;
-                
-                heartButton.addEventListener('mouseenter', function() {
-                    heartSound.currentTime = 0;
-                    heartSound.play();
-                });
-                
-                heartButton.addEventListener('mouseleave', function() {
-                    heartSound.pause();
-                    heartSound.currentTime = 0;
-                });
-                
-                heartButton.addEventListener('click', function() {
-                    heartSound.pause();
-                    heartSound.currentTime = 0;
-                });
+                try {
+                    heartSound = new Audio('heartbeat.mp3');
+                    heartSound.preload = 'none'; // Меняем на 'none' чтобы не грузить сразу
+                    
+                    heartButton.addEventListener('mouseenter', function() {
+                        if (heartSound) {
+                            heartSound.currentTime = 0;
+                            heartSound.play().catch(e => console.log('Звук не воспроизведён:', e));
+                        }
+                    });
+                    
+                    heartButton.addEventListener('mouseleave', function() {
+                        if (heartSound && !heartSound.paused) {
+                            heartSound.pause();
+                            heartSound.currentTime = 0;
+                        }
+                    });
+                    
+                    heartButton.addEventListener('click', function() {
+                        if (heartSound && !heartSound.paused) {
+                            heartSound.pause();
+                            heartSound.currentTime = 0;
+                        }
+                    });
+                } catch (e) {
+                    console.warn('Звук не загружен:', e);
+                }
             }
+            
+            // 4. Восстановление работы при ошибках
+            window.addEventListener('error', function(e) {
+                console.error('Ошибка на странице:', e.error);
+            });
+            
+            // 5. Предотвращаем множественные клики
+            let isProcessing = false;
+            document.addEventListener('click', function(e) {
+                if (isProcessing && (e.target === toggleBtn || e.target.closest('.block-header'))) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return;
+                }
+                
+                if (e.target === toggleBtn || e.target.closest('.block-header')) {
+                    isProcessing = true;
+                    setTimeout(() => { isProcessing = false; }, 300);
+                }
+            });
+            
+            console.log('Инициализация завершена');
+        });
+        
+        // Отлавливаем ошибки загрузки ресурсов
+        window.addEventListener('load', function() {
+            console.log('Страница полностью загружена');
         });
     </script>
 </body>
