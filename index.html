@@ -687,7 +687,16 @@
         
         <!-- АНИМАЦИЯ ЛЁГКИХ -->
         <div class="lungs-container">
-            <div class="lungs-animation" id="lungsAnimation"></div>
+            <div class="lungs-animation" id="lungsAnimation">
+                <lottie-player
+                    src="lungs.json"
+                    background="transparent"
+                    speed="0.8"
+                    style="width: 100%; height: 100%;"
+                    loop
+                    autoplay>
+                </lottie-player>
+            </div>
         </div>
     </div>
 </header>
@@ -1123,24 +1132,7 @@
             });
         }
         // ============ КОНЕЦ ЗВУКА СЕРДЦА ============
-        
-        // ============ АНИМАЦИЯ ЛЁГКИХ ============
-        const lungsContainer = document.querySelector('.lungs-container');
-        if (lungsContainer) {
-            // ВСТАВЛЯЕМ АНИМАЦИЮ
-            lungsContainer.innerHTML = `
-                <lottie-player
-                    src="lungs.json"
-                    background="transparent"
-                    speed="0.8"
-                    style="width: 100%; height: 100%;"
-                    loop
-                    autoplay>
-                </lottie-player>
-            `;
-        }
     });
 </script>
-```
 </body>
 </html>
