@@ -1059,100 +1059,93 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ============ АНИМАЦИЯ ЛЁГКИХ ============
-            // Загружаем и воспроизводим анимацию лёгких
-            const lungsAnimation = lottie.loadAnimation({
-                container: document.getElementById('lungsAnimation'),
-                renderer: 'canvas',
-                loop: true,
-                autoplay: true,
-                path: 'lungs.json' // Путь к файлу анимации
-            });
-            
-            
-            // Настраиваем анимацию
-            lungsAnimation.setSpeed(1);
-            
-            // ============ УПРАВЛЕНИЕ КАРТОЧКАМИ ============
-            const toggleBtn = document.getElementById('toggleAllCards');
-            const cardsContainer = document.getElementById('cardsContainer');
-            const allCards = document.querySelectorAll('.content-block');
-            let allExpanded = false;
-            
-            function toggleAllCards() {
-                allExpanded = !allExpanded;
-                
-                if (allExpanded) {
-                    allCards.forEach(card => {
-                        card.classList.remove('collapsed');
-                    });
-                    toggleBtn.textContent = 'Закрыть все карточки';
-                } else {
-                    allCards.forEach(card => {
-                        card.classList.add('collapsed');
-                    });
-                    toggleBtn.textContent = 'Открыть все карточки';
-                }
-            }
-            
-            toggleBtn.addEventListener('click', toggleAllCards);
-            
+    // ============ АНИМАЦИЯ ЛЁГКИХ ============
+    const lungsAnimation = lottie.loadAnimation({
+        container: document.getElementById('lungsAnimation'),
+        renderer: 'svg', // Используем SVG рендерер
+        loop: true,
+        autoplay: true,
+        path: 'lungs.json'
+    });
+
+    // ============ УПРАВЛЕНИЕ КАРТОЧКАМИ ============
+    const toggleBtn = document.getElementById('toggleAllCards');
+    const cardsContainer = document.getElementById('cardsContainer');
+    const allCards = document.querySelectorAll('.content-block');
+    let allExpanded = false;
+    
+    function toggleAllCards() {
+        allExpanded = !allExpanded;
+        
+        if (allExpanded) {
             allCards.forEach(card => {
-                const header = card.querySelector('.block-header');
-                
-                header.addEventListener('click', function(e) {
-                    if (e.target.tagName === 'A') {
-                        return;
-                    }
-                    
-                    card.classList.toggle('collapsed');
-                    updateToggleButtonState();
-                });
+                card.classList.remove('collapsed');
             });
-            
-            function updateToggleButtonState() {
-                const collapsedCards = document.querySelectorAll('.content-block.collapsed').length;
-                
-                if (collapsedCards === 0) {
-                    toggleBtn.textContent = 'Закрыть все карточки';
-                    allExpanded = true;
-                } else if (collapsedCards === allCards.length) {
-                    toggleBtn.textContent = 'Открыть все карточки';
-                    allExpanded = false;
-                } else {
-                    toggleBtn.textContent = 'Открыть все карточки';
-                    allExpanded = false;
-                }
+            toggleBtn.textContent = 'Закрыть все карточки';
+        } else {
+            allCards.forEach(card => {
+                card.classList.add('collapsed');
+            });
+            toggleBtn.textContent = 'Открыть все карточки';
+        }
+    }
+    
+    toggleBtn.addEventListener('click', toggleAllCards);
+    
+    allCards.forEach(card => {
+        const header = card.querySelector('.block-header');
+        
+        header.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                return;
             }
             
+            card.classList.toggle('collapsed');
             updateToggleButtonState();
-            
-            // ============ ЗВУК СЕРДЦА ДЛЯ КНОПКИ ============
-            const heartButton = document.querySelector('a[href="vvedenie.html"]');
-            
-            if (heartButton) {
-                const heartSound = new Audio('heartbeat.mp3');
-                heartSound.preload = 'auto';
-                heartSound.loop = true; // ЗАЦИКЛИВАЕМ ЗВУК
-                
-                heartButton.addEventListener('mouseenter', function() {
-                    heartSound.currentTime = 0;
-                    heartSound.play();
-                });
-                
-                heartButton.addEventListener('mouseleave', function() {
-                    heartSound.pause();
-                    heartSound.currentTime = 0;
-                });
-                
-                heartButton.addEventListener('click', function() {
-                    heartSound.pause();
-                    heartSound.currentTime = 0;
-                });
-            }
-            // ============ КОНЕЦ ЗВУКА СЕРДЦА ============
-            
         });
+    });
+    
+    function updateToggleButtonState() {
+        const collapsedCards = document.querySelectorAll('.content-block.collapsed').length;
+        
+        if (collapsedCards === 0) {
+            toggleBtn.textContent = 'Закрыть все карточки';
+            allExpanded = true;
+        } else if (collapsedCards === allCards.length) {
+            toggleBtn.textContent = 'Открыть все карточки';
+            allExpanded = false;
+        } else {
+            toggleBtn.textContent = 'Открыть все карточки';
+            allExpanded = false;
+        }
+    }
+    
+    updateToggleButtonState();
+    
+    // ============ ЗВУК СЕРДЦА ДЛЯ КНОПКИ ============
+    const heartButton = document.querySelector('a[href="vvedenie.html"]');
+    
+    if (heartButton) {
+        const heartSound = new Audio('heartbeat.mp3');
+        heartSound.preload = 'auto';
+        heartSound.loop = true;
+        
+        heartButton.addEventListener('mouseenter', function() {
+            heartSound.currentTime = 0;
+            heartSound.play();
+        });
+        
+        heartButton.addEventListener('mouseleave', function() {
+            heartSound.pause();
+            heartSound.currentTime = 0;
+        });
+        
+        heartButton.addEventListener('click', function() {
+            heartSound.pause();
+            heartSound.currentTime = 0;
+        });
+    }
+});
     </script>
 </body>
 </html>
