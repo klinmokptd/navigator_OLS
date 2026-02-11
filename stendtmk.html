@@ -59,7 +59,7 @@
         }
         
         .main-content {
-            padding: 0 5px;
+            padding: 0;
         }
         
         .section {
@@ -77,7 +77,7 @@
         }
         
         ul {
-            margin-left: 25px;
+            margin-left: 20px;
             margin-bottom: 5px;
             list-style-type: disc;
         }
@@ -106,9 +106,6 @@
             margin-bottom: 22px;
             padding-bottom: 18px;
             border-bottom: 1px solid rgba(44, 139, 212, 0.1);
-            display: flex;
-            flex-direction: column;
-            position: relative;
         }
         
         .phone-item:last-child {
@@ -117,39 +114,18 @@
             border-bottom: none;
         }
         
-        .phone-item::before {
-            content: '📞';
-            font-size: 14px;
-            position: absolute;
-            left: -28px;
-            top: 0px;
-            background: white;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            color: #1A5F9E;
-            border: 1.5px solid #2C8BD4;
-            box-shadow: 0 2px 4px rgba(44, 139, 212, 0.1);
-            line-height: 1;
-            padding: 0;
-        }
-        
         .phone-item strong {
             color: #1A5F9E;
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 6px;
-            margin-left: 12px;
+            display: block;
         }
         
         .phone-item span {
             display: block;
             margin-bottom: 4px;
             color: #546E7A;
-            margin-left: 12px;
             font-size: 14.5px;
         }
         
@@ -157,7 +133,7 @@
             font-size: 20px;
             font-weight: 700;
             color: #1A5F9E;
-            margin: 8px 0 5px 12px;
+            margin: 8px 0 5px 0;
             letter-spacing: 0.5px;
         }
         
@@ -166,7 +142,6 @@
             color: #2C8BD4;
             font-weight: 500;
             margin-top: 6px;
-            margin-left: 12px;
             background: rgba(44, 139, 212, 0.06);
             padding: 6px 12px;
             border-radius: 20px;
@@ -177,14 +152,14 @@
             color: #78909C;
             font-size: 13.5px;
             font-style: italic;
-            margin-left: 12px;
             margin-top: 3px;
+            display: inline-block;
         }
         
         .two-columns {
             display: flex;
             gap: 30px;
-            margin: 20px 0 10px 0;
+            margin: 20px 0 0 0;
             background: #F5F7FA;
             padding: 20px;
             border-radius: 16px;
@@ -206,7 +181,7 @@
         }
         
         .column-left ul {
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
         
         .column-left li {
@@ -334,7 +309,7 @@
                     <span>Для г.о. Клин, Солнечногорск, Химки, Долгопрудный, Лобня</span>
                     <span>Лукаш Игорь Александрович</span>
                     <div class="phone-number">8 (916) 232-23-22</div>
-                    <div class="note">Помощь в организации ТМК с отделом</div>
+                    <div class="note">Помощь в организации консультаций с отделом ТМК</div>
                 </div>
                 
                 <div class="phone-item">
