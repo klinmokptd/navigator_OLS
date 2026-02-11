@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регламент действий по задачам | Навигатор по выявлению туберкулёза</title>
+    
+    <style>
+        /* ШРИФТЫ КИРИЛЛИЧЕСКИЕ - ТОЛЬКО WOFF2 */
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        :root {
+            --primary-blue: #1A5F9E;
+            --secondary-blue: #2C8BD4;
+            --light-blue: #F0F7FF;
+            --accent-red: #D32F2F;
+            --white: #FFFFFF;
+            --gray-light: #F5F7FA;
+            --gray-medium: #E0E5EC;
+            --text-primary: #263238;
+            --text-secondary: #546E7A;
+            
+            --shadow-soft: 0 2px 8px rgba(26, 95, 158, 0.04);
+            --shadow: 0 4px 12px rgba(26, 95, 158, 0.08);
+            --radius: 8px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background-color: var(--white);
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        /* === ЗАГОЛОВОК === */
+        .document-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: var(--radius);
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow);
+            border-bottom: 4px solid var(--accent-red);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .document-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        
+        .document-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            max-width: 900px;
+        }
+        
+        /* === СЕТКА ИЗ ЧЕТЫРЁХ ВЕТОК === */
+        .scheme-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 4rem;
+        }
+        
+        .branch {
+            background: var(--light-blue);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            border: 1px solid var(--gray-medium);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .branch-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-red);
+        }
+        
+        /* === ЗАДАЧИ В ВЕТКАХ === */
+        .task-level {
+            margin-bottom: 2rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .task-level:last-child {
+            margin-bottom: 0;
+        }
+        
+        .level-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--primary-blue);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+        
+        .level-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 0.8rem;
+            margin-left: 0.5rem;
+        }
+        
+        .task-list {
+            list-style: none;
+            margin-left: 0.5rem;
+        }
+        
+        .task-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .task-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-red);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* === ФУТЕР === */
+        .document-footer {
+            background: var(--gray-light);
+            color: var(--text-secondary);
+            padding: 2.5rem;
+            margin-top: 4rem;
+            border-radius: var(--radius);
+            text-align: center;
+            border-top: 1px solid var(--gray-medium);
+            font-size: 0.95rem;
+        }
+        
+        /* === АДАПТИВНОСТЬ === */
+        @media (max-width: 1024px) {
+            .scheme-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            .document-header {
+                padding: 2rem;
+            }
+            
+            .document-title {
+                font-size: 1.8rem;
+            }
+            
+            .scheme-container {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+            
+            .branch-title {
+                font-size: 1.3rem;
+            }
+            
+            .level-title {
+                font-size: 1rem;
+            }
+            
+            .task-list li {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media print {
+            .document-footer {
+                display: none;
+            }
+            
+            body {
+                max-width: 100%;
+                padding: 0;
+            }
+            
+            .scheme-container {
+                break-inside: avoid;
+            }
+        }
+    </style>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Заголовок -->
+    <header class="document-header">
+        <h1 class="document-title">Регламент действий по задачам</h1>
+        <p class="document-subtitle">Распределение задач по выявлению туберкулёза по направлениям и уровням ответственности в медицинской организации</p>
+    </header>
+
+    <!-- ЧЕТЫРЕ ВЕТКИ -->
+    <div class="scheme-container">
+        
+        <!-- 1. Амбулаторно-поликлиническая помощь -->
+        <div class="branch">
+            <h2 class="branch-title">Амбулаторно-поликлиническая помощь</h2>
+            
+            <div class="task-level">
+                <div class="level-number">1</div>
+                <h3 class="level-title">Заместитель главного врача по АПР</h3>
+                <ul class="task-list">
+                    <li>Контроль выполнения планов скрининга</li>
+                    <li>Корректировка работы на основе полученных результатов</li>
+                    <li>Консолидация данных по поликлиникам</li>
+                </ul>
+            </div>
+            
+            <div class="task-level">
+                <div class="level-number">2</div>
+                <h3 class="level-title">Заведующие подразделениями</h3>
+                <ul class="task-list">
+                    <li>Организация работы по раннему выявлению на участках</li>
+                    <li>Контроль кратности назначений флюорографии и Диаскинтеста</li>
+                    <li>Своевременное сообщение врачам-терапевтам о флюоропатологии</li>
+                    <li>Организация вызова пациентов на дообследование</li>
+                    <li>Своевременное сообщение фтизиатру о подозрении на туберкулёз</li>
+                </ul>
+            </div>
+            
+            <div class="task-level">
+                <div class="level-number">3</div>
+                <h3 class="level-title">Врачи-терапевты участковые</h3>
+                <ul class="task-list">
+                    <li>Контроль прикреплённого населения по флюорографическим осмотрам (не менее 1 раза в 2 года)</li>
+                    <li>Наблюдение за группами риска (контроль кратности обследования: флюорография, Диаскинтест)</li>
+                    <li>Назначение анализа мокроты на КУМ маломобильным пациентам</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 2. Стационарная помощь -->
+        <div class="branch">
+            <h2 class="branch-title">Стационарная помощь</h2>
+            
+            <div class="task-level">
+                <div class="level-number">1</div>
+                <h3 class="level-title">Заместитель главного врача по стационару</h3>
+                <ul class="task-list">
+                    <li>Организация своевременной диагностики туберкулёза</li>
+                    <li>Контроль настороженности на туберкулёз в стационаре</li>
+                    <li>Организация обратной связи с поликлиниками</li>
+                </ul>
+            </div>
+            
+            <div class="task-level">
+                <div class="level-number">2</div>
+                <h3 class="level-title">Начальники терапевтических, инфекционных отделений</h3>
+                <ul class="task-list">
+                    <li>Организация выполнения приказов № 951, 952, 932</li>
+                    <li>Своевременное назначение рентгеновских исследований</li>
+                    <li>Организация трёхкратного исследования мокроты на КУМ по Цилю-Нильсену</li>
+                </ul>
+            </div>
+            
+            <div class="task-level">
+                <div class="level-number">3</div>
+                <h3 class="level-title">Врачи стационара</h3>
+                <ul class="task-list">
+                    <li>Высокая настороженность на туберкулёз</li>
+                    <li>Своевременное назначение мокроты на КУМ (трёхкратно)</li>
+                    <li>Своевременное назначение КТ-контроля</li>
+                    <li>Назначение Диаскинтеста</li>
+                    <li>Своевременный вызов фтизиатра на консультацию</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 3. Родовспоможение и педиатрия -->
+        <div class="branch">
+            <h2 class="branch-title">Родовспоможение и педиатрия</h2>
+            
+            <div class="task-level">
+                <div class="level-number">1</div>
+                <h3 class="level-title">Заместитель главного врача по родовспоможению</h3>
+                <ul class="task-list">
+                    <li>Планирование и контроль вакцинации БЦЖ</li>
+                    <li>Организация ревакцинации БЦЖ</li>
+                    <li>Контроль работы по педиатрическому направлению</li>
+                </ul>
+            </div>
+            
+            <div class="task-level">
+                <div class="level-number">2</div>
+                <h3 class="level-title">Заведующие отделениями (роддом, детская поликлиника)</h3>
+                <ul class="task-list">
+                    <li>Организация вакцинации БЦЖ на местах</li>
+                    <li>Контроль сбора отчётности по вакцинации</li>
+                    <li>Организация работы с детскими группами риска</li>
+                </ul>
+            </div>
+            
+            <div class="task-level">
+                <div class="level-number">3</div>
+                <h3 class="level-title">Педиатры / Неонатологи</h3>
+                <ul class="task-list">
+                    <li>Проведение вакцинации БЦЖ</li>
+                    <li>Контроль за детскими группами риска</li>
+                    <li>Ведение документации и отчётности</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 4. СТАТИСТИЧЕСКИЙ ОТДЕЛ (один уровень, общий дизайн) -->
+        <div class="branch">
+            <h2 class="branch-title">Статистический отдел</h2>
+            
+            <div class="task-level">
+                <div class="level-number">1</div>
+                <h3 class="level-title">Медицинский статистик / руководитель отдела статистики</h3>
+                <ul class="task-list">
+                    <li>Организация сбора отчётности по раннему выявлению туберкулёза со всех структурных подразделений по установленным нормативам и формам</li>
+                    <li>Анализ данных по охвату скринингом и результатам обследований</li>
+                    <li>Ежемесячная обратная связь руководству ЛПУ для своевременного принятия решений</li>
+                    <li>Подготовка аналитических материалов для заместителей главного врача</li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Футер -->
+    <footer class="document-footer">
+        <p>ГБУЗ МО "МОКПТД" филиал "Клинский" | Навигатор по выявлению туберкулёза</p>
+        <p>© 2026. Материал предназначен для врачей медицинских организаций.</p>
+    </footer>
+</body>
+</html>
