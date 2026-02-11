@@ -233,20 +233,19 @@
     }
     
     .document-official-title {
-        color: white;
-        font-size: 0.86rem; /* Значительно уменьшили размер шрифта */
-        font-weight: 400;
-        line-height: 1.2; /* Уменьшили межстрочный интервал */
-        opacity: 0.95;
-        display: -webkit-box;
-        -webkit-line-clamp: 6; /* Увеличили до 6 строк */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-height: calc(1.2em * 6); /* Подстроили под новую высоту */
-        word-break: break-word; /* Разрешили перенос длинных слов */
-        width: 100%; /* Занимаем всю ширину */
-    }
+    color: white;
+    font-size: 0.95rem; /* Оставляем как было */
+    font-weight: 400;
+    line-height: 1.3; /* Оставляем как было */
+    opacity: 0.95;
+    display: -webkit-box;
+    -webkit-line-clamp: 5; /* Увеличиваем с 4 до 5 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: calc(1.3em * 5); /* Подстраиваем под 5 строк */
+    /* Убираем word-break если он был */
+}
     
     .document-body {
         padding: 1.5rem;
