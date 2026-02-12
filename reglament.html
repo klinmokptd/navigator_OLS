@@ -77,7 +77,7 @@
             color: white;
             padding: 3rem;
             border-radius: var(--radius);
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             box-shadow: var(--shadow);
             border-bottom: 4px solid var(--accent-red);
             position: relative;
@@ -94,9 +94,78 @@
         .document-subtitle {
             font-size: 1.1rem;
             opacity: 0.95;
-            margin-bottom: 1.5rem;
             font-weight: 300;
             max-width: 900px;
+        }
+        
+        /* === БЛОК ГЛАВНОГО ВРАЧА === */
+        .chief-block {
+            background: var(--light-blue);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--gray-medium);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .chief-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-red);
+        }
+        
+        .chief-task-list {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .chief-task-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .chief-task-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent-red);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+        
+        /* === КНОПКИ "ПОДРОБНЕЕ" - ТОЛЬКО ОБВОДКА === */
+        .outline-btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 8px 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+            align-self: flex-start;
+            width: fit-content;
+            border: 1.5px solid var(--gray-medium);
+            cursor: pointer;
+        }
+        
+        .outline-btn:hover {
+            background: var(--gray-light);
+            border-color: var(--text-secondary);
+            color: var(--text-primary);
         }
         
         /* === СЕТКА ИЗ ЧЕТЫРЁХ ВЕТОК === */
@@ -128,11 +197,12 @@
             border-bottom: 2px solid var(--accent-red);
         }
         
-        /* === ЗАДАЧИ В ВЕТКАХ === */
         .task-level {
             margin-bottom: 2rem;
             position: relative;
             padding-left: 1.5rem;
+            display: flex;
+            flex-direction: column;
         }
         
         .task-level:last-child {
@@ -166,7 +236,7 @@
         .task-list {
             list-style: none;
             margin-left: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.5rem;
         }
         
         .task-list li {
@@ -185,30 +255,6 @@
             color: var(--accent-red);
             font-weight: bold;
             font-size: 1.2rem;
-        }
-        
-        /* === КНОПКА ПОДРОБНЕЕ === */
-        .branch-btn {
-            display: inline-block;
-            background: var(--primary-blue);
-            color: white;
-            padding: 10px 20px;
-            border-radius: var(--radius);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: background 0.3s;
-            margin-top: auto;
-            align-self: center;
-            width: fit-content;
-            border: none;
-            cursor: pointer;
-        }
-        
-        .branch-btn:hover {
-            background: var(--secondary-blue);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
         }
         
         /* === ФУТЕР === */
@@ -244,6 +290,11 @@
                 font-size: 1.8rem;
             }
             
+            .outline-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
             .scheme-container {
                 grid-template-columns: 1fr;
                 gap: 25px;
@@ -252,23 +303,10 @@
             .branch-title {
                 font-size: 1.3rem;
             }
-            
-            .level-title {
-                font-size: 1rem;
-            }
-            
-            .task-list li {
-                font-size: 0.9rem;
-            }
-            
-            .branch-btn {
-                width: 100%;
-                text-align: center;
-            }
         }
         
         @media print {
-            .branch-btn {
+            .outline-btn {
                 display: none;
             }
             
@@ -281,7 +319,8 @@
                 padding: 0;
             }
             
-            .scheme-container {
+            .scheme-container,
+            .chief-block {
                 break-inside: avoid;
             }
         }
@@ -294,6 +333,18 @@
         <h1 class="document-title">Регламент действий по задачам</h1>
         <p class="document-subtitle">Распределение задач по направлениям и уровням ответственности в медицинской организации</p>
     </header>
+
+    <!-- БЛОК: ГЛАВНЫЙ ВРАЧ (только две задачи, кнопка под списком) -->
+    <div class="chief-block">
+        <h2 class="chief-title">Главный врач</h2>
+        
+        <ul class="chief-task-list">
+            <li><strong>Создать внутренний приказ</strong> «Об организации раннего выявления туберкулёза» на основании распоряжения МЗ МО № 445-Р от 30.09.2025</li>
+            <li><strong>Назначить уполномоченное должностное лицо</strong> по организации профосмотров в целях раннего выявления туберкулёза (не ниже заместителя главного врача)</li>
+        </ul>
+        
+        <a href="chief-physician.html" class="outline-btn">Подробнее</a>
+    </div>
 
     <!-- ЧЕТЫРЕ ВЕТКИ -->
     <div class="scheme-container">
@@ -310,6 +361,7 @@
                     <li>Корректировка работы на основе полученных результатов</li>
                     <li>Консолидация данных по поликлиникам</li>
                 </ul>
+                <a href="zam-apr.html" class="outline-btn">Подробнее</a>
             </div>
             
             <div class="task-level">
@@ -322,6 +374,7 @@
                     <li>Организация вызова пациентов на дообследование</li>
                     <li>Своевременное сообщение фтизиатру о подозрении на туберкулёз</li>
                 </ul>
+                <a href="zav-podr.html" class="outline-btn">Подробнее</a>
             </div>
             
             <div class="task-level">
@@ -332,9 +385,8 @@
                     <li>Наблюдение за группами риска (контроль кратности обследования: флюорография, Диаскинтест)</li>
                     <li>Назначение анализа мокроты на КУМ маломобильным пациентам</li>
                 </ul>
+                <a href="terapevt.html" class="outline-btn">Подробнее</a>
             </div>
-            
-            <a href="ambulatory.html" class="branch-btn">Подробнее</a>
         </div>
         
         <!-- 2. Стационарная помощь -->
@@ -349,6 +401,7 @@
                     <li>Контроль настороженности на туберкулёз в стационаре</li>
                     <li>Организация обратной связи с поликлиниками</li>
                 </ul>
+                <a href="zam-stac.html" class="outline-btn">Подробнее</a>
             </div>
             
             <div class="task-level">
@@ -359,6 +412,7 @@
                     <li>Своевременное назначение рентгеновских исследований</li>
                     <li>Организация трёхкратного исследования мокроты на КУМ по Цилю-Нильсену</li>
                 </ul>
+                <a href="zav-otd.html" class="outline-btn">Подробнее</a>
             </div>
             
             <div class="task-level">
@@ -371,9 +425,8 @@
                     <li>Назначение Диаскинтеста</li>
                     <li>Своевременный вызов фтизиатра на консультацию</li>
                 </ul>
+                <a href="vrach-stac.html" class="outline-btn">Подробнее</a>
             </div>
-            
-            <a href="hospital.html" class="branch-btn">Подробнее</a>
         </div>
         
         <!-- 3. Родовспоможение и педиатрия -->
@@ -388,6 +441,7 @@
                     <li>Организация ревакцинации БЦЖ</li>
                     <li>Контроль работы по педиатрическому направлению</li>
                 </ul>
+                <a href="zam-rod.html" class="outline-btn">Подробнее</a>
             </div>
             
             <div class="task-level">
@@ -398,6 +452,7 @@
                     <li>Контроль сбора отчётности по вакцинации</li>
                     <li>Организация работы с детскими группами риска</li>
                 </ul>
+                <a href="zav-ped.html" class="outline-btn">Подробнее</a>
             </div>
             
             <div class="task-level">
@@ -408,12 +463,11 @@
                     <li>Контроль за детскими группами риска</li>
                     <li>Ведение документации и отчётности</li>
                 </ul>
+                <a href="pediatr.html" class="outline-btn">Подробнее</a>
             </div>
-            
-            <a href="pediatrics.html" class="branch-btn">Подробнее</a>
         </div>
         
-        <!-- 4. СТАТИСТИЧЕСКИЙ ОТДЕЛ -->
+        <!-- 4. Статистический отдел -->
         <div class="branch">
             <h2 class="branch-title">Статистический отдел</h2>
             
@@ -426,9 +480,8 @@
                     <li>Ежемесячная обратная связь руководству ЛПУ для своевременного принятия решений</li>
                     <li>Подготовка аналитических материалов для заместителей главного врача</li>
                 </ul>
+                <a href="statistik.html" class="outline-btn">Подробнее</a>
             </div>
-            
-            <a href="statistics.html" class="branch-btn">Подробнее</a>
         </div>
         
     </div>
