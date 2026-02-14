@@ -917,15 +917,15 @@
             });
         }
 
-                function openExplanation(id) {
+                        function openExplanation(id) {
             const doc = allDocuments.find(d => d.id == id);
             
             if (!doc || !doc.explanation) {
                 modalBody.innerHTML = '<p>Пояснение для этого документа пока не добавлено.</p>';
                 modalTitle.textContent = "Пояснение документа";
             } else {
-                // ИСПРАВЛЕНО: теперь берем полное название из officialTitle
-                modalTitle.textContent = doc.officialTitle; 
+                // ИСПРАВЛЕНО: объединяем сокращенное и полное название
+                modalTitle.textContent = doc.title + " — " + doc.officialTitle;
                 
                 modalBody.innerHTML = `
                     <div class="explanation-section">
@@ -953,7 +953,6 @@
         }
 
         function showAllExplanations() {
-            // ИСПРАВЛЕНО: теперь используем полное название
             modalTitle.textContent = "Объяснения всех документов";
             
             let allContent = '';
@@ -963,7 +962,7 @@
                     allContent += `
                         <div class="explanation-section" style="margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 2px solid var(--gray-medium);">
                             <h4 class="explanation-title" style="font-size: 1.3rem;">
-                                ${doc.officialTitle} <!-- ВОТ ЗДЕСЬ БЫЛО doc.title, СТАЛО doc.officialTitle -->
+                                ${doc.title} — ${doc.officialTitle}
                             </h4>
                             
                             <div style="margin-top: 1.5rem;">
