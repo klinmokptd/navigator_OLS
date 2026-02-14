@@ -817,30 +817,34 @@
             }
         ];
 
-        // ========== ФУНКЦИЯ ДЛЯ СКАЧИВАНИЯ ВСЕХ ДОКУМЕНТОВ ==========
-        function downloadAllDocuments() {
-            try {
-                allDocuments.forEach((doc, index) => {
-                    setTimeout(() => {
-                        const link = document.createElement('a');
-                        link.href = doc.pdfFile;
-                        link.download = doc.pdfName;
-                        link.style.display = 'none';
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                    }, index * 300);
-                });
-                
-                alert(`Начинается скачивание ${allDocuments.length} документов. Проверьте папку "Загрузки"!`);
-                
-            } catch (error) {
-                console.error('Ошибка при скачивании:', error);
-                alert('Произошла ошибка');
-            }
-        }
-
         // ========== ФУНКЦИИ ==========
+        // ========== ФУНКЦИЯ ДЛЯ СКАЧИВАНИЯ ВСЕХ ДОКУМЕНТОВ (КРОМЕ КЛИНИЧЕСКИХ РЕКОМЕНДАЦИЙ) ==========
+function downloadAllDocuments() {
+    try {
+        // Фильтруем документы: исключаем клинические рекомендации (id: 3)
+        const documentsToDownload = allDocuments.filter(doc => doc.id !== 3);
+        
+        documentsToDownload.forEach((doc, index) => {
+            setTimeout(() => {
+                const link = document.createElement('a');
+                link.href = doc.pdfFile;
+                link.download = doc.pdfName;
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }, index * 300);
+        });
+        
+        alert(`Начинается скачивание ${documentsToDownload.length} документов. Клинические рекомендации (ссылка на сайт Минздрава) исключены из загрузки.`);
+        
+    } catch (error) {
+        console.error('Ошибка при скачивании:', error);
+        alert('Произошла ошибка');
+    }
+}
+
+     
         
         function renderDocuments() {
             const container = document.getElementById('documents-container');
