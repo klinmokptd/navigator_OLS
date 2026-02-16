@@ -570,51 +570,65 @@
     </div>
 
     <!-- НОВОЕ МОДАЛЬНОЕ ОКНО для Инструментов контроля (приказ 445-Р) -->
-    <div class="modal-overlay" id="instrumentsModal">
-        <div class="modal-content" style="max-width: 650px;">
-            <div class="modal-header" style="background: var(--accent-green);">
-                <h3 class="modal-title">📗 Инструменты контроля (№445-Р)</h3>
-                <button class="modal-close" id="closeInstrumentsModal">×</button>
+<div class="modal-overlay" id="instrumentsModal">
+    <div class="modal-content" style="max-width: 650px;">
+        <div class="modal-header" style="background: var(--accent-green);">
+            <h3 class="modal-title">📗 Инструменты контроля (№445-Р)</h3>
+            <button class="modal-close" id="closeInstrumentsModal">×</button>
+        </div>
+        <div class="modal-body" id="instrumentsModalBody">
+            <!-- ПЕРВЫЙ БЛОК (сокращенный) -->
+            <div class="explanation-section" style="margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--gray-medium);">
+                <h4 class="explanation-title" style="color: var(--accent-green);">
+                    Единый инструмент контроля диспансерных групп
+                </h4>
+                <p class="explanation-text" style="margin-bottom: 1rem;">
+                    Готовый шаблон паспорта терапевтического участка. Объединяет учет по двум приказам:
+                </p>
+                <p class="explanation-text" style="margin-bottom: 0.5rem;">
+                    🔴 <strong>Красные листы</strong> — диспансерные по приказу №168н (сердечно-сосудистые, диабет, ХОБЛ, язва и др.)
+                </p>
+                <p class="explanation-text" style="margin-bottom: 0.3rem;">
+                    🔵 <strong>Синие листы</strong> — группы риска по туберкулезу (приказ №445):
+                </p>
+                <p class="explanation-text" style="margin-bottom: 0.3rem; margin-left: 1rem;">
+                    • Часть уже есть в красных (диабет, ХОБЛ, ЖКТ) — наблюдаются по 168-му + подлежат скринингу по 445-му
+                </p>
+                <p class="explanation-text" style="margin-bottom: 1rem; margin-left: 1rem;">
+                    • Остальные (БОМЖ, контактные, снятые с учета ПТД, иммуносупрессия) — только контроль ФЛГ и Диаскинтеста
+                </p>
+                <p class="explanation-text" style="margin-bottom: 0.8rem;">
+                    <strong>Удобно:</strong> один файл вместо двух журналов, цветовая маркировка, ничего не теряется.
+                </p>
+                <p class="explanation-text" style="margin-bottom: 1.5rem;">
+                    <strong>Как использовать:</strong> скачайте, заполните, контролируйте кратность посещений и сроки обследований.
+                </p>
+                <a href="documents/instrument_kontrolia.xlsx" 
+                   class="doc-btn btn-excel" 
+                   style="padding: 10px 20px; font-size: 1rem;"
+                   download>
+                    📥 Скачать instrument_kontrolia.xlsx
+                </a>
             </div>
-            <div class="modal-body" id="instrumentsModalBody">
-                <!-- ПЕРВЫЙ БЛОК -->
-                <div class="explanation-section" style="margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--gray-medium);">
-                    <h4 class="explanation-title" style="color: var(--accent-green);">
-                        Единый инструмент контроля диспансерных групп
-                    </h4>
-                    <p class="explanation-text" style="margin-bottom: 1.2rem;">
-                        Это готовый шаблон для ведения паспорта терапевтического участка. В нем собраны все категории пациентов, за которыми нужен контроль, согласно двум ключевым приказам.
-                    </p>
-                    <p class="explanation-text" style="margin-bottom: 1.5rem; font-weight: 500;">
-                        🔴 Красные листы — пациенты по приказу №168н (хроники)<br>
-                        🔵 Синие листы — группы риска по туберкулезу (приказ №445)
-                    </p>
-                    <a href="documents/instrument_kontrolia.xlsx" 
-                       class="doc-btn btn-excel" 
-                       style="padding: 10px 20px; font-size: 1rem;"
-                       download>
-                        📥 Скачать instrument_kontrolia.xlsx
-                    </a>
-                </div>
-                
-                <!-- ВТОРОЙ БЛОК -->
-                <div class="explanation-section">
-                    <h4 class="explanation-title" style="color: var(--primary-blue);">
-                        Мониторинг профилактических осмотров (свод по подразделению)
-                    </h4>
-                    <p class="explanation-text" style="margin-bottom: 1.2rem;">
-                        Это сводная таблица, которая собирает данные со всех терапевтических участков в один файл. Помогает быстро увидеть картину по подразделению в целом и контролировать выполнение осмотров.
-                    </p>
-                    <a href="documents/svod.xlsx" 
-                       class="doc-btn btn-pdf" 
-                       style="padding: 10px 20px; font-size: 1rem; background: var(--primary-blue);"
-                       download>
-                        📥 Скачать svod.xlsx
-                    </a>
-                </div>
+            
+            <!-- ВТОРОЙ БЛОК (полный) -->
+            <div class="explanation-section">
+                <h4 class="explanation-title" style="color: var(--primary-blue);">
+                    Мониторинг профилактических осмотров (свод по подразделению)
+                </h4>
+                <p class="explanation-text" style="margin-bottom: 1.5rem;">
+                    Это сводная таблица, которая собирает данные со всех терапевтических участков в один файл. Помогает быстро увидеть картину по подразделению в целом и контролировать выполнение осмотров.
+                </p>
+                <a href="documents/svod.xlsx" 
+                   class="doc-btn btn-pdf" 
+                   style="padding: 10px 20px; font-size: 1rem; background: var(--primary-blue);"
+                   download>
+                    📥 Скачать svod.xlsx
+                </a>
             </div>
         </div>
     </div>
+</div>
 
     <footer class="footer">
         <div class="footer-container">
