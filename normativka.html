@@ -569,6 +569,53 @@
         </div>
     </div>
 
+    <!-- НОВОЕ МОДАЛЬНОЕ ОКНО для Инструментов контроля (приказ 445-Р) -->
+    <div class="modal-overlay" id="instrumentsModal">
+        <div class="modal-content" style="max-width: 650px;">
+            <div class="modal-header" style="background: var(--accent-green);">
+                <h3 class="modal-title">📗 Инструменты контроля (№445-Р)</h3>
+                <button class="modal-close" id="closeInstrumentsModal">×</button>
+            </div>
+            <div class="modal-body" id="instrumentsModalBody">
+                <!-- ПЕРВЫЙ БЛОК -->
+                <div class="explanation-section" style="margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--gray-medium);">
+                    <h4 class="explanation-title" style="color: var(--accent-green);">
+                        Единый инструмент контроля диспансерных групп
+                    </h4>
+                    <p class="explanation-text" style="margin-bottom: 1.2rem;">
+                        Это готовый шаблон для ведения паспорта терапевтического участка. В нем собраны все категории пациентов, за которыми нужен контроль, согласно двум ключевым приказам.
+                    </p>
+                    <p class="explanation-text" style="margin-bottom: 1.5rem; font-weight: 500;">
+                        🔴 Красные листы — пациенты по приказу №168н (хроники)<br>
+                        🔵 Синие листы — группы риска по туберкулезу (приказ №445)
+                    </p>
+                    <a href="documents/instrument_kontrolia.xlsx" 
+                       class="doc-btn btn-excel" 
+                       style="padding: 10px 20px; font-size: 1rem;"
+                       download>
+                        📥 Скачать instrument_kontrolia.xlsx
+                    </a>
+                </div>
+                
+                <!-- ВТОРОЙ БЛОК -->
+                <div class="explanation-section">
+                    <h4 class="explanation-title" style="color: var(--primary-blue);">
+                        Мониторинг профилактических осмотров (свод по подразделению)
+                    </h4>
+                    <p class="explanation-text" style="margin-bottom: 1.2rem;">
+                        Это сводная таблица, которая собирает данные со всех терапевтических участков в один файл. Помогает быстро увидеть картину по подразделению в целом и контролировать выполнение осмотров.
+                    </p>
+                    <a href="documents/svod.xlsx" 
+                       class="doc-btn btn-pdf" 
+                       style="padding: 10px 20px; font-size: 1rem; background: var(--primary-blue);"
+                       download>
+                        📥 Скачать svod.xlsx
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-info">
@@ -840,7 +887,24 @@
                 
                 let buttonsHTML;
                 
-                if (doc.id === 8 && doc.excelFile) {
+                // Специальная обработка для приказа №445-Р (id: 5) - добавляем третью кнопку
+                if (doc.id === 5) {
+                    buttonsHTML = `
+                        <a href="${doc.pdfFile}" 
+                           target="_blank"
+                           class="doc-btn btn-pdf">
+                            📄 Смотреть PDF
+                        </a>
+                        
+                        <button class="doc-btn btn-explain explain-btn" data-id="${doc.id}">
+                            💡 Аннотация
+                        </button>
+                        
+                        <button class="doc-btn btn-excel" id="instrumentsBtn-${doc.id}" style="background: var(--accent-green);">
+                            📗 Инструменты контроля
+                        </button>
+                    `;
+                } else if (doc.id === 8 && doc.excelFile) {
                     buttonsHTML = `
                         <a href="${doc.pdfFile}" 
                            target="_blank"
@@ -904,6 +968,12 @@
                 });
             });
             
+            // Добавляем обработчики для кнопок "Инструменты контроля" (приказ 445-Р)
+            const instrumentsBtn = document.getElementById('instrumentsBtn-5');
+            if (instrumentsBtn) {
+                instrumentsBtn.addEventListener('click', openInstrumentsModal);
+            }
+            
             const cards = document.querySelectorAll('.document-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
@@ -917,14 +987,13 @@
             });
         }
 
-                        function openExplanation(id) {
+        function openExplanation(id) {
             const doc = allDocuments.find(d => d.id == id);
             
             if (!doc || !doc.explanation) {
                 modalBody.innerHTML = '<p>Пояснение для этого документа пока не добавлено.</p>';
                 modalTitle.textContent = "Пояснение документа";
             } else {
-                // ИСПРАВЛЕНО: объединяем сокращенное и полное название
                 modalTitle.textContent = doc.title + " — " + doc.officialTitle;
                 
                 modalBody.innerHTML = `
@@ -988,8 +1057,19 @@
             document.body.style.overflow = 'hidden';
         }
 
+        // Новая функция для открытия модального окна с инструментами
+        function openInstrumentsModal() {
+            instrumentsModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
         function closeModal() {
             modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeInstrumentsModal() {
+            instrumentsModal.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
@@ -998,6 +1078,10 @@
         const modalTitle = document.getElementById('modalDocTitle');
         const modalBody = document.getElementById('modalBody');
         const showAllBtn = document.getElementById('showAllExplanations');
+        
+        // Элементы для нового модального окна
+        const instrumentsModal = document.getElementById('instrumentsModal');
+        const closeInstrumentsModalBtn = document.getElementById('closeInstrumentsModal');
 
         document.addEventListener('DOMContentLoaded', () => {
             renderDocuments();
@@ -1005,15 +1089,33 @@
             showAllBtn.addEventListener('click', showAllExplanations);
             closeModalBtn.addEventListener('click', closeModal);
             
+            // Обработчики для нового модального окна
+            if (closeInstrumentsModalBtn) {
+                closeInstrumentsModalBtn.addEventListener('click', closeInstrumentsModal);
+            }
+            
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     closeModal();
                 }
             });
             
+            if (instrumentsModal) {
+                instrumentsModal.addEventListener('click', (e) => {
+                    if (e.target === instrumentsModal) {
+                        closeInstrumentsModal();
+                    }
+                });
+            }
+            
             document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && modal.classList.contains('active')) {
-                    closeModal();
+                if (e.key === 'Escape') {
+                    if (modal.classList.contains('active')) {
+                        closeModal();
+                    }
+                    if (instrumentsModal && instrumentsModal.classList.contains('active')) {
+                        closeInstrumentsModal();
+                    }
                 }
             });
         });
