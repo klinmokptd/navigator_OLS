@@ -10,7 +10,11 @@
             --secondary-color: #7fcdbb;
             --light-color: #f0f9ff;
             --border-color: #ddd;
-            --completed-color: #e6f7e6;
+            /* убрали переменную --completed-color */
+            --save-btn-bg: #ffc107;      /* желтый */
+            --save-btn-hover: #e0a800;    /* темно-желтый */
+            --export-btn-bg: #28a745;     /* зеленый */
+            --export-btn-hover: #218838;   /* темно-зеленый */
         }
         
         * {
@@ -61,22 +65,22 @@
             margin-bottom: 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
         }
         
         .branch-info-row {
             display: flex;
-            align-items: center;
-            gap: 10px;
+            flex-direction: column;
+            gap: 5px;
         }
         
         .branch-info-row label {
             font-weight: bold;
-            min-width: 150px;
+            min-width: auto;
         }
         
         .branch-info-row input {
-            flex: 1;
+            width: 100%;
             padding: 8px;
             border: 1px solid var(--border-color);
             border-radius: 4px;
@@ -90,6 +94,7 @@
             border-radius: 5px;
             margin-bottom: 20px;
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 10px;
         }
@@ -106,9 +111,9 @@
         }
         
         .auto-save-status {
-            margin-left: auto;
             font-size: 0.9rem;
             color: #666;
+            margin-left: 0;
         }
         
         .progress-bar {
@@ -181,12 +186,10 @@
             background-color: #f9f9f9;
             transition: background-color 0.3s;
             position: relative;
+            /* удалено возможное упоминание completed-color */
         }
         
-        .question.completed {
-            background-color: var(--completed-color);
-        }
-        
+        /* класс completed больше не добавляет зеленый фон */
         .question-text {
             margin-bottom: 10px;
             font-weight: 500;
@@ -211,12 +214,26 @@
             transition: all 0.3s ease;
         }
         
+        /* зеленая галочка (проверено, замечаний нет) */
         .check-button.checked {
             background-color: #4CAF50;
             border-color: #4CAF50;
         }
         
         .check-button.checked::after {
+            content: "✓";
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        /* красная галочка (проверено, есть замечания) */
+        .check-button.checked-red {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+        
+        .check-button.checked-red::after {
             content: "✓";
             color: white;
             font-weight: bold;
@@ -253,7 +270,6 @@
         
         button {
             padding: 12px 30px;
-            background-color: var(--primary-color);
             color: white;
             border: none;
             border-radius: 4px;
@@ -263,23 +279,23 @@
         }
         
         button:hover {
-            background-color: #1a5a8a;
+            opacity: 0.9;
         }
         
         .save-btn {
-            background-color: #4CAF50;
+            background-color: var(--save-btn-bg);
         }
         
         .save-btn:hover {
-            background-color: #3d8b40;
+            background-color: var(--save-btn-hover);
         }
         
         .export-btn {
-            background-color: #ff9800;
+            background-color: var(--export-btn-bg);
         }
         
         .export-btn:hover {
-            background-color: #e68900;
+            background-color: var(--export-btn-hover);
         }
         
         .clear-btn {
@@ -367,6 +383,7 @@
             .question {
                 margin-bottom: 8px !important;
                 padding: 6px !important;
+                background-color: #f9f9f9 !important; /* убираем возможные изменения фона */
             }
             
             .question-text {
@@ -384,7 +401,8 @@
                 print-color-adjust: exact;
             }
             
-            .check-button.checked::after {
+            .check-button.checked::after,
+            .check-button.checked-red::after {
                 font-size: 10px !important;
             }
             
@@ -745,32 +763,69 @@
             
             questionElement.appendChild(comment);
             
-            comment.addEventListener('input', function() {
-                if (this.value.trim() !== '' && !checkButton.classList.contains('checked')) {
-                    checkButton.classList.add('checked');
-                    questionElement.classList.add('completed');
-                    updateSectionStatus(sectionIndex);
-                    updateProgressBar();
+            // Функция обновления статуса галочки в зависимости от комментария
+            const updateButtonFromComment = () => {
+                const hasCommentText = comment.value.trim() !== '';
+                // Если есть текст комментария
+                if (hasCommentText) {
+                    // Если галочка не отмечена никак
+                    if (!checkButton.classList.contains('checked') && !checkButton.classList.contains('checked-red')) {
+                        // Устанавливаем красную
+                        checkButton.classList.add('checked-red');
+                    } 
+                    // Если уже стоит зеленая (checked) — оставляем зеленую (приоритет зеленой, если пользователь сам поставил)
+                    else if (checkButton.classList.contains('checked')) {
+                        // ничего не меняем, зеленая важнее (означает "проверено, без замечаний")
+                    }
+                    // если уже красная — оставляем
+                } else {
+                    // Комментарий пустой — если стоит красная, убираем её (если не зеленая)
+                    if (checkButton.classList.contains('checked-red') && !checkButton.classList.contains('checked')) {
+                        checkButton.classList.remove('checked-red');
+                    }
                 }
-                saveAnswer(sectionIndex, questionIndex, checkButton.classList.contains('checked') ? 'Проверено' : 'Не проверено', this.value);
+                // Сохраняем изменения
+                saveAnswer(sectionIndex, questionIndex, 
+                    checkButton.classList.contains('checked') ? 'Проверено' : 
+                    (checkButton.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Не проверено'), 
+                    comment.value);
+                updateSectionStatus(sectionIndex);
+                updateProgressBar();
                 saveToLocalStorage(true);
+            };
+            
+            comment.addEventListener('input', function() {
+                updateButtonFromComment();
+                // авторазмер
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
             });
             
             checkButton.addEventListener('click', function() {
-                const isChecked = this.classList.contains('checked');
-                
-                if (isChecked) {
+                // Если галочка зеленая -> снимаем полностью
+                if (this.classList.contains('checked')) {
                     this.classList.remove('checked');
-                    questionElement.classList.remove('completed');
-                } else {
-                    this.classList.add('checked');
-                    questionElement.classList.add('completed');
+                } 
+                // Если галочка красная -> снимаем полностью
+                else if (this.classList.contains('checked-red')) {
+                    this.classList.remove('checked-red');
+                } 
+                else {
+                    // Если не отмечена: ставим зеленую или красную в зависимости от комментария
+                    if (comment.value.trim() !== '') {
+                        this.classList.add('checked-red');
+                    } else {
+                        this.classList.add('checked');
+                    }
                 }
                 
+                // Сохраняем статус
+                saveAnswer(sectionIndex, questionIndex, 
+                    this.classList.contains('checked') ? 'Проверено' : 
+                    (this.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Не проверено'), 
+                    comment.value);
                 updateSectionStatus(sectionIndex);
                 updateProgressBar();
-                
-                saveAnswer(sectionIndex, questionIndex, this.classList.contains('checked') ? 'Проверено' : 'Не проверено', comment.value);
                 saveToLocalStorage(true);
             });
             
@@ -788,7 +843,8 @@
             const section = document.querySelector(`.section[data-section-index="${sectionIndex}"]`);
             const statusElement = section.querySelector('.section-status');
             const totalQuestions = sections[sectionIndex].questions.length + 1;
-            const answeredQuestions = section.querySelectorAll('.check-button.checked').length;
+            // считаем любые отмеченные галочки (и зеленые и красные)
+            const answeredQuestions = section.querySelectorAll('.check-button.checked, .check-button.checked-red').length;
             statusElement.textContent = `${answeredQuestions}/${totalQuestions}`;
         }
         
@@ -814,7 +870,11 @@
                 const [sectionIndex, questionIndex] = questionId.split('-').map(Number);
                 const questionElement = document.querySelector(`[data-question-id="${questionId}"]`);
                 const comment = questionElement ? questionElement.querySelector('textarea') : null;
-                saveAnswer(sectionIndex, questionIndex, button.classList.contains('checked') ? 'Проверено' : 'Не проверено', comment ? comment.value : null);
+                let answerStatus = 'Не проверено';
+                if (button.classList.contains('checked')) answerStatus = 'Проверено';
+                else if (button.classList.contains('checked-red')) answerStatus = 'Проверено (замечания)';
+                
+                saveAnswer(sectionIndex, questionIndex, answerStatus, comment ? comment.value : null);
             });
             
             const timestamp = document.getElementById('timestamp').value;
@@ -859,9 +919,12 @@
                         
                         if (questionElement) {
                             const checkButton = questionElement.querySelector('.check-button');
-                            if (checkButton && answerData.answer === 'Проверено') {
-                                checkButton.classList.add('checked');
-                                questionElement.classList.add('completed');
+                            if (checkButton) {
+                                if (answerData.answer === 'Проверено') {
+                                    checkButton.classList.add('checked');
+                                } else if (answerData.answer === 'Проверено (замечания)') {
+                                    checkButton.classList.add('checked-red');
+                                }
                             }
                             
                             if (answerData.comment) {
@@ -890,9 +953,10 @@
                 localStorage.removeItem('tb_early_detection_checklist_v4');
                 
                 document.querySelectorAll('.question').forEach(question => {
-                    question.classList.remove('completed');
                     const checkButtons = question.querySelectorAll('.check-button');
-                    checkButtons.forEach(button => button.classList.remove('checked'));
+                    checkButtons.forEach(button => {
+                        button.classList.remove('checked', 'checked-red');
+                    });
                     
                     const textareas = question.querySelectorAll('textarea');
                     textareas.forEach(textarea => {
@@ -923,7 +987,8 @@
         
         function exportToExcel() {
             const timestamp = document.getElementById('timestamp').value;
-            const date = new Date(timestamp).toLocaleDateString('ru-RU');
+            const date = new Date(timestamp + 'T00:00:00'); // костыль для Safari
+            const formattedDate = date.toLocaleDateString('ru-RU');
             const orgName = document.getElementById('org-name').value || 'Не указано';
             const orgDepartment = document.getElementById('org-department').value || 'Не указано';
             
@@ -933,7 +998,7 @@
             excelData.push(["Карта контроля организации раннего выявления туберкулеза в учреждениях общей лечебной сети"]);
             excelData.push([`Медицинская организация: ${orgName}`]);
             excelData.push([`Подразделение / Участок: ${orgDepartment}`]);
-            excelData.push([`Дата проверки: ${date}`]);
+            excelData.push([`Дата проверки: ${formattedDate}`]);
             excelData.push([]);
             excelData.push(["Раздел", "Вопрос", "Статус", "Комментарий"]);
             
@@ -955,8 +1020,17 @@
             });
             
             const ws = XLSX.utils.aoa_to_sheet(excelData);
+            
+            // Настройка ширины столбцов: A=20 (x2), B=50 (x5), C=15 (x1.5), D=50 (x5)
+            ws['!cols'] = [
+                { wch: 20 },  // A
+                { wch: 50 },  // B
+                { wch: 15 },  // C
+                { wch: 50 }   // D
+            ];
+            
             XLSX.utils.book_append_sheet(wb, ws, "Чек-лист ОЛС");
-            XLSX.writeFile(wb, `карта_контроля_ОЛС_${date.replace(/\./g, '-')}.xlsx`);
+            XLSX.writeFile(wb, `карта_контроля_ОЛС_${formattedDate.replace(/\./g, '-')}.xlsx`);
         }
     </script>
 </body>
