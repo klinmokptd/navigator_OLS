@@ -605,10 +605,12 @@
             }
         ];
 
-        // Глобальные переменные
+                // Глобальные переменные
         let answers = {};
         let autoSaveInterval;
         let lastSaveTime = null;
+        let autoSaveTimer = null;
+        let currentExpandedSection = null;
         
         // Инициализация при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
@@ -620,40 +622,54 @@
             const day = String(now.getDate()).padStart(2, '0');
             timestampInput.value = `${year}-${month}-${day}`;
             
-            // Генерация секций
-            generateSections();
+            // Генерация скелета секций (только заголовки)
+            generateSectionSkeletons();
+            
+            // Загрузка сохраненных данных
+            loadFromLocalStorage();
             
             // Обновление прогресс-бара
             updateProgressBar();
             
             // Обработчики событий для кнопок
-            document.getElementById('save-btn').addEventListener('click', saveToLocalStorage);
+            document.getElementById('save-btn').addEventListener('click', () => saveToLocalStorage(false));
             document.getElementById('export-btn').addEventListener('click', exportToExcel);
             document.getElementById('clear-btn').addEventListener('click', clearForm);
             document.getElementById('print-btn').addEventListener('click', printForm);
             
-            // Загрузка сохраненных данных
-            loadFromLocalStorage();
+            // Периодическое автосохранение (раз в 3 минуты)
+            setInterval(() => saveToLocalStorage(true), 3 * 60 * 1000);
             
-            // Запуск автосохранения (каждые 3 минуты)
-            startAutoSave();
+            // Автосохранение при закрытии страницы
+            window.addEventListener('beforeunload', () => {
+                if (autoSaveTimer) {
+                    clearTimeout(autoSaveTimer);
+                }
+                saveToLocalStorage(true);
+            });
             
-            // Автоматическое увеличение полей комментариев
-            setupAutoResizeTextareas();
+            updateAutoSaveStatus();
         });
         
+        // Функция печати
         function printForm() {
+            // Раскрываем все секции перед печатью
             document.querySelectorAll('.section').forEach(section => {
+                if (!section.dataset.initialized) {
+                    const sectionIndex = section.dataset.sectionIndex;
+                    lazyLoadSectionContent(section, parseInt(sectionIndex));
+                    section.dataset.initialized = 'true';
+                }
                 section.classList.remove('collapsed');
                 section.classList.add('expanded');
             });
-            setTimeout(() => {
-                window.print();
-            }, 100);
+            
+            setTimeout(() => window.print(), 100);
         }
         
-        function setupAutoResizeTextareas() {
-            document.querySelectorAll('.comment').forEach(textarea => {
+        // Настройка автосайза для textarea в секции
+        function setupAutoResizeForSection(container) {
+            container.querySelectorAll('.comment').forEach(textarea => {
                 textarea.style.height = 'auto';
                 textarea.style.height = (textarea.scrollHeight) + 'px';
                 textarea.addEventListener('input', function() {
@@ -663,14 +679,8 @@
             });
         }
         
-        function startAutoSave() {
-            // Автосохранение каждые 3 минуты (180000 миллисекунд)
-            autoSaveInterval = setInterval(() => {
-                saveToLocalStorage(true);
-            }, 3 * 60 * 1000);
-        }
-        
-        function generateSections() {
+        // Генерация скелета секций (только заголовки)
+        function generateSectionSkeletons() {
             const container = document.getElementById('sections-container');
             
             sections.forEach((section, index) => {
@@ -687,7 +697,7 @@
                 
                 const status = document.createElement('div');
                 status.className = 'section-status';
-                status.textContent = '0/' + (section.questions.length + 1);
+                status.textContent = `0/${section.questions.length + 1}`;
                 
                 header.appendChild(title);
                 header.appendChild(status);
@@ -695,51 +705,99 @@
                 const content = document.createElement('div');
                 content.className = 'section-content';
                 
-                section.questions.forEach((question, qIndex) => {
-                    const questionElement = createQuestionElement(index, qIndex, question);
-                    content.appendChild(questionElement);
-                });
-                
-                // Дополнительная информация
-                const additionalInfoElement = createQuestionElement(
-                    index, 
-                    section.questions.length, 
-                    "Дополнительная информация / Примечания"
-                );
-                content.appendChild(additionalInfoElement);
-                
                 sectionElement.appendChild(header);
                 sectionElement.appendChild(content);
+                container.appendChild(sectionElement);
                 
-                header.addEventListener('click', function() {
-                    const sectionIndex = this.dataset.sectionIndex;
-                    const section = document.querySelector(`.section[data-section-index="${sectionIndex}"]`);
+                // Обработчик клика с ленивой загрузкой
+                header.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const section = this.closest('.section');
+                    const sectionIndex = section.dataset.sectionIndex;
                     
-                    if (section.classList.contains('collapsed')) {
-                        document.querySelectorAll('.section').forEach(s => {
-                            s.classList.remove('expanded');
-                            s.classList.add('collapsed');
-                        });
-                        section.classList.remove('collapsed');
-                        section.classList.add('expanded');
-                        
-                        setTimeout(() => {
-                            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }, 100);
-                    } else {
-                        section.classList.remove('expanded');
-                        section.classList.add('collapsed');
+                    if (!section.dataset.initialized) {
+                        lazyLoadSectionContent(section, parseInt(sectionIndex));
+                        section.dataset.initialized = 'true';
                     }
                     
-                    setTimeout(() => {
-                        setupAutoResizeTextareas();
-                    }, 100);
+                    toggleSection(section);
                 });
-                
-                container.appendChild(sectionElement);
             });
         }
         
+        // Управление сворачиванием/разворачиванием секции
+        function toggleSection(section) {
+            const wasCollapsed = section.classList.contains('collapsed');
+            
+            if (currentExpandedSection && currentExpandedSection !== section) {
+                currentExpandedSection.classList.remove('expanded');
+                currentExpandedSection.classList.add('collapsed');
+            }
+            
+            if (wasCollapsed) {
+                section.classList.remove('collapsed');
+                section.classList.add('expanded');
+                currentExpandedSection = section;
+                
+                setTimeout(() => {
+                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
+            } else {
+                section.classList.remove('expanded');
+                section.classList.add('collapsed');
+                if (currentExpandedSection === section) {
+                    currentExpandedSection = null;
+                }
+            }
+        }
+        
+        // Ленивая загрузка контента секции
+        function lazyLoadSectionContent(sectionElement, sectionIndex) {
+            const contentElement = sectionElement.querySelector('.section-content');
+            const sectionData = sections[sectionIndex];
+            
+            sectionData.questions.forEach((question, qIndex) => {
+                contentElement.appendChild(createQuestionElement(sectionIndex, qIndex, question));
+            });
+            
+            contentElement.appendChild(createQuestionElement(
+                sectionIndex, 
+                sectionData.questions.length, 
+                "Дополнительная информация / Примечания"
+            ));
+            
+            restoreSectionFromAnswers(sectionIndex, contentElement);
+            setupAutoResizeForSection(contentElement);
+        }
+        
+        // Восстановление секции из сохраненных ответов
+        function restoreSectionFromAnswers(sectionIndex, container) {
+            if (!answers[sectionIndex]) return;
+            
+            Object.entries(answers[sectionIndex]).forEach(([qIndex, data]) => {
+                const questionElement = container.querySelector(`[data-question-id="${sectionIndex}-${qIndex}"]`);
+                if (!questionElement) return;
+                
+                const checkButton = questionElement.querySelector('.check-button');
+                const commentArea = questionElement.querySelector('.comment');
+                
+                if (data.answer === 'Проверено') {
+                    checkButton.classList.add('checked');
+                } else if (data.answer === 'Проверено (замечания)') {
+                    checkButton.classList.add('checked-red');
+                }
+                
+                if (data.comment) {
+                    commentArea.value = data.comment;
+                    commentArea.style.height = 'auto';
+                    commentArea.style.height = (commentArea.scrollHeight) + 'px';
+                }
+            });
+            
+            updateSectionStatus(sectionIndex);
+        }
+        
+        // Создание элемента вопроса
         function createQuestionElement(sectionIndex, questionIndex, questionText) {
             const questionElement = document.createElement('div');
             questionElement.className = 'question';
@@ -763,55 +821,29 @@
             
             questionElement.appendChild(comment);
             
-            // Функция обновления статуса галочки в зависимости от комментария
-            const updateButtonFromComment = () => {
-                const hasCommentText = comment.value.trim() !== '';
-                // Если есть текст комментария
-                if (hasCommentText) {
-                    // Если галочка не отмечена никак
-                    if (!checkButton.classList.contains('checked') && !checkButton.classList.contains('checked-red')) {
-                        // Устанавливаем красную
-                        checkButton.classList.add('checked-red');
-                    } 
-                    // Если уже стоит зеленая (checked) — оставляем зеленую (приоритет зеленой, если пользователь сам поставил)
-                    else if (checkButton.classList.contains('checked')) {
-                        // ничего не меняем, зеленая важнее (означает "проверено, без замечаний")
-                    }
-                    // если уже красная — оставляем
-                } else {
-                    // Комментарий пустой — если стоит красная, убираем её (если не зеленая)
-                    if (checkButton.classList.contains('checked-red') && !checkButton.classList.contains('checked')) {
-                        checkButton.classList.remove('checked-red');
-                    }
-                }
-                // Сохраняем изменения
-                saveAnswer(sectionIndex, questionIndex, 
-                    checkButton.classList.contains('checked') ? 'Проверено' : 
-                    (checkButton.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Не проверено'), 
-                    comment.value);
-                updateSectionStatus(sectionIndex);
-                updateProgressBar();
-                saveToLocalStorage(true);
+            // Состояние для отслеживания изменений
+            let previousState = {
+                isChecked: false,
+                hasComment: false
             };
             
-            comment.addEventListener('input', function() {
-                updateButtonFromComment();
-                // авторазмер
-                this.style.height = 'auto';
-                this.style.height = (this.scrollHeight) + 'px';
-            });
+            // Функция обновления счетчика
+            const updateState = (newChecked, newHasComment) => {
+                if (previousState.isChecked !== newChecked) {
+                    updateProgressBar();
+                }
+                previousState = { isChecked: newChecked, hasComment: newHasComment };
+            };
             
-            checkButton.addEventListener('click', function() {
-                // Если галочка зеленая -> снимаем полностью
+            // Обработчик клика по галочке
+            checkButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
                 if (this.classList.contains('checked')) {
                     this.classList.remove('checked');
-                } 
-                // Если галочка красная -> снимаем полностью
-                else if (this.classList.contains('checked-red')) {
+                } else if (this.classList.contains('checked-red')) {
                     this.classList.remove('checked-red');
-                } 
-                else {
-                    // Если не отмечена: ставим зеленую или красную в зависимости от комментария
+                } else {
                     if (comment.value.trim() !== '') {
                         this.classList.add('checked-red');
                     } else {
@@ -819,19 +851,49 @@
                     }
                 }
                 
-                // Сохраняем статус
-                saveAnswer(sectionIndex, questionIndex, 
-                    this.classList.contains('checked') ? 'Проверено' : 
-                    (this.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Не проверено'), 
-                    comment.value);
+                const isChecked = this.classList.contains('checked') || this.classList.contains('checked-red');
+                const answerStatus = isChecked ? 
+                    (this.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Проверено') : 
+                    'Не проверено';
+                
+                saveAnswer(sectionIndex, questionIndex, answerStatus, comment.value);
                 updateSectionStatus(sectionIndex);
-                updateProgressBar();
-                saveToLocalStorage(true);
+                updateState(isChecked, comment.value.trim() !== '');
+                scheduleAutoSave();
+            });
+            
+            // Обработчик ввода в комментарий
+            comment.addEventListener('input', function() {
+                const hasCommentText = this.value.trim() !== '';
+                const wasChecked = checkButton.classList.contains('checked') || checkButton.classList.contains('checked-red');
+                
+                if (hasCommentText) {
+                    if (!checkButton.classList.contains('checked-red') && !checkButton.classList.contains('checked')) {
+                        checkButton.classList.add('checked-red');
+                    }
+                } else {
+                    if (checkButton.classList.contains('checked-red') && !checkButton.classList.contains('checked')) {
+                        checkButton.classList.remove('checked-red');
+                    }
+                }
+                
+                const isNowChecked = checkButton.classList.contains('checked') || checkButton.classList.contains('checked-red');
+                const answerStatus = isNowChecked ? 
+                    (checkButton.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Проверено') : 
+                    'Не проверено';
+                
+                saveAnswer(sectionIndex, questionIndex, answerStatus, this.value);
+                
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+                
+                scheduleAutoSave();
             });
             
             return questionElement;
         }
         
+        // Сохранение ответа
         function saveAnswer(sectionIndex, questionIndex, answer, comment = null) {
             if (!answers[sectionIndex]) answers[sectionIndex] = {};
             if (!answers[sectionIndex][questionIndex]) answers[sectionIndex][questionIndex] = {};
@@ -839,15 +901,16 @@
             answers[sectionIndex][questionIndex].comment = comment;
         }
         
+        // Обновление статуса секции
         function updateSectionStatus(sectionIndex) {
             const section = document.querySelector(`.section[data-section-index="${sectionIndex}"]`);
             const statusElement = section.querySelector('.section-status');
             const totalQuestions = sections[sectionIndex].questions.length + 1;
-            // считаем любые отмеченные галочки (и зеленые и красные)
             const answeredQuestions = section.querySelectorAll('.check-button.checked, .check-button.checked-red').length;
             statusElement.textContent = `${answeredQuestions}/${totalQuestions}`;
         }
         
+        // Обновление прогресс-бара
         function updateProgressBar() {
             const progressBar = document.getElementById('progress');
             let totalQuestions = 0;
@@ -855,7 +918,10 @@
             
             sections.forEach((section, index) => {
                 totalQuestions += section.questions.length + 1;
-                if (answers[index]) {
+                const sectionElement = document.querySelector(`.section[data-section-index="${index}"]`);
+                if (sectionElement && sectionElement.dataset.initialized) {
+                    answeredQuestions += sectionElement.querySelectorAll('.check-button.checked, .check-button.checked-red').length;
+                } else if (answers[index]) {
                     answeredQuestions += Object.keys(answers[index]).length;
                 }
             });
@@ -864,17 +930,30 @@
             progressBar.style.width = `${progressPercentage}%`;
         }
         
+        // Планирование автосохранения
+        function scheduleAutoSave() {
+            if (autoSaveTimer) {
+                clearTimeout(autoSaveTimer);
+            }
+            autoSaveTimer = setTimeout(() => saveToLocalStorage(true), 2000);
+        }
+        
+        // Сохранение в localStorage
         function saveToLocalStorage(silent = false) {
-            document.querySelectorAll('.check-button').forEach(button => {
-                const questionId = button.dataset.questionId;
-                const [sectionIndex, questionIndex] = questionId.split('-').map(Number);
-                const questionElement = document.querySelector(`[data-question-id="${questionId}"]`);
-                const comment = questionElement ? questionElement.querySelector('textarea') : null;
-                let answerStatus = 'Не проверено';
-                if (button.classList.contains('checked')) answerStatus = 'Проверено';
-                else if (button.classList.contains('checked-red')) answerStatus = 'Проверено (замечания)';
-                
-                saveAnswer(sectionIndex, questionIndex, answerStatus, comment ? comment.value : null);
+            document.querySelectorAll('.section[data-initialized="true"]').forEach(section => {
+                const sectionIndex = section.dataset.sectionIndex;
+                section.querySelectorAll('.question').forEach(question => {
+                    const questionId = question.dataset.questionId.split('-');
+                    const qIndex = parseInt(questionId[1]);
+                    const checkButton = question.querySelector('.check-button');
+                    const comment = question.querySelector('.comment').value;
+                    
+                    let answerStatus = 'Не проверено';
+                    if (checkButton.classList.contains('checked')) answerStatus = 'Проверено';
+                    else if (checkButton.classList.contains('checked-red')) answerStatus = 'Проверено (замечания)';
+                    
+                    saveAnswer(parseInt(sectionIndex), qIndex, answerStatus, comment);
+                });
             });
             
             const timestamp = document.getElementById('timestamp').value;
@@ -894,8 +973,10 @@
             
             if (!silent) alert('Данные сохранены в браузере!');
             updateAutoSaveStatus();
+            autoSaveTimer = null;
         }
         
+        // Обновление статуса автосохранения
         function updateAutoSaveStatus() {
             const statusElement = document.getElementById('auto-save-status');
             if (lastSaveTime) {
@@ -906,35 +987,12 @@
             }
         }
         
+        // Загрузка из localStorage
         function loadFromLocalStorage() {
             const savedData = localStorage.getItem('tb_early_detection_checklist_v4');
             if (savedData) {
                 const data = JSON.parse(savedData);
                 answers = data.answers || {};
-                
-                Object.keys(answers).forEach(sectionIndex => {
-                    Object.keys(answers[sectionIndex]).forEach(questionIndex => {
-                        const answerData = answers[sectionIndex][questionIndex];
-                        const questionElement = document.querySelector(`[data-question-id="${sectionIndex}-${questionIndex}"]`);
-                        
-                        if (questionElement) {
-                            const checkButton = questionElement.querySelector('.check-button');
-                            if (checkButton) {
-                                if (answerData.answer === 'Проверено') {
-                                    checkButton.classList.add('checked');
-                                } else if (answerData.answer === 'Проверено (замечания)') {
-                                    checkButton.classList.add('checked-red');
-                                }
-                            }
-                            
-                            if (answerData.comment) {
-                                const comment = questionElement.querySelector('textarea');
-                                if (comment) comment.value = answerData.comment;
-                            }
-                        }
-                    });
-                    updateSectionStatus(parseInt(sectionIndex));
-                });
                 
                 if (data.timestamp) document.getElementById('timestamp').value = data.timestamp;
                 if (data.orgName) document.getElementById('org-name').value = data.orgName;
@@ -942,32 +1000,23 @@
                 
                 updateProgressBar();
                 updateAutoSaveStatus();
-                
-                setTimeout(() => { setupAutoResizeTextareas(); }, 100);
             }
         }
         
+        // Очистка формы
         function clearForm() {
             if (confirm('Вы уверены, что хотите очистить всю форму? Все данные будут удалены.')) {
                 answers = {};
                 localStorage.removeItem('tb_early_detection_checklist_v4');
                 
-                document.querySelectorAll('.question').forEach(question => {
-                    const checkButtons = question.querySelectorAll('.check-button');
-                    checkButtons.forEach(button => {
-                        button.classList.remove('checked', 'checked-red');
-                    });
+                document.querySelectorAll('.section[data-initialized="true"]').forEach(section => {
+                    const content = section.querySelector('.section-content');
+                    content.innerHTML = '';
+                    delete section.dataset.initialized;
                     
-                    const textareas = question.querySelectorAll('textarea');
-                    textareas.forEach(textarea => {
-                        textarea.value = '';
-                        textarea.style.height = '60px';
-                    });
-                });
-                
-                document.querySelectorAll('.section-status').forEach(status => {
-                    const sectionIndex = status.closest('.section').dataset.sectionIndex;
-                    status.textContent = `0/${sections[sectionIndex].questions.length + 1}`;
+                    const sectionIndex = section.dataset.sectionIndex;
+                    const statusElement = section.querySelector('.section-status');
+                    statusElement.textContent = `0/${sections[sectionIndex].questions.length + 1}`;
                 });
                 
                 document.getElementById('org-name').value = '';
@@ -985,12 +1034,30 @@
             }
         }
         
+        // Экспорт в Excel
         function exportToExcel() {
             const timestamp = document.getElementById('timestamp').value;
-            const date = new Date(timestamp + 'T00:00:00'); // костыль для Safari
+            const date = new Date(timestamp + 'T00:00:00');
             const formattedDate = date.toLocaleDateString('ru-RU');
             const orgName = document.getElementById('org-name').value || 'Не указано';
             const orgDepartment = document.getElementById('org-department').value || 'Не указано';
+            
+            // Сохраняем все данные перед экспортом
+            document.querySelectorAll('.section[data-initialized="true"]').forEach(section => {
+                const sectionIndex = section.dataset.sectionIndex;
+                section.querySelectorAll('.question').forEach(question => {
+                    const questionId = question.dataset.questionId.split('-');
+                    const qIndex = parseInt(questionId[1]);
+                    const checkButton = question.querySelector('.check-button');
+                    const comment = question.querySelector('.comment').value;
+                    
+                    let answerStatus = 'Не проверено';
+                    if (checkButton.classList.contains('checked')) answerStatus = 'Проверено';
+                    else if (checkButton.classList.contains('checked-red')) answerStatus = 'Проверено (замечания)';
+                    
+                    saveAnswer(parseInt(sectionIndex), qIndex, answerStatus, comment);
+                });
+            });
             
             const wb = XLSX.utils.book_new();
             const excelData = [];
@@ -1021,17 +1088,16 @@
             
             const ws = XLSX.utils.aoa_to_sheet(excelData);
             
-            // Настройка ширины столбцов: A=20 (x2), B=50 (x5), C=15 (x1.5), D=50 (x5)
             ws['!cols'] = [
-                { wch: 20 },  // A
-                { wch: 50 },  // B
-                { wch: 15 },  // C
-                { wch: 50 }   // D
+                { wch: 20 },
+                { wch: 50 },
+                { wch: 15 },
+                { wch: 50 }
             ];
             
             XLSX.utils.book_append_sheet(wb, ws, "Чек-лист ОЛС");
             XLSX.writeFile(wb, `карта_контроля_ОЛС_${formattedDate.replace(/\./g, '-')}.xlsx`);
         }
-    </script>
+</script>
 </body>
 </html>
