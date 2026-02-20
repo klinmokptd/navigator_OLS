@@ -5,21 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Карта контроля ОЛС: раннее выявление туберкулеза</title>
     <style>
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-500-normal.woff2') format('woff2');
+            font-weight: 500;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-600-normal.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('./fonts/inter-cyrillic-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+        
         :root {
             --primary-color: #2c7fb8;
             --secondary-color: #7fcdbb;
             --light-color: #f0f9ff;
             --border-color: #ddd;
-            /* убрали переменную --completed-color */
-            --save-btn-bg: #ffc107;      /* желтый */
-            --save-btn-hover: #e0a800;    /* темно-желтый */
-            --export-btn-bg: #28a745;     /* зеленый */
-            --export-btn-hover: #218838;   /* темно-зеленый */
+            --save-btn-bg: #ffc107;
+            --save-btn-hover: #e0a800;
+            --export-btn-bg: #28a745;
+            --export-btn-hover: #218838;
         }
         
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
         
         body {
@@ -27,6 +60,7 @@
             padding: 20px;
             background-color: #f5f5f5;
             color: #333;
+            -webkit-font-smoothing: antialiased;
         }
         
         .container {
@@ -49,16 +83,17 @@
             color: var(--primary-color);
             margin-bottom: 10px;
             font-size: 1.8rem;
+            font-weight: 600;
         }
         
         .subtitle {
             color: #666;
             font-size: 1.1rem;
             margin: 0;
-            font-weight: bold;
+            font-weight: 500;
         }
         
-        .branch-info {
+        .info-block {
             background-color: var(--light-color);
             padding: 15px;
             border-radius: 5px;
@@ -68,24 +103,24 @@
             gap: 15px;
         }
         
-        .branch-info-row {
+        .info-row {
             display: flex;
             flex-direction: column;
             gap: 5px;
         }
         
-        .branch-info-row label {
-            font-weight: bold;
-            min-width: auto;
+        .info-row label {
+            font-weight: 600;
         }
         
-        .branch-info-row input {
+        .info-row input {
             width: 100%;
             padding: 8px;
             border: 1px solid var(--border-color);
             border-radius: 4px;
             font-size: 1rem;
             background-color: white;
+            font-family: 'Inter', sans-serif;
         }
         
         .timestamp {
@@ -100,7 +135,7 @@
         }
         
         .timestamp label {
-            font-weight: bold;
+            font-weight: 600;
         }
         
         .timestamp input {
@@ -108,6 +143,7 @@
             border: 1px solid var(--border-color);
             border-radius: 4px;
             font-size: 1rem;
+            font-family: 'Inter', sans-serif;
         }
         
         .auto-save-status {
@@ -166,6 +202,7 @@
             margin: 0;
             font-size: 1.1rem;
             flex: 1;
+            font-weight: 500;
         }
         
         .section-content {
@@ -186,10 +223,8 @@
             background-color: #f9f9f9;
             transition: background-color 0.3s;
             position: relative;
-            /* удалено возможное упоминание completed-color */
         }
         
-        /* класс completed больше не добавляет зеленый фон */
         .question-text {
             margin-bottom: 10px;
             font-weight: 500;
@@ -214,7 +249,6 @@
             transition: all 0.3s ease;
         }
         
-        /* зеленая галочка (проверено, замечаний нет) */
         .check-button.checked {
             background-color: #4CAF50;
             border-color: #4CAF50;
@@ -227,7 +261,6 @@
             font-size: 14px;
         }
         
-        /* красная галочка (проверено, есть замечания) */
         .check-button.checked-red {
             background-color: #dc3545;
             border-color: #dc3545;
@@ -251,6 +284,7 @@
             font-size: 0.95rem;
             overflow: hidden;
             transition: height 0.2s;
+            font-family: 'Inter', sans-serif;
         }
         
         .section-status {
@@ -259,6 +293,7 @@
             padding: 3px 8px;
             border-radius: 12px;
             margin-left: 10px;
+            font-weight: 400;
         }
         
         .controls {
@@ -275,7 +310,9 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 1.1rem;
-            transition: background-color 0.3s;
+            transition: opacity 0.3s;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
         }
         
         button:hover {
@@ -314,7 +351,37 @@
             background-color: #7b1fa2;
         }
 
-        /* Стили для печати */
+        .recommendation-block {
+            background-color: #e8f4fd;
+            border-left: 4px solid #2c7fb8;
+            border-radius: 5px;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .recommendation-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .recommendation-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+
+        .recommendation-text {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #1a4b6d;
+        }
+
+        .recommendation-text strong {
+            color: #1a4b6d;
+            font-weight: 600;
+        }
+
         @media print {
             body {
                 background-color: white;
@@ -331,15 +398,8 @@
                 width: 100% !important;
             }
             
-            .controls, .progress-bar, .auto-save-status {
+            .controls, .progress-bar, .auto-save-status, .recommendation-block {
                 display: none !important;
-            }
-            
-            .branch-info input {
-                border: none !important;
-                background: transparent !important;
-                padding: 0 !important;
-                font-weight: normal !important;
             }
             
             .section {
@@ -383,7 +443,6 @@
             .question {
                 margin-bottom: 8px !important;
                 padding: 6px !important;
-                background-color: #f9f9f9 !important; /* убираем возможные изменения фона */
             }
             
             .question-text {
@@ -427,6 +486,17 @@
                 margin-bottom: 5px !important;
             }
             
+            .info-block {
+                padding: 8px !important;
+                margin-bottom: 10px !important;
+            }
+            
+            .info-row input {
+                border: none !important;
+                background: transparent !important;
+                padding: 2px 0 !important;
+            }
+            
             .timestamp {
                 padding: 8px !important;
                 margin-bottom: 10px !important;
@@ -435,7 +505,7 @@
             .timestamp input {
                 padding: 4px !important;
                 font-size: 10pt !important;
-                border: none !important;
+                border: 1px solid #000 !important;
                 background: transparent !important;
             }
         }
@@ -465,14 +535,24 @@
             <h1>Карта контроля организации раннего выявления туберкулеза в учреждениях общей лечебной сети</h1>
         </header>
         
-        <div class="branch-info">
-            <div class="branch-info-row">
-                <label for="org-name">Медицинская организация:</label>
-                <input type="text" id="org-name" name="org-name" placeholder="Введите название">
+        <div class="recommendation-block">
+            <div class="recommendation-content">
+                <span class="recommendation-icon">💡</span>
+                <div class="recommendation-text">
+                    <strong>Рекомендации по заполнению:</strong><br>
+                    Заполняйте карту контроля с мобильного телефона, используя встроенную функцию голосового набора. При формировании замечаний обязательно указывайте конкретные факты: даты, ФИО ответственных лиц, номера документов. Это позволит подготовить обоснованный акт кураторского визита с помощью ИИ-помощника.
+                </div>
             </div>
-            <div class="branch-info-row">
+        </div>
+        
+        <div class="info-block">
+            <div class="info-row">
+                <label for="org-name">Медицинская организация:</label>
+                <input type="text" id="org-name" placeholder="Введите название">
+            </div>
+            <div class="info-row">
                 <label for="org-department">Подразделение / Участок:</label>
-                <input type="text" id="org-department" name="org-department" placeholder="Введите подразделение">
+                <input type="text" id="org-department" placeholder="Введите подразделение">
             </div>
         </div>
         
@@ -486,9 +566,7 @@
             <div class="progress" id="progress"></div>
         </div>
         
-        <div class="sections-grid" id="sections-container">
-            <!-- Секции будут сгенерированы автоматически -->
-        </div>
+        <div class="sections-grid" id="sections-container"></div>
         
         <div class="controls">
             <button id="save-btn" class="save-btn">Сохранить данные</button>
@@ -498,9 +576,8 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
-        // Данные чек-листа из таблицы "Новая таблица (4).xlsx"
+        // Данные чек-листа
         const sections = [
             {
                 title: "1. Противотуберкулезное отделение, больницы",
@@ -512,8 +589,7 @@
                     "Организация работы о передаче информации в поликлинику (списки): - впервые выявленные; - снятые с ПТУ; - умершие от туберкулеза",
                     "Наличие в отделении «Журнала передачи информации» о детях из контакта заболевшего взрослого",
                     "Организация работы фтизиатра с ОЛС по обследованию контактных по подъезду"
-                ],
-                hasComment: true
+                ]
             },
             {
                 title: "2.1. ОЛС - Поликлиника. Руководитель подразделения",
@@ -527,8 +603,7 @@
                     "Укомплектованность участковыми врачами терапевтами",
                     "Укомплектованность врачами общеврачебной практики",
                     "Количество проведенных разборов случаев позднего выявления туберкулеза"
-                ],
-                hasComment: true
+                ]
             },
             {
                 title: "2.2. ОЛС - Поликлиника. Терапевтический участок",
@@ -539,16 +614,14 @@
                     "Алгоритм контроля и привлечения населения, не проходившего графические обследования два года и более",
                     "Кратность назначения Диаскинтеста группам риска (охват)",
                     "Проверка знаний персоналом правил сбора мокроты и наличие памяток для пациентов"
-                ],
-                hasComment: true
+                ]
             },
             {
                 title: "2.3. ОЛС - Поликлиника. Узкие специалисты",
                 questions: [
                     "Организация работы по направлению на иммунодиагностические исследования эндокринологом",
                     "Организация работы по направлению на иммунодиагностические исследования инфекционистом"
-                ],
-                hasComment: true
+                ]
             },
             {
                 title: "2.4. ОЛС - Поликлиника. Процедурный кабинет",
@@ -560,8 +633,7 @@
                     "Введение журналов. Количество групп риска, наличие отметок о результатах",
                     "Организация обратной связи и алгоритм дообследования пациентов с положительным результатом",
                     "Соблюдение сроков направления пациентов с сомнительной/положительной реакцией на Диаскинтест к врачу-фтизиатру (не более 6 календарных дней)"
-                ],
-                hasComment: true
+                ]
             },
             {
                 title: "3.0. ФЛГ-кабинет",
@@ -581,8 +653,7 @@
                     "Дата передачи информации о выявленной патологии, подозрении на туберкулез в ПТД, как информация передается фтизиатрам при подозрении на туберкулез",
                     "Соблюдение сроков передачи информации о пациенте с подозрением на туберкулез в ПТД (не более 2 календарных дней)",
                     "Количество диагностируемых случаев туберкулеза в течение текущего года"
-                ],
-                hasComment: true
+                ]
             },
             {
                 title: "4. КДЛ (Клинико-диагностическая лаборатория)",
@@ -600,147 +671,103 @@
                     "Количество положительных результатов",
                     "Алгоритм действий при выявлении положительного результата",
                     "Соблюдение сроков хранения «стекол» с положительным мазком на КУМ"
-                ],
-                hasComment: true
+                ]
             }
         ];
 
-                // Глобальные переменные
+        // Глобальные переменные
         let answers = {};
-        let autoSaveInterval;
-        let lastSaveTime = null;
+        let totalQuestionsCount = 0;
+        let answeredQuestionsCount = 0;
         let autoSaveTimer = null;
+        let lastSaveTime = null;
         let currentExpandedSection = null;
-        
-        // Инициализация при загрузке страницы
+
+        // Подсчет общего количества вопросов
+        sections.forEach(section => {
+            totalQuestionsCount += section.questions.length + 1;
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
-            // Установка текущей даты
             const now = new Date();
             const timestampInput = document.getElementById('timestamp');
-            const year = now.getFullYear();
-            const month = String(now.getMonth() + 1).padStart(2, '0');
-            const day = String(now.getDate()).padStart(2, '0');
-            timestampInput.value = `${year}-${month}-${day}`;
-            
-            // Генерация скелета секций (только заголовки)
+            timestampInput.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+
             generateSectionSkeletons();
-            
-            // Загрузка сохраненных данных
             loadFromLocalStorage();
-            
-            // Обновление прогресс-бара
             updateProgressBar();
-            
-            // Обработчики событий для кнопок
+
             document.getElementById('save-btn').addEventListener('click', () => saveToLocalStorage(false));
-            document.getElementById('export-btn').addEventListener('click', exportToExcel);
             document.getElementById('clear-btn').addEventListener('click', clearForm);
             document.getElementById('print-btn').addEventListener('click', printForm);
-            
-            // Периодическое автосохранение (раз в 3 минуты)
-            setInterval(() => saveToLocalStorage(true), 3 * 60 * 1000);
-            
-            // Автосохранение при закрытии страницы
+            document.getElementById('export-btn').addEventListener('click', exportToExcel);
+
             window.addEventListener('beforeunload', () => {
-                if (autoSaveTimer) {
-                    clearTimeout(autoSaveTimer);
-                }
+                if (autoSaveTimer) clearTimeout(autoSaveTimer);
                 saveToLocalStorage(true);
             });
-            
+
+            setInterval(() => saveToLocalStorage(true), 3 * 60 * 1000);
             updateAutoSaveStatus();
         });
-        
-        // Функция печати
-        function printForm() {
-            // Раскрываем все секции перед печатью
-            document.querySelectorAll('.section').forEach(section => {
-                if (!section.dataset.initialized) {
-                    const sectionIndex = section.dataset.sectionIndex;
-                    lazyLoadSectionContent(section, parseInt(sectionIndex));
-                    section.dataset.initialized = 'true';
-                }
-                section.classList.remove('collapsed');
-                section.classList.add('expanded');
-            });
-            
-            setTimeout(() => window.print(), 100);
-        }
-        
-        // Настройка автосайза для textarea в секции
-        function setupAutoResizeForSection(container) {
-            container.querySelectorAll('.comment').forEach(textarea => {
-                textarea.style.height = 'auto';
-                textarea.style.height = (textarea.scrollHeight) + 'px';
-                textarea.addEventListener('input', function() {
-                    this.style.height = 'auto';
-                    this.style.height = (this.scrollHeight) + 'px';
-                });
-            });
-        }
-        
-        // Генерация скелета секций (только заголовки)
+
         function generateSectionSkeletons() {
             const container = document.getElementById('sections-container');
-            
             sections.forEach((section, index) => {
                 const sectionElement = document.createElement('div');
                 sectionElement.className = 'section collapsed';
                 sectionElement.dataset.sectionIndex = index;
-                
+
                 const header = document.createElement('div');
                 header.className = 'section-header';
                 header.dataset.sectionIndex = index;
-                
+
                 const title = document.createElement('h2');
                 title.textContent = section.title;
-                
+
                 const status = document.createElement('div');
                 status.className = 'section-status';
                 status.textContent = `0/${section.questions.length + 1}`;
-                
+
                 header.appendChild(title);
                 header.appendChild(status);
-                
+
                 const content = document.createElement('div');
                 content.className = 'section-content';
-                
+
                 sectionElement.appendChild(header);
                 sectionElement.appendChild(content);
                 container.appendChild(sectionElement);
-                
-                // Обработчик клика с ленивой загрузкой
+
                 header.addEventListener('click', function(e) {
                     e.stopPropagation();
                     const section = this.closest('.section');
                     const sectionIndex = section.dataset.sectionIndex;
-                    
+
                     if (!section.dataset.initialized) {
                         lazyLoadSectionContent(section, parseInt(sectionIndex));
                         section.dataset.initialized = 'true';
                     }
-                    
+
                     toggleSection(section);
                 });
             });
         }
-        
-        // Управление сворачиванием/разворачиванием секции
+
         function toggleSection(section) {
             const wasCollapsed = section.classList.contains('collapsed');
-            
+
             if (currentExpandedSection && currentExpandedSection !== section) {
                 currentExpandedSection.classList.remove('expanded');
                 currentExpandedSection.classList.add('collapsed');
             }
-            
+
             if (wasCollapsed) {
                 section.classList.remove('collapsed');
                 section.classList.add('expanded');
                 currentExpandedSection = section;
-                
                 setTimeout(() => {
-                    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    section.scrollIntoView({ block: 'start' });
                 }, 50);
             } else {
                 section.classList.remove('expanded');
@@ -750,95 +777,70 @@
                 }
             }
         }
-        
-        // Ленивая загрузка контента секции
+
         function lazyLoadSectionContent(sectionElement, sectionIndex) {
             const contentElement = sectionElement.querySelector('.section-content');
             const sectionData = sections[sectionIndex];
-            
+
             sectionData.questions.forEach((question, qIndex) => {
                 contentElement.appendChild(createQuestionElement(sectionIndex, qIndex, question));
             });
-            
+
             contentElement.appendChild(createQuestionElement(
-                sectionIndex, 
-                sectionData.questions.length, 
+                sectionIndex,
+                sectionData.questions.length,
                 "Дополнительная информация / Примечания"
             ));
-            
+
             restoreSectionFromAnswers(sectionIndex, contentElement);
             setupAutoResizeForSection(contentElement);
         }
-        
-        // Восстановление секции из сохраненных ответов
-        function restoreSectionFromAnswers(sectionIndex, container) {
-            if (!answers[sectionIndex]) return;
-            
-            Object.entries(answers[sectionIndex]).forEach(([qIndex, data]) => {
-                const questionElement = container.querySelector(`[data-question-id="${sectionIndex}-${qIndex}"]`);
-                if (!questionElement) return;
-                
-                const checkButton = questionElement.querySelector('.check-button');
-                const commentArea = questionElement.querySelector('.comment');
-                
-                if (data.answer === 'Проверено') {
-                    checkButton.classList.add('checked');
-                } else if (data.answer === 'Проверено (замечания)') {
-                    checkButton.classList.add('checked-red');
-                }
-                
-                if (data.comment) {
-                    commentArea.value = data.comment;
-                    commentArea.style.height = 'auto';
-                    commentArea.style.height = (commentArea.scrollHeight) + 'px';
-                }
+
+        function setupAutoResizeForSection(container) {
+            container.querySelectorAll('.comment').forEach(textarea => {
+                textarea.style.height = 'auto';
+                textarea.style.height = (textarea.scrollHeight) + 'px';
             });
-            
-            updateSectionStatus(sectionIndex);
         }
-        
-        // Создание элемента вопроса
+
         function createQuestionElement(sectionIndex, questionIndex, questionText) {
             const questionElement = document.createElement('div');
             questionElement.className = 'question';
             questionElement.dataset.questionId = `${sectionIndex}-${questionIndex}`;
-            
+
             const questionTextElement = document.createElement('div');
             questionTextElement.className = 'question-text';
             questionTextElement.textContent = questionText;
-            
+
             const checkButton = document.createElement('div');
             checkButton.className = 'check-button';
             checkButton.dataset.questionId = `${sectionIndex}-${questionIndex}`;
-            
+
             questionElement.appendChild(questionTextElement);
             questionElement.appendChild(checkButton);
-            
+
             const comment = document.createElement('textarea');
             comment.className = 'comment';
             comment.dataset.questionId = `${sectionIndex}-${questionIndex}`;
             comment.placeholder = 'Комментарий / замечания...';
-            
+
             questionElement.appendChild(comment);
-            
-            // Состояние для отслеживания изменений
-            let previousState = {
-                isChecked: false,
-                hasComment: false
-            };
-            
-            // Функция обновления счетчика
+
+            let previousState = { isChecked: false, hasComment: false };
+
             const updateState = (newChecked, newHasComment) => {
-                if (previousState.isChecked !== newChecked) {
+                const wasChecked = previousState.isChecked;
+                if (wasChecked !== newChecked) {
+                    if (newChecked) answeredQuestionsCount++;
+                    else answeredQuestionsCount--;
                     updateProgressBar();
                 }
                 previousState = { isChecked: newChecked, hasComment: newHasComment };
             };
-            
-            // Обработчик клика по галочке
+
             checkButton.addEventListener('click', function(e) {
                 e.stopPropagation();
-                
+
                 if (this.classList.contains('checked')) {
                     this.classList.remove('checked');
                 } else if (this.classList.contains('checked-red')) {
@@ -850,23 +852,22 @@
                         this.classList.add('checked');
                     }
                 }
-                
+
                 const isChecked = this.classList.contains('checked') || this.classList.contains('checked-red');
-                const answerStatus = isChecked ? 
-                    (this.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Проверено') : 
+                const answerStatus = isChecked ?
+                    (this.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Проверено') :
                     'Не проверено';
-                
+
                 saveAnswer(sectionIndex, questionIndex, answerStatus, comment.value);
                 updateSectionStatus(sectionIndex);
                 updateState(isChecked, comment.value.trim() !== '');
                 scheduleAutoSave();
             });
-            
-            // Обработчик ввода в комментарий
+
             comment.addEventListener('input', function() {
                 const hasCommentText = this.value.trim() !== '';
                 const wasChecked = checkButton.classList.contains('checked') || checkButton.classList.contains('checked-red');
-                
+
                 if (hasCommentText) {
                     if (!checkButton.classList.contains('checked-red') && !checkButton.classList.contains('checked')) {
                         checkButton.classList.add('checked-red');
@@ -876,69 +877,76 @@
                         checkButton.classList.remove('checked-red');
                     }
                 }
-                
+
                 const isNowChecked = checkButton.classList.contains('checked') || checkButton.classList.contains('checked-red');
-                const answerStatus = isNowChecked ? 
-                    (checkButton.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Проверено') : 
+                const answerStatus = isNowChecked ?
+                    (checkButton.classList.contains('checked-red') ? 'Проверено (замечания)' : 'Проверено') :
                     'Не проверено';
-                
+
                 saveAnswer(sectionIndex, questionIndex, answerStatus, this.value);
-                
+
                 this.style.height = 'auto';
                 this.style.height = (this.scrollHeight) + 'px';
-                
+
                 scheduleAutoSave();
             });
-            
+
             return questionElement;
         }
-        
-        // Сохранение ответа
+
         function saveAnswer(sectionIndex, questionIndex, answer, comment = null) {
             if (!answers[sectionIndex]) answers[sectionIndex] = {};
-            if (!answers[sectionIndex][questionIndex]) answers[sectionIndex][questionIndex] = {};
-            answers[sectionIndex][questionIndex].answer = answer;
-            answers[sectionIndex][questionIndex].comment = comment;
+            answers[sectionIndex][questionIndex] = { answer, comment };
         }
-        
-        // Обновление статуса секции
+
         function updateSectionStatus(sectionIndex) {
             const section = document.querySelector(`.section[data-section-index="${sectionIndex}"]`);
+            if (!section) return;
             const statusElement = section.querySelector('.section-status');
             const totalQuestions = sections[sectionIndex].questions.length + 1;
             const answeredQuestions = section.querySelectorAll('.check-button.checked, .check-button.checked-red').length;
             statusElement.textContent = `${answeredQuestions}/${totalQuestions}`;
         }
-        
-        // Обновление прогресс-бара
+
         function updateProgressBar() {
             const progressBar = document.getElementById('progress');
-            let totalQuestions = 0;
-            let answeredQuestions = 0;
-            
-            sections.forEach((section, index) => {
-                totalQuestions += section.questions.length + 1;
-                const sectionElement = document.querySelector(`.section[data-section-index="${index}"]`);
-                if (sectionElement && sectionElement.dataset.initialized) {
-                    answeredQuestions += sectionElement.querySelectorAll('.check-button.checked, .check-button.checked-red').length;
-                } else if (answers[index]) {
-                    answeredQuestions += Object.keys(answers[index]).length;
+            const percent = (answeredQuestionsCount / totalQuestionsCount) * 100;
+            progressBar.style.width = `${percent}%`;
+        }
+
+        function restoreSectionFromAnswers(sectionIndex, container) {
+            if (!answers[sectionIndex]) return;
+
+            Object.entries(answers[sectionIndex]).forEach(([qIndex, data]) => {
+                const questionElement = container.querySelector(`[data-question-id="${sectionIndex}-${qIndex}"]`);
+                if (!questionElement) return;
+
+                const checkButton = questionElement.querySelector('.check-button');
+                const commentArea = questionElement.querySelector('.comment');
+
+                if (data.answer === 'Проверено') {
+                    checkButton.classList.add('checked');
+                    answeredQuestionsCount++;
+                } else if (data.answer === 'Проверено (замечания)') {
+                    checkButton.classList.add('checked-red');
+                    answeredQuestionsCount++;
+                }
+
+                if (data.comment) {
+                    commentArea.value = data.comment;
+                    commentArea.style.height = 'auto';
+                    commentArea.style.height = (commentArea.scrollHeight) + 'px';
                 }
             });
-            
-            const progressPercentage = (answeredQuestions / totalQuestions) * 100;
-            progressBar.style.width = `${progressPercentage}%`;
+
+            updateSectionStatus(sectionIndex);
         }
-        
-        // Планирование автосохранения
+
         function scheduleAutoSave() {
-            if (autoSaveTimer) {
-                clearTimeout(autoSaveTimer);
-            }
+            if (autoSaveTimer) clearTimeout(autoSaveTimer);
             autoSaveTimer = setTimeout(() => saveToLocalStorage(true), 2000);
         }
-        
-        // Сохранение в localStorage
+
         function saveToLocalStorage(silent = false) {
             document.querySelectorAll('.section[data-initialized="true"]').forEach(section => {
                 const sectionIndex = section.dataset.sectionIndex;
@@ -947,36 +955,44 @@
                     const qIndex = parseInt(questionId[1]);
                     const checkButton = question.querySelector('.check-button');
                     const comment = question.querySelector('.comment').value;
-                    
+
                     let answerStatus = 'Не проверено';
                     if (checkButton.classList.contains('checked')) answerStatus = 'Проверено';
                     else if (checkButton.classList.contains('checked-red')) answerStatus = 'Проверено (замечания)';
-                    
+
                     saveAnswer(parseInt(sectionIndex), qIndex, answerStatus, comment);
                 });
             });
-            
-            const timestamp = document.getElementById('timestamp').value;
-            const orgName = document.getElementById('org-name').value;
-            const orgDepartment = document.getElementById('org-department').value;
-            
+
             const data = {
-                timestamp: timestamp,
-                orgName: orgName,
-                orgDepartment: orgDepartment,
+                timestamp: document.getElementById('timestamp').value,
+                orgName: document.getElementById('org-name').value,
+                orgDepartment: document.getElementById('org-department').value,
                 answers: answers,
+                answeredCount: answeredQuestionsCount,
                 lastSaved: new Date().toLocaleString('ru-RU')
             };
-            
+
             localStorage.setItem('tb_early_detection_checklist_v4', JSON.stringify(data));
             lastSaveTime = new Date();
-            
             if (!silent) alert('Данные сохранены в браузере!');
             updateAutoSaveStatus();
             autoSaveTimer = null;
         }
-        
-        // Обновление статуса автосохранения
+
+        function loadFromLocalStorage() {
+            const savedData = localStorage.getItem('tb_early_detection_checklist_v4');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                if (data.timestamp) document.getElementById('timestamp').value = data.timestamp;
+                if (data.orgName) document.getElementById('org-name').value = data.orgName;
+                if (data.orgDepartment) document.getElementById('org-department').value = data.orgDepartment;
+                answers = data.answers || {};
+                answeredQuestionsCount = data.answeredCount || 0;
+                updateAutoSaveStatus();
+            }
+        }
+
         function updateAutoSaveStatus() {
             const statusElement = document.getElementById('auto-save-status');
             if (lastSaveTime) {
@@ -986,63 +1002,54 @@
                 statusElement.textContent = 'Автосохранение включено';
             }
         }
-        
-        // Загрузка из localStorage
-        function loadFromLocalStorage() {
-            const savedData = localStorage.getItem('tb_early_detection_checklist_v4');
-            if (savedData) {
-                const data = JSON.parse(savedData);
-                answers = data.answers || {};
-                
-                if (data.timestamp) document.getElementById('timestamp').value = data.timestamp;
-                if (data.orgName) document.getElementById('org-name').value = data.orgName;
-                if (data.orgDepartment) document.getElementById('org-department').value = data.orgDepartment;
-                
-                updateProgressBar();
-                updateAutoSaveStatus();
-            }
-        }
-        
-        // Очистка формы
+
         function clearForm() {
             if (confirm('Вы уверены, что хотите очистить всю форму? Все данные будут удалены.')) {
                 answers = {};
+                answeredQuestionsCount = 0;
                 localStorage.removeItem('tb_early_detection_checklist_v4');
-                
+
                 document.querySelectorAll('.section[data-initialized="true"]').forEach(section => {
                     const content = section.querySelector('.section-content');
                     content.innerHTML = '';
                     delete section.dataset.initialized;
-                    
                     const sectionIndex = section.dataset.sectionIndex;
                     const statusElement = section.querySelector('.section-status');
                     statusElement.textContent = `0/${sections[sectionIndex].questions.length + 1}`;
                 });
-                
+
                 document.getElementById('org-name').value = '';
                 document.getElementById('org-department').value = '';
-                
+
                 const now = new Date();
-                const year = now.getFullYear();
-                const month = String(now.getMonth() + 1).padStart(2, '0');
-                const day = String(now.getDate()).padStart(2, '0');
-                document.getElementById('timestamp').value = `${year}-${month}-${day}`;
-                
+                document.getElementById('timestamp').value = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+
                 updateProgressBar();
                 updateAutoSaveStatus();
                 alert('Форма очищена!');
             }
         }
-        
-                // Экспорт в Excel
+
+        function printForm() {
+            document.querySelectorAll('.section').forEach(section => {
+                if (!section.dataset.initialized) {
+                    const sectionIndex = section.dataset.sectionIndex;
+                    lazyLoadSectionContent(section, parseInt(sectionIndex));
+                    section.dataset.initialized = 'true';
+                }
+                section.classList.remove('collapsed');
+                section.classList.add('expanded');
+            });
+            setTimeout(() => window.print(), 100);
+        }
+
         function exportToExcel() {
             const timestamp = document.getElementById('timestamp').value;
             const date = new Date(timestamp + 'T00:00:00');
             const formattedDate = date.toLocaleDateString('ru-RU');
             const orgName = document.getElementById('org-name').value || 'Не указано';
             const orgDepartment = document.getElementById('org-department').value || 'Не указано';
-            
-            // Сохраняем все данные перед экспортом
+
             document.querySelectorAll('.section[data-initialized="true"]').forEach(section => {
                 const sectionIndex = section.dataset.sectionIndex;
                 section.querySelectorAll('.question').forEach(question => {
@@ -1050,74 +1057,62 @@
                     const qIndex = parseInt(questionId[1]);
                     const checkButton = question.querySelector('.check-button');
                     const comment = question.querySelector('.comment').value;
-                    
+
                     let answerStatus = 'Не проверено';
                     if (checkButton.classList.contains('checked')) answerStatus = 'Проверено';
                     else if (checkButton.classList.contains('checked-red')) answerStatus = 'Проверено (замечания)';
-                    
+
                     saveAnswer(parseInt(sectionIndex), qIndex, answerStatus, comment);
                 });
             });
-            
+
             const wb = XLSX.utils.book_new();
-            
-            // === ЛИСТ 1: Чек-лист ===
-            const excelData = [];
-            
-            excelData.push(["Карта контроля организации раннего выявления туберкулеза в учреждениях общей лечебной сети"]);
-            excelData.push([`Медицинская организация: ${orgName}`]);
-            excelData.push([`Подразделение / Участок: ${orgDepartment}`]);
-            excelData.push([`Дата проверки: ${formattedDate}`]);
-            excelData.push([]);
-            excelData.push(["Раздел", "Вопрос", "Статус", "Комментарий"]);
-            
+
+            // Лист 1: Чек-лист
+            const excelData = [
+                ["Карта контроля организации раннего выявления туберкулеза в учреждениях общей лечебной сети"],
+                [`Медицинская организация: ${orgName}`],
+                [`Подразделение / Участок: ${orgDepartment}`],
+                [`Дата проверки: ${formattedDate}`],
+                [],
+                ["Раздел", "Вопрос", "Статус", "Комментарий"]
+            ];
+
             sections.forEach((section, sectionIndex) => {
                 excelData.push([section.title, "", "", ""]);
-                
+
                 section.questions.forEach((question, questionIndex) => {
                     const answerData = answers[sectionIndex]?.[questionIndex];
-                    const answer = answerData?.answer || 'Не проверено';
-                    const comment = answerData?.comment || '';
-                    excelData.push(["", question, answer, comment]);
+                    excelData.push(["", question, answerData?.answer || 'Не проверено', answerData?.comment || '']);
                 });
-                
-                const additionalInfoData = answers[sectionIndex]?.[section.questions.length];
-                const additionalInfoAnswer = additionalInfoData?.answer || 'Не проверено';
-                const additionalInfoComment = additionalInfoData?.comment || '';
-                excelData.push(["", "Дополнительная информация / Примечания", additionalInfoAnswer, additionalInfoComment]);
+
+                const additional = answers[sectionIndex]?.[section.questions.length];
+                excelData.push(["", "Дополнительная информация / Примечания", additional?.answer || 'Не проверено', additional?.comment || '']);
                 excelData.push([]);
             });
-            
+
             const wsChecklist = XLSX.utils.aoa_to_sheet(excelData);
-            wsChecklist['!cols'] = [
-                { wch: 20 },
-                { wch: 50 },
-                { wch: 15 },
-                { wch: 50 }
-            ];
+            wsChecklist['!cols'] = [{ wch: 20 }, { wch: 50 }, { wch: 15 }, { wch: 50 }];
             XLSX.utils.book_append_sheet(wb, wsChecklist, "Чек-лист ОЛС");
-            
-            // === ЛИСТ 2: Промпт для ИИ (СКРЫТЫЙ) ===
+
+            // Лист 2: Промпт для ИИ (скрытый)
             const promptSheetData = createPromptSheet(formattedDate, orgName);
             const wsPrompt = XLSX.utils.aoa_to_sheet(promptSheetData);
             wsPrompt['!cols'] = [{ wch: 15 }, { wch: 100 }];
             XLSX.utils.book_append_sheet(wb, wsPrompt, "Промт для ИИ");
-            
-            // Делаем лист скрытым
+
             if (!wb.Workbook) wb.Workbook = { Sheets: [] };
             if (!wb.Workbook.Sheets) wb.Workbook.Sheets = [];
             const sheetIndex = wb.SheetNames.length - 1;
             wb.Workbook.Sheets[sheetIndex] = { Hidden: 1 };
-            
+
             XLSX.writeFile(wb, `карта_контроля_ОЛС_${formattedDate.replace(/\./g, '-')}.xlsx`);
         }
-        
-        // Функция для создания листа с промптом (адаптирована под ОЛС)
+
         function createPromptSheet(visitDate, orgName) {
-            // Текущая дата для составления акта
             const today = new Date();
             const reportDate = today.toLocaleDateString('ru-RU');
-            
+
             const promptText = `ПРОМПТ ДЛЯ ГЕНЕРАЦИИ АКТА КУРАТОРСКОГО ВИЗИТА (РАННЕЕ ВЫЯВЛЕНИЕ ТУБЕРКУЛЕЗА В ОЛС)
 
 Ты — заведующий филиалом «Лесногорский» ГБУЗ МО «МОКПТД» Иванов Иван Иванович.
@@ -1173,7 +1168,6 @@
 
             const lines = promptText.split('\n');
             const sheetData = [["Параметр", "Значение"]];
-            
             lines.forEach(line => {
                 if (line.trim() === "") {
                     sheetData.push(["", ""]);
@@ -1181,9 +1175,9 @@
                     sheetData.push(["", line]);
                 }
             });
-            
             return sheetData;
         }
-</script>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
 </html>
