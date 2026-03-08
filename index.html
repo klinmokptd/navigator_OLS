@@ -153,7 +153,7 @@
         z-index: 2;
     }
 
-    /* ================= ЦЕЛЬ ПРОЕКТА (как в регламенте) ================= */
+    /* ================= ЦЕЛЬ ПРОЕКТА ================= */
     .mission-section {
         background: var(--white);
         padding: 2.5rem 0;
@@ -168,7 +168,7 @@
     }
 
     .mission-card {
-        background: var(--light-blue); /* ГОЛУБОЙ как в регламенте */
+        background: var(--light-blue);
         border-radius: var(--radius);
         padding: 2rem;
         box-shadow: var(--shadow);
@@ -192,7 +192,7 @@
         color: var(--text-secondary);
     }
 
-    /* ================= КАРТОЧКИ (ГОЛУБЫЕ КАК В РЕГЛАМЕНТЕ) ================= */
+    /* ================= КАРТОЧКИ ================= */
     .blocks-section {
         padding: 2.5rem 0;
         width: 100%;
@@ -225,7 +225,6 @@
     .toggle-all-btn:hover {
         background: var(--primary-blue);
         color: white;
-        border-color: var(--primary-blue);
     }
 
     .blocks-grid {
@@ -235,9 +234,9 @@
         width: 100%;
     }
 
-    /* ВСЕ КАРТОЧКИ ГОЛУБЫЕ - КАК В РЕГЛАМЕНТЕ */
+    /* ВСЕ КАРТОЧКИ ГОЛУБЫЕ */
     .content-block {
-        background: var(--light-blue); /* ГОЛУБОЙ фон как в регламенте */
+        background: var(--light-blue);
         border-radius: var(--radius);
         overflow: hidden;
         box-shadow: var(--shadow);
@@ -250,7 +249,6 @@
         border-top: 4px solid var(--accent-red);
     }
 
-    /* ЗАКРЫТАЯ КАРТОЧКА - тоже голубая */
     .content-block.collapsed {
         height: 140px;
         min-height: 140px;
@@ -262,15 +260,15 @@
         display: none;
     }
 
-    /* ШАПКА КАРТОЧКИ */
+    /* ШАПКА КАРТОЧКИ С ПРАВИЛЬНЫМ ВЫРАВНИВАНИЕМ */
     .block-header {
-        background: transparent; /* Прозрачный, чтобы был виден голубой фон */
+        background: transparent;
         color: var(--primary-blue);
         padding: 1.5rem;
         height: 140px;
         min-height: 140px;
         display: flex;
-        align-items: center;
+        align-items: flex-start; /* ПРИЖАТО К ВЕРХУ */
         position: relative;
         flex-shrink: 0;
         width: 100%;
@@ -281,23 +279,26 @@
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: space-between; /* ЗАГОЛОВОК СВЕРХУ, ПОДЗАГОЛОВОК СНИЗУ */
         min-height: 50px;
         width: 100%;
+        height: 100%;
     }
 
     .block-title {
         font-size: 1.3rem;
         font-weight: 700;
-        margin-bottom: 5px;
         line-height: 1.3;
         color: var(--primary-blue);
+        align-self: flex-start;
     }
 
     .block-subtitle {
         font-size: 0.95rem;
         color: var(--text-secondary);
         font-weight: 400;
+        align-self: flex-start;
+        margin-top: auto; /* ПРИЖИМАЕТ К НИЗУ */
     }
 
     .block-content {
@@ -306,7 +307,7 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-        background: var(--white); /* Внутри открытой карточки - белый */
+        background: var(--white);
         border-top: 1px solid #E0E5EC;
     }
 
@@ -348,23 +349,23 @@
         border-top: 1px solid #E0E5EC;
     }
 
+    /* ===== ГОЛУБЫЕ КНОПКИ (ВСЕГДА) ===== */
     .block-btn {
         display: inline-block;
-        background: transparent;
-        color: var(--text-secondary);
+        background: var(--light-blue);  /* ГОЛУБОЙ ФОН */
+        color: var(--primary-blue);      /* СИНИЙ ТЕКСТ */
         padding: 8px 20px;
         border-radius: 30px;
         text-decoration: none;
-        font-weight: 500;
-        font-size: 0.9rem;
+        font-weight: 600;
+        font-size: 0.95rem;
         transition: all 0.2s;
-        border: 1.5px solid #E0E5EC;
+        border: 1.5px solid var(--primary-blue);
     }
 
     .block-btn:hover {
-        background: #E0E5EC;
-        border-color: var(--text-secondary);
-        color: var(--text-primary);
+        background: var(--primary-blue);
+        color: white;
     }
 
     /* ================= ФУТЕР ================= */
