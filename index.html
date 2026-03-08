@@ -192,7 +192,7 @@
         color: var(--text-secondary);
     }
 
-    /* ================= КАРТОЧКИ ================= */
+    /* ================= КАРТОЧКИ (ИНВЕРТИРОВАННЫЕ ЦВЕТА) ================= */
     .blocks-section {
         padding: 2.5rem 0;
         width: 100%;
@@ -205,7 +205,7 @@
         width: 100%;
     }
 
-    /* КНОПКА "ОТКРЫТЬ ВСЕ КАРТОЧКИ" В СТИЛЕ РЕГЛАМЕНТА */
+    /* КНОПКА "ОТКРЫТЬ ВСЕ КАРТОЧКИ" */
     .toggle-all-btn {
         display: block;
         margin: 0 auto 2.5rem;
@@ -236,34 +236,65 @@
         width: 100%;
     }
 
-    /* КАРТОЧКА В СТИЛЕ РЕГЛАМЕНТА */
+    /* БАЗОВЫЙ СТИЛЬ КАРТОЧКИ */
     .content-block {
-        background: var(--white);
         border-radius: var(--radius);
         overflow: hidden;
         box-shadow: var(--shadow);
         border: 1px solid #E0E5EC;
         display: flex;
         flex-direction: column;
-        transition: box-shadow 0.2s;
+        transition: all 0.3s ease;
         width: 100%;
         text-align: left;
-        border-top: 4px solid var(--accent-red);
     }
 
+    /* ===== ЗАКРЫТАЯ КАРТОЧКА (СИНЯЯ С КРАСНОЙ ПОЛОСОЙ) ===== */
     .content-block.collapsed {
+        background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
         height: 140px;
         min-height: 140px;
         overflow: hidden;
         cursor: pointer;
+        border-bottom: 4px solid var(--accent-red);
+    }
+
+    .content-block.collapsed .block-header {
+        background: transparent;
+        color: white;
+        height: 140px;
+        min-height: 140px;
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        border-bottom: none;
+    }
+
+    .content-block.collapsed .block-title {
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        line-height: 1.3;
+    }
+
+    .content-block.collapsed .block-subtitle {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+        font-weight: 400;
     }
 
     .content-block.collapsed .block-content {
         display: none;
     }
 
-    /* ШАПКА КАРТОЧКИ - БЕЛЫЙ ФОН, СИНИЙ ТЕКСТ */
-    .block-header {
+    /* ===== ОТКРЫТАЯ КАРТОЧКА (БЕЛАЯ С ГОЛУБЫМ ВНУТРИ) ===== */
+    .content-block:not(.collapsed) {
+        background: var(--white);
+    }
+
+    .content-block:not(.collapsed) .block-header {
         background: var(--white);
         color: var(--primary-blue);
         padding: 1.5rem;
@@ -277,48 +308,29 @@
         border-bottom: 2px solid var(--light-blue);
     }
 
-    .block-header::after {
-        display: none; /* Убираем красную полосу */
-    }
-
-    .block-text {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        min-height: 50px;
-        width: 100%;
-    }
-
-    .block-title {
+    .content-block:not(.collapsed) .block-title {
+        color: var(--primary-blue);
         font-size: 1.3rem;
         font-weight: 700;
         margin-bottom: 5px;
         line-height: 1.3;
-        color: var(--primary-blue);
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        height: 3.2em;
     }
 
-    .block-subtitle {
-        font-size: 0.95rem;
+    .content-block:not(.collapsed) .block-subtitle {
         color: var(--text-secondary);
+        font-size: 0.95rem;
         font-weight: 400;
     }
 
-    .block-content {
-        padding: 1.5rem;
-        flex-grow: 1;
+    .content-block:not(.collapsed) .block-content {
         display: flex;
         flex-direction: column;
-        width: 100%;
+        padding: 1.5rem;
         background: var(--light-blue);
+        width: 100%;
     }
 
+    /* ОБЩИЕ СТИЛИ ДЛЯ КОНТЕНТА */
     .block-description {
         color: var(--text-primary);
         margin-bottom: 1.2rem;
@@ -357,7 +369,7 @@
         border-top: 1px solid #E0E5EC;
     }
 
-    /* КНОПКА "ПОДРОБНЕЕ" В СТИЛЕ РЕГЛАМЕНТА (ОБВОДКА) */
+    /* КНОПКА "ПОДРОБНЕЕ" В СТИЛЕ РЕГЛАМЕНТА */
     .block-btn {
         display: inline-block;
         background: transparent;
@@ -368,7 +380,7 @@
         font-weight: 500;
         font-size: 0.9rem;
         transition: all 0.2s;
-        border: 1.5px solid var(--gray-medium, #E0E5EC);
+        border: 1.5px solid #E0E5EC;
     }
 
     .block-btn:hover {
@@ -377,13 +389,13 @@
         color: var(--text-primary);
     }
 
-    /* ================= ФУТЕР В СТИЛЕ РЕГЛАМЕНТА ================= */
+    /* ================= ФУТЕР ================= */
     .footer {
-        background: var(--gray-light, #F5F7FA);
+        background: #F5F7FA;
         color: var(--text-secondary);
         padding: 2.5rem 0 1.5rem;
         margin-top: 3rem;
-        border-top: 1px solid var(--gray-medium, #E0E5EC);
+        border-top: 1px solid #E0E5EC;
         width: 100%;
     }
 
@@ -400,7 +412,7 @@
         gap: 40px;
         margin-bottom: 2rem;
         padding-bottom: 2rem;
-        border-bottom: 1px solid var(--gray-medium, #E0E5EC);
+        border-bottom: 1px solid #E0E5EC;
         text-align: left;
     }
 
@@ -556,19 +568,20 @@
             margin-top: -40px;
         }
         
-        .block-header {
-            padding: 1rem;
+        .content-block.collapsed,
+        .content-block.collapsed .block-header {
             height: 120px;
             min-height: 120px;
+        }
+        
+        .content-block:not(.collapsed) .block-header {
+            height: 120px;
+            min-height: 120px;
+            padding: 1rem;
         }
         
         .block-title {
             font-size: 1.1rem;
-        }
-        
-        .content-block.collapsed {
-            height: 120px;
-            min-height: 120px;
         }
     }
 </style>
