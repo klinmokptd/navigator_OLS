@@ -511,6 +511,37 @@
             font-size: 1.1rem;
         }
     }
+    .footer-feedback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback-btn {
+    display: inline-block;
+    background: var(--primary-blue);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.2s;
+    border: 2px solid var(--primary-blue);
+    box-shadow: var(--shadow);
+}
+
+.feedback-btn:hover {
+    background: white;
+    color: var(--primary-blue);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .footer-feedback {
+        margin: 10px 0;
+    }
+}
 </style>
 </head>
 <body>
@@ -646,26 +677,7 @@
         </div>
     </div>
 </article>
-                <!-- Карточка 4: Контроль выполнения -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Рейтинг по территориям:<br>планы и факты</h3>
-                            <p class="block-subtitle">Охват обследованиями</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Сводные данные выполнения планов скрининга взрослого и детского населения для управления ресурсами и коррекции работы на местах.</p>
-                        <ul class="block-features">
-                            <li>Динамика по взрослым и детям отдельно</li>
-                            <li>Рейтинг территорий и ЛПУ</li>
-                            <li>Прогноз выполнения годового плана</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="#" class="block-btn">Раздел в разработке</a>
-                        </div>
-                    </div>
-                </article>
+                
 
                 <!-- Карточка 5: Чек-лист для руководителей -->
 <article class="content-block collapsed">
@@ -692,27 +704,7 @@
     </div>
 </article>
                 
-                <!-- Карточка 6: Опыт других учреждений -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Опыт других учреждений ОЛС</h3>
-                            <p class="block-subtitle">Обучение на примерах</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Лекции, вебинары и учебные материалы для непрерывного медицинского образования.</p>
-                        <ul class="block-features">
-                            <li>Обучающие видеолекции</li>
-                            <li>Презентации и методички</li>
-                            <li>Тесты для самопроверки</li>
-                            <li>Актуальные публикации</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="#" class="block-btn">Раздел в разработке</a>
-                        </div>
-                    </div>
-                </article>
+               
 
                  <!-- Карточка 7: Разбор случаев -->
                 <article class="content-block collapsed">
@@ -736,27 +728,7 @@
                     </div>
                 </article>
 
-                <!-- Карточка 8: Диагностические алгоритмы -->
-                <article class="content-block collapsed">
-                    <div class="block-header">
-                        <div class="block-text">
-                            <h3 class="block-title">Диагностические алгоритмы</h3>
-                            <p class="block-subtitle">Пошаговые инструкции</p>
-                        </div>
-                    </div>
-                    <div class="block-content">
-                        <p class="block-description">Четкие схемы действий при различных клинических ситуациях и результатах обследований.</p>
-                        <ul class="block-features">
-                            <li>Алгоритм при изменении на флюорографии</li>
-                            <li>Работа с группой риска</li>
-                            <li>Дифференциальная диагностика</li>
-                            <li>Действия при отказе от обследования</li>
-                        </ul>
-                        <div class="block-actions">
-                            <a href="#" class="block-btn">Раздел в разработке</a>
-                        </div>
-                    </div>
-                </article>
+               
 
                 <!-- Карточка 9: Телемедицина -->
                 <article class="content-block collapsed">
@@ -872,31 +844,35 @@
     </section>
 
     <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-main">
-                <div class="footer-brand">
-                    <div class="footer-title">Ассистент по выявлению туберкулёза</div>
-                    <div class="footer-org">Филиал "Клинский" ГБУЗ МО "МОКПТД"</div>
-                </div>
-                
-            
-                
-                <div class="footer-contacts">
-                    <div class="contacts-title">Контакты для взаимодействия</div>
-                    <a href="mailto:mz_mokptd_klin@mosreg.ru" class="contact-link">
-                        📧 mz_mokptd_klin@mosreg.ru
-                    </a>
-                    <a href="tel:+79296901080" class="contact-link">
-                        📞 +7 (929) 690-10-80
-                    </a>
-                </div>
+    <div class="footer-content">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <div class="footer-title">Ассистент по выявлению туберкулёза</div>
+                <div class="footer-org">Филиал "Клинский" ГБУЗ МО "МОКПТД"</div>
             </div>
             
-            <div class="footer-bottom">
-                <div class="copyright">© 2026. Все права защищены.</div>
+            <div class="footer-feedback">
+                <a href="https://forms.gle/7KgmmoPESJmcqUDy7" target="_blank" class="feedback-btn">
+                    📝 Форма для обратной связи
+                </a>
+            </div>
+            
+            <div class="footer-contacts">
+                <div class="contacts-title">Контакты для взаимодействия</div>
+                <a href="mailto:mz_mokptd_klin@mosreg.ru" class="contact-link">
+                    📧 mz_mokptd_klin@mosreg.ru
+                </a>
+                <a href="tel:+79296901080" class="contact-link">
+                    📞 +7 (929) 690-10-80
+                </a>
             </div>
         </div>
-    </footer>
+        
+        <div class="footer-bottom">
+            <div class="copyright">© 2026. Все права защищены.</div>
+        </div>
+    </div>
+</footer>
 
     <script>
         // УПРОЩЕННЫЙ И ОПТИМИЗИРОВАННЫЙ КОД
